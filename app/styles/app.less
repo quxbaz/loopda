@@ -50,18 +50,18 @@ a {
 @blipsPerRow: 8;
 @blipLength: @blipsContainerLength / @blipsPerRow;
 
-.flow-content() {
+.flow-content {
   display: flex;
   flex-flow: row wrap;
 }
 
-.center-content() {
+.center-content {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.center-column() {
+.center-column {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -93,7 +93,7 @@ a {
 }
 
 .blip {
-  -webkit-user-select: none;
+  // -webkit-user-select: none;
   cursor: pointer;
   .center-content;
   position: relative;
@@ -111,18 +111,11 @@ a {
   &:not(.mute) {background: #fffd31;}
   &.playing {background: #fdd;}
 
-  .pitch-scale {
-    position: absolute;
-    left: 4px;
-    font-weight: bold;
-  }
   .pitch-label {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    font-size: 10px;
     font-family: courier new;
+    font-size: 10px;
     font-weight: bold;
+    text-align: center;
   }
 }
 
