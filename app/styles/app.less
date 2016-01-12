@@ -44,11 +44,11 @@ a {
 @channelsPerRow: 4;
 @channelRowWidth: 800px;
 @channelLength: @channelRowWidth / @channelsPerRow;
-@innerChannelLength: @channelLength * 0.9;
+@blipsContainerLength: @channelLength * 0.9;
 
 // Blips
 @blipsPerRow: 8;
-@blipLength: @innerChannelLength / @blipsPerRow;
+@blipLength: @blipsContainerLength / @blipsPerRow;
 
 .flow-content() {
   display: flex;
@@ -88,8 +88,8 @@ a {
 
 .blips-container {
   .flow-content;
-  width: @innerChannelLength;
-  height: @innerChannelLength;
+  width: @blipsContainerLength;
+  height: @blipsContainerLength;
 }
 
 .blip {
@@ -130,9 +130,9 @@ a {
   text-align: center;
   .inner {
     .center-column;
-    width: @innerChannelLength;
-    height: @innerChannelLength;
-    margin: (@channelLength - @innerChannelLength) / 2;
+    width: @blipsContainerLength;
+    height: @blipsContainerLength;
+    margin: (@channelLength - @blipsContainerLength) / 2;
     .border;
     h4 {
       margin: 0;
