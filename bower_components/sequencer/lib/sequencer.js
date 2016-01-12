@@ -21,6 +21,7 @@ function defaultState() {
   return {
     playing: false,
     currentBeat: -1,
+    beats: 32,
     beatDuration: 200,
     channels: []
   };
@@ -66,7 +67,7 @@ export default class Sequencer {
 
   advanceBeat() {
     this.setState({
-      currentBeat: (this.state.currentBeat + 1) % 16
+      currentBeat: (this.state.currentBeat + 1) % this.state.beats
     });
   }
 

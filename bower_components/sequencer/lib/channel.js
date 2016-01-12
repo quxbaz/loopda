@@ -7,9 +7,10 @@ import Blip from './blip';
 
 function defaultState() {
   let blips = [];
-  for (var i=0; i < 16; i++)
+  for (var i=0; i < 32; i++)
     blips.push(new Blip({mute: true}));
   return {
+    beats: 32,
     sampleName: '',
     blips
   };
