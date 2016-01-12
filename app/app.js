@@ -17,7 +17,7 @@ let AppComponent = React.createClass({
 export default class App {
 
   constructor() {
-    this.sequencer = new Sequencer();
+    this.sequencer = new Sequencer({beatDuration: 100});
 
     // <TESTING>
     this.sequencer.addChannel({sampleName: 'hihat'});
