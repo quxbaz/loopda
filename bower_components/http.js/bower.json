@@ -1,0 +1,21 @@
+{
+  "name": "http.js",
+  "main": "http.js",
+  "authors": [
+    "David Yeung <quxbaz@gmail.com>"
+  ],
+  "description": "Small, concise library for performing http requests.",
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

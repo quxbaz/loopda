@@ -1,0 +1,34 @@
+{
+  "name": "loopdaloop",
+  "version": "0.0.1",
+  "description": "Make sik beats.",
+  "main": "app/entry.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.3.26",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "css-loader": "^0.23.1",
+    "es6-promise": "^3.0.2",
+    "jsx-loader": "^0.13.2",
+    "less": "^2.5.3",
+    "less-loader": "^2.2.2",
+    "react": "^0.14.5",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.9"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quxbaz/loopdaloop.git"
+  },
+  "author": "quxbaz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quxbaz/loopdaloop/issues"
+  },
+  "homepage": "https://github.com/quxbaz/loopdaloop#readme"
+}

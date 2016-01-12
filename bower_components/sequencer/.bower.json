@@ -1,0 +1,34 @@
+{
+  "name": "sequencer",
+  "description": "A music sequencer to be run with an audio and/or visual adapter.",
+  "main": "index.js",
+  "authors": [
+    "quxbaz"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/quxbaz/sequencer",
+  "moduleType": [
+    "es6"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "dispatcher": "https://github.com/quxbaz/dispatcher.git",
+    "timer.js": "https://github.com/quxbaz/timer.js.git"
+  },
+  "_release": "f728bdc7b0",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "f728bdc7b02d1542df4ddefdda9125e31cc9cdc5"
+  },
+  "_source": "https://github.com/quxbaz/sequencer.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/quxbaz/sequencer.git"
+}

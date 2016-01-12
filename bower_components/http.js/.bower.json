@@ -1,0 +1,31 @@
+{
+  "name": "http.js",
+  "main": "http.js",
+  "authors": [
+    "David Yeung <quxbaz@gmail.com>"
+  ],
+  "description": "Small, concise library for performing http requests.",
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/quxbaz/http.js",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "071b84671b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "071b84671b0b63093c7dd42c6c9680108eeab827"
+  },
+  "_source": "https://github.com/quxbaz/http.js.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/quxbaz/http.js.git",
+  "_direct": true
+}

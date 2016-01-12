@@ -1,0 +1,31 @@
+{
+  "name": "timer.js",
+  "main": "timer.js",
+  "authors": [
+    "David Yeung <quxbaz@gmail.com>"
+  ],
+  "description": "Keeping time all the time with web workers.",
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/quxbaz/timer.js",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "43a3d4e19a",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "43a3d4e19ac61c4e7bd60dea73d35e3238b71c92"
+  },
+  "_source": "https://github.com/quxbaz/timer.js.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/quxbaz/timer.js.git",
+  "_direct": true
+}

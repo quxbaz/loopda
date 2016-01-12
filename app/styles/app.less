@@ -1,0 +1,152 @@
+@font-size-normal: 16px;
+@font-size-small: 12px;
+@font-color: #383838;
+
+*, *:before, *:after {box-sizing: border-box;}
+.outline(@color:#f00) {outline: 1px solid @color;}
+.border(@color: #f00) {border: 1px solid @color;}
+.bg(@color: #f00) {background: @color;}
+.hide {display: none;}
+.show(@display: block) {display: @display;}
+
+.column() {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.small-caps {
+  font-size: @font-size-small;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  color: @font-color;
+}
+
+a {
+  cursor: pointer;
+  color: #00f;
+  text-decoration: underline;
+}
+
+#app-container {
+  .outline(#0f0);
+  width: 960px;
+  margin: 80px auto 0 auto;
+}
+
+@channelsPerRow: 4;
+@channelRowWidth: 760px;
+@channelLength: @channelRowWidth / @channelsPerRow;
+@innerChannelLength: @channelLength * 0.8;
+@blipLength: @innerChannelLength / 4;
+
+.flow-content() {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.center-content() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-column() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.channels {
+  .flow-content;
+  width: @channelRowWidth;
+  margin: 0 auto;
+}
+
+.channel {
+  .center-column;
+  align-items: center;
+  width: @channelLength;
+  height: @channelLength;
+}
+
+.blips {
+  .flow-content;
+  width: @innerChannelLength;
+  height: @innerChannelLength;
+}
+
+.blip {
+  -webkit-user-select: none;
+  cursor: pointer;
+  .center-content;
+  position: relative;
+  width: @blipLength;
+  height: @blipLength;
+  .bg(#fffd31);
+  .border;
+  &:not(:nth-child(4n + 1)) {
+    border-left: none;
+  }
+  &:nth-child(n + 5) {
+    border-top: none;
+  }
+  &.playing {
+    .bg(#fdd) !important;
+  }
+  &.mute {
+    .bg(none);
+  }
+  .pitch-scale {
+    position: absolute;
+    left: 4px;
+    font-weight: bold;
+  }
+  .pitch-label {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 10px;
+    font-family: courier new;
+    font-weight: bold;
+  }
+}
+
+.add-channel {
+  .channel;
+  > div:first-child {
+    .center-column;
+    width: @innerChannelLength;
+    height: @innerChannelLength;
+    .border;
+    text-align: center;
+    h4 {
+      margin: 0;
+    }
+  }
+}
+
+.sample-option {
+  padding: 0 2px;
+}
+
+.channels .spacer {
+  .channel;
+}
+
+.control-panel {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 400px;
+  background: #fff;
+  border-top: 2px solid #333;
+}

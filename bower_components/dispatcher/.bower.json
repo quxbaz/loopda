@@ -1,0 +1,28 @@
+{
+  "name": "dispatcher",
+  "main": "dispatcher.js",
+  "homepage": "https://github.com/quxbaz/dispatcher",
+  "authors": [
+    "David Yeung <quxbaz@gmail.com>"
+  ],
+  "description": "Simple implementation of the pub/sub pattern.",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "c8387f2735",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "c8387f273560fc77c92a7a908cb8c1c87db3c682"
+  },
+  "_source": "https://github.com/quxbaz/dispatcher.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/quxbaz/dispatcher.git"
+}
