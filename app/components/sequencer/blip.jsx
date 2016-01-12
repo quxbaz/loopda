@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import Slider from 'components/ui/slider';
 
 export default React.createClass({
 
@@ -11,15 +12,20 @@ export default React.createClass({
     });
   },
 
+  componentDidMount() {
+    this.clicks = 0;
+    this.timerId = setInterval(() => {
+      this.clicks = Math.max(this.clicks - 1, 0);
+    }, 500);
+  },
+
   componentWillUnmount() {
     // <TODO> Detach event handlers
   },
 
-  toggle() {
+  toggleMute() {
     let blip = this.props.blip;
-    blip.setState({
-      mute: !blip.state.mute
-    });
+    blip.setState({mute: !blip.state.mute});
   },
 
   handleWheel(event) {
@@ -43,6 +49,20 @@ export default React.createClass({
     });
   },
 
+  showSlider(event) {
+    event.preventDefault();
+    this.clicks++;
+    if (this.clicks >= 2) {
+      this.clicks = 0;
+      this.setState({showSlider: true, mute: false});
+      let handler = (event) => {
+        this.setState({showSlider: false});
+        window.removeEventListener('mouseup', handler);
+      };
+      window.addEventListener('mouseup', handler);
+    }
+  },
+
   render() {
 
     /*
@@ -52,20 +72,27 @@ export default React.createClass({
 
     let props = {
       className: classNames({
-        blip    : true,
-        mute    : !this.state.sampleName || this.state.mute,
-        playing : this.props.playing
+        blip: true,
+        mute: !this.state.sampleName || this.state.mute,
+        playing: this.props.playing
       }),
-      onMouseDown: this.toggle,
-      onWheel: this.handleWheel
+      onClick: this.toggleMute,
+      onWheel: this.handleWheel,
+      onMouseDown: this.showSlider
     };
+
+    let toRender = {};
+
+    if (!this.state.mute)
+      toRender.pitchLabel = <div className="pitch-label">{this.state.pitchLabel}</div>;
+
+    if (this.state.showSlider)
+      toRender.slider = <Slider />;
 
     return (
       <div {...props}>
-        {!this.state.mute && [
-          <div className="pitch-scale" key={1}>{this.state.pitchScale}</div>,
-          <div className="pitch-label" key={2}>{this.state.pitchLabel}</div>
-        ]}
+        {toRender.pitchLabel}
+        {toRender.slider}
       </div>
     );
 
