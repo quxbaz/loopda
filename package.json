@@ -23,12 +23,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quxbaz/loopdaloop.git"
+    "url": "git+https://github.com/quxbaz/loopdaloop2.git"
   },
   "author": "quxbaz",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/quxbaz/loopdaloop/issues"
+    "url": "https://github.com/quxbaz/loopdaloop2/issues"
   },
-  "homepage": "https://github.com/quxbaz/loopdaloop#readme"
+  "homepage": "https://github.com/quxbaz/loopdaloop2#readme"
 }
