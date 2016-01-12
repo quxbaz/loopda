@@ -52,7 +52,8 @@ export default React.createClass({
         <div className="channels">
           {channels}
           <div className="add-channel">
-            <div>
+            <div>&nbsp;</div>
+            <div className="inner">
               <h4>Add a channel</h4>
               <div>{sampleOptions}</div>
             </div>

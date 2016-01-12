@@ -22,9 +22,11 @@ export default React.createClass({
     });
     return (
       <div className="channel">
-        <div className="channel-title hide">{this.state.sampleName}</div>
-        <div className="blips">
-          {blipNodes}
+        <div className="channel-title">{this.state.sampleName}</div>
+        <div className="inner-channel">
+          <div className="blips-container">
+            {blipNodes}
+          </div>
         </div>
       </div>
     );

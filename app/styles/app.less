@@ -73,14 +73,20 @@ a {
   margin: 0 auto;
 }
 
-.channel {
+.channel {}
+
+.channel-title {
+  text-align: center;
+}
+
+.inner-channel {
   .center-column;
   align-items: center;
   width: @channelLength;
   height: @channelLength;
 }
 
-.blips {
+.blips-container {
   .flow-content;
   width: @innerChannelLength;
   height: @innerChannelLength;
@@ -121,13 +127,13 @@ a {
 }
 
 .add-channel {
-  .channel;
-  > div:first-child {
+  text-align: center;
+  .inner {
     .center-column;
     width: @innerChannelLength;
     height: @innerChannelLength;
+    margin: (@channelLength - @innerChannelLength) / 2;
     .border;
-    text-align: center;
     h4 {
       margin: 0;
     }
