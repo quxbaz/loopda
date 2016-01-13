@@ -6,30 +6,26 @@ import stateful from './stateful';
 
 function defaultState() {
   return {
-
     sampleName : '',
     mute       : false,
     duration   : 200,
     offset     : 0,
-
     gain       : 1,
     minGain    : 0,
     maxGain    : 10,
-
     rate       : 1,
-    minRate    : 0.05,
-    maxRate    : 4,
-
+    minRate    : 0,
+    maxRate    : 4
   };
 }
 
 function mixinComputedStates(state) {
-  Object.defineProperty(state, 'gainScale', {
-    get: () => (state.gain - state.minGain) / (state.maxGain - state.minGain)
-  });
-  Object.defineProperty(state, 'rateScale', {
-    get: () => (state.rate - state.minRate) / (state.maxRate - state.minRate)
-  });
+  // Object.defineProperty(state, 'gainScale', {
+  //   get: () => (state.gain - state.minGain) / (state.maxGain - state.minGain)
+  // });
+  // Object.defineProperty(state, 'rateScale', {
+  //   get: () => (state.rate - state.minRate) / (state.maxRate - state.minRate)
+  // });
 };
 
 export default class Blip {
