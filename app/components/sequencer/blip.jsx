@@ -26,10 +26,10 @@ export default React.createClass({
     if (this.state.mute)
       return;
     var direction = event.deltaY > 0 ? 'down' : 'up';
-    this.adjustPitch(direction);
+    this.adjustRate(direction);
   },
 
-  adjustPitch(direction) {
+  adjustRate(direction) {
     let blip = this.props.blip;
     let rate = blip.state.rate;
     if (direction == 'up')
@@ -37,9 +37,6 @@ export default React.createClass({
     else if (direction == 'down')
       rate -= 0.1;
     this.props.blip.setState({rate});
-    this.setState({
-      pitchLabel: Math.floor(blip.state.rateScale * 100)
-    });
   },
 
   showSlider(event) {
@@ -52,8 +49,7 @@ export default React.createClass({
       return;
     }
 
-    if (new Date().getTime() - this.lastClick <= 500) {
-      this.lastClick = undefined;
+    if (new Date().getTime() - this.lastClick < 500) {
       this.setState({showSlider: true});
       this.props.blip.setState({mute: false});
       let handler = (event) => {
@@ -61,20 +57,16 @@ export default React.createClass({
         window.removeEventListener('mouseup', handler);
       };
       window.addEventListener('mouseup', handler);
-    } else
-      this.lastClick = new Date().getTime();
+    }
+
+    this.lastClick = undefined;
 
   },
 
   handleSetScale(value) {
-    console.log(value);
     let state = this.props.blip.state;
     let rate = (state.maxRate - state.minRate) * (value / 100) + (state.minRate);
-    console.log(rate);
     this.props.blip.setState({rate});
-    this.setState({
-      pitchLabel: state.rateScale * 100
-    });
   },
 
   render() {
@@ -98,14 +90,21 @@ export default React.createClass({
     let toRender = {};
 
     if (!this.state.mute)
-      toRender.pitchLabel = <div className="pitch-label">{this.state.pitchLabel}</div>;
+      toRender.rateLabel = <div className="rate-label">{this.state.rate}</div>;
 
-    if (this.state.showSlider)
-      toRender.slider = <Slider onSetValue={this.handleSetScale} value={Math.round(this.props.blip.state.rateScale * 100)} />;
+    if (this.state.showSlider) {
+      let sliderProps = {
+        value: this.state.rate,
+        min: this.state.minRate,
+        max: this.state.maxRate,
+        onSetValue: this.handleSetScale
+      };
+      toRender.slider = <Slider {...sliderProps} />;
+    }
 
     return (
       <div {...props}>
-        {toRender.pitchLabel}
+        {toRender.rateLabel}
         {toRender.slider}
       </div>
     );
