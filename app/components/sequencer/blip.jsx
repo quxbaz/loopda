@@ -12,13 +12,6 @@ export default React.createClass({
     });
   },
 
-  componentDidMount() {
-    this.clicks = 0;
-    this.timerId = setInterval(() => {
-      this.clicks = Math.max(this.clicks - 1, 0);
-    }, 500);
-  },
-
   componentWillUnmount() {
     // <TODO> Detach event handlers
   },
@@ -50,17 +43,38 @@ export default React.createClass({
   },
 
   showSlider(event) {
+
     event.preventDefault();
-    this.clicks++;
-    if (this.clicks >= 2) {
-      this.clicks = 0;
-      this.setState({showSlider: true, mute: false});
+    event.stopPropagation();
+
+    if (!this.lastClick) {
+      this.lastClick = new Date().getTime();
+      return;
+    }
+
+    if (new Date().getTime() - this.lastClick <= 500) {
+      this.lastClick = undefined;
+      this.setState({showSlider: true});
+      this.props.blip.setState({mute: false});
       let handler = (event) => {
         this.setState({showSlider: false});
         window.removeEventListener('mouseup', handler);
       };
       window.addEventListener('mouseup', handler);
-    }
+    } else
+      this.lastClick = new Date().getTime();
+
+  },
+
+  handleSetScale(value) {
+    console.log(value);
+    let state = this.props.blip.state;
+    let rate = (state.maxRate - state.minRate) * (value / 100) + (state.minRate);
+    console.log(rate);
+    this.props.blip.setState({rate});
+    this.setState({
+      pitchLabel: state.rateScale * 100
+    });
   },
 
   render() {
@@ -87,7 +101,7 @@ export default React.createClass({
       toRender.pitchLabel = <div className="pitch-label">{this.state.pitchLabel}</div>;
 
     if (this.state.showSlider)
-      toRender.slider = <Slider />;
+      toRender.slider = <Slider onSetValue={this.handleSetScale} value={Math.round(this.props.blip.state.rateScale * 100)} />;
 
     return (
       <div {...props}>
