@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 
 let px = val => val + 'px';
 
-let slider = {
-  width: 300,
+let scale = {
+  length: 300,
   height: 24,
 };
 
@@ -13,15 +13,15 @@ let grabber = {
   height: 32
 };
 
-let sliderStyle = {
+let scaleStyle = {
   zIndex       : 4000,
   position     : 'absolute',
   top          : '50%',
   left         : '50%',
-  marginLeft   : px(-slider.width / 2),
-  marginTop    : px(-slider.height / 2),
-  width        : px(slider.width),
-  height       : px(slider.height),
+  marginLeft   : px(-scale.length / 2),
+  marginTop    : px(-scale.height / 2),
+  width        : px(scale.length),
+  height       : px(scale.height),
   borderRadius : '32px',
   background   : 'blue'
 };
@@ -30,8 +30,8 @@ let grabberStyle = {
   position     : 'absolute',
   width        : px(grabber.width),
   height       : px(grabber.height),
-  top          : px((slider.height - grabber.height) / 2),
-  left         : px(slider.width / 2 - grabber.width / 2),
+  top          : px((scale.height - grabber.height) / 2),
+  left         : px(scale.length / 2 - grabber.width / 2),
   borderRadius : '32px',
   color        : 'white',
   background   : 'red'
@@ -41,14 +41,19 @@ let bound = (x, [min, max]) => Math.max(Math.min(x, max), min);
 
 export default React.createClass({
 
+  getDefaultProps() {
+    return {
+      lastValue: 0,
+      value: 0,
+      min: 0,
+      max: 1
+    };
+  },
+
   getInitialState() {
     return {
-      lastValue: 50,
-      value: 50,
-      min: 0,
-      max: 100,
-      float: false,
-      grabberX: (slider.width / 2) - (grabber.width / 2)
+      lastValue: this.props.value,
+      value: this.props.value
     };
   },
 
@@ -63,25 +68,21 @@ export default React.createClass({
   },
 
   adjustValue(event) {
-    let pageLeft = this.el.getBoundingClientRect().left;
-    let grabberX = event.clientX - pageLeft - (grabber.width / 2);
-    grabberX = bound(grabberX, [0, slider.width - grabber.width]);
-    let sliderLength = slider.width - grabber.width;
-    let value = (this.state.max - this.state.min) * (grabberX / sliderLength) + this.state.min;
-    if (!this.state.float)
-      value = Math.round(value);
-    this.setState({grabberX, value});
+    let scaleOffset = event.clientX - this.el.getBoundingClientRect().left;
+    scaleOffset = bound(scaleOffset, [0, scale.length]);
+    let min = this.props.min;
+    let max = this.props.max;
+    let value = (max - min) * (scaleOffset / scale.length) + min;
+    this.setState({value});
+    this.props.onSetValue(value);
   },
 
   render() {
-    // let finalGrabberStyle = Object.assign({}, grabberStyle, {
-    //   // left: this.state.grabberX + 'px'
-    //   // left: slider.width / 2 - grabber.width / 2 + 'px'
-    // });
+    let pretty = x => Math.round(x * 10) / 10;
     return (
-      <div className="ui-slider" style={sliderStyle}>
-        <div className="ui-slider-grabber center-content" style={grabberStyle}>
-          {this.state.lastValue} -> {this.state.value}
+      <div className="ui-scale" style={scaleStyle}>
+        <div className="ui-scale-grabber center-content" style={grabberStyle}>
+          {this.state.lastValue} -> {pretty(this.state.value)}
         </div>
       </div>
     );
