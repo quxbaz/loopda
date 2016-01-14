@@ -1,5 +1,5 @@
 import React from 'react';
-import ChannelComponent from './channel';
+import ChannelComponent from 'sequencer/channel/channel';
 
 export default React.createClass({
 
