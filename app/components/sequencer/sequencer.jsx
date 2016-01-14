@@ -4,10 +4,8 @@ import ChannelComponent from './channel';
 export default React.createClass({
 
   componentWillMount() {
-    let sequencer = this.props.sequencer;
-    this.setState(sequencer.state);
-    sequencer.onStateChange((newState) => {
-      this.setState(newState);
+    this.props.sequencer.onStateChange(() => {
+      this.forceUpdate();
     });
   },
 
@@ -26,11 +24,13 @@ export default React.createClass({
 
   render() {
 
-    let channels = this.state.channels.map((channel, i) => {
+    let sequencer = this.props.sequencer;
+
+    let channels = sequencer.state.channels.map((channel, i) => {
       let props = {
         key: i,
         channel,
-        currentBeat: this.state.currentBeat
+        currentBeat: sequencer.state.currentBeat
       };
       return <ChannelComponent {...props} />;
     });
@@ -47,7 +47,7 @@ export default React.createClass({
     return (
       <div className="sequencer">
         <a className="togglePlay" onClick={this.togglePlay}>
-          {this.state.playing ? 'Pause' : 'Play'}
+          {sequencer.state.playing ? 'Pause' : 'Play'}
         </a>
         <div className="channels">
           {channels}

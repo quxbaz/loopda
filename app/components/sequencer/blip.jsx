@@ -4,11 +4,13 @@ import Slider from 'components/ui/slider';
 
 export default React.createClass({
 
+  getInitialState() {
+    return {};
+  },
+
   componentWillMount() {
-    let blip = this.props.blip;
-    this.setState(blip.state);
-    blip.onStateChange((newState) => {
-      this.setState(newState);
+    this.props.blip.onStateChange(() => {
+      this.forceUpdate();
     });
   },
 
@@ -22,8 +24,9 @@ export default React.createClass({
   },
 
   handleWheel(event) {
+    let blip = this.props.blip;
     event.preventDefault();
-    if (this.state.mute)
+    if (blip.state.mute)
       return;
     var direction = event.deltaY > 0 ? 'down' : 'up';
     this.adjustRate(direction);
@@ -36,10 +39,12 @@ export default React.createClass({
       rate += 0.1;
     else if (direction == 'down')
       rate -= 0.1;
-    this.props.blip.setState({rate});
+    blip.setState({rate});
   },
 
   showSlider(event) {
+
+    let blip = this.props.blip;
 
     event.preventDefault();
     event.stopPropagation();
@@ -51,7 +56,7 @@ export default React.createClass({
 
     if (new Date().getTime() - this.lastClick < 500) {
       this.setState({showSlider: true});
-      this.props.blip.setState({mute: false});
+      blip.setState({mute: false});
       let handler = (event) => {
         this.setState({showSlider: false});
         window.removeEventListener('mouseup', handler);
@@ -64,9 +69,10 @@ export default React.createClass({
   },
 
   handleSetScale(value) {
-    let state = this.props.blip.state;
-    let rate = (state.maxRate - state.minRate) * (value / 100) + (state.minRate);
-    this.props.blip.setState({rate});
+    let blip = this.props.blip
+    let {maxRate, minRate} = blip.state;
+    let rate = (maxRate - minRate) * (value / 100) + minRate;
+    blip.setState({rate});
   },
 
   render() {
@@ -76,11 +82,13 @@ export default React.createClass({
       console.log('render');
     */
 
+    let blip = this.props.blip;
+
     let props = {
       className: classNames({
         blip: true,
-        mute: !this.state.sampleName || this.state.mute,
-        playing: this.props.playing
+        mute: !blip.state.sampleName || blip.state.mute,
+        playing: this.props.onBeat
       }),
       onClick: this.toggleMute,
       onWheel: this.handleWheel,
@@ -89,14 +97,14 @@ export default React.createClass({
 
     let toRender = {};
 
-    if (!this.state.mute)
+    if (!blip.state.mute)
       toRender.rateLabel = <div className="rate-label">{this.state.rate}</div>;
 
     if (this.state.showSlider) {
       let sliderProps = {
-        value: this.state.rate,
-        min: this.state.minRate,
-        max: this.state.maxRate,
+        value: blip.state.rate,
+        min: blip.state.minRate,
+        max: blipstate.maxRate,
         onSetValue: this.handleSetScale
       };
       toRender.slider = <Slider {...sliderProps} />;
