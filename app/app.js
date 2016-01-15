@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {loadAudioSamples} from 'audio/audiohelper';
 import sampleList from 'audio/samplelist';
 import {Sequencer, AudioService} from 'sequencer';
-import SequencerComponent from 'sequencer/sequencer/sequencer';
+import SequencerComponent from 'components/sequencer/sequencer';
 
 let AppComponent = React.createClass({
   render() {
