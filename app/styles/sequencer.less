@@ -1,0 +1,95 @@
+// Channels
+@channelsPerRow: 4;
+@channelRowWidth: 800px;
+@channelLength: @channelRowWidth / @channelsPerRow;
+@blipsContainerLength: @channelLength * 0.9;
+
+// Blips
+@blipsPerRow: 8;
+@blipLength: @blipsContainerLength / @blipsPerRow;
+
+.channels {
+  .flow-content;
+  width: @channelRowWidth;
+  margin: 0 auto;
+}
+
+.channel {}
+
+.channel-title {
+  text-align: center;
+}
+
+.inner-channel {
+  .center-column;
+  align-items: center;
+  width: @channelLength;
+  height: @channelLength;
+}
+
+.blips-container {
+  .flow-content;
+  width: @blipsContainerLength;
+  height: @blipsContainerLength;
+}
+
+.blip {
+  -webkit-user-select: none;
+  cursor: pointer;
+  .center-content;
+  position: relative;
+  width: @blipLength;
+  height: @blipLength * 2;
+  .border;
+  &:not(:nth-child(8n + 1)) {
+    border-left: none;
+  }
+  &:nth-child(n + 9) {border-top: none;}
+
+  // Order here is important.
+  &.mute {background: #fff;}
+  &:nth-child(even) {background: #fff8f8;}
+  // &:nth-child(4n) {background: #fff2f2;}
+  // &:nth-child(4n - 1) {background: #fff2f2;}
+  &:not(.mute) {background: #fffd31;}
+  &.playing {background: #fdd;}
+
+  .rate-label {
+    font-family: courier new;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.add-channel {
+  text-align: center;
+  .inner {
+    .center-column;
+    width: @blipsContainerLength;
+    height: @blipsContainerLength;
+    margin: (@channelLength - @blipsContainerLength) / 2;
+    .border;
+    h4 {
+      margin: 0;
+    }
+  }
+}
+
+.sample-option {
+  padding: 0 2px;
+}
+
+.channels .spacer {
+  .channel;
+}
+
+.control-panel {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 400px;
+  background: #fff;
+  border-top: 2px solid #333;
+}
