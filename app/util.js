@@ -24,8 +24,18 @@ export function fireOnce(el, event, handler) {
   });
 }
 
-export function titleCase(s) {
-  return s.split(' ').map(word =>
+export function titleCase(s, sep=' ') {
+  return s.split(sep).map(word =>
     word[0].toUpperCase() + word.slice(1)
-  ).join(' ');
+  ).join(sep);
+}
+
+export function ifn(cond, then, else_) {
+  /*
+    if-statement as an expression.
+  */
+  if (cond)
+    return then;
+  else
+    return else_;
 }
