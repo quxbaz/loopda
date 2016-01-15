@@ -10,8 +10,8 @@ export function requireProps(object, props) {
   });
 }
 
-export function constrain(val, minmax) {
-  return Math.min(Math.max(val, minmax[0]), minmax[1]);
+export function constrain(val, [min, max]) {
+  return Math.min(Math.max(val, min), max);
 }
 
 export function fireOnce(el, event, handler) {
@@ -22,4 +22,10 @@ export function fireOnce(el, event, handler) {
     handler.apply(null, arguments);
     el.removeEventListener(event, once);
   });
+}
+
+export function titleCase(s) {
+  return s.split(' ').map(word =>
+    word[0].toUpperCase() + word.slice(1)
+  ).join(' ');
 }
