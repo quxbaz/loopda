@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import Slider from 'components/ui/slider';
+import Scale from 'components/ui/scale';
 import doubleClick from 'components/mixins/doubleclick';
 import {fireOnce} from 'util';
 
@@ -48,10 +48,10 @@ export default React.createClass({
   },
 
   handleDoubleClick(event) {
-    this.setState({showSlider: true});
+    this.setState({showScale: true});
     this.props.blip.setState({mute: false});
     fireOnce(window, 'mouseup', () => {
-      this.setState({showSlider: false});
+      this.setState({showScale: false});
     });
   },
 
@@ -86,20 +86,20 @@ export default React.createClass({
     if (!blip.state.mute)
       toRender.rateLabel = <div className="rate-label">{this.state.rate}</div>;
 
-    if (this.state.showSlider) {
-      let sliderProps = {
+    if (this.state.showScale) {
+      let scaleProps = {
         value      : blip.state.rate,
         min        : blip.state.minRate,
         max        : blip.state.maxRate,
         onSetValue : this.handleSetScale
       };
-      toRender.slider = <Slider {...sliderProps} />;
+      toRender.scale = <Scale {...scaleProps} />;
     }
 
     return (
       <div {...props}>
         {toRender.rateLabel}
-        {toRender.slider}
+        {toRender.scale}
       </div>
     );
 
