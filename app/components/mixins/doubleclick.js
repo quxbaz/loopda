@@ -1,3 +1,8 @@
+/*
+  Mixin for the double-click event. It's similar to React's
+  double-click, but it fires on 'mousedown' instead of 'click.'
+*/
+
 import ReactDOM from 'react-dom';
 
 export default {
