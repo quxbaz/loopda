@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import Scale from 'components/ui/scale';
-import doubleClick from 'components/mixins/doubleclick';
 import {fireOnce} from 'util';
+import doubleClick from 'components/mixins/doubleclick';
+import Scale from 'components/ui/scale';
+import BlipViewModel from 'app/sequencer/blip/viewmodel';
 
 export default React.createClass({
 
@@ -14,7 +15,9 @@ export default React.createClass({
   },
 
   componentWillMount() {
-    this.props.blip.onStateChange(() => {
+    let blip = this.props.blip;
+    this.vm = new BlipViewModel(blip);
+    blip.onStateChange(() => {
       this.forceUpdate();
     });
   },
@@ -28,14 +31,14 @@ export default React.createClass({
     blip.setState({mute: !blip.state.mute});
   },
 
-  handleWheel(event) {
-    let blip = this.props.blip;
-    event.preventDefault();
-    if (blip.state.mute)
-      return;
-    var direction = event.deltaY > 0 ? 'down' : 'up';
-    this.adjustRate(direction);
-  },
+  // handleWheel(event) {
+  //   event.preventDefault();
+  //   let blip = this.props.blip;
+  //   if (blip.state.mute)
+  //     return;
+  //   var direction = event.deltaY > 0 ? 'down' : 'up';
+  //   this.adjustRate(direction);
+  // },
 
   adjustRate(direction) {
     let blip = this.props.blip;
@@ -48,18 +51,17 @@ export default React.createClass({
   },
 
   handleDoubleClick(event) {
-    this.setState({showScale: true});
+    this.setState({scaleMode: true});
     this.props.blip.setState({mute: false});
     fireOnce(window, 'mouseup', () => {
-      this.setState({showScale: false});
+      this.setState({scaleMode: false});
     });
   },
 
-  handleSetScale(value) {
-    let blip = this.props.blip
-    let {maxRate, minRate} = blip.state;
-    let rate = (maxRate - minRate) * (value / 100) + minRate;
-    blip.setState({rate});
+  handleScaleChange(percent) {
+    this.props.blip.setState({
+      rate: this.vm.toValue('rate', percent)
+    });
   },
 
   render() {
@@ -78,20 +80,18 @@ export default React.createClass({
         playing: this.props.onBeat
       }),
       onClick: this.toggleMute,
-      onWheel: this.handleWheel
+      // onWheel: this.handleWheel
     };
 
     let toRender = {};
 
     if (!blip.state.mute)
-      toRender.rateLabel = <div className="rate-label">{this.state.rate}</div>;
+      toRender.rateLabel = <div className="rate-label">{this.vm.toPercent('rate')}</div>;
 
-    if (this.state.showScale) {
+    if (this.state.scaleMode) {
       let scaleProps = {
-        value      : blip.state.rate,
-        min        : blip.state.minRate,
-        max        : blip.state.maxRate,
-        onSetValue : this.handleSetScale
+        value    : this.vm.toPercent('rate'),
+        onChange : this.handleScaleChange
       };
       toRender.scale = <Scale {...scaleProps} />;
     }
