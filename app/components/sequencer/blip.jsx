@@ -1,8 +1,13 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Slider from 'components/ui/slider';
+import doubleClick from 'components/mixins/doubleclick';
+import {fireOnce} from 'util';
 
 export default React.createClass({
+
+  mixins: [doubleClick],
 
   getInitialState() {
     return {};
@@ -42,30 +47,12 @@ export default React.createClass({
     blip.setState({rate});
   },
 
-  showSlider(event) {
-
-    let blip = this.props.blip;
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (!this.lastClick) {
-      this.lastClick = new Date().getTime();
-      return;
-    }
-
-    if (new Date().getTime() - this.lastClick < 500) {
-      this.setState({showSlider: true});
-      blip.setState({mute: false});
-      let handler = (event) => {
-        this.setState({showSlider: false});
-        window.removeEventListener('mouseup', handler);
-      };
-      window.addEventListener('mouseup', handler);
-    }
-
-    this.lastClick = undefined;
-
+  handleDoubleClick(event) {
+    this.setState({showSlider: true});
+    this.props.blip.setState({mute: false});
+    fireOnce(window, 'mouseup', () => {
+      this.setState({showSlider: false});
+    });
   },
 
   handleSetScale(value) {
@@ -91,8 +78,7 @@ export default React.createClass({
         playing: this.props.onBeat
       }),
       onClick: this.toggleMute,
-      onWheel: this.handleWheel,
-      onMouseDown: this.showSlider
+      onWheel: this.handleWheel
     };
 
     let toRender = {};
@@ -102,10 +88,10 @@ export default React.createClass({
 
     if (this.state.showSlider) {
       let sliderProps = {
-        value: blip.state.rate,
-        min: blip.state.minRate,
-        max: blipstate.maxRate,
-        onSetValue: this.handleSetScale
+        value      : blip.state.rate,
+        min        : blip.state.minRate,
+        max        : blip.state.maxRate,
+        onSetValue : this.handleSetScale
       };
       toRender.slider = <Slider {...sliderProps} />;
     }
