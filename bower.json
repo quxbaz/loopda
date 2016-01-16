@@ -20,6 +20,8 @@
   ],
   "dependencies": {
     "sequencer": "https://github.com/quxbaz/sequencer.git",
-    "normalize-css": "~3.0.3"
+    "normalize-css": "~3.0.3",
+    "mocha": "~2.3.4",
+    "chai": "~3.4.2"
   }
 }

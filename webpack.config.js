@@ -2,7 +2,7 @@ require('es6-promise').polyfill();
 var path = require('path');
 var resolve = path.resolve;
 
-module.exports = {
+var config = {
 
   cache: true,
   devtool: 'eval-source-map',
@@ -59,3 +59,9 @@ module.exports = {
   }
 
 };
+
+if (process.env.mode == 'test') {
+  config.entry = './app/test.js';
+}
+
+module.exports = config;
