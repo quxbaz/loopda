@@ -2,7 +2,7 @@
   Blip View-Model
 */
 
-import {titleCase} from 'util';
+import {titleCase} from 'lib/util';
 
 export default class {
 
