@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+let minScaleLength = 300;
 let bound = (x, [min, max]) => Math.max(Math.min(x, max), min);
 
 export default React.createClass({
@@ -32,7 +33,7 @@ export default React.createClass({
   },
 
   handleMouseMove(event) {
-    let scaleLength = this.el.offsetWidth;
+    let scaleLength = Math.max(this.el.offsetWidth, minScaleLength);
     let mouseOffset = bound(
       event.clientX - this.el.getBoundingClientRect().left,
       [0, scaleLength]
