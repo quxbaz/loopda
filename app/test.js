@@ -6,5 +6,6 @@ require('bower_components/chai/chai').should();
 
 // Tests
 import './tests/lib/util';
+import './tests/sequencer/blip/viewmodel';
 
 mocha.run();
