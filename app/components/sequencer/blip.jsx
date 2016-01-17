@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import {fireOnce} from 'lib/util';
+import {constrain, fireOnce} from 'lib/util';
 import doubleClick from 'components/mixins/doubleclick';
 import Scale from 'components/ui/scale';
 import BlipViewModel from 'app/sequencer/blip/viewmodel';
@@ -31,23 +31,23 @@ export default React.createClass({
     blip.setState({mute: !blip.state.mute});
   },
 
-  // handleWheel(event) {
-  //   event.preventDefault();
-  //   let blip = this.props.blip;
-  //   if (blip.state.mute)
-  //     return;
-  //   var direction = event.deltaY > 0 ? 'down' : 'up';
-  //   this.adjustRate(direction);
-  // },
+  handleWheel(event) {
+    event.preventDefault();
+    if (this.props.blip.state.mute)
+      return;
+    var direction = event.deltaY > 0 ? 'down' : 'up';
+    this.tuneBlipProp(direction);
+  },
 
-  adjustRate(direction) {
+  tuneBlipProp(direction) {
     let blip = this.props.blip;
-    let rate = blip.state.rate;
+    let rate = this.vm.toPercent('rate');
     if (direction == 'up')
-      rate += 0.1;
+      rate += 1;
     else if (direction == 'down')
-      rate -= 0.1;
-    blip.setState({rate});
+      rate -= 1;
+    rate = constrain(rate, [0, 100]);
+    blip.setState({rate: this.vm.toValue('rate', rate)});
   },
 
   handleDoubleClick(event) {
@@ -66,11 +66,6 @@ export default React.createClass({
 
   render() {
 
-    /*
-      <TODO> Fix, this is rerendering too much.
-      console.log('render');
-    */
-
     let blip = this.props.blip;
 
     let props = {
@@ -80,7 +75,7 @@ export default React.createClass({
         playing: this.props.onBeat
       }),
       onClick: this.toggleMute,
-      // onWheel: this.handleWheel
+      onWheel: this.handleWheel
     };
 
     let toRender = {};
