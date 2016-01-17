@@ -36,18 +36,20 @@ export default React.createClass({
     if (this.props.blip.state.mute)
       return;
     var direction = event.deltaY > 0 ? 'down' : 'up';
-    this.tuneBlipProp(direction);
+    this.tuneProp(direction);
   },
 
-  tuneBlipProp(direction) {
+  tuneProp(direction) {
+    let tuner = this.props.tuner;
     let blip = this.props.blip;
-    let rate = this.vm.toPercent('rate');
+    let percent = this.vm.toPercent(tuner);
     if (direction == 'up')
-      rate += 1;
+      percent += 1;
     else if (direction == 'down')
-      rate -= 1;
-    rate = constrain(rate, [0, 100]);
-    blip.setState({rate: this.vm.toValue('rate', rate)});
+      percent -= 1;
+    blip.setState({
+      [tuner]: this.vm.toValue(tuner, constrain(percent, [0, 100]))
+    });
   },
 
   handleDoubleClick(event) {
@@ -59,20 +61,22 @@ export default React.createClass({
   },
 
   handleScaleChange(percent) {
+    let tuner = this.props.tuner;
     this.props.blip.setState({
-      rate: this.vm.toValue('rate', percent)
+      [tuner]: this.vm.toValue(tuner, percent)
     });
   },
 
   render() {
 
     let blip = this.props.blip;
+    let tuner = this.props.tuner;
 
     let props = {
       className: classNames({
         blip: true,
         mute: !blip.state.sampleName || blip.state.mute,
-        playing: this.props.onBeat
+        playing: this.props.isPlaying
       }),
       onClick: this.toggleMute,
       onWheel: this.handleWheel
@@ -81,11 +85,11 @@ export default React.createClass({
     let toRender = {};
 
     if (!blip.state.mute)
-      toRender.rateLabel = <div className="rate-label">{this.vm.toPercent('rate')}</div>;
+      toRender.tunerLabel = <div className="tuner-label">{this.vm.toPercent(tuner)}</div>;
 
     if (this.state.scaleMode) {
       let scaleProps = {
-        value    : this.vm.toPercent('rate'),
+        value    : this.vm.toPercent(tuner),
         onChange : this.handleScaleChange
       };
       toRender.scale = <Scale {...scaleProps} />;
@@ -93,7 +97,7 @@ export default React.createClass({
 
     return (
       <div {...props}>
-        {toRender.rateLabel}
+        {toRender.tunerLabel}
         {toRender.scale}
       </div>
     );

@@ -1,7 +1,15 @@
 import React from 'react';
 import ChannelComponent from './channel';
 
+let tuners = ['gain', 'rate'];
+
 export default React.createClass({
+
+  getInitialState() {
+    return {
+      tuner: 'rate'
+    };
+  },
 
   componentWillMount() {
     this.props.sequencer.onStateChange(() => {
@@ -22,15 +30,24 @@ export default React.createClass({
     this.props.sequencer.addChannel({sampleName});
   },
 
+  setTuner(tuner) {
+    this.setState({tuner});
+  },
+
   render() {
 
     let sequencer = this.props.sequencer;
 
-    let channels = sequencer.state.channels.map((channel, i) => {
+    let tunerNodes = tuners.map(tuner =>
+      <a key={tuner} onClick={this.setTuner.bind(this, tuner)}>{tuner} / </a>
+    );
+
+    let channelNodes = sequencer.state.channels.map((channel, i) => {
       let props = {
         key: i,
         channel,
-        currentBeat: sequencer.state.currentBeat
+        currentBeat: sequencer.state.currentBeat,
+        tuner: this.state.tuner
       };
       return <ChannelComponent {...props} />;
     });
@@ -47,10 +64,14 @@ export default React.createClass({
     return (
       <div className="sequencer">
         <a className="togglePlay" onClick={this.togglePlay}>
-          {sequencer.state.playing ? 'Pause' : 'Play'}
+          {sequencer.state.playing ? 'pause' : 'play'}
         </a>
+        <br /><br />
+        <div>{tunerNodes}</div>
+        <div>Current tuner: {this.state.tuner}</div>
+        <br /><br />
         <div className="channels">
-          {channels}
+          {channelNodes}
           <div className="add-channel">
             <div>&nbsp;</div>
             <div className="inner">

@@ -17,7 +17,13 @@ export default React.createClass({
     let channel = this.props.channel;
     // <TODO> Use ids instead of indexes for keys.
     let blipNodes = channel.state.blips.map((blip, i) => {
-      return <BlipComponent key={i} blip={blip} onBeat={this.props.currentBeat == i} />
+      let props = {
+        blip,
+        key: i,
+        isPlaying: this.props.currentBeat == i,
+        tuner: this.props.tuner
+      };
+      return <BlipComponent {...props} />
     });
     return (
       <div className="channel">
