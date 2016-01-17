@@ -1,6 +1,8 @@
-require('bower_components/normalize-css/normalize.css');
-require('./styles/app.less');
+// Styles
+import 'bower_components/normalize-css/normalize.css';
+import './styles/app.less';
 
+// Modules
 import App from 'app';
 
 let app = new App();
