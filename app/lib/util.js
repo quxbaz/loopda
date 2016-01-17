@@ -3,6 +3,12 @@ export let uniqId = (() => {
   return () => _id++;
 })();
 
+export function each(obj, fn) {
+  Object.keys(obj).forEach((key) => {
+    fn(obj[key], key);
+  });
+}
+
 export function requireProps(object, props) {
   _.each(props, function(prop) {
     if (!_.has(object, prop))
