@@ -9,9 +9,16 @@ export function each(obj, fn) {
   });
 }
 
-export function requireProps(object, props) {
-  _.each(props, function(prop) {
-    if (!_.has(object, prop))
+export function times(n, fn) {
+  let results = [];
+  for (let i=0; i < n; i++)
+    results.push(fn());
+  return results;
+}
+
+export function requireProps(obj, props) {
+  props.forEach(function(prop) {
+    if (!obj.hasOwnProperty(prop))
       throw new Error('Property @' + prop + ' is required.');
   });
 }
