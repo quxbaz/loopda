@@ -1,6 +1,6 @@
 export default {
-  "hihat" : "/samples/hihat.mp3",
-  "clap"  : "/samples/clap.mp3",
-  "kick"  : "/samples/kick.mp3",
-  "snare" : "/samples/snare.mp3"
+  "hihat" : "media/samples/hihat.mp3",
+  "clap"  : "media/samples/clap.mp3",
+  "kick"  : "media/samples/kick.mp3",
+  "snare" : "media/samples/snare.mp3"
 }
