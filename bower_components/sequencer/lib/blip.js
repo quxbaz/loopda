@@ -8,7 +8,7 @@ function defaultState() {
   return {
     sampleName : '',
     mute       : false,
-    duration   : 200,
+    duration   : 0,
     offset     : 0,
     gain       : 1,
     minGain    : 0,

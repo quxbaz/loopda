@@ -36,6 +36,14 @@ export let mixin = {
     if (this._stateChangeHandlers === undefined)
       this._stateChangeHandlers = [];
     this._stateChangeHandlers.push(handler);
+  },
+
+  offStateChange(handler) {
+    let i = this._stateChangeHandlers.indexOf(handler);
+    if (i == -1)
+      throw new Error("Handler is not attached.");
+    else
+      this._stateChangeHandlers.splice(i, 1);
   }
 
 };
