@@ -1,17 +1,10 @@
 import React from 'react';
+import modelUpdate from 'components/mixins/modelupdate';
 import BlipComponent from './blip';
 
 export default React.createClass({
 
-  componentWillMount() {
-    this.props.model.onStateChange(() => {
-      this.forceUpdate();
-    });
-  },
-
-  componentWillUnmount() {
-    this.props.model.offStateChange(this.update);
-  },
+  mixins: [modelUpdate],
 
   render() {
     let model = this.props.model;

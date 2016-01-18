@@ -3,27 +3,20 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import {constrain, fireOnce} from 'lib/util';
 import doubleClick from 'components/mixins/doubleclick';
+import modelUpdate from 'components/mixins/modelupdate';
 import Scale from 'components/ui/scale';
 import BlipViewModel from 'app/sequencer/blip/viewmodel';
 
 export default React.createClass({
 
-  mixins: [doubleClick],
+  mixins: [modelUpdate, doubleClick],
 
   getInitialState() {
     return {};
   },
 
   componentWillMount() {
-    let model = this.props.model;
-    this.vm = new BlipViewModel(model);
-    model.onStateChange(() => {
-      this.forceUpdate();
-    });
-  },
-
-  componentWillUnmount() {
-    // <TODO> Detach event handlers
+    this.vm = new BlipViewModel(this.props.model);
   },
 
   toggleMute() {

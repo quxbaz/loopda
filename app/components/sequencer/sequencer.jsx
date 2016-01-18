@@ -1,23 +1,17 @@
 import React from 'react';
+import modelUpdate from 'components/mixins/modelupdate';
 import ChannelComponent from './channel';
 
 let tuners = ['gain', 'rate'];
 
 export default React.createClass({
 
+  mixins: [modelUpdate],
+
   getInitialState() {
     return {
       tuner: 'rate'
     };
-  },
-
-  componentWillMount() {
-    this.update = () => this.forceUpdate();
-    this.props.model.onStateChange(this.update);
-  },
-
-  componentWillUnmount() {
-    this.props.model.offStateChange(this.update);
   },
 
   togglePlay() {
