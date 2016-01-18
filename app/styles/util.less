@@ -32,3 +32,15 @@
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
+.overlay(@background, @opacity: 0.24) {
+  content: "";
+  z-index: 4000;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: @background;
+  opacity: @opacity;
+}

@@ -8,13 +8,24 @@
 @blipsPerRow: 8;
 @blipLength: @blipsContainerLength / @blipsPerRow;
 
+// Colors
+@blipBackground        : #fff;
+@altBlipBackground     : #fff8f8;
+@activeBlipBackground  : #fffd31;
+@playingBlipBackground : #fdd;
+
 .channels {
   .flow-content;
   width: @channelRowWidth;
   margin: 0 auto;
 }
 
-.channel {}
+.channel {
+  &.mute .blips-container:after {
+    .overlay(#888);
+    pointer-events: none;
+  }
+}
 
 .channel-title {
   text-align: center;
@@ -28,6 +39,7 @@
 }
 
 .blips-container {
+  position: relative;
   .flow-content;
   width: @blipsContainerLength;
   height: @blipsContainerLength;
@@ -47,12 +59,10 @@
   &:nth-child(n + 9) {border-top: none;}
 
   // Order here is important.
-  &.mute {background: #fff;}
-  &:nth-child(even) {background: #fff8f8;}
-  // &:nth-child(4n) {background: #fff2f2;}
-  // &:nth-child(4n - 1) {background: #fff2f2;}
-  &:not(.mute) {background: #fffd31;}
-  &.playing {background: #fdd;}
+  &.mute {background: @blipBackground;}
+  &:nth-child(even) {background: @altBlipBackground;}
+  &:not(.mute) {background: @activeBlipBackground;}
+  &.playing {background: @playingBlipBackground;}
 
   .tuner-label {
     font-family: courier new;
