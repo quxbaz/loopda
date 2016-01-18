@@ -19,8 +19,15 @@ export default React.createClass({
     model.setState({playing: !model.state.playing});
   },
 
-  addChannel(sampleName, event) {
+  addChannel(sampleName) {
     this.props.model.addChannel({sampleName});
+  },
+
+  removeChannel(channel) {
+    let channels = this.props.model.state.channels;
+    this.props.model.setState({
+      channels: channels.filter(item => item !== channel)
+    });
   },
 
   setTuner(tuner) {
@@ -35,12 +42,13 @@ export default React.createClass({
       <a key={tuner} onClick={this.setTuner.bind(this, tuner)}>{tuner} / </a>
     );
 
-    let channelNodes = model.state.channels.map((channel, i) => {
+    let channelNodes = model.state.channels.map((channel) => {
       let props = {
-        key: i,
+        key: channel.state.id,
         model: channel,
         currentBeat: model.state.currentBeat,
-        tuner: this.state.tuner
+        tuner: this.state.tuner,
+        onRemove: this.removeChannel
       };
       return <ChannelComponent {...props} />;
     });
