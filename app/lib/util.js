@@ -3,6 +3,8 @@ export let uniqId = (() => {
   return () => _id++;
 })();
 
+export let last = (arr) => arr[arr.length - 1];
+
 export function each(obj, fn) {
   Object.keys(obj).forEach((key) => {
     fn(obj[key], key);
@@ -23,9 +25,8 @@ export function requireProps(obj, props) {
   });
 }
 
-export function constrain(val, [min, max]) {
-  return Math.min(Math.max(val, min), max);
-}
+export let constrain = (val, [min, max]) =>
+  Math.min(Math.max(val, min), max);
 
 export function fireOnce(el, event, handler) {
   /*

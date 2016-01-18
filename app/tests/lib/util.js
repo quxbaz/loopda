@@ -11,6 +11,16 @@ describe("lib/util", () => {
     });
   });
 
+  describe("last()", () => {
+    it("returns the last element in an array.", () => {
+      util.last([1, 2]).should.eql(2);
+      util.last([2]).should.eql(2);
+    });
+    it("returns undefined if the array has no elments..", () => {
+      (typeof util.last([])).should.eql('undefined');
+    });
+  });
+
   describe("each()", () => {
     it("iterates over an object.", () => {
       let vals = [];
