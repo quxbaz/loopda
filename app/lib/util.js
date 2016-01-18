@@ -44,12 +44,5 @@ export function titleCase(s, sep=' ') {
   ).join(sep);
 }
 
-export function ifn(cond, then, else_) {
-  /*
-    if-statement as an expression.
-  */
-  if (cond)
-    return then;
-  else
-    return else_;
-}
+// if-statement as an expression.
+export let ifn = (cond, then, else_) => cond ? then : else_;
