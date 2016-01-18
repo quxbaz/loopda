@@ -5,22 +5,23 @@
 import stateful from './stateful';
 import Blip from './blip';
 
-function defaultState() {
+function objectDefaults() {
   let blips = [];
-  for (var i=0; i < 32; i++)
+  for (let i=0; i < 32; i++)
     blips.push(new Blip({mute: true}));
-  return {
-    beats: 32,
-    mute: false,
-    sampleName: '',
-    blips
-  };
+  return {blips};
 }
+
+export let defaults = {
+  beats      : 32,
+  mute       : false,
+  sampleName : ''
+};
 
 export default class Channel {
 
   constructor(state, props={}) {
-    this.setState(Object.assign(defaultState(), state));
+    this.setState(Object.assign(objectDefaults(), defaults, state));
     this.props = props;
     this.state.blips.forEach((blip) => {
       if (!blip.state.sampleName)

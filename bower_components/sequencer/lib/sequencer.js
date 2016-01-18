@@ -17,20 +17,18 @@ import Channel from './channel';
 import Timer from 'bower_components/timer.js/timer';
 import Dispatcher from 'bower_components/dispatcher/dispatcher';
 
-function defaultState() {
-  return {
-    playing: false,
-    currentBeat: -1,
-    beats: 32,
-    beatDuration: 200,
-    channels: []
-  };
+export let defaults = {
+  playing      : false,
+  currentBeat  : -1,
+  beats        : 32,
+  beatDuration : 200,
+  channels     : []
 }
 
 export default class Sequencer {
 
   constructor(state, props={}) {
-    this.setState(Object.assign(defaultState(), state));
+    this.setState(Object.assign({}, defaults, state));
     this.props = props;
     this.timer = new Timer({tickInterval: this.state.beatDuration});
     this.timer.on('tick', () => {
