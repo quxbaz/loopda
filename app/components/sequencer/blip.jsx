@@ -15,9 +15,9 @@ export default React.createClass({
   },
 
   componentWillMount() {
-    let blip = this.props.blip;
-    this.vm = new BlipViewModel(blip);
-    blip.onStateChange(() => {
+    let model = this.props.model;
+    this.vm = new BlipViewModel(model);
+    model.onStateChange(() => {
       this.forceUpdate();
     });
   },
@@ -27,13 +27,13 @@ export default React.createClass({
   },
 
   toggleMute() {
-    let blip = this.props.blip;
-    blip.setState({mute: !blip.state.mute});
+    let model = this.props.model;
+    model.setState({mute: !model.state.mute});
   },
 
   handleWheel(event) {
     event.preventDefault();
-    if (this.props.blip.state.mute)
+    if (this.props.model.state.mute)
       return;
     var direction = event.deltaY > 0 ? 'down' : 'up';
     this.tuneProp(direction);
@@ -41,20 +41,20 @@ export default React.createClass({
 
   tuneProp(direction) {
     let tuner = this.props.tuner;
-    let blip = this.props.blip;
+    let model = this.props.model;
     let percent = this.vm.toPercent(tuner);
     if (direction == 'up')
       percent += 1;
     else if (direction == 'down')
       percent -= 1;
-    blip.setState({
+    model.setState({
       [tuner]: this.vm.toValue(tuner, constrain(percent, [0, 100]))
     });
   },
 
   handleDoubleClick(event) {
     this.setState({scaleMode: true});
-    this.props.blip.setState({mute: false});
+    this.props.model.setState({mute: false});
     fireOnce(window, 'mouseup', () => {
       this.setState({scaleMode: false});
     });
@@ -62,20 +62,20 @@ export default React.createClass({
 
   handleScaleChange(percent) {
     let tuner = this.props.tuner;
-    this.props.blip.setState({
+    this.props.model.setState({
       [tuner]: this.vm.toValue(tuner, percent)
     });
   },
 
   render() {
 
-    let blip = this.props.blip;
+    let model = this.props.model;
     let tuner = this.props.tuner;
 
     let props = {
       className: classNames({
         blip: true,
-        mute: !blip.state.sampleName || blip.state.mute,
+        mute: !model.state.sampleName || model.state.mute,
         playing: this.props.isPlaying
       }),
       onClick: this.toggleMute,
@@ -84,7 +84,7 @@ export default React.createClass({
 
     let toRender = {};
 
-    if (!blip.state.mute)
+    if (!model.state.mute)
       toRender.tunerLabel = <div className="tuner-label">{this.vm.toPercent(tuner)}</div>;
 
     if (this.state.scaleMode) {

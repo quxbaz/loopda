@@ -8,7 +8,7 @@ import SequencerComponent from 'components/sequencer/sequencer';
 let AppComponent = React.createClass({
   render() {
     return (
-      <SequencerComponent sequencer={this.props.sequencer}
+      <SequencerComponent model={this.props.sequencer}
        sampleNames={Object.keys(sampleList)} />
     );
   }

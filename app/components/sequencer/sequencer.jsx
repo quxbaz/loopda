@@ -12,22 +12,21 @@ export default React.createClass({
   },
 
   componentWillMount() {
-    this.props.sequencer.onStateChange(() => {
-      this.forceUpdate();
-    });
+    this.update = () => this.forceUpdate();
+    this.props.model.onStateChange(this.update);
   },
 
   componentWillUnmount() {
-    // <TODO> Detach event handlers
+    this.props.model.offStateChange(this.update);
   },
 
   togglePlay() {
-    let sequencer = this.props.sequencer;
-    sequencer.setState({playing: !sequencer.state.playing});
+    let model = this.props.model;
+    model.setState({playing: !model.state.playing});
   },
 
   addChannel(sampleName, event) {
-    this.props.sequencer.addChannel({sampleName});
+    this.props.model.addChannel({sampleName});
   },
 
   setTuner(tuner) {
@@ -36,17 +35,17 @@ export default React.createClass({
 
   render() {
 
-    let sequencer = this.props.sequencer;
+    let model = this.props.model;
 
     let tunerNodes = tuners.map(tuner =>
       <a key={tuner} onClick={this.setTuner.bind(this, tuner)}>{tuner} / </a>
     );
 
-    let channelNodes = sequencer.state.channels.map((channel, i) => {
+    let channelNodes = model.state.channels.map((channel, i) => {
       let props = {
         key: i,
-        channel,
-        currentBeat: sequencer.state.currentBeat,
+        model: channel,
+        currentBeat: model.state.currentBeat,
         tuner: this.state.tuner
       };
       return <ChannelComponent {...props} />;
@@ -64,7 +63,7 @@ export default React.createClass({
     return (
       <div className="sequencer">
         <a className="togglePlay" onClick={this.togglePlay}>
-          {sequencer.state.playing ? 'pause' : 'play'}
+          {model.state.playing ? 'pause' : 'play'}
         </a>
         <br /><br />
         <div>{tunerNodes}</div>

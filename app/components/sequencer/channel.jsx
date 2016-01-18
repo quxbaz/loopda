@@ -4,21 +4,21 @@ import BlipComponent from './blip';
 export default React.createClass({
 
   componentWillMount() {
-    this.props.channel.onStateChange(() => {
+    this.props.model.onStateChange(() => {
       this.forceUpdate();
     });
   },
 
   componentWillUnmount() {
-    // <TODO> Detach event handlers
+    this.props.model.offStateChange(this.update);
   },
 
   render() {
-    let channel = this.props.channel;
+    let model = this.props.model;
     // <TODO> Use ids instead of indexes for keys.
-    let blipNodes = channel.state.blips.map((blip, i) => {
+    let blipNodes = model.state.blips.map((blip, i) => {
       let props = {
-        blip,
+        model: blip,
         key: i,
         isPlaying: this.props.currentBeat == i,
         tuner: this.props.tuner
@@ -27,7 +27,7 @@ export default React.createClass({
     });
     return (
       <div className="channel">
-        <div className="channel-title">{channel.state.sampleName}</div>
+        <div className="channel-title">{model.state.sampleName}</div>
         <div className="inner-channel">
           <div className="blips-container">
             {blipNodes}
