@@ -29,7 +29,7 @@ export default React.createClass({
       let props = {
         model: blip,
         key: blip.state.id,
-        isPlaying: this.props.currentBeat == i,
+        isPlaying: !model.state.mute && this.props.currentBeat == i,
         tuner: this.props.tuner
       };
       return <BlipComponent {...props} />
