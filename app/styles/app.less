@@ -3,8 +3,17 @@
 
 *, *:before, *:after {box-sizing: border-box;}
 
+.background {
+	/* Generated with http://gradient.quasi.ink */
+	background-size: cover;
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAADCAYAAABfwxXFAAAAYklEQVQIWwFXAKj/AUkdUf8hDh8AXFpKAOXO1gAp+RYAIRgdAJnNwwABs2an/+LZ3gDqCvcAPVVLANm6xAA3CxYAMyIuAAGNTY3/6evjAOT99QAtRTkAHR4UAMuaugAyFSkAiWIgFtADblAAAAAASUVORK5CYII=");
+}
+
 html {
   font-size: 14px;
+  min-width: 100%;
+  min-height: 100%;
+  .background;
 }
 
 body {
@@ -21,6 +30,7 @@ a {
   .outline(#0f0);
   width: 960px;
   margin: 80px auto 0 auto;
+  background: #fff;
 }
 
 @import "sequencer";
