@@ -68,7 +68,7 @@ export default React.createClass({
         </a>
         <br /><br />
         <div>{tunerNodes}</div>
-        <div>Current tuner: {this.state.tuner}</div>
+        <div>Tuning mode: {this.state.tuner}</div>
         <br /><br />
         <div className="channels">
           {channelNodes}
