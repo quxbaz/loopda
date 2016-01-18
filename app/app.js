@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {loadAudioSamples} from 'audio/audiohelper';
 import sampleList from 'audio/samplelist';
+import {loadAudioSamples} from 'audio/audiohelper';
 import {Sequencer, AudioService} from 'sequencer';
+import {defaults as blipDefaults} from 'sequencer/lib/blip';
 import SequencerComponent from 'components/sequencer/sequencer';
 
 let AppComponent = React.createClass({
@@ -17,7 +18,10 @@ let AppComponent = React.createClass({
 export default class App {
 
   constructor() {
-    this.sequencer = new Sequencer({beatDuration: 100});
+    let beatDuration = 100;
+    this.sequencer = new Sequencer({beatDuration});
+    blipDefaults.minOffset = 0;
+    blipDefaults.maxOffset = 100;
 
     // <TESTING>
     this.sequencer.addChannel({sampleName: 'hihat'});

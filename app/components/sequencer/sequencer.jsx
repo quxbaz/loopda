@@ -2,7 +2,7 @@ import React from 'react';
 import modelUpdate from 'components/mixins/modelupdate';
 import ChannelComponent from './channel';
 
-let tuners = ['gain', 'rate'];
+let tuners = ['gain', 'rate', 'offset'];
 
 export default React.createClass({
 
