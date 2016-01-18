@@ -22,11 +22,11 @@
     "dispatcher": "https://github.com/quxbaz/dispatcher.git",
     "timer.js": "https://github.com/quxbaz/timer.js.git"
   },
-  "_release": "103a9707c0",
+  "_release": "84aa781524",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "103a9707c0f740e878b52c5bcfc466835d17f4d0"
+    "commit": "84aa7815243c8d67e1884171a8ae6cfe3c8dc23a"
   },
   "_source": "https://github.com/quxbaz/sequencer.git",
   "_target": "*",

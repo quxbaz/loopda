@@ -8,11 +8,20 @@
   changes.
 */
 
+let uniqId = (() => {
+  let i = 0;
+  return () => {
+    return i++;
+  };
+})();
+
 export let mixin = {
 
   setState(state) {
     if (this.state === undefined) {
-      this._state = {};
+      this._state = {
+        id: uniqId()
+      };
       Object.defineProperty(this, 'state', {
         get: () => this._state,
         set() {
