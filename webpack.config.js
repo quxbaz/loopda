@@ -48,9 +48,9 @@ var config = {
       'react-dom'  : resolve('node_modules/react/lib/ReactDOM.js'),
 
       // bower
-      'classnames' : resolve('bower_components/classnames/index.js'),
+      'classnames' : resolve('bower_components/classnames/'),
       'http'       : resolve('bower_components/http.js/http.js'),
-      'sequencer'  : resolve('bower_components/sequencer/index.js')
+      'sequencer'  : resolve('bower_components/sequencer/')
 
       // app
       // --
