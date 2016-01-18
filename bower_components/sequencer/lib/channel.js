@@ -11,6 +11,7 @@ function defaultState() {
     blips.push(new Blip({mute: true}));
   return {
     beats: 32,
+    mute: false,
     sampleName: '',
     blips
   };
@@ -29,7 +30,8 @@ export default class Channel {
   }
 
   playBeat(beat) {
-    this.state.blips[beat].play();
+    if (!this.state.mute)
+      this.state.blips[beat].play();
   }
 
 }
