@@ -1,6 +1,7 @@
 import React from 'react';
 import modelUpdate from 'components/mixins/modelupdate';
 import ChannelComponent from './channel';
+import {initial, last} from 'lib/util';
 
 let tuners = ['gain', 'rate', 'offset'];
 
@@ -10,7 +11,8 @@ export default React.createClass({
 
   getInitialState() {
     return {
-      tuner: 'rate'
+      tuner: 'rate',
+      removedChannels: []
     };
   },
 
@@ -24,9 +26,28 @@ export default React.createClass({
   },
 
   removeChannel(channel) {
+    this.setState({
+      removedChannels: this.state.removedChannels.concat(channel)
+    });
     let channels = this.props.model.state.channels;
     this.props.model.setState({
       channels: channels.filter(item => item !== channel)
+    });
+  },
+
+  restoreChannel() {
+    /*
+      Undos a removeChannel action.
+    */
+    let removedChannels = this.state.removedChannels;
+    if (removedChannels.length == 0)
+      return;
+    let model = this.props.model;
+    let restore = last(removedChannels);
+    let channels = model.state.channels.concat(restore);
+    model.setState({channels});
+    this.setState({
+      removedChannels: initial(removedChannels)
     });
   },
 
@@ -70,6 +91,8 @@ export default React.createClass({
         <br /><br />
         <div>{tunerNodes}</div>
         <div>Tuning mode: {this.state.tuner}</div>
+        <br /><br />
+        <a onClick={this.restoreChannel}>Restore channel</a>
         <br /><br />
         <div className="channels">
           {channelNodes}
