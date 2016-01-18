@@ -21,6 +21,19 @@ describe("lib/util", () => {
     });
   });
 
+  describe("initial()", () => {
+    it("returns everything but the last item in an array", () => {
+      util.initial([1, 2]).should.eql([1]);
+      util.initial([1, 2, 3]).should.eql([1, 2]);
+    });
+    it("returns an empty array if the array is size 1.", () => {
+      util.initial([1]).should.eql([]);
+    });
+    it("returns an empty array if the array is empty.", () => {
+      util.initial([]).should.eql([]);
+    });
+  });
+
   describe("each()", () => {
     it("iterates over an object.", () => {
       let vals = [];

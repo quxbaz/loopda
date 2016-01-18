@@ -5,6 +5,8 @@ export let uniqId = (() => {
 
 export let last = (arr) => arr[arr.length - 1];
 
+export let initial = (arr) => arr.slice(0, -1);
+
 export function each(obj, fn) {
   Object.keys(obj).forEach((key) => {
     fn(obj[key], key);
