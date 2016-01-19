@@ -10,7 +10,7 @@
 
 // Colors
 @blipBackground        : #fff;
-@altBlipBackground     : #fff8f8;
+@altBlipBackground     : #fff2f2;
 @activeBlipBackground  : #fffd31;
 @playingBlipBackground : #fdd;
 
@@ -60,7 +60,7 @@
 
   // Order here is important.
   &.mute {background: @blipBackground;}
-  &:nth-child(even) {background: @altBlipBackground;}
+  &:nth-child(4n), &:nth-child(4n - 1) {background: @altBlipBackground;}
   &:not(.mute) {background: @activeBlipBackground;}
   &.playing {background: @playingBlipBackground;}
 
