@@ -4,7 +4,7 @@
 
 export default {
 
-  componentWillMount() {
+  componentDidMount() {
     this._modelUpdate = () => this.forceUpdate();
     this.props.model.onStateChange(this._modelUpdate);
   },
