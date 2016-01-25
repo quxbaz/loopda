@@ -7,7 +7,6 @@ export let last = (arr) => arr[arr.length - 1];
 
 export let initial = (arr) => arr.slice(0, -1);
 
-
 export function each(o, fn) {
   let keys = Object.keys(o);
   for (let i=0; i < keys.length; i++) {
