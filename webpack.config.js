@@ -5,7 +5,7 @@ var resolve = path.resolve;
 var config = {
 
   cache: true,
-  devtool: 'cheap-source-map',
+  devtool: 'eval-source-map',
   entry: './app/entry.js',
 
   output: {
@@ -21,7 +21,9 @@ var config = {
         loader: 'babel',
         include: [
           resolve(__dirname, 'app'),
-          resolve(__dirname, 'bower_components/sequencer')
+          resolve(__dirname, 'bower_components/sequencer'),
+          resolve(__dirname, 'bower_components/store'),
+          resolve(__dirname, 'bower_components/pending.js')
         ],
         query: {
           presets: ['es2015', 'react']
@@ -50,7 +52,9 @@ var config = {
       // bower
       'classnames' : resolve('bower_components/classnames/'),
       'http'       : resolve('bower_components/http.js/http.js'),
-      'sequencer'  : resolve('bower_components/sequencer/')
+      'sequencer'  : resolve('bower_components/sequencer/'),
+      'store'      : resolve('bower_components/store.js/'),
+      'pending'    : resolve('bower_components/pending.js/'),
 
       // app
       // --
