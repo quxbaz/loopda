@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "Make sik beats.",
   "main": "app/entry.js",
-  "dependencies": {},
+  "dependencies": {
+    "babel-polyfill": "^6.3.14"
+  },
   "devDependencies": {
     "babel-core": "^6.3.26",
     "babel-loader": "^6.2.1",
