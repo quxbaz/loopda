@@ -1,0 +1,24 @@
+{
+  "name": "store.js",
+  "main": "index.js",
+  "authors": [
+    "David Yeung <quxbaz@gmail.com>"
+  ],
+  "description": "",
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/quxbaz/store.js",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "mocha": "~2.3.4"
+  }
+}
