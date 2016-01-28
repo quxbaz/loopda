@@ -1,0 +1,21 @@
+{
+  "name": "pending.js",
+  "description": "Asynchronous generator/promise library.",
+  "main": "index.js",
+  "authors": [
+    "quxbaz"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "es6"
+  ],
+  "homepage": "https://github.com/quxbaz/pending.js.git",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
