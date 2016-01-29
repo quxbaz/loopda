@@ -24,7 +24,8 @@ var config = {
           resolve(__dirname, 'bower_components/sequencer'),
           resolve(__dirname, 'bower_components/store'),
           resolve(__dirname, 'bower_components/pending.js'),
-          resolve(__dirname, 'node_modules/bin.js')
+          resolve(__dirname, 'node_modules/bin.js'),
+          resolve(__dirname, 'node_modules/sentry'),
         ],
         query: {
           presets: ['es2015', 'react']
