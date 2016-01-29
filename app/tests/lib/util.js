@@ -120,4 +120,13 @@ describe("lib/util", () => {
     });
   });
 
+  describe("copy()", () => {
+    it("Creates a shallow copy of an object.", () => {
+      let a = {a: 1};
+      let b = util.copy(a);
+      b.a = 2;
+      a.a.should.eql(1);
+    });
+  });
+
 });

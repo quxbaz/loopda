@@ -64,3 +64,10 @@ export function without(obj, keys) {
   });
   return newObj;
 }
+
+export function copy(obj) {
+  /*
+    Returns a shallow copy of an object.
+  */
+  return Object.assign({}, obj);
+}
