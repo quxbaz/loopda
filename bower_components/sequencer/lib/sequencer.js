@@ -82,6 +82,7 @@ export default class Sequencer {
 }
 
 let dispatcher = new Dispatcher();
+
 Object.assign(Sequencer.prototype, stateful.mixin, {
   subscribe : dispatcher.subscribe.bind(dispatcher),
   publish   : dispatcher.publish.bind(dispatcher)

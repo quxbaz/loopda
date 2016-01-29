@@ -10,18 +10,22 @@
 
 let uniqId = (() => {
   let i = 0;
-  return () => {
-    return i++;
-  };
+  return () => i++;
 })();
 
 export let mixin = {
 
   setState(state) {
+
+    /*
+      <WARNING> We are making a very bad, dirty assumption here that
+      setState will be called in the constructor.
+    */
+    if (!this.id)
+      this.id = uniqId();
+
     if (this.state === undefined) {
-      this._state = {
-        id: uniqId()
-      };
+      this._state = {};
       Object.defineProperty(this, 'state', {
         get: () => this._state,
         set() {
