@@ -28,7 +28,7 @@ export default React.createClass({
     let blipNodes = model.state.blips.map((blip, i) => {
       let props = {
         model: blip,
-        key: blip.state.id,
+        key: blip.id,
         isPlaying: !model.state.mute && this.props.currentBeat == i,
         tuner: this.props.tuner
       };

@@ -22,7 +22,10 @@ export default React.createClass({
   },
 
   addChannel(sampleName) {
-    this.props.model.addChannel({sampleName});
+    // let channel = this.props.model.addChannel({sampleName});
+
+    // <TEST>
+    this.props.onAddChannel({sampleName});
   },
 
   removeChannel(channel) {
@@ -65,7 +68,7 @@ export default React.createClass({
 
     let channelNodes = model.state.channels.map((channel) => {
       let props = {
-        key: channel.state.id,
+        key: channel.id,
         model: channel,
         currentBeat: model.state.currentBeat,
         tuner: this.state.tuner,
