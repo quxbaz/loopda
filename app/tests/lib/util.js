@@ -111,4 +111,13 @@ describe("lib/util", () => {
     });
   });
 
+  describe("without()", () => {
+    it("Removes keys from an object.", () => {
+      util.without({a:1, b:2, c:3}, 'c').should.eql({a:1, b:2})
+      util.without({a:1, b:2, c:3}, ['a']).should.eql({b:2, c:3})
+      util.without({a:1, b:2, c:3}, ['a', 'b']).should.eql({c:3})
+      util.without({a:1, b:2, c:3}, ['a', 'b', 'c']).should.eql({})
+    });
+  });
+
 });

@@ -51,3 +51,16 @@ export function titleCase(s, sep=' ') {
 
 // if-statement as an expression.
 export let ifn = (cond, then, else_) => cond ? then : else_;
+
+export function without(obj, keys) {
+  /*
+    Returns a new object with [keys] removed.
+  */
+  if (!Array.isArray(keys))
+    keys = [keys];
+  let newObj = Object.assign({}, obj);
+  keys.forEach((key) => {
+    delete newObj[key];
+  });
+  return newObj;
+}
