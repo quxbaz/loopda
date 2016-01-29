@@ -33,6 +33,8 @@ export default class Store {
   }
 
   get(modelName, id) {
+    if (this.models[modelName] === undefined)
+      throw new Error('Model @' + modelName + ' is not registered.');
     if (id === undefined)
       throw new Error('You must provide an id.');
     let hit = this.searchCache(modelName, id);
@@ -48,6 +50,8 @@ export default class Store {
   }
 
   all(modelName) {
+    if (this.models[modelName] === undefined)
+      throw new Error('Model @' + modelName + ' is not registered.');
     if (arguments.length > 1)
       throw new Error('@all takes only 1 argument.');
     if (this.fetchedAll[modelName])

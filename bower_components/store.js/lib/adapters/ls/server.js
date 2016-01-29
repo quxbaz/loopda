@@ -2,13 +2,13 @@
   LocalStorage server.
 */
 
-import Bin from 'store/lib/bin';
+import Bin from 'bin.js';
 import {uuid} from 'store/lib/util';
 
 export default class {
 
   constructor() {
-    this.bin = new Bin({parser: Bin.URL_PARSER});
+    this.bin = new Bin({parser: Bin.urlParser});
   }
 
   request(url, options) {

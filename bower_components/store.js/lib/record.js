@@ -58,11 +58,10 @@ export default class Record {
     /*
       For getting [hasMany, belongsTo] records. Always returns a
       promise.
-
-      <TODO>
-      If schema attr does not exist, throw an error.
     */
     let {schema, name} = this.props.model;
+    if (schema[attr] === undefined)
+      throw new Error('Schema relation @' + attr + ' does not exist.');
     let relation = schema[attr];
     if (relation.type === 'belongsTo') {
       let belongsToId = this.state[relation.modelName];
@@ -80,8 +79,24 @@ export default class Record {
   detach(attr) {
     /*
       Detaches a belongsTo record.
+      @attr: A string or the actual record.
     */
-    this.state[attr] = undefined;
+    if (typeof attr === 'string')
+      this.state[attr] = undefined;
+    else {
+      let record = attr;
+      attr = attr.props.model.name;
+      if (hasId(record, this.state[attr]))
+        this.state[attr] = undefined;
+    }
+  }
+
+  attach(target) {
+    /*
+      @target: The record that this one belongs to.
+    */
+    let attr = target.props.model.name;
+    this.state[attr] = target.state.id || target.cid;
   }
 
 }

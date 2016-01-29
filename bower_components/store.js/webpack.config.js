@@ -18,7 +18,12 @@ var config = {
       {
         test: /\.js$/,
         loader: 'babel',
-        exclude: [/node_modules/, /bower_components/],
+        include: [
+          resolve(__dirname, 'index.js'),
+          resolve(__dirname, 'lib/'),
+          resolve(__dirname, 'test/'),
+          resolve(__dirname, 'node_modules/bin.js/')
+        ],
         query: {
           presets: ['es2015']
         }
