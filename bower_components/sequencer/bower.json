@@ -19,7 +19,6 @@
     "tests"
   ],
   "dependencies": {
-    "dispatcher": "https://github.com/quxbaz/dispatcher.git",
     "timer.js": "https://github.com/quxbaz/timer.js.git"
   }
 }

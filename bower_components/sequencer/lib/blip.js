@@ -2,6 +2,7 @@
   blip.js
 */
 
+import {uniqId} from './util';
 import stateful from './stateful';
 
 export let defaults = {
@@ -22,6 +23,7 @@ export let defaults = {
 export default class Blip {
 
   constructor(state, props={}) {
+    this.id = uniqId();
     this.setState(Object.assign({}, defaults, state));
     this.props = props;
   }

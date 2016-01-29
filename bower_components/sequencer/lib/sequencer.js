@@ -2,20 +2,15 @@
   sequencer.js
 
   <Usage>
-
   let sequencer = new Sequencer();
   sequencer.play();
-
-  <TODO>
-  - Move this file to /lib.
-  - Create file called index.
-  - export this, audioservice, blip, and channel from index.
 */
 
+import Sentry from 'sentry';
+import {uniqId} from './util';
 import stateful from './stateful';
 import Channel from './channel';
 import Timer from 'bower_components/timer.js/timer';
-import Dispatcher from 'bower_components/dispatcher/dispatcher';
 
 export let defaults = {
   playing      : false,
@@ -28,14 +23,25 @@ export let defaults = {
 export default class Sequencer {
 
   constructor(state, props={}) {
+    this.id = uniqId();
     this.setState(Object.assign({}, defaults, state));
     this.props = props;
+    this.sentry = new Sentry();
     this.timer = new Timer({tickInterval: this.state.beatDuration});
     this.timer.on('tick', () => {
       if (this.state.playing)
         this.tick();
     });
     this.timerStarted = false;
+  }
+
+  on(...args) {
+    this.sentry.on(...args);
+    return this;
+  }
+
+  trigger(...args) {
+    this.sentry.trigger(...args);
   }
 
   play() {
@@ -71,7 +77,7 @@ export default class Sequencer {
 
   addChannel(state={}) {
     let channel = new Channel(state, {
-      onPlay: blipState => this.publish('play-blip', blipState)
+      onPlay: blipState => this.trigger('play-blip', blipState)
     });
     this.setState({
       channels: this.state.channels.concat(channel)
@@ -81,9 +87,4 @@ export default class Sequencer {
 
 }
 
-let dispatcher = new Dispatcher();
-
-Object.assign(Sequencer.prototype, stateful.mixin, {
-  subscribe : dispatcher.subscribe.bind(dispatcher),
-  publish   : dispatcher.publish.bind(dispatcher)
-});
+Object.assign(Sequencer.prototype, stateful.mixin);

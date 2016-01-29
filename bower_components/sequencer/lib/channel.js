@@ -2,6 +2,7 @@
   channel.js
 */
 
+import {uniqId} from './util';
 import stateful from './stateful';
 import Blip from './blip';
 
@@ -21,6 +22,7 @@ export let defaults = {
 export default class Channel {
 
   constructor(state, props={}) {
+    this.id = uniqId();
     this.setState(Object.assign(objectDefaults(), defaults, state));
     this.props = props;
     this.state.blips.forEach((blip) => {

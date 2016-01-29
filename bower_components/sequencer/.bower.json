@@ -19,14 +19,13 @@
     "tests"
   ],
   "dependencies": {
-    "dispatcher": "https://github.com/quxbaz/dispatcher.git",
     "timer.js": "https://github.com/quxbaz/timer.js.git"
   },
-  "_release": "e4890e7ef7",
+  "_release": "695a97a651",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "e4890e7ef7347b1ed888b6f48fb803b668fdabdc"
+    "commit": "695a97a65160ad6c4ddb7992f63f5050a43906d3"
   },
   "_source": "https://github.com/quxbaz/sequencer.git",
   "_target": "*",
