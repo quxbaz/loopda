@@ -5,7 +5,8 @@
   "main": "app/entry.js",
   "dependencies": {
     "babel-polyfill": "^6.3.14",
-    "bin.js": "git+https://github.com/quxbaz/bin.js.git"
+    "bin.js": "git+https://github.com/quxbaz/bin.js.git",
+    "sentry": "git+https://github.com/quxbaz/sentry.git"
   },
   "devDependencies": {
     "babel-core": "^6.3.26",
