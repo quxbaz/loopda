@@ -77,7 +77,7 @@ export default class Sequencer {
 
   addChannel(state={}) {
     let channel = new Channel(state, {
-      onPlay: blipState => this.trigger('play-blip', blipState)
+      onPlay: blipState => this.trigger('playBlip', blipState)
     });
     this.setState({
       channels: this.state.channels.concat(channel)

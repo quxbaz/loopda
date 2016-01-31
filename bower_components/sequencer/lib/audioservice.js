@@ -4,7 +4,7 @@
   <Usage>
   let sequencer = new Sequencer();
   let audioService = new AudioService();
-  sequencer.on('play-blip', blipState => {
+  sequencer.on('playBlip', blipState => {
     audioService.playBlip(blipState);
   });
 */
