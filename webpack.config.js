@@ -59,7 +59,7 @@ var config = {
       'pending'    : resolve('bower_components/pending.js/'),
 
       // app
-      'loopdaloop' : resolve(__dirname)
+      // --
 
     }
   }
