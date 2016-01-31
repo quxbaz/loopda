@@ -1,13 +1,15 @@
 import React from 'react';
+import controllerMixin from 'components/mixins/controllermixin';
 import modelUpdate from 'components/mixins/modelupdate';
 import ChannelComponent from './channel';
-import {initial, last} from 'lib/util';
+import sampleList from 'audio/samplelist';
+import {keys, initial, last} from 'lib/util';
 
 let tuners = ['gain', 'rate', 'offset'];
 
 export default React.createClass({
 
-  mixins: [modelUpdate],
+  mixins: [controllerMixin, modelUpdate],
 
   getInitialState() {
     return {
@@ -17,18 +19,15 @@ export default React.createClass({
   },
 
   togglePlay() {
-    let model = this.props.model;
-    model.setState({playing: !model.state.playing});
+    this.model().setState({playing: !this.model().state.playing});
   },
 
   addChannel(sampleName) {
-    // let channel = this.props.model.addChannel({sampleName});
-
-    // <TEST>
-    this.props.onAddChannel({sampleName});
+    this.trigger('addChannel', sampleName);
   },
 
   removeChannel(channel) {
+    // this.trigger('removeChannel');
     this.setState({
       removedChannels: this.state.removedChannels.concat(channel)
     });
@@ -60,31 +59,25 @@ export default React.createClass({
 
   render() {
 
-    let model = this.props.model;
+    let model = this.model();
 
     let tunerNodes = tuners.map(tuner =>
       <a key={tuner} onClick={this.setTuner.bind(this, tuner)}>{tuner} / </a>
     );
 
-    let channelNodes = model.state.channels.map((channel) => {
-      let props = {
-        key: channel.id,
-        model: channel,
-        currentBeat: model.state.currentBeat,
-        tuner: this.state.tuner,
-        onRemove: this.removeChannel
-      };
-      return <ChannelComponent {...props} />;
+    let channelNodes = this.props.ctrl.children.map((ctrl) => {
+      let channel = ctrl.props.model;
+      return (<ChannelComponent key={channel.id} ctrl={ctrl}
+        currentBeat={model.state.currentBeat}
+        tuner={this.state.tuner}
+        onRemove={this.removeChannel} />);
     });
 
-    let sampleOptions = this.props.sampleNames.map((sampleName, key) => {
-      let props = {
-        key       : sampleName,
-        className : 'sample-option',
-        onClick   : this.addChannel.bind(this, sampleName)
-      };
-      return <a {...props}>{sampleName}</a>;
-    });
+    let sampleOptions = keys(sampleList).map(sampleName => (
+        <a key={sampleName} className="sample-option"
+           onClick={this.addChannel}>{sampleName}</a>
+      )
+    );
 
     return (
       <div className="sequencer">

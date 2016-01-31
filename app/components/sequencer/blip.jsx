@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import {constrain, fireOnce} from 'lib/util';
-import doubleClick from 'components/mixins/doubleclick';
+import controllerMixin from 'components/mixins/controllermixin';
 import modelUpdate from 'components/mixins/modelupdate';
+import doubleClick from 'components/mixins/doubleclick';
 import Scale from 'components/ui/scale';
 import BlipViewModel from 'app/sequencer/blip/viewmodel';
 
 export default React.createClass({
 
-  mixins: [modelUpdate, doubleClick],
+  mixins: [controllerMixin, modelUpdate, doubleClick],
 
   getInitialState() {
     return {};

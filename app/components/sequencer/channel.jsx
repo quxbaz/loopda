@@ -1,11 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
+import controllerMixin from 'components/mixins/controllermixin';
 import modelUpdate from 'components/mixins/modelupdate';
 import BlipComponent from './blip';
 
 export default React.createClass({
 
-  mixins: [modelUpdate],
+  mixins: [controllerMixin, modelUpdate],
 
   remove() {
     this.props.onRemove(this.props.model);
@@ -18,7 +19,9 @@ export default React.createClass({
 
   render() {
 
-    let model = this.props.model;
+    return <div>Channel</div>
+
+    let model = this.model();
 
     let channelClassNames = classNames({
       channel: true,
@@ -34,6 +37,8 @@ export default React.createClass({
       };
       return <BlipComponent {...props} />
     });
+
+    // let blipNodes = [];
 
     return (
       <div className={channelClassNames}>

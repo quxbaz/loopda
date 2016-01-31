@@ -6,11 +6,11 @@ export default {
 
   componentDidMount() {
     this._modelUpdate = () => this.forceUpdate();
-    this.props.model.onStateChange(this._modelUpdate);
+    this.model().onStateChange(this._modelUpdate);
   },
 
   componentWillUnmount() {
-    this.props.model.offStateChange(this._modelUpdate);
+    this.model().offStateChange(this._modelUpdate);
   }
 
 };

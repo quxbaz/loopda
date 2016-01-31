@@ -1,50 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import sampleList from 'audio/samplelist';
 import {loadAudioSamples} from 'audio/audiohelper';
-import {Sequencer, AudioService} from 'sequencer';
+import {Sequencer} from 'sequencer';
+import audioContext from './audiocontext';
+import audioService from './audioservice';
 import {defaults as blipDefaults} from 'sequencer/lib/blip';
-import SequencerComponent from 'components/sequencer/sequencer';
+import AppWire from 'wires/app';
 
-let AppComponent = React.createClass({
-  render() {
-    return (
-      <SequencerComponent model={this.props.sequencer}
-       sampleNames={Object.keys(sampleList)} />
-    );
-  }
-});
+let beatDuration = 100;
+blipDefaults.minOffset = 0;
+blipDefaults.maxOffset = beatDuration;
 
 export default class App {
 
   constructor() {
-    let beatDuration = 100;
     this.sequencer = new Sequencer({beatDuration});
-    blipDefaults.minOffset = 0;
-    blipDefaults.maxOffset = 100;
-
-    // <TESTING>
-    this.sequencer.addChannel({sampleName: 'hihat'});
-
-    this.audioContext = new AudioContext();
-    this.audioService = new AudioService(this.audioContext);
-    this.sequencer.subscribe('play-blip', (blipState) => {
-      this.audioService.playBlip(blipState);
+    this.sequencer.on('playBlip', (blipState) => {
+      audioService.playBlip(blipState);
     });
   }
 
   init() {
-    return loadAudioSamples(this.audioContext, sampleList).then((sampleMap) => {
-      this.audioService.sampleMap = sampleMap;
+    return loadAudioSamples(audioContext, sampleList).then((sampleMap) => {
+      audioService.sampleMap = sampleMap;
     });
   }
 
   start() {
+    let wire = new AppWire({app: this});
+    wire.start();
     this.sequencer.play();
-    ReactDOM.render(
-      <AppComponent sequencer={this.sequencer} />,
-      document.getElementById('app-container')
-    );
   }
 
 }
