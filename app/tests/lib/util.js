@@ -143,4 +143,14 @@ describe("lib/util", () => {
     });
   });
 
+  describe("filterMap()", () => {
+    it("Filters and maps an array.", () => {
+      util.filterMap([], () => {}).should.eql([]);
+      util.filterMap([1, 2, 3, 4, 5], (val) => {
+        if (val > 2)
+          return val.toString();
+      }).should.eql(['3', '4', '5']);
+    });
+  });
+
 });

@@ -85,3 +85,13 @@ export function values(obj) {
   */
   return Object.keys(obj).map(key => obj[key]);
 }
+
+export function filterMap(list, fn) {
+  let data = [];
+  list.forEach((val) => {
+    let result = fn(val);
+    if (result)
+      data.push(result);
+  });
+  return data;
+}
