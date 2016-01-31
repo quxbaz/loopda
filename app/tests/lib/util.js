@@ -129,4 +129,18 @@ describe("lib/util", () => {
     });
   });
 
+  describe("keys()", () => {
+    it("Returns the keys of an object.", () => {
+      util.keys({}).should.eql([]);
+      util.keys({a:1, b:2}).should.eql(['a', 'b']);
+    });
+  });
+
+  describe("values()", () => {
+    it("Returns the values of an object.", () => {
+      util.values({}).should.eql([]);
+      util.values({a:1, b:2}).should.eql([1, 2]);
+    });
+  });
+
 });

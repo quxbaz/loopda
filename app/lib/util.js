@@ -71,3 +71,17 @@ export function copy(obj) {
   */
   return Object.assign({}, obj);
 }
+
+export function keys(obj) {
+  /*
+    Returns the keys of an object.
+  */
+  return Object.keys(obj);
+}
+
+export function values(obj) {
+  /*
+    Returns the values of an object.
+  */
+  return Object.keys(obj).map(key => obj[key]);
+}
