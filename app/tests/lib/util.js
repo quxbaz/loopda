@@ -45,6 +45,11 @@ describe("lib/util", () => {
       vals.should.eql([1, 2]);
       keys.should.eql(['a', 'b']);
     });
+    it("Fails silently on receiving undefined or null.", () => {
+      (() => {
+        util.each(undefined, () => {});
+      }).should.not.throw();
+    });
   });
 
   describe("times()", () => {
