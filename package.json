@@ -6,6 +6,7 @@
   "dependencies": {
     "babel-polyfill": "^6.3.14",
     "bin.js": "git+https://github.com/quxbaz/bin.js.git",
+    "eventnode": "git+https://github.com/quxbaz/eventnode.git",
     "sentry": "git+https://github.com/quxbaz/sentry.git"
   },
   "devDependencies": {

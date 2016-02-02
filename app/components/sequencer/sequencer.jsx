@@ -73,10 +73,9 @@ export default React.createClass({
         onRemove={this.removeChannel} />);
     });
 
-    let sampleOptions = keys(sampleList).map(sampleName => (
-        <a key={sampleName} className="sample-option"
-           onClick={this.addChannel}>{sampleName}</a>
-      )
+    let sampleOptions = keys(sampleList).map(
+      sampleName => (<a key={sampleName} className="sample-option"
+                        onClick={this.addChannel}>{sampleName}</a>)
     );
 
     return (

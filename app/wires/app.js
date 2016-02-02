@@ -4,6 +4,7 @@ import store from 'app/store';
 import Wire from 'lib/wire';
 import Controller from 'lib/controller';
 import AppController from 'controllers/app';
+import SequencerController from 'controllers/sequencer/sequencer';
 import AppComponent from 'components/app';
 import {filterMap} from 'lib/util';
 
@@ -30,7 +31,7 @@ export default class AppWire extends Wire {
 
     let sequencer = this.props.app.sequencer;
 
-    let sequencerCtrl = new Controller({
+    let sequencerCtrl = new SequencerController({
       parent: ctrl,
       model: sequencer,
       record

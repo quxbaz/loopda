@@ -5,19 +5,29 @@
   to models, not controllers.
 */
 
+import EventNode from 'eventnode';
+import {each} from 'lib/util';
+
 export default class Controller {
 
   constructor(props={}) {
     this.props = props;
     this.children = [];
-    // this.eventNode = new EventNode();
+    this.eventNode = new EventNode({
+      parent: props.parent && props.parent.eventNode
+    });
+    each(this.constructor.actions, (handler, event) => {
+      this.eventNode.on(event, handler.bind(this));
+    });
   }
 
   addChild(ctrl) {
+    this.eventNode.addChild(ctrl.eventNode);
     this.children.push(ctrl);
   }
 
   addChildren(ctrls) {
+    this.eventNode.addChildren(ctrls.map(ctrl => ctrl.eventNode));
     this.children = this.children.concat(ctrls);
   }
 
@@ -32,23 +42,7 @@ export default class Controller {
   }
 
   trigger(event, ...args) {
-
-    // if (event === 'addChannel') {
-    //   import store from 'app/store';
-    //   store.createRecord('channel', {sampleName: 'hihat'});
-    //   sequencer.addChannel()
-    //   this.addChild(new Controller({
-    //     channel, record, parent
-    //   }));
-    //   // trigger component update
-    //   //
-    // }
-
-    // this.eventNode.trigger(event, ...args);
-
-    // console.log(this.constructor.actions[event]);
-    // this.constructor.actions[event]();
-
+    this.eventNode.trigger(event, ...args);
   }
 
 }
