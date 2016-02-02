@@ -1,5 +1,4 @@
 import React from 'react';
-import controllerMixin from 'components/mixins/controllermixin';
 import modelUpdate from 'components/mixins/modelupdate';
 import ChannelComponent from './channel';
 import sampleList from 'audio/samplelist';
@@ -9,7 +8,7 @@ let tuners = ['gain', 'rate', 'offset'];
 
 export default React.createClass({
 
-  mixins: [controllerMixin, modelUpdate],
+  mixins: [modelUpdate],
 
   getInitialState() {
     return {

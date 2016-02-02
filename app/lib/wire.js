@@ -1,7 +1,7 @@
 /*
   wire.js
 
-  Fetches necessary data and connects controllers and components.
+  Fetches necessary data and starts up components.
 */
 
 export default class Wire {

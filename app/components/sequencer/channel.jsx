@@ -1,12 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
-import controllerMixin from 'components/mixins/controllermixin';
 import modelUpdate from 'components/mixins/modelupdate';
 import BlipComponent from './blip';
 
 export default React.createClass({
 
-  mixins: [controllerMixin, modelUpdate],
+  mixins: [modelUpdate],
 
   remove() {
     this.props.onRemove(this.props.model);
