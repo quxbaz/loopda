@@ -34,7 +34,7 @@ export default class Record {
       .map(attr => store.searchCache(attr, this.state[attr]));
 
     let toStrip = [];
-    let data = Object.assign({}, this.state);
+    let state = Object.assign({}, this.state);
 
     belongsTos.forEach((record) => {
       let modelName = record.props.model.name;
@@ -44,10 +44,16 @@ export default class Record {
       // If the record is persisted and is referenced by cid change
       // the value to its id.
       else if (this.state[modelName] !== record.state.id)
-        data[modelName] = record.state.id;
+        state[modelName] = record.state.id;
     });
 
-    return without(data, toStrip);
+    // Strip any attributes that do not exist in the model schema.
+    for (let attr of Object.keys(state)) {
+      if (!schema.hasOwnProperty(attr))
+        toStrip.push(attr);
+    }
+
+    return without(state, toStrip);
   }
 
   destroy() {

@@ -5,6 +5,10 @@ export class Relation {
   }
 }
 
+export let attr = () => {
+  return new Relation('attr');
+};
+
 export let hasMany = (modelName) => {
   return new Relation('hasMany', modelName);
 };
