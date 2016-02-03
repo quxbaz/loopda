@@ -1,11 +1,8 @@
 import React from 'react';
 import modelUpdate from 'components/mixins/modelupdate';
-import ChannelComponent from './channel';
-import sampleList from 'audio/samplelist';
-import {keys, initial, last} from 'lib/util';
+import {keys, initial, last, toggleState} from 'lib/util';
 import actions from 'actions/sequencer/actions';
-
-let tuners = ['gain', 'rate', 'offset'];
+import helper from 'helpers/sequencer';
 
 export default React.createClass({
 
@@ -13,14 +10,16 @@ export default React.createClass({
 
   getInitialState() {
     return {
+      tuners: ['gain', 'rate', 'offset'],
       tuner: 'rate',
       removedChannels: []
     };
   },
 
   togglePlay() {
-    let {model} = this.props;
-    model.setState({playing: !model.state.playing});
+    toggleState(this.props.model, 'playing');
+    // let {model} = this.props;
+    // model.setState({playing: !model.state.playing});
   },
 
   addChannel(sampleName) {
@@ -61,53 +60,30 @@ export default React.createClass({
   },
 
   render() {
-
-    let model = this.props.model;
-
-    // // <TODO> Render this using a viewmodel
-    let tunerNodes = tuners.map(tuner =>
-      <a key={tuner} onClick={this.setTuner.bind(this, tuner)}>{tuner} / </a>
-    );
-
-    // <TODO> Render this using a viewmodel
-    let channelNodes = model.state.channels.map((channel) => {
-      return (<ChannelComponent key={channel.id} model={channel}
-        currentBeat={model.state.currentBeat}
-        tuner={this.state.tuner}
-        onRemove={this.removeChannel} />);
-    });
-
-    // // <TODO> Render this using a viewmodel
-    let sampleOptions = keys(sampleList).map(
-      sampleName => (<a key={sampleName} className="sample-option"
-                        onClick={this.addChannel.bind(this, sampleName)}>{sampleName}</a>)
-    );
-
     return (
       <div className="sequencer">
         <a className="togglePlay" onClick={this.togglePlay}>
-          {model.state.playing ? 'pause' : 'play'}
+          {this.props.model.state.playing ? 'pause' : 'play'}
         </a>
-        <br /><br />
-        <div>{tunerNodes}</div>
+        <hr />
+        <div>{helper.renderTuners(this)}</div>
         <div>Tuning mode: {this.state.tuner}</div>
-        <br /><br />
+        <hr />
         <a onClick={this.restoreChannel}>Restore channel</a>
-        <br /><br />
+        <hr />
         <div className="channels">
-          {channelNodes}
+          {helper.renderChannels(this)}
           <div className="add-channel">
             <div>&nbsp;</div>
             <div className="inner">
               <h4>Add a channel</h4>
-              <div>{sampleOptions}</div>
+              <div>{helper.renderSampleOptions(this)}</div>
             </div>
           </div>
           <div className="spacer"></div>
         </div>
       </div>
     );
-
   }
 
 });
