@@ -20,7 +20,7 @@ export default {
         model: channel,
         currentBeat: model.state.currentBeat,
         tuner,
-        onRemove: component.removeChannel
+        onRemove: component.removeChannel.bind(component, channel)
       };
       return <ChannelComponent {...props} />;
     });

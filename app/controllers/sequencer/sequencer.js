@@ -7,9 +7,19 @@ let callbacks = {
 
   createChannel(payload) {
     if (payload.actionType === constants.CREATE_CHANNEL) {
-      let {sampleName, sequencer} = payload;
+      let {sequencer, sampleName} = payload;
       sequencer.addChannel({sampleName});
       // store.createRecord('channel').attachTo(record);
+    }
+  },
+
+  removeChannel(payload) {
+    if (payload.actionType === constants.REMOVE_CHANNEL) {
+      let {sequencer, channel} = payload;
+      let {channels} = sequencer.state;
+      sequencer.setState({
+        channels: channels.filter(el => el !== channel)
+      });
     }
   }
 

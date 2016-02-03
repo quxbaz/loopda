@@ -17,19 +17,13 @@ export default React.createClass({
   },
 
   addChannel(sampleName) {
-    actions.createChannel({
-      sampleName,
-      sequencer: this.props.model,
-    });
+    actions.createChannel(this.props.model, sampleName);
   },
 
   removeChannel(channel) {
+    actions.removeChannel(this.props.model, channel);
     this.setState({
-      removedChannels: this.state.removedChannels.concat(channel)
-    });
-    let channels = this.props.model.state.channels;
-    this.props.model.setState({
-      channels: channels.filter(item => item !== channel)
+      removedChannels: [...this.state.removedChannels, channel]
     });
   },
 
@@ -37,16 +31,13 @@ export default React.createClass({
     /*
       Undos a removeChannel action.
     */
-    let removedChannels = this.state.removedChannels;
+    let {removedChannels} = this.state;
     if (removedChannels.length == 0)
       return;
-    let model = this.props.model;
+    let {model} = this.props;
     let restore = last(removedChannels);
-    let channels = model.state.channels.concat(restore);
-    model.setState({channels});
-    this.setState({
-      removedChannels: initial(removedChannels)
-    });
+    model.setState({channels: model.state.channels.concat(restore)});
+    this.setState({removedChannels: initial(removedChannels)});
   },
 
   setTuner(tuner) {

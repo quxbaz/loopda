@@ -3,11 +3,19 @@ import constants from './constants';
 
 export default {
 
-  createChannel(data) {
+  createChannel(sequencer, sampleName) {
     dispatcher.dispatch({
       actionType: constants.CREATE_CHANNEL,
-      sampleName: data.sampleName,
-      sequencer: data.sequencer
+      sequencer,
+      sampleName
+    });
+  },
+
+  removeChannel(sequencer, channel) {
+    dispatcher.dispatch({
+      actionType: constants.REMOVE_CHANNEL,
+      sequencer,
+      channel
     });
   }
 

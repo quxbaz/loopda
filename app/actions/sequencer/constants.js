@@ -1,3 +1,4 @@
 export default {
-  CREATE_CHANNEL: Symbol()
+  CREATE_CHANNEL: Symbol(),
+  REMOVE_CHANNEL: Symbol()
 };
