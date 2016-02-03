@@ -89,6 +89,7 @@ export default class Record {
       if (hasId(record, this.state[attr]))
         this.state[attr] = undefined;
     }
+    return this;
   }
 
   attachTo(target) {
@@ -97,6 +98,7 @@ export default class Record {
     */
     let attr = target.props.model.name;
     this.state[attr] = target.state.id || target.cid;
+    return this;
   }
 
 }
