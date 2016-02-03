@@ -26,6 +26,7 @@ export default React.createClass({
       return;
     var direction = event.deltaY > 0 ? 'down' : 'up';
     this.tuneProp(direction);
+    this.props.model.play();
   },
 
   tuneProp(direction) {
