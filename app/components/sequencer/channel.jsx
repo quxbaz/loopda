@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import modelUpdate from 'components/mixins/modelupdate';
-import BlipComponent from './blip';
+import helper from 'helpers/channel';
 
 export default React.createClass({
 
@@ -17,26 +17,13 @@ export default React.createClass({
   },
 
   render() {
-
     let {model} = this.props;
-
-    let channelClassNames = classNames({
+    let classes = classNames({
       channel: true,
       mute: model.state.mute
     });
-
-    let blipNodes = model.state.blips.map((blip, i) => {
-      let props = {
-        model: blip,
-        key: blip.id,
-        isPlaying: !model.state.mute && this.props.currentBeat == i,
-        tuner: this.props.tuner
-      };
-      return <BlipComponent {...props} />
-    });
-
     return (
-      <div className={channelClassNames}>
+      <div className={classes}>
         <div className="channel-title">
           {model.state.sampleName} -
           (<a onClick={this.remove}>remove</a>) -
@@ -46,12 +33,11 @@ export default React.createClass({
         </div>
         <div className="inner-channel">
           <div className="blips-container">
-            {blipNodes}
+            {helper.renderBlips(this)}
           </div>
         </div>
       </div>
     );
-
   }
 
 });

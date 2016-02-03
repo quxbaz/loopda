@@ -16,12 +16,6 @@ export default React.createClass({
     };
   },
 
-  togglePlay() {
-    toggleState(this.props.model, 'playing');
-    // let {model} = this.props;
-    // model.setState({playing: !model.state.playing});
-  },
-
   addChannel(sampleName) {
     actions.createChannel({
       sampleName,
@@ -60,9 +54,10 @@ export default React.createClass({
   },
 
   render() {
+    let togglePlay = toggleState.bind({}, this.props.model, 'playing');
     return (
       <div className="sequencer">
-        <a className="togglePlay" onClick={this.togglePlay}>
+        <a className="togglePlay" onClick={togglePlay}>
           {this.props.model.state.playing ? 'pause' : 'play'}
         </a>
         <hr />
