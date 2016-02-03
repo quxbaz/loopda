@@ -1,14 +1,12 @@
 import {Blip} from 'sequencer';
-import BlipViewModel from 'app/sequencer/blip/viewmodel';
+import helper from 'helpers/blip';
 
-describe("sequencer/blip/viewmodel", () => {
+describe("helpers/blip", () => {
 
-  let vm;
   let blip;
 
   beforeEach(() => {
     blip = new Blip();
-    vm = new BlipViewModel(blip);
   });
 
   it("gets the value, min, and max of a blip property.", () => {
@@ -17,7 +15,7 @@ describe("sequencer/blip/viewmodel", () => {
       minRate: 0,
       maxRate: 10
     });
-    let {value, min, max} = vm.getValueMinMax('rate');
+    let {value, min, max} = helper.getValueMinMax(blip, 'rate');
     value.should.eql(1.2);
     min.should.eql(0);
     max.should.eql(10);
@@ -29,15 +27,15 @@ describe("sequencer/blip/viewmodel", () => {
       minRate: 0,
       maxRate: 4
     });
-    vm.toPercent('rate').should.eql(0);
+    helper.toPercent(blip, 'rate').should.eql(0);
     blip.setState({rate: 1});
-    vm.toPercent('rate').should.eql(25);
+    helper.toPercent(blip, 'rate').should.eql(25);
     blip.setState({rate: 2});
-    vm.toPercent('rate').should.eql(50);
+    helper.toPercent(blip, 'rate').should.eql(50);
     blip.setState({rate: 3});
-    vm.toPercent('rate').should.eql(75);
+    helper.toPercent(blip, 'rate').should.eql(75);
     blip.setState({rate: 4});
-    vm.toPercent('rate').should.eql(100);
+    helper.toPercent(blip, 'rate').should.eql(100);
   });
 
   it("returns a property's proportion value as an actual value.", () => {
@@ -45,11 +43,11 @@ describe("sequencer/blip/viewmodel", () => {
       minRate: 0,
       maxRate: 4
     });
-    vm.toValue('rate', 0).should.eql(0);
-    vm.toValue('rate', 25).should.eql(1);
-    vm.toValue('rate', 50).should.eql(2);
-    vm.toValue('rate', 75).should.eql(3);
-    vm.toValue('rate', 100).should.eql(4);
+    helper.toValue(blip, 'rate', 0).should.eql(0);
+    helper.toValue(blip, 'rate', 25).should.eql(1);
+    helper.toValue(blip, 'rate', 50).should.eql(2);
+    helper.toValue(blip, 'rate', 75).should.eql(3);
+    helper.toValue(blip, 'rate', 100).should.eql(4);
   });
 
 });
