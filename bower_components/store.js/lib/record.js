@@ -91,7 +91,7 @@ export default class Record {
     }
   }
 
-  attach(target) {
+  attachTo(target) {
     /*
       @target: The record that this one belongs to.
     */
