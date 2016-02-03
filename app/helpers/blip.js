@@ -4,37 +4,33 @@
 
 import {titleCase} from 'lib/util';
 
-export default class {
+export default {
 
-  constructor(blip) {
-    this.model = blip;
-  }
-
-  getValueMinMax(prop) {
+  getValueMinMax(model, prop) {
     return {
-      value: this.model.state[prop],
-      min: this.model.state['min' + titleCase(prop)],
-      max: this.model.state['max' + titleCase(prop)]
+      value: model.state[prop],
+      min: model.state['min' + titleCase(prop)],
+      max: model.state['max' + titleCase(prop)]
     };
-  }
+  },
 
-  toPercent(prop) {
+  toPercent(model, prop) {
     /*
       Returns the value of a property as a proportion of its min and
       max values.
     */
-    let {value, min, max} = this.getValueMinMax(prop);
+    let {value, min, max} = this.getValueMinMax(model, prop);
     return Math.round((value - min) / (max - min) * 100);
-  }
+  },
 
-  toValue(prop, percent) {
+  toValue(model, prop, percent) {
     /*
       Returns a property value as it's actual value, not as a
       proportion of it's min/max.
     */
     if (percent < 0 || percent > 100)
       throw new Error('@percent must be a number between 0 and 100.');
-    let {min, max} = this.getValueMinMax(prop);
+    let {min, max} = this.getValueMinMax(model, prop);
     return (max - min) * (percent / 100) + min;
   }
 

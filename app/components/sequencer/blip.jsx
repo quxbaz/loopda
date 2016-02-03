@@ -5,7 +5,7 @@ import {constrain, fireOnce} from 'lib/util';
 import modelUpdate from 'components/mixins/modelupdate';
 import doubleClick from 'components/mixins/doubleclick';
 import Scale from 'components/ui/scale';
-import BlipViewModel from 'app/sequencer/blip/viewmodel';
+import helper from 'helpers/blip';
 
 export default React.createClass({
 
@@ -13,10 +13,6 @@ export default React.createClass({
 
   getInitialState() {
     return {};
-  },
-
-  componentWillMount() {
-    this.vm = new BlipViewModel(this.props.model);
   },
 
   toggleMute() {
@@ -34,13 +30,13 @@ export default React.createClass({
 
   tuneProp(direction) {
     let {model, tuner} = this.props;
-    let percent = this.vm.toPercent(tuner);
+    let percent = helper.toPercent(model, tuner);
     if (direction == 'up')
       percent += 1;
     else if (direction == 'down')
       percent -= 1;
     model.setState({
-      [tuner]: this.vm.toValue(tuner, constrain(percent, [0, 100]))
+      [tuner]: helper.toValue(model, tuner, constrain(percent, [0, 100]))
     });
   },
 
@@ -55,7 +51,7 @@ export default React.createClass({
   handleScaleChange(percent) {
     let {model, tuner} = this.props;
     model.setState({
-      [tuner]: this.vm.toValue(tuner, percent)
+      [tuner]: helper.toValue(model, tuner, percent)
     });
   },
 
@@ -76,11 +72,11 @@ export default React.createClass({
     let toRender = {};
 
     if (!model.state.mute)
-      toRender.tunerLabel = <div className="tuner-label">{this.vm.toPercent(tuner)}</div>;
+      toRender.tunerLabel = <div className="tuner-label">{helper.toPercent(model, tuner)}</div>;
 
     if (this.state.scaleMode) {
       let scaleProps = {
-        value    : this.vm.toPercent(tuner),
+        value    : helper.toPercent(model, tuner),
         onChange : this.handleScaleChange
       };
       toRender.scale = <Scale {...scaleProps} />;
