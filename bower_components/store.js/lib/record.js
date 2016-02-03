@@ -53,6 +53,11 @@ export default class Record {
         toStrip.push(attr);
     }
 
+    // Strip all hasMany attributes.
+    toStrip = toStrip.concat(
+      Object.keys(schema).filter(attr => schema[attr].type === 'hasMany')
+    );
+
     return without(state, toStrip);
   }
 
