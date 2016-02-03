@@ -97,3 +97,7 @@ export function filterMap(list, fn) {
   });
   return data;
 }
+
+export function toggleState(model, boolProp) {
+  model.setState({[boolProp]: !model.state[boolProp]});
+}
