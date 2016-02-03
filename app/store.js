@@ -8,4 +8,8 @@ let store = new Store({
 
 initModels(store);
 
+let map = new WeakMap();
+store.map = (model, record) => map.set(model, record);
+store.recordFor = (model) => map.get(model);
+
 export default store;

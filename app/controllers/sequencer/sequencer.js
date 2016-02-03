@@ -1,15 +1,18 @@
 import store from 'app/store';
 import dispatcher from 'app/dispatcher';
 import constants from 'actions/sequencer/constants';
-import {each} from 'lib/util';
+import {without, each} from 'lib/util';
 
 let callbacks = {
 
   createChannel(payload) {
     if (payload.actionType === constants.CREATE_CHANNEL) {
       let {sequencer, sampleName} = payload;
-      sequencer.addChannel({sampleName});
-      // store.createRecord('channel').attachTo(record);
+      let channel = sequencer.addChannel({sampleName});
+      let record = store.createRecord('channel', channel.state);
+      record.attachTo(store.recordFor(sequencer));
+      record.save();
+      store.map(channel, record);
     }
   },
 
@@ -20,6 +23,7 @@ let callbacks = {
       sequencer.setState({
         channels: channels.filter(el => el !== channel)
       });
+      store.recordFor(channel).destroy();
     }
   }
 

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import store from 'app/store';
 import Wire from 'lib/wire';
 import AppComponent from 'components/app';
+import {without} from 'lib/util';
 
 export default class AppWire extends Wire {
 
@@ -21,6 +22,12 @@ export default class AppWire extends Wire {
       store.createRecord('sequencer');
 
     let sequencer = this.props.app.sequencer;
+    store.map(sequencer, record);
+
+    channels.forEach((channelRecord) => {
+      let model = sequencer.addChannel(without(channelRecord.state, 'id'));
+      store.map(model, channelRecord);
+    });
 
     ReactDOM.render(
       <AppComponent model={this.props.app} />,
