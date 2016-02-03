@@ -3,6 +3,7 @@ import modelUpdate from 'components/mixins/modelupdate';
 import ChannelComponent from './channel';
 import sampleList from 'audio/samplelist';
 import {keys, initial, last} from 'lib/util';
+import actions from 'actions/sequencer/actions';
 
 let tuners = ['gain', 'rate', 'offset'];
 
@@ -18,15 +19,18 @@ export default React.createClass({
   },
 
   togglePlay() {
-    this.model().setState({playing: !this.model().state.playing});
+    let {model} = this.props;
+    model.setState({playing: !model.state.playing});
   },
 
   addChannel(sampleName) {
-    this.trigger('addChannel', sampleName);
+    actions.createChannel({
+      sampleName,
+      sequencer: this.props.model,
+    });
   },
 
   removeChannel(channel) {
-    // this.trigger('removeChannel');
     this.setState({
       removedChannels: this.state.removedChannels.concat(channel)
     });
@@ -58,23 +62,25 @@ export default React.createClass({
 
   render() {
 
-    let model = this.model();
+    let model = this.props.model;
 
+    // // <TODO> Render this using a viewmodel
     let tunerNodes = tuners.map(tuner =>
       <a key={tuner} onClick={this.setTuner.bind(this, tuner)}>{tuner} / </a>
     );
 
-    let channelNodes = this.props.ctrl.children.map((ctrl) => {
-      let channel = ctrl.props.model;
-      return (<ChannelComponent key={channel.id} ctrl={ctrl}
+    // <TODO> Render this using a viewmodel
+    let channelNodes = model.state.channels.map((channel) => {
+      return (<ChannelComponent key={channel.id} model={channel}
         currentBeat={model.state.currentBeat}
         tuner={this.state.tuner}
         onRemove={this.removeChannel} />);
     });
 
+    // // <TODO> Render this using a viewmodel
     let sampleOptions = keys(sampleList).map(
       sampleName => (<a key={sampleName} className="sample-option"
-                        onClick={this.addChannel}>{sampleName}</a>)
+                        onClick={this.addChannel.bind(this, sampleName)}>{sampleName}</a>)
     );
 
     return (

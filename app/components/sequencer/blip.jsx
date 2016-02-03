@@ -20,7 +20,7 @@ export default React.createClass({
   },
 
   toggleMute() {
-    let model = this.props.model;
+    let {model} = this.props;
     model.setState({mute: !model.state.mute});
   },
 
@@ -33,8 +33,7 @@ export default React.createClass({
   },
 
   tuneProp(direction) {
-    let tuner = this.props.tuner;
-    let model = this.props.model;
+    let {model, tuner} = this.props;
     let percent = this.vm.toPercent(tuner);
     if (direction == 'up')
       percent += 1;
@@ -54,16 +53,15 @@ export default React.createClass({
   },
 
   handleScaleChange(percent) {
-    let tuner = this.props.tuner;
-    this.props.model.setState({
+    let {model, tuner} = this.props;
+    model.setState({
       [tuner]: this.vm.toValue(tuner, percent)
     });
   },
 
   render() {
 
-    let model = this.props.model;
-    let tuner = this.props.tuner;
+    let {model, tuner} = this.props;
 
     let props = {
       className: classNames({

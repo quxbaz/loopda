@@ -12,15 +12,13 @@ export default React.createClass({
   },
 
   toggleMute() {
-    let model = this.props.model;
+    let {model} = this.props;
     model.setState({mute: !model.state.mute});
   },
 
   render() {
 
-    return <div>Channel</div>
-
-    let model = this.model();
+    let {model} = this.props;
 
     let channelClassNames = classNames({
       channel: true,
@@ -36,8 +34,6 @@ export default React.createClass({
       };
       return <BlipComponent {...props} />
     });
-
-    // let blipNodes = [];
 
     return (
       <div className={channelClassNames}>

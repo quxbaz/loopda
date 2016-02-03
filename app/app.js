@@ -1,3 +1,4 @@
+import 'controllers/imports';
 import sampleList from 'audio/samplelist';
 import {loadAudioSamples} from 'audio/audiohelper';
 import {Sequencer} from 'sequencer';

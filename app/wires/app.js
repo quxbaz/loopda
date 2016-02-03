@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import store from 'app/store';
 import Wire from 'lib/wire';
 import AppComponent from 'components/app';
-import {filterMap} from 'lib/util';
 
 export default class AppWire extends Wire {
 
@@ -24,7 +23,7 @@ export default class AppWire extends Wire {
     let sequencer = this.props.app.sequencer;
 
     ReactDOM.render(
-      <AppComponent ctrl={ctrl} />,
+      <AppComponent model={this.props.app} />,
       document.getElementById('app-container')
     );
 
