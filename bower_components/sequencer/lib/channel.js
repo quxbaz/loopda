@@ -32,6 +32,11 @@ export default class Channel {
     });
   }
 
+  setBlip(beat, state) {
+    this.state.blips[beat].setState(state);
+    return this;
+  }
+
   playBeat(beat) {
     if (!this.state.mute)
       this.state.blips[beat].play();
