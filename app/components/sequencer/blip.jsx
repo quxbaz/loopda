@@ -6,6 +6,7 @@ import modelUpdate from 'components/mixins/modelupdate';
 import doubleClick from 'components/mixins/doubleclick';
 import Scale from 'components/ui/scale';
 import helper from 'helpers/blip';
+import blipActions from 'actions/blip/actions';
 
 export default React.createClass({
 
@@ -16,8 +17,7 @@ export default React.createClass({
   },
 
   toggleMute() {
-    let {model} = this.props;
-    model.setState({mute: !model.state.mute});
+    blipActions.toggleMute(this.props.model);
   },
 
   handleWheel(event) {

@@ -25,8 +25,25 @@ export default class AppWire extends Wire {
     store.map(sequencer, record);
 
     channels.forEach((channelRecord) => {
-      let model = sequencer.addChannel(without(channelRecord.state, 'id'));
-      store.map(model, channelRecord);
+
+      let channel = sequencer.addChannel(without(channelRecord.state, 'id'));
+      store.map(channel, channelRecord);
+
+      let matches = blips.filter(
+        blipRecord => blipRecord.state.channel === channelRecord.state.id
+      );
+
+      channel.state.blips.forEach((blip, i) => {
+        let blipRecord = matches.find(record => record.state.beat === i);
+        if (blipRecord) {
+          channel.setBlip(i, blipRecord.state);
+        } else {
+          blipRecord = store.createRecord('blip', blip.state);
+          blipRecord.attachTo(channelRecord);
+        }
+        store.map(blip, blipRecord);
+      });
+
     });
 
     ReactDOM.render(

@@ -1,18 +1,23 @@
 import store from 'app/store';
-import dispatcher from 'app/dispatcher';
 import constants from 'actions/sequencer/constants';
-import {without, each} from 'lib/util';
 
-let callbacks = {
+export default {
 
   createChannel(payload) {
     if (payload.actionType === constants.CREATE_CHANNEL) {
       let {sequencer, sampleName} = payload;
+      // Create and save channel record.
       let channel = sequencer.addChannel({sampleName});
-      let record = store.createRecord('channel', channel.state);
-      record.attachTo(store.recordFor(sequencer));
-      record.save();
-      store.map(channel, record);
+      let channelRecord = store.createRecord('channel', channel.state);
+      channelRecord.attachTo(store.recordFor(sequencer));
+      channelRecord.save();
+      store.map(channel, channelRecord);
+      // Create blip records.
+      channel.state.blips.forEach((blip) => {
+        let blipRecord = store.createRecord('blip', blip.state);
+        blipRecord.attachTo(channelRecord);
+        store.map(blip, blipRecord);
+      });
     }
   },
 
@@ -23,10 +28,12 @@ let callbacks = {
       sequencer.setState({
         channels: channels.filter(el => el !== channel)
       });
-      store.recordFor(channel).destroy();
+      let channelRecord = store.recordFor(channel);
+      channelRecord.get('blips').then((blipRecords) => {
+        blipRecords.forEach(record => record.destroy());
+      });
+      channelRecord.destroy();
     }
   }
 
-}
-
-each(callbacks, (fn) => dispatcher.register(fn));
+};

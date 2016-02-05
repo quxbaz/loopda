@@ -62,7 +62,10 @@ export default class Record {
   }
 
   destroy() {
-    return this.props.store.destroyRecord(this);
+    if (this.state.hasOwnProperty('id'))
+      return this.props.store.destroyRecord(this);
+    else
+      return Promise.resolve();
   }
 
   get(attr) {
