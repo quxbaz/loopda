@@ -9,7 +9,7 @@ import Blip from './blip';
 function objectDefaults() {
   let blips = [];
   for (let i=0; i < 32; i++)
-    blips.push(new Blip({mute: true}));
+    blips.push(new Blip({beat: i, mute: true}));
   return {blips};
 }
 

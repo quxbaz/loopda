@@ -6,6 +6,7 @@ import {uniqId} from './util';
 import stateful from './stateful';
 
 export let defaults = {
+  beat       : undefined,
   sampleName : '',
   mute       : false,
   duration   : 0,

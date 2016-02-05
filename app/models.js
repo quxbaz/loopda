@@ -25,6 +25,7 @@ export let initModels = (store) => {
   });
 
   store.registerModel('blip', '/blip/', {
+    beat: attr(),
     sampleName: attr(),
     mute: attr(),
     duration: attr(),
