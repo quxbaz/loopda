@@ -1,8 +1,3 @@
-/*
-  <TODO>
-  Make this a standard  module.
-*/
-
 import http from 'http';
 
 function decode(audioContext, audioBuffer) {
