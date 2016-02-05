@@ -1,7 +1,7 @@
 import React from 'react';
 import modelUpdate from 'components/mixins/modelupdate';
 import {keys, initial, last, toggleState} from 'lib/util';
-import actions from 'actions/sequencer/actions';
+import sequencerActions from 'actions/sequencer/actions';
 import helper from 'helpers/sequencer';
 
 export default React.createClass({
@@ -17,11 +17,11 @@ export default React.createClass({
   },
 
   addChannel(sampleName) {
-    actions.createChannel(this.props.model, sampleName);
+    sequencerActions.createChannel(this.props.model, sampleName);
   },
 
   removeChannel(channel) {
-    actions.removeChannel(this.props.model, channel);
+    sequencerActions.removeChannel(this.props.model, channel);
     this.setState({
       removedChannels: [...this.state.removedChannels, channel]
     });
