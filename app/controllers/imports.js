@@ -1,10 +1,14 @@
 import dispatcher from 'app/dispatcher';
 import {each} from 'lib/util';
 
-let lists = [
+let imports = [
   require('./sequencer/sequencer').default,
   require('./sequencer/blip').default
 ];
 
-for (let callbacks of lists)
-  each(callbacks, (fn) => dispatcher.register(fn));
+imports.forEach((actionMap) => {
+  // Object.keys() is not used because it ignores symbols.
+  Object.getOwnPropertySymbols(actionMap).forEach((symbol) => {
+    dispatcher.on(symbol, actionMap[symbol]);
+  });
+});

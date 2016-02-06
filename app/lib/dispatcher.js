@@ -1,17 +1,18 @@
+import Sentry from 'sentry';
+
 export default class Dispatcher {
 
   constructor() {
-    this.callbacks = [];
+    this.sentry = new Sentry();
   }
 
-  register(fn) {
-    this.callbacks.push(fn);
+  on(action, handler) {
+    this.sentry.on(action, handler);
     return this;
   }
 
-  dispatch(...args) {
-    for (let fn of this.callbacks)
-      fn(...args);
+  emit(action, ...args) {
+    this.sentry.trigger(action, ...args);
     return this;
   }
 
