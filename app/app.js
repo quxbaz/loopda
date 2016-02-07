@@ -4,7 +4,7 @@ import {loadAudioSamples} from 'audio/audiohelper';
 import {Sequencer} from 'sequencer';
 import audioContext from './audiocontext';
 import audioService from './audioservice';
-import {defaults as blipDefaults} from 'sequencer/lib/blip';
+import {blipDefaults} from 'sequencer/lib/defaults';
 import AppWire from 'wires/app';
 
 let beatDuration = 100;

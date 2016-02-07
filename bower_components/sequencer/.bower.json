@@ -21,11 +21,11 @@
   "dependencies": {
     "timer.js": "https://github.com/quxbaz/timer.js.git"
   },
-  "_release": "8ce032f148",
+  "_release": "9718b7ccd4",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "8ce032f1485230f7b0d719a877e84e7a26dec831"
+    "commit": "9718b7ccd4b27a1d3837ac8e7652bd9ecc2a2a0b"
   },
   "_source": "https://github.com/quxbaz/sequencer.git",
   "_target": "*",

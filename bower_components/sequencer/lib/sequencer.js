@@ -6,19 +6,12 @@ import {assign} from './util';
 import {Stateful} from './stateful';
 import Channel from './channel';
 import Timer from 'bower_components/timer.js/timer';
-
-export let defaults = {
-  playing      : false,
-  currentBeat  : -1,
-  beats        : 32,
-  beatDuration : 200,
-  channels     : []
-}
+import {sequencerDefaults} from './defaults';
 
 export default class Sequencer extends Stateful {
 
   constructor(state={}, props={}) {
-    super(assign({}, defaults, state));
+    super(assign({}, sequencerDefaults, state));
     this.props = props;
     this.timer = new Timer({tickInterval: this.state.beatDuration});
     this.timer.on('tick', () => {

@@ -4,27 +4,12 @@
 
 import {assign} from './util';
 import {Stateful} from './stateful';
-
-export let defaults = {
-  beat       : undefined,
-  sampleName : '',
-  mute       : false,
-  duration   : 0,
-  offset     : 0,
-  minOffset  : 0,
-  maxOffset  : 3600,  // 60 seconds
-  gain       : 1,
-  minGain    : 0,
-  maxGain    : 10,
-  rate       : 1,
-  minRate    : 0,
-  maxRate    : 4
-};
+import {blipDefaults} from './defaults';
 
 export default class Blip extends Stateful {
 
   constructor(state={}, props={}) {
-    super(assign({}, defaults, state));
+    super(assign({}, blipDefaults, state));
     this.props = props;
   }
 

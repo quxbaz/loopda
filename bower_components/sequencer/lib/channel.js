@@ -5,6 +5,7 @@
 import {Stateful} from './stateful';
 import {assign} from './util';
 import Blip from './blip';
+import {channelDefaults} from './defaults';
 
 function makeBlips() {
   let blips = [];
@@ -13,16 +14,10 @@ function makeBlips() {
   return blips;
 }
 
-export let defaults = {
-  beats      : 32,
-  mute       : false,
-  sampleName : ''
-};
-
 export default class Channel extends Stateful {
 
   constructor(state={}, props={}) {
-    super(assign({blips: makeBlips()}, defaults, state));
+    super(assign({blips: makeBlips()}, channelDefaults, state));
     this.props = props;
     this.state.blips.forEach((blip) => {
       blip.props.onPlay = props.onPlay;
