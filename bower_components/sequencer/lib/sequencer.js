@@ -1,14 +1,9 @@
 /*
   sequencer.js
-
-  <Usage>
-  let sequencer = new Sequencer();
-  sequencer.play();
 */
 
-import Sentry from 'sentry';
-import {uniqId} from './util';
-import stateful from './stateful';
+import {assign} from './util';
+import {Stateful} from './stateful';
 import Channel from './channel';
 import Timer from 'bower_components/timer.js/timer';
 
@@ -20,28 +15,17 @@ export let defaults = {
   channels     : []
 }
 
-export default class Sequencer {
+export default class Sequencer extends Stateful {
 
-  constructor(state, props={}) {
-    this.id = uniqId();
-    this.setState(Object.assign({}, defaults, state));
+  constructor(state={}, props={}) {
+    super(assign({}, defaults, state));
     this.props = props;
-    this.sentry = new Sentry();
     this.timer = new Timer({tickInterval: this.state.beatDuration});
     this.timer.on('tick', () => {
       if (this.state.playing)
         this.tick();
     });
     this.timerStarted = false;
-  }
-
-  on(...args) {
-    this.sentry.on(...args);
-    return this;
-  }
-
-  trigger(...args) {
-    this.sentry.trigger(...args);
   }
 
   play() {
@@ -86,5 +70,3 @@ export default class Sequencer {
   }
 
 }
-
-Object.assign(Sequencer.prototype, stateful.mixin);

@@ -2,8 +2,8 @@
   blip.js
 */
 
-import {uniqId} from './util';
-import stateful from './stateful';
+import {assign} from './util';
+import {Stateful} from './stateful';
 
 export let defaults = {
   beat       : undefined,
@@ -21,11 +21,10 @@ export let defaults = {
   maxRate    : 4
 };
 
-export default class Blip {
+export default class Blip extends Stateful {
 
-  constructor(state, props={}) {
-    this.id = uniqId();
-    this.setState(Object.assign({}, defaults, state));
+  constructor(state={}, props={}) {
+    super(assign({}, defaults, state));
     this.props = props;
   }
 
@@ -42,5 +41,3 @@ export default class Blip {
   }
 
 }
-
-Object.assign(Blip.prototype, stateful.mixin);

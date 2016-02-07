@@ -1,53 +1,36 @@
 /*
   stateful.js
 
-  Mixin for stateful objects.
-
-  <TODO>
-  This should trigger a state change event whenever the state
-  changes.
+  Base class for stateful objects.
 */
 
-export let mixin = {
+import Sentry from 'sentry';
+import {uniqId, assign} from './util';
 
-  setState(state) {
-    if (this.state === undefined) {
-      this._state = {};
-      Object.defineProperty(this, 'state', {
-        get: () => this._state,
-        set() {
-          throw Error("You cannot reassign @state. Use setState instead.");
-        }
-      });
-    }
-    let newState = Object.assign({}, this.state, state);
-    if (this.validateState)
-      Object.assign(this.state, this.validateState(newState));
-    else
-      Object.assign(this.state, state);
-    if (this._stateChangeHandlers !== undefined) {
-      this._stateChangeHandlers.forEach((handler) => {
-        handler(this.state);
-      });
-    }
-  },
+export class Stateful {
 
-  onStateChange(handler) {
-    if (this._stateChangeHandlers === undefined)
-      this._stateChangeHandlers = [];
-    this._stateChangeHandlers.push(handler);
-  },
-
-  offStateChange(handler) {
-    let i = this._stateChangeHandlers.indexOf(handler);
-    if (i == -1)
-      throw new Error("Handler is not attached.");
-    else
-      this._stateChangeHandlers.splice(i, 1);
+  constructor(state={}) {
+    this.id = uniqId();
+    Object.defineProperty(this, 'state', {
+      writable: false,
+      value: assign({}, state)
+    });
+    this.event = new Sentry();
   }
 
-};
+  setState(state) {
+    let nextState = assign({}, this.state, state);
+    assign(this.state, this.validateState(nextState));
+    this.event.trigger('change', this.state);
+  }
 
-export default {
-  mixin
-};
+  validateState(nextState) {
+    return nextState;
+  }
+
+  // Aliases
+  on(...args) {return this.event.on(...args)}
+  off(...args) {return this.event.off(...args)}
+  trigger(...args) {return this.event.trigger(...args)}
+
+}

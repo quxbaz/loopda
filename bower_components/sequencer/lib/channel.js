@@ -2,15 +2,15 @@
   channel.js
 */
 
-import {uniqId} from './util';
-import stateful from './stateful';
+import {Stateful} from './stateful';
+import {assign} from './util';
 import Blip from './blip';
 
-function objectDefaults() {
+function makeBlips() {
   let blips = [];
   for (let i=0; i < 32; i++)
     blips.push(new Blip({beat: i, mute: true}));
-  return {blips};
+  return blips;
 }
 
 export let defaults = {
@@ -19,16 +19,15 @@ export let defaults = {
   sampleName : ''
 };
 
-export default class Channel {
+export default class Channel extends Stateful {
 
-  constructor(state, props={}) {
-    this.id = uniqId();
-    this.setState(Object.assign(objectDefaults(), defaults, state));
+  constructor(state={}, props={}) {
+    super(assign({blips: makeBlips()}, defaults, state));
     this.props = props;
     this.state.blips.forEach((blip) => {
+      blip.props.onPlay = props.onPlay;
       if (!blip.state.sampleName)
         blip.setState({sampleName: this.state.sampleName});
-      blip.props.onPlay = props.onPlay;
     });
   }
 
@@ -43,5 +42,3 @@ export default class Channel {
   }
 
 }
-
-Object.assign(Channel.prototype, stateful.mixin);
