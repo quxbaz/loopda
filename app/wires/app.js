@@ -8,11 +8,7 @@ import {without} from 'lib/util';
 export default class AppWire extends Wire {
 
   fetch() {
-    return Promise.all([
-      store.all('sequencer'),
-      store.all('channel'),
-      store.all('blip')
-    ]);
+    return store.all(['sequencer', 'channel', 'blip']);
   }
 
   ready([sequencers, channels, blips]) {

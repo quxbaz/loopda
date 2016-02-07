@@ -50,6 +50,11 @@ export default class Store {
   }
 
   all(modelName) {
+    if (Array.isArray(modelName)) {
+      return Promise.all(modelName.map(
+        (modelName) => this.all(modelName)
+      ));
+    }
     if (this.models[modelName] === undefined)
       throw new Error('Model @' + modelName + ' is not registered.');
     if (arguments.length > 1)
@@ -117,7 +122,7 @@ export default class Store {
     } else {
       // Resolve immediately because this resource doesn't exist on
       // the server and nothings need to be done.
-      return new Promise.resolve();
+      return Promise.resolve();
     }
   }
 

@@ -21,11 +21,11 @@
   "dependencies": {
     "mocha": "~2.3.4"
   },
-  "_release": "9689dbdaf3",
+  "_release": "14836d281c",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "9689dbdaf39bffae85d986ce62a2a861d073665f"
+    "commit": "14836d281cbf7becfcb0c902ff7c55831e9b89e9"
   },
   "_source": "https://github.com/quxbaz/store.js.git",
   "_target": "*",
