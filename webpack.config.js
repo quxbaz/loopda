@@ -5,7 +5,7 @@ var resolve = path.resolve;
 var config = {
 
   cache: true,
-  devtool: 'inline-source-map',
+  devtool: 'eval',
   entry: './app/entry.js',
 
   output: {
