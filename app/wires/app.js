@@ -4,6 +4,7 @@ import store from 'app/store';
 import Wire from 'lib/wire';
 import AppComponent from 'components/app';
 import {without} from 'lib/util';
+import pending from 'pending';
 
 export default class AppWire extends Wire {
 
@@ -42,11 +43,30 @@ export default class AppWire extends Wire {
 
     });
 
+    this.startSaveRecords(record);
+
     ReactDOM.render(
       <AppComponent model={this.props.app} />,
       document.getElementById('app-container')
     );
 
+  }
+
+  startSaveRecords(root, interval=1000) {
+    // Auto-saves all records from a root record every n interval
+    setInterval(() => {
+      pending(this.saveRecords(root));
+    }, interval);
+  }
+
+  *saveRecords(root) {
+    root.save();
+    let channels = yield root.get('channels');
+    for (let channel of channels) {
+      channel.save();
+      let blips = yield channel.get('blips')
+      blips.forEach((blip) => blip.save());
+    }
   }
 
 }

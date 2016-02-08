@@ -6,7 +6,6 @@ export default {
 
   [actions.toggleMute]: function(blip) {
     toggleState(blip, 'mute');
-    store.recordFor(blip).save(blip.state);
   }
 
 };
