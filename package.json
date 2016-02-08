@@ -7,6 +7,7 @@
     "babel-polyfill": "^6.3.14",
     "bin.js": "git+https://github.com/quxbaz/bin.js.git",
     "eventnode": "git+https://github.com/quxbaz/eventnode.git",
+    "regenerator": "^0.8.42",
     "sentry": "git+https://github.com/quxbaz/sentry.git"
   },
   "devDependencies": {

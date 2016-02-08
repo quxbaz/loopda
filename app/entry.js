@@ -3,7 +3,7 @@ import 'bower_components/normalize-css/normalize.css';
 import './styles/app.less';
 
 // Modules
-// import './polyfill';
+import 'regenerator/runtime';
 import App from 'app';
 
 let app = new App();
