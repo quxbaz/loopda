@@ -10,8 +10,11 @@ class MappedStore extends Store {
   }
 
   map(object, record) {
-    // Maps an object to a record
+    // Maps an object to a record and mirror changes.
     this._map.set(object, record);
+    object.on('change', () => {
+      record.setState(object.state);
+    });
   }
 
   recordFor(object) {
