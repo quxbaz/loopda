@@ -42,7 +42,7 @@ export default class Store {
       return Promise.resolve(hit);
     let model = this.models[modelName];
     return this.props.adapter.read(model, id).then(
-      data => this.createRecord(modelName, data, true),
+      data => this.createRecord(modelName, data),
       (error) => {
         throw new Error(error);
       }
@@ -70,7 +70,7 @@ export default class Store {
           if (record)
             return record;
           else
-            return this.createRecord(modelName, data, true);
+            return this.createRecord(modelName, data);
         });
       }, (error) => {
         throw new Error(error);

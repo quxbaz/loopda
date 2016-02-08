@@ -6,17 +6,22 @@ export default class Record {
     this.cid = cid();
     this.state = state;
     this.props = props;
+    this.isDirty = true;
   }
 
   setState(state) {
     Object.assign(this.state, state);
+    this.isDirty = true;
   }
 
   save(state) {
     if (state !== undefined)
       this.setState(state);
+    if (!this.isDirty)
+      return Promise.resolve({});
     return this.props.store.saveRecord(this).then((data) => {
       this.setState(data);
+      this.isDirty = false;
       return data;
     });
   }
@@ -31,7 +36,8 @@ export default class Record {
 
     let belongsTos = Object.keys(schema)
       .filter(attr => schema[attr].type === 'belongsTo')
-      .map(attr => store.searchCache(attr, this.state[attr]));
+      .map(attr => store.searchCache(attr, this.state[attr]))
+      .filter(record => record !== undefined);
 
     let toStrip = [];
     let state = Object.assign({}, this.state);
