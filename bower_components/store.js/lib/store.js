@@ -87,7 +87,7 @@ export default class Store {
   one(modelName) {
     /*
       Fetches a single model. If the request returns more than a
-      single model, an error is thrown.
+      single model, rejects with an error.
     */
     return this.all(modelName).then((records) => {
       if (records.length === 0)
@@ -95,6 +95,22 @@ export default class Store {
       else if (records.length > 1)
         return Promise.reject('Only expected a single record.');
       return records[0];
+    });
+  }
+
+  alwaysOne(modelName) {
+    /*
+      Fetches a single model or creates one if none exist. If multiple
+      models are fetched, rejects with an error.
+    */
+    return this.all(modelName).then((records) => {
+      switch (records.length) {
+        case 0:
+          return this.createRecord(modelName);
+        case 1:
+          return records[0];
+      }
+      return Promise.reject('Received multiple records.');
     });
   }
 

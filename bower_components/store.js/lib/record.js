@@ -86,11 +86,14 @@ export default class Record {
     }
     else if (relation.type === 'hasMany') {
       return this.props.store.all(relation.modelName).then(
-        records => records.filter(
-          record => hasId(this, record.state[name])
-        )
+        records => records.filter(record => record.belongsTo(this))
       );
     }
+  }
+
+  belongsTo(record) {
+    let attr = record.props.model.name;
+    return hasId(record, this.state[attr]);
   }
 
   detach(attr) {
@@ -103,7 +106,7 @@ export default class Record {
     else {
       let record = attr;
       attr = attr.props.model.name;
-      if (hasId(record, this.state[attr]))
+      if (this.belongsTo(record))
         this.state[attr] = undefined;
     }
     return this;
