@@ -6,8 +6,9 @@ let imports = [
   require('./sequencer/blip').default
 ];
 
+// Attach imported event handlers to the global dispatcher
 imports.forEach((actionMap) => {
-  // Object.keys() is not used because it ignores symbols.
+  // Object.keys() is not used because it ignores symbols
   Object.getOwnPropertySymbols(actionMap).forEach((symbol) => {
     dispatcher.on(symbol, actionMap[symbol]);
   });
