@@ -1,5 +1,6 @@
 import React from 'react';
 import BlipComponent from 'components/sequencer/blip';
+import store from 'app/store';
 
 export default {
 
@@ -9,6 +10,7 @@ export default {
       let props = {
         key: blip.id,
         model: blip,
+        record: store.recordFor(blip),
         isPlaying: !model.state.mute && component.props.currentBeat == i,
         tuner: component.props.tuner
       };

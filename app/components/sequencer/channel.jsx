@@ -17,7 +17,7 @@ export default React.createClass({
   },
 
   render() {
-    let {model} = this.props;
+    let {model, record} = this.props;
     let classes = classNames({
       channel: true,
       mute: model.state.mute
@@ -25,6 +25,7 @@ export default React.createClass({
     return (
       <div className={classes}>
         <div className="channel-title">
+          {record.state.title} -
           {model.state.sampleName} -
           (<a onClick={this.remove}>remove</a>) -
           (<a onClick={this.toggleMute}>

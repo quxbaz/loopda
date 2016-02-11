@@ -1,6 +1,7 @@
 import React from 'react';
 import ChannelComponent from 'components/sequencer/channel';
 import sampleList from 'audio/samplelist';
+import store from 'app/store';
 
 export default {
 
@@ -18,6 +19,7 @@ export default {
       let props = {
         key: channel.id,
         model: channel,
+        record: store.recordFor(channel),
         currentBeat: model.state.currentBeat,
         tuner,
         onRemove: component.removeChannel.bind(component, channel)

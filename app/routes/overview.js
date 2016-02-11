@@ -5,13 +5,11 @@ import store from 'app/store';
 import AppComponent from 'components/app';
 import pending from 'pending';
 
-function startSavingRecords(interval=1000) {
+function startSavingRecords(sequencerRecord, interval=1000) {
   // Auto-saves all records record every n interval
-  store.one('sequencer').then((record) => {
-    setInterval(() => {
-      pending(saveRecords(record));
-    }, interval);
-  });
+  setInterval(() => {
+    pending(saveRecords(sequencerRecord));
+  }, interval);
 }
 
 function* saveRecords(sequencerRecord) {
@@ -26,9 +24,11 @@ function* saveRecords(sequencerRecord) {
 
 setRoute('/overview', {
   on: () => {
-    ReactDOM.render(<AppComponent model={app} />, $app);
-    startSavingRecords();
-    app.sequencer.play();
+    store.alwaysOne('sequencer').then((sequencerRecord) => {
+      ReactDOM.render(<AppComponent model={app} record={sequencerRecord} />, $app);
+      startSavingRecords(sequencerRecord);
+      app.sequencer.play();
+    });
   },
   after: () => {
     // Cleanup
