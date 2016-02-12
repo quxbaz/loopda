@@ -31,6 +31,6 @@ setRoute('/overview', {
     });
   },
   after: () => {
-    // Cleanup
+    // cleanup
   }
 });

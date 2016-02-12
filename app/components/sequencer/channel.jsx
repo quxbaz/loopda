@@ -2,6 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import modelUpdate from 'components/mixins/modelupdate';
 import helper from 'helpers/channel';
+import dispatcher from 'app/dispatcher';
+import channelActions from 'actions/sequencer/channel';
 
 export default React.createClass({
 
@@ -9,6 +11,10 @@ export default React.createClass({
 
   remove() {
     this.props.onRemove(this.props.model);
+  },
+
+  viewChannel() {
+    dispatcher.emit(channelActions.viewChannel, this.props.model);
   },
 
   toggleMute() {
@@ -25,7 +31,9 @@ export default React.createClass({
     return (
       <div className={classes}>
         <div className="channel-title">
-          {record.state.title} -
+          <div>
+            <a onClick={this.viewChannel}>{record.state.title}</a>
+          </div>
           {model.state.sampleName} -
           (<a onClick={this.remove}>remove</a>) -
           (<a onClick={this.toggleMute}>

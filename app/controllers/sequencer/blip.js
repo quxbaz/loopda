@@ -1,6 +1,5 @@
 import actions from 'actions/sequencer/blip';
 import {toggleState} from 'lib/util';
-import store from 'app/store';
 
 export default {
 

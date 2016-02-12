@@ -6,7 +6,11 @@ export default {
   [actions.createChannel]: function(sequencer, sampleName) {
     // Create new channel
     let channel = sequencer.addChannel({sampleName});
-    let channelRecord = store.createRecord('channel', channel.state, channel);
+    let channelRecord = store.createRecord(
+      'channel',
+      Object.assign({}, channel.state, {title: 'untitled'}),
+      channel
+    );
     channelRecord.attachTo(store.recordFor(sequencer));
     // Create blip records and attach to new channel record
     channel.state.blips.forEach((blip) => {

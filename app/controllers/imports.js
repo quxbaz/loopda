@@ -3,6 +3,7 @@ import {each} from 'lib/util';
 
 let imports = [
   require('./sequencer/sequencer').default,
+  require('./sequencer/channel').default,
   require('./sequencer/blip').default
 ];
 

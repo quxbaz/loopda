@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import {constrain, fireOnce} from 'lib/util';
 import modelUpdate from 'components/mixins/modelupdate';
