@@ -1,3 +1,3 @@
 export default {
-  viewChannel: Symbol()
+  viewChannelDetail: Symbol()
 };

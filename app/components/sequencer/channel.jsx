@@ -13,8 +13,8 @@ export default React.createClass({
     this.props.onRemove(this.props.model);
   },
 
-  viewChannel() {
-    dispatcher.emit(channelActions.viewChannel, this.props.model);
+  viewChannelDetail() {
+    dispatcher.emit(channelActions.viewChannelDetail, this.props.model);
   },
 
   toggleMute() {
@@ -32,7 +32,7 @@ export default React.createClass({
       <div className={classes}>
         <div className="channel-title">
           <div>
-            <a onClick={this.viewChannel}>{record.state.title}</a>
+            <a onClick={this.viewChannelDetail}>{record.state.title}</a>
           </div>
           {model.state.sampleName} -
           (<a onClick={this.remove}>remove</a>) -
