@@ -18,11 +18,11 @@
     "test",
     "tests"
   ],
-  "_release": "30f90b0491",
+  "_release": "51119796dc",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "30f90b049134c0600f0c9b5c1b306cab3805f734"
+    "commit": "51119796dcf85c13245ca2baa53fd547a616bea4"
   },
   "_source": "https://github.com/quxbaz/pending.js.git",
   "_target": "*",

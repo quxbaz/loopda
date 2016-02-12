@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 export default function pending(gen) {
 
   function waitToResolve(next) {
