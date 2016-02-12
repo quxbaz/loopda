@@ -7,11 +7,13 @@ class MappedStore extends Store {
   constructor(...args) {
     super(...args);
     this._map = new WeakMap();
+    this._reverseMap = new WeakMap();
   }
 
   map(object, record) {
     // Maps an object to a record and mirror changes.
     this._map.set(object, record);
+    this._reverseMap.set(record, object);
     object.on('change', () => {
       record.setState(object.state);
     });
@@ -19,6 +21,10 @@ class MappedStore extends Store {
 
   recordFor(object) {
     return this._map.get(object);
+  }
+
+  objectFor(record) {
+    return this._reverseMap.get(record);
   }
 
   createRecord(modelName, state, objectToMap) {
