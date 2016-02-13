@@ -2,7 +2,7 @@ import {setRoute} from 'app/router';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import store from 'app/store';
-import AppComponent from 'components/app';
+import OverviewComponent from 'components/overview/overview';
 import pending from 'pending';
 
 function startSavingRecords(sequencerRecord, interval=1000) {
@@ -24,13 +24,14 @@ function* saveRecords(sequencerRecord) {
 
 setRoute('/overview', {
   on: () => {
-    store.alwaysOne('sequencer').then((sequencerRecord) => {
-      ReactDOM.render(<AppComponent model={app} record={sequencerRecord} />, $app);
-      startSavingRecords(sequencerRecord);
-      app.sequencer.play();
-    });
+    let {sequencer} = app;
+    let record = store.recordFor(sequencer);
+    ReactDOM.render(<OverviewComponent sequencer={sequencer} />, $app);
+    startSavingRecords(record);
+    app.sequencer.play();
   },
   after: () => {
+    app.sequencer.pause();
     // cleanup
   }
 });

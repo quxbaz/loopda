@@ -1,7 +1,14 @@
+/*
+  App component
+*/
+
 import React from 'react';
-import SequencerComponent from 'components/sequencer/sequencer';
+import OverviewComponent from 'components/overview/overview';
 
 export default (props) => {
-  let {sequencer} = props.model;
-  return <SequencerComponent model={sequencer} record={props.record} />;
+  return (
+    <div>
+      App
+    </div>
+  );
 };
