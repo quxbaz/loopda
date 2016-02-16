@@ -1,17 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {setRoute} from 'app/router';
+import {route} from 'app/router';
 import store from 'app/store';
 import ChannelDetailComponent from 'components/sequencer/channel-detail';
 
-setRoute('/channel/:id', {
-  on: (id) => {
-    store.get('channel', id).then((record) => {
-      let model = store.objectFor(record);
-      ReactDOM.render(<ChannelDetailComponent model={model} record={record} />, $app);
-    });
+route('/channel/:id', {
+  resource(id) {
+    return store.get('channel', id);
   },
-  after: () => {
-    // cleanup
+  render(record) {
+    let model = store.objectFor(record);
+    return <ChannelDetailComponent model={model} record={record} />;
   }
 });

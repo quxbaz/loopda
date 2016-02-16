@@ -3,12 +3,19 @@
 */
 
 import React from 'react';
-import OverviewComponent from 'components/overview/overview';
+import {router} from 'app/router';
 
-export default (props) => {
-  return (
-    <div>
-      App
-    </div>
-  );
-};
+export default React.createClass({
+  componentDidMount() {
+    router.on('change', () => {
+      this.forceUpdate();
+    });
+  },
+  render() {
+    return (
+      <div className="app">
+        {this.props.router.renderOutlet}
+      </div>
+    );
+  }
+});

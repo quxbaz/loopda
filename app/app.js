@@ -12,15 +12,8 @@ import audioService from './audioservice';
 import {Sequencer} from 'sequencer';
 import {blipDefaults} from 'sequencer/lib/defaults';
 
-// Data
-import store from './store';
-
 // Router
-import {startRouter} from './router';
-
-// Misc libs
-import pending from 'pending';
-import {without} from 'lib/util';
+import {router} from './router';
 
 // Globals
 window.$app = document.getElementById('app-container');
@@ -40,43 +33,8 @@ export default class App {
     });
   }
 
-  fetchRecords() {
-    return store.all(['sequencer', 'channel', 'blip']);
-  }
-
-  *mapRecords([sequencers, channels, blips]) {
-    let sequencerRecord = yield store.alwaysOne('sequencer')
-    store.map(this.sequencer, sequencerRecord);
-    this.mapChannels(this.sequencer, channels, blips);
-  }
-
-  mapChannels(sequencer, channelRecords, blipRecords) {
-    channelRecords.forEach((channelRecord) => {
-      let channel = sequencer.addChannel(without(channelRecord.state, 'id'));
-      store.map(channel, channelRecord);
-      let blipMatches = blipRecords.filter(blipRecord => blipRecord.belongsTo(channelRecord));
-      this.mapBlips(channel, channelRecord, channel.state.blips, blipMatches);
-    })
-  }
-
-  mapBlips(channel, channelRecord, blips, blipRecords) {
-    blips.forEach((blip, i) => {
-      let blipRecord = blipRecords.find(record => record.state.beat === i);
-      if (blipRecord) {
-        channel.setBlip(i, blipRecord.state);
-      } else {
-        blipRecord = store.createRecord('blip', blip.state);
-        blipRecord.attachTo(channelRecord);
-      }
-      store.map(blip, blipRecord);
-    });
-  }
-
   init() {
     return Promise.all([
-      this.fetchRecords().then((allRecords) => {
-        return pending(this.mapRecords(allRecords));
-      }),
       loadAudioSamples(audioContext, sampleList).then((sampleMap) => {
         audioService.sampleMap = sampleMap;
       })
@@ -84,7 +42,7 @@ export default class App {
   }
 
   start() {
-    startRouter();
+    router.start();
   }
 
 }
