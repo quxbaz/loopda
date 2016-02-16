@@ -10,8 +10,18 @@ export default class Record {
   }
 
   setState(state) {
-    Object.assign(this.state, state);
+    Object.assign(this.state, this.validateState(state));
     this.isDirty = true;
+  }
+
+  validateState(state) {
+    let validState = Object.assign({}, state);
+    let schema = this.props.model.schema;
+    for (let attr of Object.keys(state)) {
+      if (schema[attr] === undefined || schema[attr].type === 'hasMany')
+        delete validState[attr];
+    }
+    return validState;
   }
 
   save(state) {

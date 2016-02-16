@@ -9,6 +9,7 @@ export let initModels = (store) => {
   initialized = true;
 
   store.registerModel('sequencer', '/sequencer/', {
+    id: attr(),
     playing: attr(),
     currentBeat: attr(),
     beats: attr(),
@@ -17,6 +18,7 @@ export let initModels = (store) => {
   });
 
   store.registerModel('channel', '/channel/', {
+    id: attr(),
     title: attr(),
     beats: attr(),
     mute: attr(),
@@ -26,6 +28,7 @@ export let initModels = (store) => {
   });
 
   store.registerModel('blip', '/blip/', {
+    id: attr(),
     beat: attr(),
     sampleName: attr(),
     mute: attr(),
