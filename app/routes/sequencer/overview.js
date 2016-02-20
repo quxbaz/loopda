@@ -3,13 +3,10 @@ import React from 'react';
 import OverviewComponent from 'components/overview/overview';
 
 route('/sequencer/overview', {
-  setup() {
-    app.sequencer.play();
+  resource() {
+    return Promise.resolve(app.sequencer);
   },
-  render() {
-    return <OverviewComponent sequencer={app.sequencer} />;
-  },
-  cleanup() {
-    app.sequencer.pause();
+  render(sequencer) {
+    return <OverviewComponent sequencer={sequencer} />;
   }
 });
