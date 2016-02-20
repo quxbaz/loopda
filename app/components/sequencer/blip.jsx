@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import {constrain, fireOnce} from 'lib/util';
-import modelUpdate from 'components/mixins/modelupdate';
+import bindTo from 'components/mixins/modelupdate';
 import doubleClick from 'components/mixins/doubleclick';
 import Scale from 'components/ui/scale';
 import helper from 'helpers/blip';
@@ -10,7 +10,7 @@ import blipActions from 'actions/sequencer/blip';
 
 export default React.createClass({
 
-  mixins: [modelUpdate, doubleClick],
+  mixins: [bindTo, doubleClick],
 
   getInitialState() {
     return {};

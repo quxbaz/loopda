@@ -7,6 +7,6 @@ route('/sequencer/overview', {
     return Promise.resolve(app.sequencer);
   },
   render(sequencer) {
-    return <OverviewComponent sequencer={sequencer} />;
+    return <OverviewComponent sequencer={sequencer} bindTo={sequencer} />;
   }
 });

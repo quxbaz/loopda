@@ -1,13 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
-import modelUpdate from 'components/mixins/modelupdate';
+import bindTo from 'components/mixins/modelupdate';
 import helper from 'helpers/channel';
 import dispatcher from 'app/dispatcher';
 import channelActions from 'actions/sequencer/channel';
 
 export default React.createClass({
 
-  mixins: [modelUpdate],
+  mixins: [bindTo],
 
   remove() {
     this.props.onRemove(this.props.model);

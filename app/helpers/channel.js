@@ -10,6 +10,7 @@ export default {
       let props = {
         key: blip.id,
         model: blip,
+        bindTo: blip,
         record: store.recordFor(blip),
         isPlaying: !model.state.mute && component.props.currentBeat == i,
         tuner: component.props.tuner

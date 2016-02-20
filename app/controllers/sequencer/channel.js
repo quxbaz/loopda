@@ -7,7 +7,7 @@ export default {
   [actions.viewChannelDetail]: function(channel) {
     let record = store.recordFor(channel);
     let id = record.state.id || record.cid;
-    router.nav('/channel/' + id);
+    router.nav('/sequencer/channel/' + id);
   }
 
 };
