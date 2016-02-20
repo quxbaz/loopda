@@ -1,14 +1,27 @@
 import React from 'react';
 import {route} from 'app/router';
 import store from 'app/store';
+import SequencerComponent from 'components/sequencer/sequencer';
 import ChannelDetailComponent from 'components/sequencer/channel-detail';
 
-route('/channel/:id', {
+route('/sequencer/channel/:id', {
   resource(id) {
-    return store.get('channel', id);
+    return store.get('channel', id).then((record) => {
+      return [app.sequencer, record, store.objectFor(record)];
+    });
   },
-  render(record) {
-    let model = store.objectFor(record);
-    return <ChannelDetailComponent model={model} record={record} />;
+  render([sequencer, record, model]) {
+    let props = {
+      model,
+      record,
+      bindTo: model,
+      currentBeat: app.sequencer.state.currentBeat,
+      tuner: 'gain'
+    };
+    return (
+      <SequencerComponent model={sequencer} bindTo={sequencer}>
+        <ChannelDetailComponent {...props} />
+      </SequencerComponent>
+    );
   }
 });

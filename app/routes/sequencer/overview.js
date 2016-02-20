@@ -1,5 +1,6 @@
 import {route} from 'app/router';
 import React from 'react';
+import SequencerComponent from 'components/sequencer/sequencer';
 import OverviewComponent from 'components/overview/overview';
 
 route('/sequencer/overview', {
@@ -7,6 +8,10 @@ route('/sequencer/overview', {
     return Promise.resolve(app.sequencer);
   },
   render(sequencer) {
-    return <OverviewComponent sequencer={sequencer} bindTo={sequencer} />;
+    return (
+      <SequencerComponent model={sequencer} bindTo={sequencer}>
+        <OverviewComponent />
+      </SequencerComponent>
+    );
   }
 });

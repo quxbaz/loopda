@@ -3,7 +3,6 @@
 */
 
 import React from 'react';
-import bindTo from 'components/mixins/bindto';
 import {toggleState} from 'lib/util';
 import dispatcher from 'app/dispatcher';
 import sequencerActions from 'actions/sequencer/sequencer';
@@ -12,8 +11,6 @@ import store from 'app/store';
 import ChannelComponent from 'components/sequencer/channel';
 
 export default React.createClass({
-
-  mixins: [bindTo],
 
   // getInitialState() {
   //   return {
