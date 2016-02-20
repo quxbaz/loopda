@@ -3,8 +3,7 @@ import classNames from 'classnames';
 import bindTo from 'components/mixins/bindto';
 import dispatcher from 'app/dispatcher';
 import channelActions from 'actions/sequencer/channel';
-import store from 'app/store';
-import BlipComponent from 'components/sequencer/blip';
+import BlipsComponent from './blips';
 
 export default React.createClass({
 
@@ -23,27 +22,18 @@ export default React.createClass({
     model.setState({mute: !model.state.mute});
   },
 
-  renderBlips() {
-    let {model} = this.props;
-    return model.state.blips.map((blip, i) => {
-      let props = {
-        key: blip.id,
-        model: blip,
-        bindTo: blip,
-        record: store.recordFor(blip),
-        isPlaying: !model.state.mute && this.props.currentBeat == i,
-        tuner: this.props.tuner
-      };
-      return <BlipComponent {...props} />;
-    });
-  },
-
   render() {
-    let {model, record} = this.props;
+    let {model, record, currentBeat, tuner} = this.props;
     let classes = classNames({
       channel: true,
       mute: model.state.mute
     });
+    let blipsProps = {
+      blips: model.state.blips,
+      mute: model.state.mute,
+      currentBeat,
+      tuner
+    };
     return (
       <div className={classes}>
         <div className="channel-title">
@@ -57,9 +47,7 @@ export default React.createClass({
           </a>)
         </div>
         <div className="inner-channel">
-          <div className="blips-container">
-            {this.renderBlips(this)}
-          </div>
+          <BlipsComponent {...blipsProps} />
         </div>
       </div>
     );
