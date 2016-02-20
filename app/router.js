@@ -14,34 +14,35 @@ class Route {
   constructor(router, handlers) {
     this.router = router;
     Object.assign(this, handlers);
+    this.resourceData = null;
   }
 
-  resource() {
-    return Promise.resolve();
-  }
-
-  setup(data) {
-    return data;
-  }
-
+  resource() {return Promise.resolve()}
+  setup(data) {return data}
   render(data) {}
-
-  cleanup() {}
+  redirect() {}
+  cleanup(data) {}
 
   on(...args) {
     this.resource(...args).then((data) => {
+      this.resourceData = data;
       return this.setup(data);
     }).then((data) => {
-      let renderOutlet = this.render(data);
-      if (renderOutlet) {
-        this.router.renderOutlet = renderOutlet;
-        this.router.trigger('change');
+      let redirect = this.redirect();
+      if (redirect !== undefined)
+        this.router.nav(redirect);
+      else {
+        let renderOutlet = this.render(data);
+        if (renderOutlet) {
+          this.router.renderOutlet = renderOutlet;
+          this.router.trigger('change');
+        }
       }
     });
   }
 
   after() {
-    this.cleanup();
+    this.cleanup(this.resourceData);
   }
 
   makeRoute() {
