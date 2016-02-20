@@ -2,7 +2,7 @@ import {route} from 'app/router';
 import React from 'react';
 import OverviewComponent from 'components/overview/overview';
 
-route('/overview', {
+route('/sequencer/overview', {
   setup() {
     app.sequencer.play();
   },

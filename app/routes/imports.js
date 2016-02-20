@@ -1,3 +1,4 @@
 import './app';
-import './overview';
-import './channel-detail';
+import './sequencer/index';
+import './sequencer/overview';
+import './sequencer/channel-detail';
