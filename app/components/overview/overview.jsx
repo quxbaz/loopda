@@ -6,9 +6,8 @@ import React from 'react';
 import {toggleState} from 'lib/util';
 import dispatcher from 'app/dispatcher';
 import sequencerActions from 'actions/sequencer/sequencer';
-import sampleList from 'audio/samplelist';
-import store from 'app/store';
-import ChannelComponent from 'components/sequencer/channel';
+import ChannelsComponent from './channels';
+import SampleOptionsComponent from './sample-options';
 
 export default React.createClass({
 
@@ -32,35 +31,10 @@ export default React.createClass({
   //   this.setState({tuner});
   // },
 
-  renderChannels() {
-    let {sequencer} = this.props;
-    return sequencer.state.channels.map((channel) => {
-      let props = {
-        key: channel.id,
-        model: channel,
-        bindTo: channel,
-        record: store.recordFor(channel),
-        currentBeat: sequencer.state.currentBeat,
-        tuner: 'gain',
-        onRemove: this.removeChannel.bind(this, channel)
-      };
-      return <ChannelComponent {...props} />;
-    });
-  },
-
-  renderSampleOptions() {
-    return Object.keys(sampleList).map((sampleName) => {
-      let props = {
-        key: sampleName,
-        className: 'sample-option',
-        onClick: this.addChannel.bind(this, sampleName)
-      };
-      return <a {...props}>{sampleName}</a>;
-    });
-  },
-
   render() {
     let togglePlay = toggleState.bind({}, this.props.sequencer, 'playing');
+    let {sequencer} = this.props;
+    let {channels, currentBeat} = sequencer.state;
     return (
       <div className="sequencer">
         <a className="togglePlay" onClick={togglePlay}>
@@ -71,12 +45,12 @@ export default React.createClass({
         {/*<div>Tuning mode: {this.state.tuner}</div>*/}
         <hr />
         <div className="channels">
-          {this.renderChannels(this)}
+          <ChannelsComponent channels={channels} currentBeat={currentBeat} onRemove={this.removeChannel} />
           <div className="add-channel">
             <div>&nbsp;</div>
             <div className="inner">
               <h4>Add a channel</h4>
-              <div>{this.renderSampleOptions(this)}</div>
+              <SampleOptionsComponent onClick={this.addChannel} />
             </div>
           </div>
           <div className="spacer"></div>
