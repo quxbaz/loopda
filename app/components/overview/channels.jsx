@@ -15,5 +15,5 @@ export default function(props) {
     };
     return <ChannelComponent {...channelProps} />;
   });
-  return (<div>{channels}</div>);
+  return <div>{channels}</div>;
 };
