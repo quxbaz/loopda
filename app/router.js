@@ -82,7 +82,9 @@ class AppRouter extends Sentry {
 
   start() {
     this.initAppRoute().then(() => {
-      this._router = Router(this.routes);
+      this._router = Router(this.routes).configure({
+        recurse: 'forward'
+      });
       this._router.init();
     });
   }
