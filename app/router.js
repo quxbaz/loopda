@@ -11,8 +11,9 @@ let _router;
 
 class Route {
 
-  constructor(router, handlers) {
+  constructor(router, path, handlers) {
     this.router = router;
+    this.path = path;
     Object.assign(this, handlers);
     this.resourceData = null;
   }
@@ -29,7 +30,7 @@ class Route {
       return this.setup(data);
     }).then((data) => {
       let redirect = this.redirect();
-      if (redirect !== undefined)
+      if (redirect !== undefined && window.location.hash.substring(1) === this.path)
         this.router.nav(redirect);
       else {
         let renderOutlet = this.render(data);
@@ -65,7 +66,7 @@ class AppRouter extends Sentry {
   }
 
   route(path, handlers) {
-    let route_ = new Route(this, handlers);
+    let route_ = new Route(this, path, handlers);
     if (path === 'app')
       this.appRoute = route_;
     else
