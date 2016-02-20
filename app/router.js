@@ -32,8 +32,11 @@ class Route {
     this.resource(...args).then((data) => {
       return this.setup(data);
     }).then((data) => {
-      this.router.renderOutlet = this.render(data);
-      this.router.trigger('change');
+      let renderOutlet = this.render(data);
+      if (renderOutlet) {
+        this.router.renderOutlet = renderOutlet;
+        this.router.trigger('change');
+      }
     });
   }
 
