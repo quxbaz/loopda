@@ -15,8 +15,7 @@ route('/sequencer/channel/:id', {
       model,
       record,
       bindTo: model,
-      currentBeat: app.sequencer.state.currentBeat,
-      tuner: 'gain'
+      currentBeat: app.sequencer.state.currentBeat
     };
     return (
       <SequencerComponent model={sequencer} bindTo={sequencer}>

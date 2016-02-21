@@ -10,7 +10,6 @@ export default function(props) {
       bindTo: channel,
       record: store.recordFor(channel),
       currentBeat: props.currentBeat,
-      tuner: 'gain',
       onRemove: props.onRemove.bind(null, channel)
     };
     return <ChannelComponent {...channelProps} />;

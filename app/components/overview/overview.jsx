@@ -9,13 +9,6 @@ import SampleOptionsComponent from './sample-options';
 
 export default React.createClass({
 
-  // getInitialState() {
-  //   return {
-  //     tuners: ['gain', 'rate', 'offset'],
-  //     tuner: 'rate'
-  //   };
-  // },
-
   togglePlay() {
     sequencerCtrl.togglePlay(this.props.sequencer);
   },
@@ -28,11 +21,6 @@ export default React.createClass({
     sequencerCtrl.removeChannel(this.props.sequencer, channel);
   },
 
-  // This should be in app state
-  // setTuner(tuner) {
-  //   this.setState({tuner});
-  // },
-
   render() {
     let {sequencer} = this.props;
     let {channels, currentBeat} = sequencer.state;
@@ -41,9 +29,6 @@ export default React.createClass({
         <a className="togglePlay" onClick={this.togglePlay}>
           {this.props.sequencer.state.playing ? 'pause' : 'play'}
         </a>
-        <hr />
-        {/*<div>{this.renderTuners(this)}</div>*/}
-        {/*<div>Tuning mode: {this.state.tuner}</div>*/}
         <hr />
         <div className="channels">
           <ChannelsComponent channels={channels} currentBeat={currentBeat} onRemove={this.removeChannel} />

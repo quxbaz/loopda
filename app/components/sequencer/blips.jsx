@@ -9,8 +9,7 @@ export default function(props) {
       model: blip,
       bindTo: blip,
       record: store.recordFor(blip),
-      isPlaying: !props.mute && props.currentBeat === i,
-      tuner: props.tuner
+      isPlaying: !props.mute && props.currentBeat === i
     };
     return <BlipComponent {...blipProps} />;
   });

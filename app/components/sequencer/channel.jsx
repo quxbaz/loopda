@@ -21,7 +21,7 @@ export default React.createClass({
   },
 
   render() {
-    let {model, record, currentBeat, tuner} = this.props;
+    let {model, record, currentBeat} = this.props;
     let classes = classNames({
       channel: true,
       mute: model.state.mute
@@ -29,8 +29,7 @@ export default React.createClass({
     let blipsProps = {
       blips: model.state.blips,
       mute: model.state.mute,
-      currentBeat,
-      tuner
+      currentBeat
     };
     return (
       <div className={classes}>
