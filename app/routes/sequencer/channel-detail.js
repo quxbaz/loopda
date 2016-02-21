@@ -2,7 +2,7 @@ import React from 'react';
 import {route} from 'app/router';
 import store from 'app/store';
 import SequencerComponent from 'components/sequencer/sequencer';
-import ChannelDetailComponent from 'components/sequencer/channel-detail';
+import ChannelDetailComponent from 'components/channel-detail/channel-detail';
 
 route('/sequencer/channel/:id', {
   resource(id) {
