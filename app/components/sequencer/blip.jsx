@@ -23,8 +23,7 @@ export default React.createClass({
         mute: !model.state.sampleName || model.state.mute,
         playing: this.props.isPlaying
       }),
-      onMouseDown: this.toggleMute,
-      onWheel: this.handleWheel
+      onMouseDown: this.toggleMute
     };
     return <div {...props} />;
   }
