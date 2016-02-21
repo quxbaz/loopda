@@ -7,10 +7,6 @@ export default React.createClass({
 
   mixins: [bindTo],
 
-  getInitialState() {
-    return {};
-  },
-
   toggleMute() {
     blipCtrl.toggleMute(this.props.model);
   },
