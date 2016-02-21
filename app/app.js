@@ -1,5 +1,4 @@
-// Definitions
-import 'controllers/imports';
+// Declarations
 import 'routes/imports';
 
 // Audio stuff

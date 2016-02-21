@@ -1,9 +1,8 @@
-import actions from 'actions/sequencer/blip';
 import {toggleState} from 'lib/util';
 
 export default {
 
-  [actions.toggleMute]: function(blip) {
+  toggleMute(blip) {
     toggleState(blip, 'mute');
   }
 

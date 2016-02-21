@@ -3,9 +3,7 @@
 */
 
 import React from 'react';
-import {toggleState} from 'lib/util';
-import dispatcher from 'app/dispatcher';
-import sequencerActions from 'actions/sequencer/sequencer';
+import sequencerCtrl from 'controllers/sequencer/sequencer';
 import ChannelsComponent from './channels';
 import SampleOptionsComponent from './sample-options';
 
@@ -18,12 +16,16 @@ export default React.createClass({
   //   };
   // },
 
+  togglePlay() {
+    sequencerCtrl.togglePlay(this.props.sequencer);
+  },
+
   addChannel(sampleName) {
-    dispatcher.emit(sequencerActions.createChannel, this.props.sequencer, sampleName);
+    sequencerCtrl.createChannel(this.props.sequencer, sampleName);
   },
 
   removeChannel(channel) {
-    dispatcher.emit(sequencerActions.removeChannel, this.props.sequencer, channel);
+    sequencerCtrl.removeChannel(this.props.sequencer, channel);
   },
 
   // This should be in app state
@@ -32,12 +34,11 @@ export default React.createClass({
   // },
 
   render() {
-    let togglePlay = toggleState.bind({}, this.props.sequencer, 'playing');
     let {sequencer} = this.props;
     let {channels, currentBeat} = sequencer.state;
     return (
       <div className="sequencer">
-        <a className="togglePlay" onClick={togglePlay}>
+        <a className="togglePlay" onClick={this.togglePlay}>
           {this.props.sequencer.state.playing ? 'pause' : 'play'}
         </a>
         <hr />

@@ -1,8 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import bindTo from 'components/mixins/bindto';
-import dispatcher from 'app/dispatcher';
-import channelActions from 'actions/sequencer/channel';
+import channelCtrl from 'controllers/sequencer/channel';
 import BlipsComponent from './blips';
 
 export default React.createClass({
@@ -14,12 +13,11 @@ export default React.createClass({
   },
 
   viewChannelDetail() {
-    dispatcher.emit(channelActions.viewChannelDetail, this.props.model);
+    channelCtrl.viewChannelDetail(this.props.model);
   },
 
   toggleMute() {
-    let {model} = this.props;
-    model.setState({mute: !model.state.mute});
+    channelCtrl.toggleMute(this.props.model);
   },
 
   render() {

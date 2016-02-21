@@ -1,9 +1,13 @@
 import store from 'app/store';
-import actions from 'actions/sequencer/sequencer';
+import {toggleState} from 'lib/util';
 
 export default {
 
-  [actions.createChannel]: function(sequencer, sampleName) {
+  togglePlay(sequencer) {
+    toggleState(sequencer, 'playing');
+  },
+
+  createChannel(sequencer, sampleName) {
     // Create new channel
     let channel = sequencer.addChannel({sampleName});
     let channelRecord = store.createRecord(
@@ -19,7 +23,7 @@ export default {
     });
   },
 
-  [actions.removeChannel]: function(sequencer, channel) {
+  removeChannel(sequencer, channel) {
     let {channels} = sequencer.state;
     sequencer.setState({
       channels: channels.filter(el => el !== channel)
