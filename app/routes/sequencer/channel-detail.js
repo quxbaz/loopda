@@ -11,13 +11,10 @@ route('/sequencer/channel/:id', {
     });
   },
   render([sequencer, channel, channelRecord]) {
-    let props = {
-      channel,
-      currentBeat: sequencer.state.currentBeat
-    };
+    let {currentBeat} = sequencer.state;
     return (
       <SequencerComponent sequencer={sequencer}>
-        <ChannelDetailComponent {...props} />
+        <ChannelDetailComponent channel={channel} currentBeat={currentBeat} />
       </SequencerComponent>
     );
   }
