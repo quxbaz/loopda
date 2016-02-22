@@ -4,7 +4,7 @@ import store from 'globals/store';
 import sequencerCtrl from 'controllers/sequencer/sequencer';
 import channelCtrl from 'controllers/sequencer/channel';
 import blipCtrl from 'controllers/sequencer/blip';
-import ChannelComponent from 'components/sequencer/channel';
+import ChannelCom from 'components/sequencer/channel';
 
 ChannelWrapper.propTypes = {
   channel: React.PropTypes.object.isRequired,
@@ -36,8 +36,8 @@ export default function ChannelWrapper(props) {
         </a>)
       </div>
       <div className="inner-channel">
-        <ChannelComponent channel={channel} currentBeat={props.currentBeat}
-                          onClickBlip={blipCtrl.toggleMute} />
+        <ChannelCom channel={channel} currentBeat={props.currentBeat}
+                    onClickBlip={blipCtrl.toggleMute} />
       </div>
     </div>
   );

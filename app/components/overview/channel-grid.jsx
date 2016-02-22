@@ -1,5 +1,5 @@
 import React from 'react';
-import ChannelWrapperComponent from './channel-wrapper';
+import ChannelWrapperCom from './channel-wrapper';
 
 ChannelGrid.propTypes = {
   channels: React.PropTypes.array.isRequired,
@@ -14,7 +14,7 @@ export default function ChannelGrid(props) {
       currentBeat: props.currentBeat,
       onRemove: props.onRemove.bind(null, channel)
     };
-    return <ChannelWrapperComponent {...channelProps} />;
+    return <ChannelWrapperCom {...channelProps} />;
   });
   return <div>{channels}</div>;
 };

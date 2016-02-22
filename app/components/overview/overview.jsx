@@ -4,8 +4,8 @@
 
 import React from 'react';
 import sequencerCtrl from 'controllers/sequencer/sequencer';
-import ChannelGridComponent from './channel-grid';
-import ChannelMenuComponent from './channel-menu';
+import ChannelGridCom from './channel-grid';
+import ChannelMenuCom from './channel-menu';
 
 Overview.propTypes = {
   sequencer: React.PropTypes.object
@@ -27,9 +27,8 @@ export default function Overview(props) {
       </a>
       <hr />
       <div className="channels">
-        <ChannelGridComponent channels={channels} currentBeat={currentBeat}
-                              onRemove={removeChannel} />
-        <ChannelMenuComponent onClickOption={addChannel} />
+        <ChannelGridCom channels={channels} currentBeat={currentBeat} onRemove={removeChannel} />
+        <ChannelMenuCom onClickOption={addChannel} />
         <div className="spacer"></div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import {route} from 'globals/router';
 import React from 'react';
-import SequencerComponent from 'components/sequencer/sequencer';
-import OverviewComponent from 'components/overview/overview';
+import SequencerCom from 'components/sequencer/sequencer';
+import OverviewCom from 'components/overview/overview';
 
 route('/sequencer/overview', {
   resource() {
@@ -9,9 +9,9 @@ route('/sequencer/overview', {
   },
   render(sequencer) {
     return (
-      <SequencerComponent sequencer={sequencer}>
-        <OverviewComponent />
-      </SequencerComponent>
+      <SequencerCom sequencer={sequencer}>
+        <OverviewCom />
+      </SequencerCom>
     );
   }
 });

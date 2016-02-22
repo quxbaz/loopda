@@ -1,5 +1,5 @@
 import React from 'react';
-import SampleOptionsComponent from './sample-options';
+import SampleOptionsCom from './sample-options';
 
 ChannelMenu.PropTypes = {
   onClickOption: React.PropTypes.func
@@ -11,7 +11,7 @@ export default function ChannelMenu(props) {
       <div>&nbsp;</div>
       <div className="inner">
         <h4>Add a channel</h4>
-        <SampleOptionsComponent onClickOption={props.onClickOption} />
+        <SampleOptionsCom onClickOption={props.onClickOption} />
       </div>
     </div>
   );

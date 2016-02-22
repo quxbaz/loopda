@@ -3,7 +3,7 @@ import {router, route} from 'globals/router';
 import store from 'globals/store';
 import pending from 'pending';
 import {without} from 'lib/util';
-import AppComponent from 'components/app';
+import AppCom from 'components/app';
 
 function startSavingRecords(sequencerRecord, interval=1000) {
   // Auto-saves all records every n interval
@@ -65,6 +65,6 @@ route('app', {
     });
   },
   render() {
-    return <AppComponent router={router} />;
+    return <AppCom router={router} />;
   }
 });

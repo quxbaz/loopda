@@ -1,8 +1,8 @@
 import React from 'react';
 import {route} from 'globals/router';
 import store from 'globals/store';
-import SequencerComponent from 'components/sequencer/sequencer';
-import ChannelDetailComponent from 'components/channel-detail/channel-detail';
+import SequencerCom from 'components/sequencer/sequencer';
+import ChannelDetailCom from 'components/channel-detail/channel-detail';
 
 route('/sequencer/channel/:id', {
   resource(id) {
@@ -13,9 +13,9 @@ route('/sequencer/channel/:id', {
   render([sequencer, channel]) {
     let {currentBeat} = sequencer.state;
     return (
-      <SequencerComponent sequencer={sequencer}>
-        <ChannelDetailComponent channel={channel} currentBeat={currentBeat} />
-      </SequencerComponent>
+      <SequencerCom sequencer={sequencer}>
+        <ChannelDetailCom channel={channel} currentBeat={currentBeat} />
+      </SequencerCom>
     );
   }
 });

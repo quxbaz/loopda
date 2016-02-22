@@ -1,5 +1,5 @@
 import React from 'react';
-import BlipComponent from './blip';
+import BlipCom from './blip';
 
 Channel.propTypes = {
   channel: React.PropTypes.object.isRequired,
@@ -16,7 +16,7 @@ export default function Channel(props) {
       isPlaying: !state.mute && props.currentBeat === blip.state.beat,
       onClick: props.onClickBlip
     };
-    return <BlipComponent {...blipProps} />;
+    return <BlipCom {...blipProps} />;
   });
   return <div className="blips-container">{blips}</div>;
 };

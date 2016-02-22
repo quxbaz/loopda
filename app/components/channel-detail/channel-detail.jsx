@@ -1,6 +1,6 @@
 import React from 'react';
-import ChannelComponent from 'components/sequencer/channel';
-import MixerComponent from './mixer';
+import ChannelCom from 'components/sequencer/channel';
+import MixerCom from './mixer';
 
 export default React.createClass({
 
@@ -24,11 +24,11 @@ export default React.createClass({
   render() {
     let {channel} = this.props;
     let {currentBeat} = this.props.sequencer.state;
-    return React.createElement(ChannelComponent, {
+    return React.createElement(ChannelCom, {
       channel,
       currentBeat,
       onClickBlip: this.onClickBlip,
-      MixerComponent
+      MixerCom
     });
   }
 
