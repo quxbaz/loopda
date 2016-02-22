@@ -1,23 +1,35 @@
 import React from 'react';
 import ChannelComponent from 'components/sequencer/channel';
+import MixerComponent from './mixer';
 
-ChannelDetail.propTypes = {
-  sequencer: React.PropTypes.object,
-  channel: React.PropTypes.object.isRequired
-};
+export default React.createClass({
 
-export default function ChannelDetail(props) {
+  propTypes: {
+    sequencer: React.PropTypes.object,
+    channel: React.PropTypes.object.isRequired
+  },
 
-  let {channel} = props;
-  let {currentBeat} = props.sequencer.state;
+  getInitialState() {
+    return {
+      selection: null
+    };
+  },
 
-  let onClickBlip = (blip) => {
-    // TODO
-    // (cursorController).addToBlipSelection(recordFor(blip))
-  };
+  onClickBlip(blip) {
+    this.setState({
+      selection: blip
+    });
+  },
 
-  return React.createElement(ChannelComponent, {
-    channel, currentBeat, onClickBlip
-  });
+  render() {
+    let {channel} = this.props;
+    let {currentBeat} = this.props.sequencer.state;
+    return React.createElement(ChannelComponent, {
+      channel,
+      currentBeat,
+      onClickBlip: this.onClickBlip,
+      MixerComponent
+    });
+  }
 
-};
+});
