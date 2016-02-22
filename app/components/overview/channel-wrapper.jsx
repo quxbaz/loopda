@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import channelCtrl from 'controllers/sequencer/channel';
 import blipCtrl from 'controllers/sequencer/blip';
 import ChannelComponent from 'components/sequencer/channel';
+import store from 'globals/store';
 
 export default React.createClass({
 
@@ -24,7 +25,8 @@ export default React.createClass({
   },
 
   render() {
-    let {channel, record} = this.props;
+    let {channel} = this.props;
+    let record = store.recordFor(channel);
     let classes = classNames({
       channel: true,
       mute: channel.state.mute
