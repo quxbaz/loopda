@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import bindTo from 'components/mixins/bindto';
 import channelCtrl from 'controllers/sequencer/channel';
+import blipCtrl from 'controllers/sequencer/blip';
 import ChannelComponent from 'components/sequencer/channel';
 
 export default React.createClass({
@@ -33,7 +34,8 @@ export default React.createClass({
     });
     let channelProps = {
       channel,
-      currentBeat: this.props.currentBeat
+      currentBeat: this.props.currentBeat,
+      onClickBlip: blipCtrl.toggleMute
     };
     return (
       <div className={classes}>

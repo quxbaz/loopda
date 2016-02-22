@@ -9,7 +9,8 @@ export default function Channel(props) {
       key: blip.id,
       blip: blip,
       bindTo: blip,
-      isPlaying: !state.mute && props.currentBeat === blip.state.beat
+      isPlaying: !state.mute && props.currentBeat === blip.state.beat,
+      onClick: props.onClickBlip
     };
     return <BlipComponent {...blipProps} />;
   });
@@ -18,5 +19,6 @@ export default function Channel(props) {
 
 Channel.propTypes = {
   channel: React.PropTypes.object.isRequired,
-  currentBeat: React.PropTypes.number.isRequired
+  currentBeat: React.PropTypes.number.isRequired,
+  onClickBlip: React.PropTypes.func
 };

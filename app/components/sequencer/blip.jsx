@@ -1,19 +1,21 @@
 import React from 'react';
 import classNames from 'classnames';
 import bindTo from 'components/mixins/bindto';
-import blipCtrl from 'controllers/sequencer/blip';
 
 export default React.createClass({
 
   propTypes: {
-    blip: React.PropTypes.object.isRequired
+    blip: React.PropTypes.object.isRequired,
+    onClick: React.PropTypes.func
+  },
+
+  getDefaultProps() {
+    return {
+      onClick() {}
+    };
   },
 
   mixins: [bindTo],
-
-  toggleMute() {
-    blipCtrl.toggleMute(this.props.blip);
-  },
 
   render() {
     let {blip} = this.props;
@@ -23,8 +25,7 @@ export default React.createClass({
         mute: !blip.state.sampleName || blip.state.mute,
         playing: this.props.isPlaying
       }),
-      onMouseDown: this.toggleMute
-      // onMouseDown: this.onMouseDown  // Can you specify this in the parent component?
+      onMouseDown: this.props.onClick.bind(null, blip)
     };
     return <div {...props} />;
   }

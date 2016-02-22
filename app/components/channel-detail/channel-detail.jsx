@@ -4,12 +4,14 @@ import ChannelComponent from 'components/sequencer/channel';
 export default React.createClass({
 
   propTypes: {
+    sequencer: React.PropTypes.object,
     channel: React.PropTypes.object.isRequired
   },
 
   render() {
     let {channel} = this.props;
-    return <ChannelComponent channel={channel} />;
+    let {currentBeat} = this.props.sequencer.state;
+    return <ChannelComponent channel={channel} currentBeat={currentBeat} />;
   }
 
 });
