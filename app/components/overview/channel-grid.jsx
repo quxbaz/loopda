@@ -1,6 +1,11 @@
 import React from 'react';
 import ChannelWrapperComponent from './channel-wrapper';
 
+ChannelGrid.propTypes = {
+  channels: React.PropTypes.array.isRequired,
+  currentBeat: React.PropTypes.number.isRequired
+};
+
 export default function ChannelGrid(props) {
   let channels =  props.channels.map((channel) => {
     let channelProps = {
@@ -12,9 +17,4 @@ export default function ChannelGrid(props) {
     return <ChannelWrapperComponent {...channelProps} />;
   });
   return <div>{channels}</div>;
-};
-
-ChannelGrid.propTypes = {
-  channels: React.PropTypes.array.isRequired,
-  currentBeat: React.PropTypes.number.isRequired
 };

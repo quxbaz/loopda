@@ -1,6 +1,10 @@
 import React from 'react';
 import sampleList from 'audio/samplelist';
 
+SampleOptions.propTypes = {
+  onClickOption: React.PropTypes.func.isRequired
+};
+
 export default function SampleOptions(props) {
   let options = Object.keys(sampleList).map((sampleName) => {
     let sampleProps = {
@@ -11,8 +15,4 @@ export default function SampleOptions(props) {
     return <a {...sampleProps}>{sampleName}</a>;
   });
   return <div>{options}</div>;
-};
-
-SampleOptions.propTypes = {
-  onClickOption: React.PropTypes.func.isRequired
 };

@@ -1,6 +1,12 @@
 import React from 'react';
 import BlipComponent from './blip';
 
+Channel.propTypes = {
+  channel: React.PropTypes.object.isRequired,
+  currentBeat: React.PropTypes.number.isRequired,
+  onClickBlip: React.PropTypes.func
+};
+
 export default function Channel(props) {
   let {state} = props.channel;
   let blips = state.blips.map((blip) => {
@@ -13,10 +19,4 @@ export default function Channel(props) {
     return <BlipComponent {...blipProps} />;
   });
   return <div className="blips-container">{blips}</div>;
-};
-
-Channel.propTypes = {
-  channel: React.PropTypes.object.isRequired,
-  currentBeat: React.PropTypes.number.isRequired,
-  onClickBlip: React.PropTypes.func
 };
