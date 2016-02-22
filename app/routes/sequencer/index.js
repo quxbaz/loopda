@@ -5,12 +5,12 @@ route('/sequencer', {
     return Promise.resolve(app.sequencer);
   },
   setup(sequencer) {
-    sequencer.play();
+    // sequencer.play();
   },
   redirect() {
     return '/sequencer/overview';
   },
   cleanup(sequencer) {
-    sequencer.pause();
+    // sequencer.pause();
   }
 });
