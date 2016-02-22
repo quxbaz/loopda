@@ -20,6 +20,7 @@ export default React.createClass({
         playing: this.props.isPlaying
       }),
       onMouseDown: this.toggleMute
+      // onMouseDown: this.
     };
     return <div {...props} />;
   }
