@@ -22,14 +22,18 @@ export default React.createClass({
   },
 
   render() {
-    let {channel} = this.props;
-    let {currentBeat} = this.props.sequencer.state;
-    return React.createElement(ChannelCom, {
+    let {channel, sequencer} = this.props;
+    let channelProps = {
       channel,
-      currentBeat,
-      onClickBlip: this.onClickBlip,
-      MixerCom
-    });
+      currentBeat: sequencer.state.currentBeat,
+      onClickBlip: this.onClickBlip
+    };
+    return (
+      <div>
+        <ChannelCom {...channelProps} />
+        <MixerCom />
+      </div>
+    );
   }
 
 });
