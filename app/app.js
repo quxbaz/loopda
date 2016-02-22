@@ -4,15 +4,15 @@ import 'routes/imports';
 // Audio stuff
 import sampleList from 'audio/samplelist';
 import {loadAudioSamples} from 'audio/audiohelper';
-import audioContext from './audiocontext';
-import audioService from './audioservice';
+import audioContext from 'globals/audiocontext';
+import audioService from 'globals/audioservice';
 
 // Sequencer
 import {Sequencer} from 'sequencer';
 import {blipDefaults} from 'sequencer/lib/defaults';
 
 // Router
-import {router} from './router';
+import {router} from 'globals/router';
 
 // Globals
 window.$app = document.getElementById('app-container');

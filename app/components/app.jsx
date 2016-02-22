@@ -3,7 +3,7 @@
 */
 
 import React from 'react';
-import {router} from 'app/router';
+import {router} from 'globals/router';
 
 export default React.createClass({
   componentDidMount() {

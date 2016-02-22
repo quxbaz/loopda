@@ -1,6 +1,6 @@
 import React from 'react';
-import {route} from 'app/router';
-import store from 'app/store';
+import {route} from 'globals/router';
+import store from 'globals/store';
 import SequencerComponent from 'components/sequencer/sequencer';
 import ChannelDetailComponent from 'components/channel-detail/channel-detail';
 

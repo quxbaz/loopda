@@ -1,5 +1,4 @@
 import React from 'react';
-import store from 'app/store';
 import BlipComponent from './blip';
 
 export default function Channel(props) {

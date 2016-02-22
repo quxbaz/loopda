@@ -1,7 +1,7 @@
 import Store from 'store';
 import LSAdapter from 'store/lib/adapters/ls/adapter';
-import {initModels} from './models';
-import watcher from 'app/watcher';
+import {initModels} from 'app/models';
+import watcher from 'globals/watcher';
 
 class MappedStore extends Store {
 

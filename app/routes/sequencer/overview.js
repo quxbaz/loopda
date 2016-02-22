@@ -1,4 +1,4 @@
-import {route} from 'app/router';
+import {route} from 'globals/router';
 import React from 'react';
 import SequencerComponent from 'components/sequencer/sequencer';
 import OverviewComponent from 'components/overview/overview';

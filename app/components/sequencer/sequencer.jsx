@@ -1,5 +1,5 @@
 import React from 'react';
-import watcher from 'app/watcher';
+import watcher from 'globals/watcher';
 
 export default React.createClass({
 

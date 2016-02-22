@@ -1,4 +1,4 @@
-import {route, router} from 'app/router';
+import {route, router} from 'globals/router';
 
 route('/sequencer', {
   resource() {

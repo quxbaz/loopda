@@ -1,5 +1,5 @@
-import {router} from 'app/router';
-import store from 'app/store';
+import {router} from 'globals/router';
+import store from 'globals/store';
 import {toggleState} from 'lib/util';
 
 export default {

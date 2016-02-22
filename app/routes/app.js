@@ -1,7 +1,7 @@
 import React from 'react';
-import {router, route} from 'app/router';
+import {router, route} from 'globals/router';
+import store from 'globals/store';
 import pending from 'pending';
-import store from 'app/store';
 import {without} from 'lib/util';
 import AppComponent from 'components/app';
 

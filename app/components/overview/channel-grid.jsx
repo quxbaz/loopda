@@ -1,6 +1,6 @@
 import React from 'react';
 import ChannelWrapperComponent from './channel-wrapper';
-import store from 'app/store';
+import store from 'globals/store';
 
 export default function ChannelGrid(props) {
   let channels =  props.channels.map((channel) => {
