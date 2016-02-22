@@ -1,5 +1,5 @@
 import React from 'react';
-import ChannelComponent from 'components/sequencer/channel';
+import ChannelWrapperComponent from './channel-wrapper';
 import store from 'app/store';
 
 export default function(props) {
@@ -12,7 +12,7 @@ export default function(props) {
       currentBeat: props.currentBeat,
       onRemove: props.onRemove.bind(null, channel)
     };
-    return <ChannelComponent {...channelProps} />;
+    return <ChannelWrapperComponent {...channelProps} />;
   });
   return <div>{channels}</div>;
 };

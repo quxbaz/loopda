@@ -4,7 +4,7 @@
 
 import React from 'react';
 import sequencerCtrl from 'controllers/sequencer/sequencer';
-import ChannelsComponent from './channels';
+import ChannelGridComponent from './channel-grid';
 import SampleOptionsComponent from './sample-options';
 
 export default React.createClass({
@@ -31,7 +31,7 @@ export default React.createClass({
         </a>
         <hr />
         <div className="channels">
-          <ChannelsComponent channels={channels} currentBeat={currentBeat} onRemove={this.removeChannel} />
+          <ChannelGridComponent channels={channels} currentBeat={currentBeat} onRemove={this.removeChannel} />
           <div className="add-channel">
             <div>&nbsp;</div>
             <div className="inner">
