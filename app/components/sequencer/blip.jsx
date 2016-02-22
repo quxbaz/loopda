@@ -1,30 +1,24 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export default React.createClass({
+export default function Blip(props) {
+  let {blip} = props;
+  let blipProps = {
+    className: classNames({
+      blip: true,
+      mute: !blip.state.sampleName || blip.state.mute,
+      playing: props.isPlaying
+    }),
+    onMouseDown: props.onClick.bind(null, blip)
+  };
+  return <div {...blipProps} />;
+};
 
-  propTypes: {
-    blip: React.PropTypes.object.isRequired,
-    onClick: React.PropTypes.func
-  },
+Blip.propTypes = {
+  blip: React.PropTypes.object.isRequired,
+  onClick: React.PropTypes.func
+};
 
-  getDefaultProps() {
-    return {
-      onClick() {}
-    };
-  },
-
-  render() {
-    let {blip} = this.props;
-    let props = {
-      className: classNames({
-        blip: true,
-        mute: !blip.state.sampleName || blip.state.mute,
-        playing: this.props.isPlaying
-      }),
-      onMouseDown: this.props.onClick.bind(null, blip)
-    };
-    return <div {...props} />;
-  }
-
-});
+Blip.defaultProps = {
+  onClick() {}
+};
