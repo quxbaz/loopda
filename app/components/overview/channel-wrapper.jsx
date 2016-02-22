@@ -28,7 +28,6 @@ export default React.createClass({
     });
     let channelProps = {
       channel: model,
-      mute: model.state.mute,
       currentBeat: this.props.currentBeat
     };
     return (

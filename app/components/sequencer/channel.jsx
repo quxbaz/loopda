@@ -3,20 +3,20 @@ import store from 'app/store';
 import BlipComponent from './blip';
 
 export default function Channel(props) {
-  let {blips} = props.channel.state;
-  let blipComponents = blips.map((blip, i) => {
+  let {state} = props.channel;
+  let blips = state.blips.map((blip) => {
     let blipProps = {
       key: blip.id,
-      model: blip,
+      blip: blip,
       bindTo: blip,
-      record: store.recordFor(blip),
-      isPlaying: !props.mute && props.currentBeat === i
+      isPlaying: !state.mute && props.currentBeat === blip.state.beat
     };
     return <BlipComponent {...blipProps} />;
   });
-  return <div className="blips-container">{blipComponents}</div>;
+  return <div className="blips-container">{blips}</div>;
 };
 
 Channel.propTypes = {
-  channel: React.PropTypes.object.isRequired
+  channel: React.PropTypes.object.isRequired,
+  currentBeat: React.PropTypes.number.isRequired
 };

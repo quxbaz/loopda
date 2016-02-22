@@ -5,22 +5,26 @@ import blipCtrl from 'controllers/sequencer/blip';
 
 export default React.createClass({
 
+  propTypes: {
+    blip: React.PropTypes.object.isRequired
+  },
+
   mixins: [bindTo],
 
   toggleMute() {
-    blipCtrl.toggleMute(this.props.model);
+    blipCtrl.toggleMute(this.props.blip);
   },
 
   render() {
-    let {model} = this.props;
+    let {blip} = this.props;
     let props = {
       className: classNames({
         blip: true,
-        mute: !model.state.sampleName || model.state.mute,
+        mute: !blip.state.sampleName || blip.state.mute,
         playing: this.props.isPlaying
       }),
       onMouseDown: this.toggleMute
-      // onMouseDown: this.
+      // onMouseDown: this.onMouseDown  // Can you specify this in the parent component?
     };
     return <div {...props} />;
   }
