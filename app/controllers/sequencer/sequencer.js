@@ -1,10 +1,12 @@
 import store from 'globals/store';
-import {toggleState} from 'lib/util';
 
 export default {
 
   togglePlay(sequencer) {
-    toggleState(sequencer, 'playing');
+    if (sequencer.state.playing)
+      sequencer.pause()
+    else
+      sequencer.play();
   },
 
   createChannel(sequencer, sampleName) {
