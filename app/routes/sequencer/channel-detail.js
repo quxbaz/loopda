@@ -12,7 +12,7 @@ route('/sequencer/channel/:id', {
   },
   render([sequencer, record, model]) {
     let props = {
-      model,
+      channel: model,
       record,
       bindTo: model,
       currentBeat: app.sequencer.state.currentBeat

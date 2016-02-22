@@ -6,28 +6,33 @@ import ChannelComponent from 'components/sequencer/channel';
 
 export default React.createClass({
 
+  propTypes: {
+    channel: React.PropTypes.object.isRequired,
+    currentBeat: React.PropTypes.number.isRequired,
+  },
+
   mixins: [bindTo],
 
   remove() {
-    this.props.onRemove(this.props.model);
+    this.props.onRemove(this.props.channel);
   },
 
   viewChannelDetail() {
-    channelCtrl.viewChannelDetail(this.props.model);
+    channelCtrl.viewChannelDetail(this.props.channel);
   },
 
   toggleMute() {
-    channelCtrl.toggleMute(this.props.model);
+    channelCtrl.toggleMute(this.props.channel);
   },
 
   render() {
-    let {model, record} = this.props;
+    let {channel, record} = this.props;
     let classes = classNames({
       channel: true,
-      mute: model.state.mute
+      mute: channel.state.mute
     });
     let channelProps = {
-      channel: model,
+      channel,
       currentBeat: this.props.currentBeat
     };
     return (
@@ -36,10 +41,10 @@ export default React.createClass({
           <div>
             <a onClick={this.viewChannelDetail}>{record.state.title}</a>
           </div>
-          {model.state.sampleName} -
+          {channel.state.sampleName} -
           (<a onClick={this.remove}>remove</a>) -
           (<a onClick={this.toggleMute}>
-            {model.state.mute ? 'unmute' : 'mute'}
+            {channel.state.mute ? 'unmute' : 'mute'}
           </a>)
         </div>
         <div className="inner-channel">

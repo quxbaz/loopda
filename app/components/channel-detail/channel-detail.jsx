@@ -3,9 +3,13 @@ import ChannelComponent from 'components/sequencer/channel';
 
 export default React.createClass({
 
+  propTypes: {
+    channel: React.PropTypes.object.isRequired
+  },
+
   render() {
-    let {model} = this.props;
-    return <ChannelComponent channel={model} />;
+    let {channel} = this.props;
+    return <ChannelComponent channel={channel} />;
   }
 
 });

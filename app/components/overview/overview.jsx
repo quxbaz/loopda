@@ -9,6 +9,10 @@ import SampleOptionsComponent from './sample-options';
 
 export default React.createClass({
 
+  propTypes: {
+    sequencer: React.PropTypes.object
+  },
+
   togglePlay() {
     sequencerCtrl.togglePlay(this.props.sequencer);
   },
@@ -36,7 +40,7 @@ export default React.createClass({
             <div>&nbsp;</div>
             <div className="inner">
               <h4>Add a channel</h4>
-              <SampleOptionsComponent onClick={this.addChannel} />
+              <SampleOptionsComponent onClickOption={this.addChannel} />
             </div>
           </div>
           <div className="spacer"></div>
