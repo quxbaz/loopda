@@ -7,7 +7,17 @@ ChannelDetail.propTypes = {
 };
 
 export default function ChannelDetail(props) {
+
   let {channel} = props;
   let {currentBeat} = props.sequencer.state;
-  return <ChannelComponent channel={channel} currentBeat={currentBeat} />;
+
+  let onClickBlip = (blip) => {
+    // TODO
+    // (cursorController).addToBlipSelection(recordFor(blip))
+  };
+
+  return React.createElement(ChannelComponent, {
+    channel, currentBeat, onClickBlip
+  });
+
 };
