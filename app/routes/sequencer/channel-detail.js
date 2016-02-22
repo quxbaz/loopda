@@ -14,11 +14,10 @@ route('/sequencer/channel/:id', {
     let props = {
       channel,
       record: channelRecord,
-      bindTo: channel,
       currentBeat: sequencer.state.currentBeat
     };
     return (
-      <SequencerComponent sequencer={sequencer} bindTo={sequencer}>
+      <SequencerComponent sequencer={sequencer}>
         <ChannelDetailComponent {...props} />
       </SequencerComponent>
     );

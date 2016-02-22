@@ -7,7 +7,6 @@ export default function ChannelGrid(props) {
     let channelProps = {
       key: channel.id,
       channel: channel,
-      bindTo: channel,
       record: store.recordFor(channel),
       currentBeat: props.currentBeat,
       onRemove: props.onRemove.bind(null, channel)

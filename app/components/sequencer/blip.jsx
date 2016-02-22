@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import bindTo from 'components/mixins/bindto';
 
 export default React.createClass({
 
@@ -14,8 +13,6 @@ export default React.createClass({
       onClick() {}
     };
   },
-
-  mixins: [bindTo],
 
   render() {
     let {blip} = this.props;

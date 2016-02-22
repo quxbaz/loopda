@@ -1,13 +1,17 @@
 import React from 'react';
-import bindTo from 'components/mixins/bindto';
+import watcher from 'app/watcher';
 
 export default React.createClass({
+
+  componentDidMount() {
+    watcher.on('change', () => {
+      this.forceUpdate();
+    });
+  },
 
   propTypes: {
     sequencer: React.PropTypes.object.isRequired
   },
-
-  mixins: [bindTo],
 
   renderChildren() {
     return React.Children.map(this.props.children, (child) =>

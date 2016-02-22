@@ -1,6 +1,7 @@
 import Store from 'store';
 import LSAdapter from 'store/lib/adapters/ls/adapter';
 import {initModels} from './models';
+import watcher from 'app/watcher';
 
 class MappedStore extends Store {
 
@@ -16,6 +17,7 @@ class MappedStore extends Store {
     this._reverseMap.set(record, object);
     object.on('change', () => {
       record.setState(object.state);
+      watcher.trigger('change');
     });
   }
 

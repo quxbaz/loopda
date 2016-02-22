@@ -9,7 +9,7 @@ route('/sequencer/overview', {
   },
   render(sequencer) {
     return (
-      <SequencerComponent sequencer={sequencer} bindTo={sequencer}>
+      <SequencerComponent sequencer={sequencer}>
         <OverviewComponent />
       </SequencerComponent>
     );

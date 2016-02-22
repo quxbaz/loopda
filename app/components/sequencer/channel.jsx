@@ -8,7 +8,6 @@ export default function Channel(props) {
     let blipProps = {
       key: blip.id,
       blip: blip,
-      bindTo: blip,
       isPlaying: !state.mute && props.currentBeat === blip.state.beat,
       onClick: props.onClickBlip
     };

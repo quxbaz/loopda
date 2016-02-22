@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import bindTo from 'components/mixins/bindto';
 import channelCtrl from 'controllers/sequencer/channel';
 import blipCtrl from 'controllers/sequencer/blip';
 import ChannelComponent from 'components/sequencer/channel';
@@ -11,8 +10,6 @@ export default React.createClass({
     channel: React.PropTypes.object.isRequired,
     currentBeat: React.PropTypes.number.isRequired,
   },
-
-  mixins: [bindTo],
 
   remove() {
     this.props.onRemove(this.props.channel);
