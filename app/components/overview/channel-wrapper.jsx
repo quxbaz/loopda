@@ -21,15 +21,15 @@ export default React.createClass({
   },
 
   render() {
-    let {model, record, currentBeat} = this.props;
+    let {model, record} = this.props;
     let classes = classNames({
       channel: true,
       mute: model.state.mute
     });
     let channelProps = {
-      blips: model.state.blips,
+      channel: model,
       mute: model.state.mute,
-      currentBeat
+      currentBeat: this.props.currentBeat
     };
     return (
       <div className={classes}>
