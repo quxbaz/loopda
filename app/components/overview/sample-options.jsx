@@ -7,12 +7,12 @@ SampleOptions.propTypes = {
 
 export default function SampleOptions(props) {
   let options = Object.keys(sampleList).map((sampleName) => {
-    let sampleProps = {
+    let optionProps = {
       key: sampleName,
       className: 'sample-option',
       onClick: props.onClickOption.bind(null, sampleName)
     };
-    return <a {...sampleProps}>{sampleName}</a>;
+    return <a {...optionProps}>{sampleName}</a>;
   });
   return <div>{options}</div>;
 };
