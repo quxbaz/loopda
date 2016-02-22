@@ -65,6 +65,6 @@ route('app', {
     });
   },
   render() {
-    return <AppComponent router={router} model={app} />;
+    return <AppComponent router={router} />;
   }
 });

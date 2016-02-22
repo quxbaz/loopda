@@ -6,11 +6,11 @@ import ChannelDetailComponent from 'components/channel-detail/channel-detail';
 
 route('/sequencer/channel/:id', {
   resource(id) {
-    return store.get('channel', id).then((record) => {
-      return [app.sequencer, store.objectFor(record), record];
+    return store.get('channel', id).then((channel) => {
+      return [app.sequencer, store.objectFor(channel)];
     });
   },
-  render([sequencer, channel, channelRecord]) {
+  render([sequencer, channel]) {
     let {currentBeat} = sequencer.state;
     return (
       <SequencerComponent sequencer={sequencer}>

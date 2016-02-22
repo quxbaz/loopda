@@ -1,11 +1,11 @@
 import {route, router} from 'globals/router';
 
 route('/sequencer', {
-  resource() {
-    return Promise.resolve(app.sequencer);
-  },
+  // resource() {
+  //   return store.one('sequencer').then;
+  // },
   setup(sequencer) {
-    // sequencer.play();
+    // store.objectFor(sequencer).play();
   },
   redirect() {
     return '/sequencer/overview';
