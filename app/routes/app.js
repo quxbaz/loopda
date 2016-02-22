@@ -27,6 +27,7 @@ function* saveRecords(sequencerRecord) {
 function* mapRecords([sequencers, channels, blips]) {
   let sequencerRecord = yield store.alwaysOne('sequencer')
   store.map(app.sequencer, sequencerRecord);
+  app.sequencer.setState(without(sequencerRecord.state, ['id', 'channels']));
   mapChannels(app.sequencer, channels, blips);
 }
 
