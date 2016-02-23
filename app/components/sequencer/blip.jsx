@@ -12,10 +12,11 @@ Blip.defaultProps = {
 
 export default function Blip(props) {
   let {blip} = props;
+  let {sampleName, mute} = blip.state;
   let blipProps = {
     className: classNames({
       blip: true,
-      mute: !blip.state.sampleName || blip.state.mute,
+      mute: mute || !sampleName,
       playing: props.isPlaying
     }),
     onMouseDown: props.onClick.bind(null, blip)

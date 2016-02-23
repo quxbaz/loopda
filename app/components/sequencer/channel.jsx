@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import BlipCom from './blip';
 
 Channel.propTypes = {
@@ -8,15 +9,23 @@ Channel.propTypes = {
 };
 
 export default function Channel(props) {
-  let {state} = props.channel;
-  let blips = state.blips.map((blip) => {
-    let blipProps = {
+
+  let {blips, mute} = props.channel.state;
+  let {currentBeat, onClickBlip} = props;
+
+  let blipComs = blips.map((blip) =>
+    React.createElement(BlipCom, {
       key: blip.id,
-      blip: blip,
-      isPlaying: !state.mute && props.currentBeat === blip.state.beat,
-      onClick: props.onClickBlip
-    };
-    return <BlipCom {...blipProps} />;
+      blip,
+      isPlaying: currentBeat === blip.state.beat,
+      onClick: onClickBlip
+    })
+  );
+
+  let classes = classNames({
+    channel: true,
+    mute
   });
-  return <div className="channel">{blips}</div>;
+
+  return <div className={classes}>{blipComs}</div>;
 };
