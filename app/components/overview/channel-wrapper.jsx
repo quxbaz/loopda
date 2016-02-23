@@ -1,9 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
 import store from 'globals/store';
-import sequencerCtrl from 'controllers/sequencer/sequencer';
-import channelCtrl from 'controllers/sequencer/channel';
-import blipCtrl from 'controllers/sequencer/blip';
+import SequencerCtrl from 'controllers/sequencer/sequencer';
+import ChannelCtrl from 'controllers/sequencer/channel';
+import BlipCtrl from 'controllers/sequencer/blip';
 import ChannelCom from 'components/sequencer/channel';
 
 ChannelWrapper.propTypes = {
@@ -17,8 +17,8 @@ export default function ChannelWrapper(props) {
   let record = store.recordFor(channel);
   // Event handlers
   let remove = props.onRemove.bind(null, channel);
-  let viewChannelDetail = channelCtrl.viewChannelDetail.bind(null, channel);
-  let toggleMute = channelCtrl.toggleMute.bind(null, channel);
+  let viewChannelDetail = ChannelCtrl.viewChannelDetail.bind(null, channel);
+  let toggleMute = ChannelCtrl.toggleMute.bind(null, channel);
   let classes = classNames({
     channel: true,
     mute: channel.state.mute
@@ -37,7 +37,7 @@ export default function ChannelWrapper(props) {
       </div>
       <div className="inner-channel">
         <ChannelCom channel={channel} currentBeat={props.currentBeat}
-                    onClickBlip={blipCtrl.toggleMute} />
+                    onClickBlip={BlipCtrl.toggleMute} />
       </div>
     </div>
   );
