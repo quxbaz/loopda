@@ -37,7 +37,7 @@ export default React.createClass({
     });
 
     return (
-      <div>
+      <div className="mixer">
         {sliders}
       </div>
     );

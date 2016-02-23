@@ -16,5 +16,5 @@ export default function ChannelGrid(props) {
     };
     return <ChannelWrapperCom {...channelProps} />;
   });
-  return <div>{channels}</div>;
+  return <div className="channel-grid">{channels}</div>;
 };

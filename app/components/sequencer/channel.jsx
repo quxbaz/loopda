@@ -18,5 +18,5 @@ export default function Channel(props) {
     };
     return <BlipCom {...blipProps} />;
   });
-  return <div className="blips-container">{blips}</div>;
+  return <div className="channel">{blips}</div>;
 };

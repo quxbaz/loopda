@@ -21,16 +21,12 @@ export default function Overview(props) {
   let removeChannel = SequencerCtrl.removeChannel.bind(null, sequencer);
 
   return (
-    <div className="sequencer">
+    <div className="overview">
       <a className="togglePlay" onClick={togglePlay}>
         {playing ? 'pause' : 'play'}
       </a>
-      <hr />
-      <div className="channels">
-        <ChannelGridCom channels={channels} currentBeat={currentBeat} onRemove={removeChannel} />
-        <ChannelMenuCom onClickOption={addChannel} />
-        <div className="spacer"></div>
-      </div>
+      <ChannelGridCom channels={channels} currentBeat={currentBeat} onRemove={removeChannel} />
+      <ChannelMenuCom onClickOption={addChannel} />
     </div>
   );
 

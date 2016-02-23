@@ -7,7 +7,7 @@ ChannelMenu.PropTypes = {
 
 export default function ChannelMenu(props) {
   return (
-    <div className="add-channel">
+    <div className="channel-menu">
       <div>&nbsp;</div>
       <div className="inner">
         <h4>Add a channel</h4>

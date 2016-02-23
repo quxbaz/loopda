@@ -20,7 +20,7 @@ export default function ChannelWrapper(props) {
   let viewChannelDetail = ChannelCtrl.viewChannelDetail.bind(null, channel);
   let toggleMute = ChannelCtrl.toggleMute.bind(null, channel);
   let classes = classNames({
-    channel: true,
+    'channel-wrapper': true,
     mute: channel.state.mute
   });
   return (
