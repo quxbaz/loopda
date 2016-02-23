@@ -8,11 +8,8 @@ ChannelMenu.PropTypes = {
 export default function ChannelMenu(props) {
   return (
     <div className="channel-menu">
-      <div>&nbsp;</div>
-      <div className="inner">
-        <h4>Add a channel</h4>
-        <SampleOptionsCom onClickOption={props.onClickOption} />
-      </div>
+      <h4>Add a channel</h4>
+      <SampleOptionsCom onClickOption={props.onClickOption} />
     </div>
   );
 };

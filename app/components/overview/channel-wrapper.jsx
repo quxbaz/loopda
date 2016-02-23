@@ -25,20 +25,14 @@ export default function ChannelWrapper(props) {
   });
   return (
     <div className={classes}>
-      <div className="channel-title">
-        <div>
-          <a onClick={viewChannelDetail}>{record.state.title}</a>
-        </div>
-        {channel.state.sampleName} -
-        (<a onClick={remove}>remove</a>) -
-        (<a onClick={toggleMute}>
+      <div className="channel-info">
+        <a onClick={viewChannelDetail}>{record.state.title}</a>
+        <a onClick={remove}>remove</a>
+        <a onClick={toggleMute}>
           {channel.state.mute ? 'unmute' : 'mute'}
-        </a>)
+        </a>
       </div>
-      <div className="inner-channel">
-        <ChannelCom channel={channel} currentBeat={props.currentBeat}
-                    onClickBlip={BlipCtrl.toggleMute} />
-      </div>
+      <ChannelCom channel={channel} currentBeat={props.currentBeat} onClickBlip={BlipCtrl.toggleMute} />
     </div>
   );
 };

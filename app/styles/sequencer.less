@@ -1,85 +1,30 @@
 // Channels
-@channelsPerRow: 4;
-@channelRowWidth: 800px;
-@channelLength: @channelRowWidth / @channelsPerRow;
-@blipsContainerLength: @channelLength * 0.9;
+@channelRowWidth: 600px;
 
 // Blips
-@blipsPerRow: 8;
-@blipLength: @blipsContainerLength / @blipsPerRow;
+@beats: 16;
+@blipLength: @channelRowWidth / @beats;
 
 // Colors
-@blipBackground        : #fff;
-@altBlipBackground     : #fff2f2;
+@muteBlipBackground    : #fff;
 @activeBlipBackground  : #fffd31;
 @playingBlipBackground : #fdd;
 
-.channel-grid {
-  .flow-content;
-  width: @channelRowWidth;
-  margin: 0 auto;
-}
-
-.channel-wrapper {
-  &.mute .channel:after {
-    .overlay(#888);
-    pointer-events: none;
-  }
-}
-
-.channel-title {
-  text-align: center;
-}
-
-.inner-channel {
-  .center-column;
-  align-items: center;
-  width: @channelLength;
-  height: @channelLength;
-}
-
 .channel {
   position: relative;
-  .flow-content;
-  width: @blipsContainerLength;
-  height: @blipsContainerLength;
+  display: flex;
+  width: @channelRowWidth;
 }
 
 .blip {
   -webkit-user-select: none;
   cursor: pointer;
-  .center-content;
-  position: relative;
   width: @blipLength;
-  height: @blipLength * 2;
+  height: @blipLength;
   .border;
-  &:not(:nth-child(8n + 1)) {
-    border-left: none;
-  }
-  &:nth-child(n + 9) {border-top: none;}
 
-  // Order here is important.
-  &.mute {background: @blipBackground;}
-  &:nth-child(4n), &:nth-child(4n - 1) {background: @altBlipBackground;}
-  &:not(.mute) {background: @activeBlipBackground;}
-  &.playing {background: @playingBlipBackground;}
+  background: @activeBlipBackground;
+  &.mute {background: @muteBlipBackground}
+  &.playing {background: @playingBlipBackground}
 
-}
-
-.channel-menu {
-  text-align: center;
-  .inner {
-    .center-column;
-    width: @blipsContainerLength;
-    height: @blipsContainerLength;
-    margin: (@channelLength - @blipsContainerLength) / 2;
-    .border;
-    h4 {
-      margin: 0;
-    }
-  }
-}
-
-.sample-option {
-  padding: 0 2px;
 }

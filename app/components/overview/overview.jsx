@@ -25,8 +25,11 @@ export default function Overview(props) {
       <a className="togglePlay" onClick={togglePlay}>
         {playing ? 'pause' : 'play'}
       </a>
-      <ChannelGridCom channels={channels} currentBeat={currentBeat} onRemove={removeChannel} />
+      <div>
+        # Channels: {channels.length}
+      </div>
       <ChannelMenuCom onClickOption={addChannel} />
+      <ChannelGridCom channels={channels} currentBeat={currentBeat} onRemove={removeChannel} />
     </div>
   );
 
