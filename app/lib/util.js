@@ -45,6 +45,8 @@ export function fireOnce(el, event, handler) {
   });
 }
 
+export let capitalize = (s) => s.substring(0, 1).toUpperCase() + s.substring(1);
+
 export function titleCase(s, sep=' ') {
   return s.split(sep).map(word =>
     word[0].toUpperCase() + word.slice(1)

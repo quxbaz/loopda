@@ -95,6 +95,21 @@ describe("lib/util", () => {
     });
   });
 
+  describe("capitalize()", () => {
+    it("Does nothing when passed an empty string.", () => {
+      util.capitalize('').should.eql('');
+    });
+    it("Capitalizes a single letter.", () => {
+      util.capitalize('a').should.eql('A');
+    });
+    it("Capitalizes a string.", () => {
+      util.capitalize('foo').should.eql('Foo');
+    });
+    it("Capitalizes only the first character of a multi-word string..", () => {
+      util.capitalize('foo foo').should.eql('Foo foo');
+    });
+  });
+
   describe("titleCase()", () => {
     it("title cases a word.", () => {
       util.titleCase('hello').should.eql('Hello');
