@@ -34,81 +34,79 @@ export default React.createClass({
     value: React.PropTypes.number,
 
     // Callbacks
-    onChange: React.PropTypes.func,
-    onSet: React.PropTypes.func
+    onChange: React.PropTypes.func
 
   },
 
   getDefaultProps() {
     return {
-      barWidth: 200,
-      grabberWidth: 40,
-      min: 0,
-      max: 100,
-      value: 50,
-      onChange: () => {},
-      onSet: () => {}
-    };
-  },
-
-  getInitialState() {
-    return {
-      grabberOffset: this.getOffset(this.props.value)
+      barWidth: 200, grabberWidth: 40,
+      min: 0, max: 100, value: 50,
+      onChange: () => {}
     };
   },
 
   handleBarClick(event) {
     fireOnce(window, 'mouseup', this.handleMouseUp);
     window.addEventListener('mousemove', this.handleMouseMove);
-    this.centerGrabberOnMouse(event.clientX);
+    this.onNewOffset(event.clientX);
   },
 
   handleMouseUp() {
     window.removeEventListener('mousemove', this.handleMouseMove);
-    this.props.onSet(this.getValue(), this.getScale());
   },
 
   handleMouseMove(event) {
-    this.centerGrabberOnMouse(event.clientX);
+    this.onNewOffset(event.clientX);
   },
 
-  centerGrabberOnMouse(mouseX) {
+  onNewOffset(mouseX) {
     let {barWidth, grabberWidth} = this.props;
     let barX = ReactDOM.findDOMNode(this).getBoundingClientRect().left;
-    let grabberOffset = constrain(
+    let offset = constrain(
       (mouseX - barX) - (grabberWidth / 2),
       [0, (barWidth - grabberWidth)]
     );
-    this.setState({grabberOffset});
-    this.props.onChange(this.getValue(), this.getScale());
+    this.props.onChange(this.getValue(offset), this.getScale(offset));
   },
 
-  getOffset(value) {
+  getPixelOffset(value) {
+    /*
+      Gets a pixel offset given a bar value.
+    */
     let {barWidth, grabberWidth} = this.props;
     let {min, max} = this.props;
     return (barWidth - grabberWidth) * (value - min) / (max - min);
   },
 
-  getScale() {
+  getScale(offset) {
+    /*
+      Gets a value from [0 - 1] given a pixel offset.
+    */
     let {barWidth, grabberWidth} = this.props;
-    return this.state.grabberOffset / (barWidth - grabberWidth);
+    return offset / (barWidth - grabberWidth);
   },
 
-  getValue() {
+  getValue(offset) {
+    /*
+      Gets a value from [props.min - props.max] given a pixel offset.
+    */
     let {max, min} = this.props;
-    return (max - min) * this.getScale() + min;
+    return (max - min) * this.getScale(offset) + min;
   },
 
   render() {
-    let barCSS = genBarCSS(this.props.barWidth);
-    let grabberCSS = genGrabberCSS(this.props.grabberWidth, this.state.grabberOffset);
+    let {barWidth, grabberWidth} = this.props;
+    let offset = this.getPixelOffset(this.props.value);
+    let barCSS = genBarCSS(barWidth);
+    let grabberCSS = genGrabberCSS(grabberWidth, offset);
     return (
       <div className="ui-slider">
         <div className="ui-slider-bar" onMouseDown={this.handleBarClick} style={barCSS}>
           <div className="ui-slider-grabber" style={grabberCSS} />
         </div>
         <span>
-          {this.getValue()}, {this.getScale() * 100}%
+          {this.getValue(offset)}, {this.getScale(offset) * 100}%
         </span>
       </div>
     );
