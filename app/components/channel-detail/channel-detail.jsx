@@ -21,19 +21,28 @@ export default React.createClass({
     });
   },
 
+  renderMixer() {
+    if (this.state.selection)
+      return <MixerCom blip={this.state.selection} />;
+  },
+
   render() {
+
     let {channel, sequencer} = this.props;
+
     let channelProps = {
       channel,
       currentBeat: sequencer.state.currentBeat,
       onClickBlip: this.onClickBlip
     };
+
     return (
       <div>
         <ChannelCom {...channelProps} />
-        <MixerCom />
+        {this.renderMixer()}
       </div>
     );
+
   }
 
 });
