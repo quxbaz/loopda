@@ -171,4 +171,15 @@ describe("lib/util", () => {
     });
   });
 
+  describe("throttle()", () => {
+    it("Calls a function twice in succession, but only executes it once.", () => {
+      let spy = 0;
+      let fn = () => spy++;
+      let fn2 = util.throttle(fn, 100);
+      fn2();
+      fn2();
+      spy.should.eql(1);
+    });
+  });
+
 });
