@@ -7,9 +7,9 @@ import {assign} from './util';
 import Blip from './blip';
 import {channelDefaults} from './defaults';
 
-function makeBlips() {
+function makeBlips(beats) {
   let blips = [];
-  for (let i=0; i < 32; i++)
+  for (let i=0; i < beats; i++)
     blips.push(new Blip({beat: i, mute: true}));
   return blips;
 }
@@ -17,7 +17,8 @@ function makeBlips() {
 export default class Channel extends Stateful {
 
   constructor(state={}, props={}) {
-    super(assign({blips: makeBlips()}, channelDefaults, state));
+    let mergedState = assign({}, channelDefaults, state);
+    super(assign({blips: makeBlips(mergedState.beats)}, mergedState));
     this.props = props;
     this.state.blips.forEach((blip) => {
       blip.props.onPlay = props.onPlay;

@@ -1,13 +1,13 @@
 export let sequencerDefaults = {
   playing: false,
   currentBeat: -1,
-  beats: 32,
+  beats: 16,
   beatDuration: 200,
   channels: []
 };
 
 export let channelDefaults = {
-  beats: 32,
+  beats: 16,
   mute: false,
   sampleName: ''
 };
