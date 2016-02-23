@@ -101,3 +101,14 @@ export function filterMap(list, fn) {
 export function toggleState(model, boolProp) {
   model.setState({[boolProp]: !model.state[boolProp]});
 }
+
+export function throttle(fn, ms) {
+  let lastCalled = 0;
+  return function() {
+    let time = performance.now();
+    if (time - lastCalled > ms) {
+      fn.apply(null, arguments);
+      lastCalled = time;
+    }
+  };
+}
