@@ -14,7 +14,7 @@ export default {
     let channel = sequencer.addChannel({sampleName});
     let channelRecord = store.createRecord(
       'channel',
-      Object.assign({}, channel.state, {title: 'untitled'}),
+      Object.assign({}, channel.state, {title: sampleName}),
       channel
     );
     channelRecord.attachTo(store.recordFor(sequencer));
