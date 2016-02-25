@@ -13,9 +13,9 @@ export default function ChannelWrapper(props) {
   let {channel} = props;
   let record = store.recordFor(channel);
   // Event handlers
-  let remove = props.onRemove.bind(null, channel);
-  let viewChannelDetail = ChannelCtrl.viewChannelDetail.bind(null, channel);
-  let toggleMute = ChannelCtrl.toggleMute.bind(null, channel);
+  let viewChannelDetail = () => ChannelCtrl.viewChannelDetail(channel);
+  let remove = () => props.onRemove(channel);
+  let toggleMute = () => ChannelCtrl.toggleMute(channel);
   return (
     <div className="channel-wrapper">
       <div className="channel-info">

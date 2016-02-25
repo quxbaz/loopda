@@ -16,9 +16,9 @@ export default function Overview(props) {
   let {sequencer} = props;
   let {playing, channels, currentBeat} = sequencer.state;
 
-  let togglePlay = SequencerCtrl.togglePlay.bind(null, sequencer);
-  let addChannel = SequencerCtrl.createChannel.bind(null, sequencer);
-  let removeChannel = SequencerCtrl.removeChannel.bind(null, sequencer);
+  let togglePlay = () => SequencerCtrl.togglePlay(sequencer);
+  let addChannel = (sampleName) => SequencerCtrl.createChannel(sequencer, sampleName);
+  let removeChannel = (channel) => SequencerCtrl.removeChannel(sequencer, channel);
 
   return (
     <div className="overview">

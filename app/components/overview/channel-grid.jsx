@@ -11,7 +11,7 @@ export default function ChannelGrid(props) {
     let channelProps = {
       key: channel.id,
       channel: channel,
-      onRemove: props.onRemove.bind(null, channel)
+      onRemove: () => props.onRemove(channel)
     };
     return <ChannelWrapperCom {...channelProps} />;
   });

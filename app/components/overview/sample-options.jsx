@@ -10,7 +10,7 @@ export default function SampleOptions(props) {
     let optionProps = {
       key: sampleName,
       className: 'sample-option',
-      onClick: props.onClickOption.bind(null, sampleName)
+      onClick: () => props.onClickOption(sampleName)
     };
     return <a {...optionProps}>{sampleName}</a>;
   });
