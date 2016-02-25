@@ -58,6 +58,11 @@ describe("lib/util", () => {
       util.times(5, () => i++);
       i.should.eql(5);
     });
+    it("calls with the index.", () => {
+      let list = [];
+      util.times(4, (i) => list.push(i));
+      list.should.eql([0, 1, 2, 3]);
+    });
   });
 
   describe("requireProps()", () => {

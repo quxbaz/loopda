@@ -21,7 +21,7 @@ export function each(o, fn) {
 export function times(n, fn) {
   let results = [];
   for (let i=0; i < n; i++)
-    results.push(fn());
+    results.push(fn(i));
   return results;
 }
 
