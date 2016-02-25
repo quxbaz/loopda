@@ -1,4 +1,5 @@
 import React from 'react';
+import {times} from 'lib/util';
 
 TempoBar.propTypes = {
   beat: React.PropTypes.number.isRequired
@@ -10,9 +11,7 @@ export default function TempoBar(props) {
   let style = {left: offset + 'px'};
   return (
     <div className="tempo-bar">
-      <div className="actual-bar">
-        <div className="tempo-mark" style={style} />
-      </div>
+      <div className="tempo-line" style={style} />
     </div>
   );
 }

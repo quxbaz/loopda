@@ -1,25 +1,12 @@
 @barColor: #bfc3da;
 @markColor: #9cb1c4;
 
-.tempo-bar {
+.tempo-bar {}
 
-  margin-bottom: 12px;
-  margin-left: @infoWidth;
-
-  .actual-bar {
-    background: @barColor;
-    border-radius: 32px;
-    width: @channelWidth;
-    height: 8px;
-  }
-
-  .tempo-mark {
-    position: relative;
-    top: -4px;
-    width: @blipWidth;
-    height: 16px;
-    background: @markColor;
-    border-radius: 32px;
-  }
-
+.tempo-line {
+  position: absolute;
+  top: 0; margin-left: @infoWidth + @blipWidth;
+  z-index: 4000;
+  width: 1px; height: 100%;
+  background: #000;
 }
