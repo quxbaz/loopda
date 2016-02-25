@@ -10,7 +10,9 @@ export default function TempoBar(props) {
   let style = {left: offset + 'px'};
   return (
     <div className="tempo-bar">
-      <div className="tempo-mark" style={style} />
+      <div className="actual-bar">
+        <div className="tempo-mark" style={style} />
+      </div>
     </div>
   );
 }

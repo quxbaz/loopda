@@ -1,0 +1,27 @@
+@import "sequencer";
+
+@barColor: #bfc3da;
+@markColor: #9cb1c4;
+
+.tempo-bar {
+
+  margin-bottom: 12px;
+  margin-left: @infoWidth;
+
+  .actual-bar {
+    background: @barColor;
+    border-radius: 32px;
+    width: @channelWidth;
+    height: 8px;
+  }
+
+  .tempo-mark {
+    position: relative;
+    top: -4px;
+    width: @blipWidth;
+    height: 16px;
+    background: @markColor;
+    border-radius: 32px;
+  }
+
+}
