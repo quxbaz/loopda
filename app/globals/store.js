@@ -12,7 +12,10 @@ class MappedStore extends Store {
   }
 
   map(object, record) {
-    // Maps an object to a record and mirror changes.
+    /*
+      Maps an object to a record and mirror changes. Also trigger any
+      changes on the global watcher when any model changes.
+    */
     this._map.set(object, record);
     this._reverseMap.set(record, object);
     object.on('change', () => {
