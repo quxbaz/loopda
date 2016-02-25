@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import store from 'globals/store';
 import BlipCom from './blip';
 
 Channel.propTypes = {
@@ -10,16 +11,14 @@ Channel.propTypes = {
 export default function Channel(props) {
 
   let {blips, mute} = props.channel.state;
-  let {onClickBlip} = props;
+  let record = store.recordFor(props.channel);
 
   let blipComs = blips.map((blip) =>
     React.createElement(BlipCom, {
       key: blip.id,
       blip,
-
-      color: `hsl(${Math.random() * 160 + 200}, 100%, 70%)`,
-
-      onClick: onClickBlip,
+      color: record.state.color,
+      onClick: props.onClickBlip
     })
   );
 

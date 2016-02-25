@@ -1,4 +1,5 @@
 import store from 'globals/store';
+import {randomChannelHSL} from 'lib/util';
 
 export default {
 
@@ -14,7 +15,10 @@ export default {
     let channel = sequencer.addChannel({sampleName});
     let channelRecord = store.createRecord(
       'channel',
-      Object.assign({}, channel.state, {title: sampleName}),
+      Object.assign({}, channel.state, {
+        title: sampleName,
+        color: randomChannelHSL()
+      }),
       channel
     );
     channelRecord.attachTo(store.recordFor(sequencer));

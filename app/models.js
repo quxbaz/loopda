@@ -23,8 +23,9 @@ export let initModels = (store) => {
     beats: attr(),
     mute: attr(),
     sampleName: attr(),
+    color: attr(),
     sequencer: belongsTo('sequencer'),
-    blips: hasMany('blip')
+    blips: hasMany('blip'),
   });
 
   store.registerModel('blip', '/blip/', {
