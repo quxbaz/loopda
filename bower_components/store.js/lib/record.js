@@ -1,4 +1,5 @@
 import {cid, without, hasId} from './util';
+import Sentry from 'sentry';
 
 export default class Record {
 
@@ -7,11 +8,16 @@ export default class Record {
     this.state = state;
     this.props = props;
     this.isDirty = true;
+    this.event = new Sentry();
   }
+
+  on(...args) {this.event.on(...args)}
+  trigger(...args) {this.event.trigger(...args)}
 
   setState(state) {
     Object.assign(this.state, this.validateState(state));
     this.isDirty = true;
+    this.trigger('change');
   }
 
   validateState(state) {
