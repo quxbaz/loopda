@@ -1,5 +1,5 @@
-import {route} from 'globals/router';
 import React from 'react';
+import {route} from 'globals/router';
 import SequencerCom from 'components/sequencer/sequencer';
 import OverviewCom from 'components/overview/overview';
 
