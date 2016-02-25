@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 Blip.propTypes = {
   blip: React.PropTypes.object.isRequired,
+  color: React.PropTypes.string,
   onClick: React.PropTypes.func
 };
 
@@ -11,15 +12,13 @@ Blip.defaultProps = {
 };
 
 export default function Blip(props) {
-  let {blip} = props;
-  let {sampleName, mute} = blip.state;
-  let blipProps = {
+  let {mute} = props.blip.state;
+  return React.DOM.div({
     className: classNames({
       blip: true,
-      mute: mute || !sampleName,
-      playing: props.isPlaying
+      enabled: !mute
     }),
-    onMouseDown: props.onClick.bind(null, blip)
-  };
-  return <div {...blipProps} />;
+    onMouseDown: () => props.onClick(props.blip),
+    style: mute ? {} : {background: props.color}
+  });
 };

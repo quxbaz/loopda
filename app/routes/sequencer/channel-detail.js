@@ -11,10 +11,9 @@ route('/sequencer/channel/:id', {
     });
   },
   render([sequencer, channel]) {
-    let {currentBeat} = sequencer.state;
     return (
       <SequencerCom sequencer={sequencer}>
-        <ChannelDetailCom channel={channel} currentBeat={currentBeat} />
+        <ChannelDetailCom channel={channel} />
       </SequencerCom>
     );
   }

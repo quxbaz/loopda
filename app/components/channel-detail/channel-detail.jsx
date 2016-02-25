@@ -5,7 +5,6 @@ import MixerCom from './mixer';
 export default React.createClass({
 
   propTypes: {
-    sequencer: React.PropTypes.object,
     channel: React.PropTypes.object.isRequired
   },
 
@@ -27,22 +26,13 @@ export default React.createClass({
   },
 
   render() {
-
-    let {channel, sequencer} = this.props;
-
-    let channelProps = {
-      channel,
-      currentBeat: sequencer.state.currentBeat,
-      onClickBlip: this.onClickBlip
-    };
-
+    let {channel} = this.props;
     return (
       <div className="channel-detail">
-        <ChannelCom {...channelProps} />
+        <ChannelCom channel={channel} onClickBlip={this.onClickBlip} />
         {this.renderMixer()}
       </div>
     );
-
   }
 
 });

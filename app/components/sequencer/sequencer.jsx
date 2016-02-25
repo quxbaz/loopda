@@ -21,7 +21,7 @@ export default React.createClass({
 
   render() {
     return (
-      <div>
+      <div className="sequencer">
         {this.renderChildren()}
       </div>
     );

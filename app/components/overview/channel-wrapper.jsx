@@ -6,7 +6,6 @@ import ChannelCom from 'components/sequencer/channel';
 
 ChannelWrapper.propTypes = {
   channel: React.PropTypes.object.isRequired,
-  currentBeat: React.PropTypes.number.isRequired,
   onRemove: React.PropTypes.func
 };
 
@@ -26,7 +25,7 @@ export default function ChannelWrapper(props) {
           {channel.state.mute ? 'unmute' : 'mute'}
         </a>
       </div>
-      <ChannelCom channel={channel} currentBeat={props.currentBeat} onClickBlip={BlipCtrl.toggleMute} />
+      <ChannelCom channel={channel} onClickBlip={BlipCtrl.toggleMute} />
     </div>
   );
 };

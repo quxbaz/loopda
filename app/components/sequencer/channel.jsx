@@ -4,27 +4,29 @@ import BlipCom from './blip';
 
 Channel.propTypes = {
   channel: React.PropTypes.object.isRequired,
-  currentBeat: React.PropTypes.number.isRequired,
   onClickBlip: React.PropTypes.func
 };
 
 export default function Channel(props) {
 
   let {blips, mute} = props.channel.state;
-  let {currentBeat, onClickBlip} = props;
+  let {onClickBlip} = props;
 
   let blipComs = blips.map((blip) =>
     React.createElement(BlipCom, {
       key: blip.id,
       blip,
-      isPlaying: currentBeat === blip.state.beat,
-      onClick: onClickBlip
+
+      color: `hsl(${Math.random() * 160 + 200}, 100%, 70%)`,
+
+      onClick: onClickBlip,
     })
   );
 
   let classes = classNames({
     channel: true,
-    mute
+    enabled: !mute,
+    mute: mute
   });
 
   return <div className={classes}>{blipComs}</div>;

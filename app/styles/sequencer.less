@@ -1,36 +1,54 @@
-// Channels
-@channelRowWidth: 600px;
+// Sequencer
+@beats: 16;
 
 // Blips
-@beats: 16;
-@blipLength: @channelRowWidth / @beats;
+@blipWidth: 48px;
+@blipHeight: 32px;
+
+// Channels
+// --
 
 // Colors
-@muteBlipBackground    : #fff;
-@activeBlipBackground  : #fffd31;
-@playingBlipBackground : #fdd;
+@blipBorderColor       : #5f3b81;
+
+.sequencer {
+  padding: 24px;
+}
 
 .channel {
-  position: relative;
+  position: relative;  // Needed to position overlay
   display: flex;
-  width: @channelRowWidth;
   &.mute:after {
-    .overlay(#888);
-    pointer-events: none;  // Prevent the overlay from capturing click events
-  }
-  &:not(.mute) .blip.playing {
-    background: @playingBlipBackground;
+    .overlay(#541751);
+    pointer-events: none;  // Prevent overlay from capturing click events
   }
 }
 
 .blip {
+
+  .flex-center-xy;
+
   -webkit-user-select: none;
   cursor: pointer;
-  width: @blipLength;
-  height: @blipLength;
-  .border;
 
-  background: @activeBlipBackground;
-  &.mute {background: @muteBlipBackground}
+  width: @blipWidth;
+  height: @blipHeight;
+
+  background: lighten(@blipBorderColor, 60%);
+
+  // Animation
+  transform-origin: 50% 50%;
+  transform: perspective(30px) rotateX(-180deg);
+  transition: transform 300ms linear, background 300ms ease-out;
+
+  // Stripe blips in blocks of four
+  &:nth-child(n+5):nth-child(-n+8),
+  &:nth-child(n+13):nth-child(-n+16) {
+    background: lighten(@blipBorderColor, 54%);
+  }
+
+  &.enabled {
+    transform: perspective(40px) rotateX(0);
+  }
 
 }

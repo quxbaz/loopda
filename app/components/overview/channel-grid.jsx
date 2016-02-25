@@ -11,7 +11,6 @@ export default function ChannelGrid(props) {
     let channelProps = {
       key: channel.id,
       channel: channel,
-      currentBeat: props.currentBeat,
       onRemove: props.onRemove.bind(null, channel)
     };
     return <ChannelWrapperCom {...channelProps} />;
