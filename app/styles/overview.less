@@ -1,36 +1,22 @@
-// @import "sequencer";
+@import "sequencer";
+
+@infoWidth: 240px;
 
 .overview {}
-
-.channel-grid {
-  padding: 32px 0;
-  // background: #1b232c;
-  // box-shadow: inset 0 0 16px #0d0e0e;
-
-  background: #fff;
-  // background: #1f2249;
-  // border: 1px solid @blipBorderColor;
-
-  // transform-origin: 50% 100%;
-  // transform: perspective(400px) rotateX(18deg);
-
-}
+.channel-grid {}
 
 .channel-wrapper {
 
   display: flex;
-  // margin: 8px 0;
+  margin: 2px 0;
 
   .channel-info {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 240px;
+    width: @infoWidth;
     padding-right: 12px;
-    a {
-      margin-left: 4px;
-      &:first-child {margin-left: 0}
-    }
+    a:not(:first-child) {margin-left: 4px}
   }
 
   .channel-title {
@@ -44,4 +30,16 @@
   h4 {margin: 0}
   text-align: center;
   .sample-option {padding: 0 2px}
+}
+
+.tempo-bar {
+  margin-bottom: 4px;
+  padding-left: @infoWidth;
+  .tempo-mark {
+    position: relative;
+    width: @blipWidth;
+    height: 8px;
+    background: #61647b;
+    border-radius: 8px;
+  }
 }

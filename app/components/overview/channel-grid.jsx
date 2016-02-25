@@ -1,5 +1,6 @@
 import React from 'react';
 import ChannelWrapperCom from './channel-wrapper';
+import TempoBarCom from './tempo-bar';
 
 ChannelGrid.propTypes = {
   channels: React.PropTypes.array.isRequired,
@@ -15,5 +16,10 @@ export default function ChannelGrid(props) {
     };
     return <ChannelWrapperCom {...channelProps} />;
   });
-  return <div className="channel-grid">{channels}</div>;
+  return (
+    <div className="channel-grid">
+      <TempoBarCom beat={props.currentBeat} />
+      {channels}
+    </div>
+  );
 };
