@@ -32,14 +32,22 @@ export default class Store {
     this._cache[name] = new Set();
   }
 
-  get(modelName, id) {
+  get(modelName, id, sync=false) {
+
     if (this.models[modelName] === undefined)
       throw new Error('Model @' + modelName + ' is not registered.');
     if (id === undefined)
       throw new Error('You must provide an id.');
+
     let hit = this.searchCache(modelName, id);
-    if (hit)
-      return Promise.resolve(hit);
+    if (hit) {
+      if (sync)
+        return hit;
+      else
+        return Promise.resolve(hit);
+    } else if (sync)
+      throw new Error('Resource not found.');
+
     let model = this.models[modelName];
     return this.props.adapter.read(model, id).then(
       data => this.createRecord(modelName, data),
@@ -47,20 +55,33 @@ export default class Store {
         throw new Error(error);
       }
     );
+
   }
 
-  all(modelName) {
+  all(modelName, sync=false) {
+
     if (Array.isArray(modelName)) {
-      return Promise.all(modelName.map(
-        (modelName) => this.all(modelName)
-      ));
+      if (sync) {
+        modelName.map((modelName) => this.all(modelName, true));
+      } else {
+        return Promise.all(modelName.map(
+          (modelName) => this.all(modelName)
+        ));
+      }
     }
+
     if (this.models[modelName] === undefined)
       throw new Error('Model @' + modelName + ' is not registered.');
-    if (arguments.length > 1)
-      throw new Error('@all takes only 1 argument.');
-    if (this.fetchedAll[modelName])
-      return Promise.resolve(Array.from(this._cache[modelName]));
+
+    if (this.fetchedAll[modelName]) {
+      let arr = Array.from(this._cache[modelName]) ;
+      if (sync)
+        return arr;
+      else
+        return Promise.resolve(arr);
+    } else if (sync)
+      throw new Error('Resource not cached. Cannot fetch synchronously.');
+
     let model = this.models[modelName];
     return this.props.adapter.read(model).then(
       (dataList) => {
@@ -82,6 +103,7 @@ export default class Store {
         allRecords.add(record);
       return Array.from(allRecords);
     });
+
   }
 
   one(modelName) {

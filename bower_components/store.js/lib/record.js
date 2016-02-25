@@ -81,24 +81,39 @@ export default class Record {
     return this.props.store.destroyRecord(this);
   }
 
-  get(attr) {
-    /*
-      For getting [hasMany, belongsTo] records. Always returns a
-      promise.
-    */
+  _get(attr, sync=false) {
     let {schema, name} = this.props.model;
     if (schema[attr] === undefined)
       throw new Error('Schema relation @' + attr + ' does not exist.');
     let relation = schema[attr];
     if (relation.type === 'belongsTo') {
       let belongsToId = this.state[relation.modelName];
-      return this.props.store.get(relation.modelName, belongsToId);
+      return this.props.store.get(relation.modelName, belongsToId, sync);
     }
     else if (relation.type === 'hasMany') {
-      return this.props.store.all(relation.modelName).then(
-        records => records.filter(record => record.belongsTo(this))
-      );
+      let result = this.props.store.all(relation.modelName, sync);
+      let filter = (records) => records.filter(record => record.belongsTo(this));
+      if (sync)
+        return filter(result);
+      else
+        return result.then(filter);
     }
+  }
+
+  get(attr) {
+    /*
+      For getting [hasMany, belongsTo] records. Always returns a
+      promise.
+    */
+    return this._get(attr);
+  }
+
+  take(attr) {
+    /*
+      Like .get(), but works synchronously. Related records must be
+      cached for this to work as intended.
+    */
+    return this._get(attr, true);
   }
 
   belongsTo(record) {
