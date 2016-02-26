@@ -1,0 +1,30 @@
+@iconLengthMd: 10px;
+@iconLengthLg: 16px;
+
+// #ea694c
+
+.icon {
+  .flex-center-xy;
+  min-width: 26px;
+  min-height: 26px;
+  background: #3788ab;
+  border-radius: 32px;
+  box-shadow: 0 1px 5px 0px #bbb;
+  &.warning {
+    background: #e65b5b;
+  }
+  svg {
+    width: @iconLengthMd;
+    height: @iconLengthMd;
+    fill: #fff;
+  }
+}
+
+.icon.large {
+  min-width: 42px;
+  min-height: 42px;
+  svg {
+    width: @iconLengthLg;
+    height: @iconLengthLg;
+  }
+}
