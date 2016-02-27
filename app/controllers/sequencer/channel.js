@@ -12,6 +12,13 @@ export default {
     let record = store.recordFor(channel);
     let id = record.state.id || record.cid;
     router.nav('/sequencer/channel/' + id);
+  },
+
+  toggleSolo(channel) {
+    for (let ch of app.sequencer.state.channels) {
+      if (ch !== channel)
+        ch.setState({mute: true});
+    }
   }
 
 };
