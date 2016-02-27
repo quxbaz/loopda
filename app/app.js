@@ -1,6 +1,9 @@
 // Declarations
 import 'routes/imports';
 
+// CSS stuff
+import {computeStyles} from 'globals/style-constants';
+
 // Audio stuff
 import sampleList from 'audio/samplelist';
 import {loadAudioSamples} from 'audio/audiohelper';
@@ -14,7 +17,7 @@ import {blipDefaults} from 'sequencer/lib/defaults';
 // Router
 import {router} from 'globals/router';
 
-// Globals
+// Declare globals
 window.$app = document.getElementById('app-container');
 
 // Set sequencer defaults
@@ -37,7 +40,7 @@ export default class App {
       loadAudioSamples(audioContext, sampleList).then((sampleMap) => {
         audioService.sampleMap = sampleMap;
       })
-    ]);
+    ]).then(computeStyles);
   }
 
   start() {
