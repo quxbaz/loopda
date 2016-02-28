@@ -3,7 +3,7 @@
 
 // Blips
 @blipWidth: 48px;
-@blipHeight: 40px;
+@blipHeight: 42px;
 
 // Channels
 @channelWidth: @blipWidth * @beats;
@@ -34,7 +34,7 @@
   width: @blipWidth;
   height: @blipHeight;
 
-  background: lighten(@blipBorderColor, 60%);
+  background: lighten(@blipBorderColor, 54%);
 
   // Animation
   transform-origin: 50% 50%;
@@ -44,7 +44,7 @@
   // Stripe blips in blocks of four
   &:nth-child(n+5):nth-child(-n+8),
   &:nth-child(n+13):nth-child(-n+16) {
-    background: lighten(@blipBorderColor, 54%);
+    background: lighten(@blipBorderColor, 60%);
   }
 
   &.enabled {
