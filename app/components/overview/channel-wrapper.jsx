@@ -18,23 +18,20 @@ export default function ChannelWrapper(props) {
 
   // Event handlers
   let viewChannelDetail = () => ChannelCtrl.viewChannelDetail(channel);
-  let remove = () => props.onRemove(channel);
+  let removeChannel = () => props.onRemove(channel);
   let toggleMute = () => ChannelCtrl.toggleMute(channel);
   let toggleSolo = () => ChannelCtrl.toggleSolo(channel);
 
   return (
     <div className="channel-wrapper">
       <div className="channel-info">
-        <a onClick={viewChannelDetail}>{title}</a>
-        {/*<a onClick={remove}>
-          <Icon name="x" classes={{warning: true}} />
-        </a>*/}
-        <a onClick={toggleMute}>
-          <Icon name={mute ? 'volume-low' : 'volume-high'} />
-        </a>
-        {/*<a onClick={toggleSolo}>
-          <Icon name="star" />
-        </a>*/}
+        <div className="color-box" style={{background: channel.state.color}} />
+        <a className="channel-title" onClick={viewChannelDetail}>{title}</a>
+        <div className="channel-controls">
+          <a onClick={removeChannel} className="remove-channel"><Icon name="trash" /></a>
+          <a onClick={toggleSolo}>Solo</a>
+          <a onClick={toggleMute}>Mute</a>
+        </div>
       </div>
       <ChannelCom channel={channel} onClickBlip={BlipCtrl.toggleMute} />
     </div>

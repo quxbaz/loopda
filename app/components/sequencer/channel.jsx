@@ -11,13 +11,13 @@ Channel.propTypes = {
 export default function Channel(props) {
 
   let {blips, mute} = props.channel.state;
-  let record = store.recordFor(props.channel);
+  let {color} = store.recordFor(props.channel).state;
 
   let blipComs = blips.map((blip) =>
     React.createElement(BlipCom, {
       key: blip.id,
       blip,
-      color: record.state.color,
+      color,
       onClick: props.onClickBlip
     })
   );
