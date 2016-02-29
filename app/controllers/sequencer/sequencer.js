@@ -1,5 +1,5 @@
 import store from 'globals/store';
-import {randomChannelHSL} from 'lib/util';
+import {randomChannelHSL, time} from 'lib/util';
 
 export default {
 
@@ -17,7 +17,8 @@ export default {
       'channel',
       Object.assign({}, channel.state, {
         title: sampleName,
-        color: randomChannelHSL()
+        color: randomChannelHSL(),
+        time_created: time()
       }),
       channel
     );

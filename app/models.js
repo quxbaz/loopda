@@ -24,6 +24,7 @@ export let initModels = (store) => {
     mute: attr(),
     sampleName: attr(),
     color: attr(),
+    time_created: attr(),
     sequencer: belongsTo('sequencer'),
     blips: hasMany('blip'),
   });

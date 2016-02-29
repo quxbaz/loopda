@@ -1,4 +1,5 @@
 import React from 'react';
+import store from 'globals/store';
 import ChannelWrapperCom from './channel-wrapper';
 import TempoBarCom from './tempo-bar';
 
@@ -8,7 +9,15 @@ ChannelGrid.propTypes = {
 };
 
 export default function ChannelGrid(props) {
-  let channels =  props.channels.map((channel) => {
+
+  // Sort channels by time created
+  let records = props.channels.map((c) => store.recordFor(c));
+  let sorted = records.sort((a, b) => {
+    let diff = a.state.time_created - b.state.time_created;
+    return diff / Math.abs(diff);
+  }).map((c) => store.objectFor(c));
+
+  let channels = sorted.map((channel) => {
     let channelProps = {
       key: channel.id,
       channel: channel,
@@ -16,10 +25,12 @@ export default function ChannelGrid(props) {
     };
     return <ChannelWrapperCom {...channelProps} />;
   });
+
   return (
     <div className="channel-grid">
       <TempoBarCom beat={props.currentBeat} />
       {channels}
     </div>
   );
+
 };
