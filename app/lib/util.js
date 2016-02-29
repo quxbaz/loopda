@@ -122,3 +122,5 @@ export function randomChannelHSL() {
   let hue = Math.random() * 160 + 200;
   return `hsl(${hue}, 100%, 70%)`;
 }
+
+export let time = () => (new Date()).getTime();
