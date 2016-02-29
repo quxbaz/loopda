@@ -14,7 +14,7 @@ export default function ChannelWrapper(props) {
 
   let {channel} = props;
   let {mute} = channel.state;
-  let {title} = store.recordFor(channel).state;
+  let {title, color} = store.recordFor(channel).state;
 
   // Event handlers
   let viewChannelDetail = () => ChannelCtrl.viewChannelDetail(channel);
@@ -25,7 +25,7 @@ export default function ChannelWrapper(props) {
   return (
     <div className="channel-wrapper">
       <div className="channel-info">
-        <div className="color-box" style={{background: channel.state.color}} />
+        <div className="color-box" style={{background: color}} />
         <a className="channel-title" onClick={viewChannelDetail}>{title}</a>
         <div className="channel-controls">
           <a onClick={removeChannel} className="remove-channel"><Icon name="trash" /></a>
