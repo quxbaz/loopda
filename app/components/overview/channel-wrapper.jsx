@@ -3,6 +3,7 @@ import ChannelCtrl from 'controllers/sequencer/channel';
 import BlipCtrl from 'controllers/sequencer/blip';
 import ChannelCom from 'components/sequencer/channel';
 import Icon from 'components/ui/icon';
+import Button from 'components/ui/button';
 
 ChannelWrapper.propTypes = {
   channel: React.PropTypes.object.isRequired,
@@ -27,9 +28,9 @@ export default function ChannelWrapper(props) {
         <div className="color-box" style={{background: color}} />
         <a className="channel-title" onClick={viewChannelDetail}>{title}</a>
         <div className="channel-controls">
-          <a onClick={removeChannel} className="remove-channel"><Icon name="trash" /></a>
-          <a onClick={toggleSolo}>{solo ? 'Unsolo' : 'Solo'}</a>
-          <a onClick={toggleMute}>{mute ? 'Unmute' : 'Mute'}</a>
+          <a className="remove-channel" onClick={removeChannel}><Icon name="trash" /></a>
+          <Button state={solo} text={['Solo', 'Unsolo']} onClick={toggleSolo} />
+          <Button state={mute} text={['Mute', 'Unmute']} onClick={toggleMute} />
         </div>
       </div>
       <ChannelCom channel={channel} soloMode={soloMode} onClickBlip={BlipCtrl.toggleMute} />
