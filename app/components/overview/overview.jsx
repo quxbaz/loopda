@@ -15,7 +15,7 @@ Overview.propTypes = {
 export default function Overview(props) {
 
   let {sequencer} = props;
-  let {playing, channels, currentBeat} = sequencer.state;
+  let {beats, playing, channels, currentBeat} = sequencer.state;
 
   let togglePlay = () => SequencerCtrl.togglePlay(sequencer);
   let addChannel = (sampleName) => SequencerCtrl.createChannel(sequencer, sampleName);
@@ -23,6 +23,7 @@ export default function Overview(props) {
 
   let gridProps = {
     channels,
+    beats,
     currentBeat,
     soloMode: SequencerHelper.soloMode(sequencer),
     onRemove: removeChannel

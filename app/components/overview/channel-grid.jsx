@@ -1,9 +1,11 @@
 import React from 'react';
 import ChannelWrapperCom from './channel-wrapper';
 import TempoBarCom from './tempo-bar';
+import MasterChannelCom from './master-channel';
 
 ChannelGrid.propTypes = {
   channels: React.PropTypes.array.isRequired,
+  beats: React.PropTypes.number.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   soloMode: React.PropTypes.bool.isRequired,
   onRemove: React.PropTypes.func
@@ -30,6 +32,7 @@ export default function ChannelGrid(props) {
   return (
     <div className="channel-grid">
       {channels.length > 0 ? <TempoBarCom beat={props.currentBeat} /> : ''}
+      <MasterChannelCom beats={props.beats} channels={props.channels} />
       {channels}
     </div>
   );
