@@ -22,11 +22,12 @@ export default function Button(props) {
     active: state
   }) + ' ' + className;
 
-  let stateText = state ? text[1] : text[0];
+  if (text)
+    var stateText = state ? text[1] : text[0];
 
   return (
     <a className={classes} onClick={onClick}>
-      {props.text ? stateText : children}
+      {text ? stateText : children}
     </a>
   );
 }
