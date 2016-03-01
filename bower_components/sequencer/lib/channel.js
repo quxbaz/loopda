@@ -18,10 +18,11 @@ export default class Channel extends Stateful {
 
   constructor(state={}, props={}) {
     let mergedState = assign({}, channelDefaults, state);
-    super(assign({blips: makeBlips(mergedState.beats)}, mergedState));
+    let blips = makeBlips(mergedState.beats);
+    super(assign({blips}, mergedState));
     this.props = props;
     this.state.blips.forEach((blip) => {
-      blip.props.onPlay = props.onPlay;
+      blip.props.onPlay = (blipState) => props.onPlay(blipState, this);
       if (!blip.state.sampleName)
         blip.setState({sampleName: this.state.sampleName});
     });

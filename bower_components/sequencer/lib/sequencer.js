@@ -54,7 +54,9 @@ export default class Sequencer extends Stateful {
 
   addChannel(state={}) {
     let channel = new Channel(state, {
-      onPlay: blipState => this.trigger('playBlip', blipState)
+      onPlay: (blipState, channel) => {
+        this.trigger('playBlip', blipState, channel);
+      }
     });
     this.setState({
       channels: this.state.channels.concat(channel)
