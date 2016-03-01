@@ -30,7 +30,7 @@ export default function ChannelWrapper(props) {
         <div className="channel-controls">
           <a onClick={removeChannel} className="remove-channel"><Icon name="trash" /></a>
           <a onClick={toggleSolo}>Solo</a>
-          <a onClick={toggleMute}>Mute</a>
+          <a onClick={toggleMute}>{mute ? 'Unmute' : 'Mute'}</a>
         </div>
       </div>
       <ChannelCom channel={channel} onClickBlip={BlipCtrl.toggleMute} />
