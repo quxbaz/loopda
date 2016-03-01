@@ -14,13 +14,13 @@ export default function ChannelWrapper(props) {
 
   let {channel} = props;
   let {mute} = channel.state;
-  let {title, color} = store.recordFor(channel).state;
+  let {title, solo, color} = store.recordFor(channel).state;
 
   // Event handlers
   let viewChannelDetail = () => ChannelCtrl.viewChannelDetail(channel);
   let removeChannel = () => props.onRemove(channel);
-  let toggleMute = () => ChannelCtrl.toggleMute(channel);
   let toggleSolo = () => ChannelCtrl.toggleSolo(channel);
+  let toggleMute = () => ChannelCtrl.toggleMute(channel);
 
   return (
     <div className="channel-wrapper">
@@ -29,7 +29,7 @@ export default function ChannelWrapper(props) {
         <a className="channel-title" onClick={viewChannelDetail}>{title}</a>
         <div className="channel-controls">
           <a onClick={removeChannel} className="remove-channel"><Icon name="trash" /></a>
-          <a onClick={toggleSolo}>Solo</a>
+          <a onClick={toggleSolo}>{solo ? 'Unsolo' : 'Solo'}</a>
           <a onClick={toggleMute}>{mute ? 'Unmute' : 'Mute'}</a>
         </div>
       </div>

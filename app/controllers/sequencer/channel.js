@@ -15,10 +15,7 @@ export default {
   },
 
   toggleSolo(channel) {
-    for (let ch of app.sequencer.state.channels) {
-      if (ch !== channel)
-        ch.setState({mute: true});
-    }
+    toggleState(channel, 'solo');
   }
 
 };
