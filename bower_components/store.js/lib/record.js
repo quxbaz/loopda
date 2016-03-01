@@ -5,7 +5,7 @@ export default class Record {
 
   constructor(state={}, props) {
     this.cid = cid();
-    this.state = state;
+    this.state = Object.assign({}, state);
     this.props = props;
     this.isDirty = true;
     this.event = new Sentry();
