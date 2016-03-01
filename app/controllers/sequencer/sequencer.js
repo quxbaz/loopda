@@ -1,5 +1,6 @@
 import store from 'globals/store';
 import {randomChannelHSL, time} from 'lib/util';
+import SequencerHelper from 'helpers/sequencer';
 
 export default {
 
@@ -14,6 +15,7 @@ export default {
     // Create new channel
     let channel = sequencer.addChannel({
       sampleName,
+      number: SequencerHelper.newChannelNumber(sequencer.state.channels),
       title: sampleName,
       solo: false,
       color: randomChannelHSL(),

@@ -14,7 +14,7 @@ ChannelWrapper.propTypes = {
 export default function ChannelWrapper(props) {
 
   let {channel, soloMode} = props;
-  let {title, solo, mute, color} = channel.state;
+  let {number, title, solo, mute, color} = channel.state;
 
   // Event handlers
   let viewChannelDetail = () => ChannelCtrl.viewChannelDetail(channel);
@@ -26,7 +26,9 @@ export default function ChannelWrapper(props) {
     <div className="channel-wrapper">
       <div className="channel-info">
         <div className="color-box" style={{background: color}} />
-        <a className="channel-title" onClick={viewChannelDetail}>{title}</a>
+        <a className="channel-title" onClick={viewChannelDetail}>
+          {number}.&nbsp;{title}
+        </a>
         <div className="channel-controls">
           <a className="remove-channel" onClick={removeChannel}><Icon name="trash" /></a>
           <Button state={solo} onClick={toggleSolo}>Solo</Button>

@@ -19,6 +19,7 @@ export let initModels = (store) => {
 
   store.registerModel('channel', '/channel/', {
     id: attr(),
+    number: attr(),
     title: attr(),
     beats: attr(),
     mute: attr(),
