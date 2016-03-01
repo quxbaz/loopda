@@ -4,8 +4,7 @@ export default {
     /*
       Returns if any channels have the solo attribute true.
     */
-    return sequencer.state.channels.filter(channel => channel.state.solo)
-      .length > 0;
+    return sequencer.state.channels.some(channel => channel.state.solo);
   }
 
 };
