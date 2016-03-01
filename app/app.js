@@ -12,7 +12,7 @@ import audioService from 'globals/audioservice';
 
 // Sequencer
 import {Sequencer} from 'sequencer';
-import {blipDefaults} from 'sequencer/lib/defaults';
+import {sequencerDefaults, blipDefaults} from 'sequencer/lib/defaults';
 
 // Router
 import {router} from 'globals/router';
@@ -22,6 +22,7 @@ window.$app = document.getElementById('app-container');
 
 // Set sequencer defaults
 let beatDuration = 100;
+sequencerDefaults.playing = true;
 blipDefaults.minOffset = 0;
 blipDefaults.maxOffset = beatDuration;
 
