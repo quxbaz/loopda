@@ -17,6 +17,7 @@ export default {
       'channel',
       Object.assign({}, channel.state, {
         title: sampleName,
+        solo: false,
         color: randomChannelHSL(),
         time_created: time()
       }),

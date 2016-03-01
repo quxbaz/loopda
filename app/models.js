@@ -22,6 +22,7 @@ export let initModels = (store) => {
     title: attr(),
     beats: attr(),
     mute: attr(),
+    solo: attr(),
     sampleName: attr(),
     color: attr(),
     time_created: attr(),
