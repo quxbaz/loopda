@@ -5,6 +5,7 @@ import TempoBarCom from './tempo-bar';
 ChannelGrid.propTypes = {
   channels: React.PropTypes.array.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
+  soloMode: React.PropTypes.bool.isRequired,
   onRemove: React.PropTypes.func
 };
 
@@ -20,6 +21,7 @@ export default function ChannelGrid(props) {
     let channelProps = {
       key: channel.id,
       channel: channel,
+      soloMode: props.soloMode,
       onRemove: () => props.onRemove(channel)
     };
     return <ChannelWrapperCom {...channelProps} />;
@@ -27,7 +29,7 @@ export default function ChannelGrid(props) {
 
   return (
     <div className="channel-grid">
-      <TempoBarCom beat={props.currentBeat} />
+      {channels.length > 0 ? <TempoBarCom beat={props.currentBeat} /> : ''}
       {channels}
     </div>
   );

@@ -6,12 +6,13 @@ import Icon from 'components/ui/icon';
 
 ChannelWrapper.propTypes = {
   channel: React.PropTypes.object.isRequired,
+  soloMode: React.PropTypes.bool.isRequired,
   onRemove: React.PropTypes.func
 };
 
 export default function ChannelWrapper(props) {
 
-  let {channel} = props;
+  let {channel, soloMode} = props;
   let {title, solo, mute, color} = channel.state;
 
   // Event handlers
@@ -31,7 +32,7 @@ export default function ChannelWrapper(props) {
           <a onClick={toggleMute}>{mute ? 'Unmute' : 'Mute'}</a>
         </div>
       </div>
-      <ChannelCom channel={channel} onClickBlip={BlipCtrl.toggleMute} />
+      <ChannelCom channel={channel} soloMode={soloMode} onClickBlip={BlipCtrl.toggleMute} />
     </div>
   );
 

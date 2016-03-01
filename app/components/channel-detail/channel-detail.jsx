@@ -29,7 +29,7 @@ export default React.createClass({
     let {channel} = this.props;
     return (
       <div className="channel-detail">
-        <ChannelCom channel={channel} onClickBlip={this.onClickBlip} />
+        <ChannelCom channel={channel} soloMode={false} onClickBlip={this.onClickBlip} />
         {this.renderMixer()}
       </div>
     );

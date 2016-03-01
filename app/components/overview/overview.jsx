@@ -4,6 +4,7 @@
 
 import React from 'react';
 import SequencerCtrl from 'controllers/sequencer/sequencer';
+import SequencerHelper from 'helpers/sequencer';
 import ChannelGridCom from './channel-grid';
 import ChannelMenuCom from './channel-menu';
 
@@ -20,6 +21,13 @@ export default function Overview(props) {
   let addChannel = (sampleName) => SequencerCtrl.createChannel(sequencer, sampleName);
   let removeChannel = (channel) => SequencerCtrl.removeChannel(sequencer, channel);
 
+  let gridProps = {
+    channels,
+    currentBeat,
+    soloMode: SequencerHelper.soloMode(sequencer),
+    onRemove: removeChannel
+  };
+
   return (
     <div className="overview">
       <a className="togglePlay" onClick={togglePlay}>
@@ -29,7 +37,7 @@ export default function Overview(props) {
         # Channels: {channels.length}
       </div>
       <ChannelMenuCom onClickOption={addChannel} />
-      <ChannelGridCom channels={channels} currentBeat={currentBeat} onRemove={removeChannel} />
+      <ChannelGridCom {...gridProps} />
     </div>
   );
 
