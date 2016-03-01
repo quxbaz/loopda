@@ -16,6 +16,6 @@ route('/sequencer', {
     return '/sequencer/overview';
   },
   cleanup([record, sequencer]) {
-    sequencer.pause();
+    // sequencer.pause();
   }
 });
