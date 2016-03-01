@@ -1,16 +1,21 @@
 import {route, router} from 'globals/router';
+import store from 'globals/store';
 
 route('/sequencer', {
-  // resource() {
-  //   return store.one('sequencer').then;
-  // },
-  setup(sequencer) {
-    // store.objectFor(sequencer).play();
+  resource() {
+    return Promise.all([
+      store.one('sequencer'),
+      app.sequencer
+    ]);
+  },
+  setup([record, sequencer]) {
+    if (record.state.playing)
+      sequencer.play();
   },
   redirect() {
     return '/sequencer/overview';
   },
-  cleanup(sequencer) {
-    // sequencer.pause();
+  cleanup([record, sequencer]) {
+    sequencer.pause();
   }
 });
