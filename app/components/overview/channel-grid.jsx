@@ -4,7 +4,8 @@ import TempoBarCom from './tempo-bar';
 
 ChannelGrid.propTypes = {
   channels: React.PropTypes.array.isRequired,
-  currentBeat: React.PropTypes.number.isRequired
+  currentBeat: React.PropTypes.number.isRequired,
+  onRemove: React.PropTypes.func
 };
 
 export default function ChannelGrid(props) {
