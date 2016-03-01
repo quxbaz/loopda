@@ -102,6 +102,7 @@ export function filterMap(list, fn) {
 
 export function toggleState(model, boolProp) {
   model.setState({[boolProp]: !model.state[boolProp]});
+  return model.state[boolProp];
 }
 
 export function throttle(fn, ms) {

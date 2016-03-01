@@ -179,15 +179,23 @@ describe("lib/util", () => {
   });
 
   describe("toggleState()", () => {
-    it("Toggles a model property.", () => {
-      let model = {
+    let model;
+    beforeEach(() => {
+      model = {
         setState: (state) => Object.assign(model.state, state),
         state: {cool: false}
       };
+    });
+    it("Toggles a model property.", () => {
       util.toggleState(model, 'cool');
       model.state.cool.should.be.true;
       util.toggleState(model, 'cool');
       model.state.cool.should.be.false;
+    });
+    it("Returns the new value of the toggled property.", () => {
+      util.toggleState(model, 'cool').should.be.true;
+      util.toggleState(model, 'cool').should.be.false;
+      util.toggleState(model, 'cool').should.be.true;
     });
   });
 
