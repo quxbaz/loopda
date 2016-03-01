@@ -1,5 +1,4 @@
 import React from 'react';
-import store from 'globals/store';
 import ChannelCtrl from 'controllers/sequencer/channel';
 import BlipCtrl from 'controllers/sequencer/blip';
 import ChannelCom from 'components/sequencer/channel';
@@ -13,8 +12,7 @@ ChannelWrapper.propTypes = {
 export default function ChannelWrapper(props) {
 
   let {channel} = props;
-  let {mute} = channel.state;
-  let {title, solo, color} = store.recordFor(channel).state;
+  let {title, solo, mute, color} = channel.state;
 
   // Event handlers
   let viewChannelDetail = () => ChannelCtrl.viewChannelDetail(channel);
