@@ -20,7 +20,8 @@ export default {
       title: sampleName,
       solo: false,
       color: ChannelHelper.randomChannelHSL(),
-      time_created: time()
+      time_created: time(),
+      archived: false
     });
     let channelRecord = store.createRecord('channel', channel.state, channel);
     channelRecord.attachTo(store.recordFor(sequencer));
