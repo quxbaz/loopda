@@ -1,5 +1,11 @@
 /*
   router.js
+
+  <TODO>
+  We shouldn't have to import all our route declarations
+  manually. Instead, the URL changes, we should do a
+  require("/routes/my/route") and use the result to do dynamic
+  routing.
 */
 
 import ReactDOM from 'react-dom';
