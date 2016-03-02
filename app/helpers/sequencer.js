@@ -4,7 +4,9 @@ export default {
     /*
       Returns true if any channels have the solo attribute true.
     */
-    return sequencer.state.channels.some(channel => channel.state.solo);
+    return sequencer.state.channels.some(channel =>
+      !channel.state.archived && channel.state.solo
+    );
   },
 
   newChannelNumber(channels) {

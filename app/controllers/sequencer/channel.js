@@ -19,7 +19,10 @@ export default {
   },
 
   archive(channel) {
-    channel.setState({archived: true});
+    channel.setState({
+      solo: false,
+      archived: true
+    });
   },
 
   restore(channel) {
