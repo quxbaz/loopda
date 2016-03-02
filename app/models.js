@@ -44,4 +44,9 @@ export let initModels = (store) => {
     channel: belongsTo('channel')
   });
 
+  store.registerModel('preset', '/preset/', {
+    gain: attr(),
+    rate: attr()
+  });
+
 };
