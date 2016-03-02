@@ -14,10 +14,7 @@
 .master-channel {
   margin: 0 0 6px @infoWidth;
   opacity: 0.8;
-  .blip {
-    cursor: default;
-    height: 12px;
-  }
+  .blip {height: 12px}
 }
 
 .channel-wrapper {
@@ -82,10 +79,11 @@
       color: #000;
       background: #e4e4e4;
     }
-    .remove-channel {flex: 1}
+    .archive-channel {flex: 1}
     a + a {border-left: 1px solid #d0d0d0}
   }
 
 }
 
+@import "archived-channel";
 @import "tempo-bar";

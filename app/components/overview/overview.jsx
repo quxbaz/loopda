@@ -19,14 +19,12 @@ export default function Overview(props) {
 
   let togglePlay = () => SequencerCtrl.togglePlay(sequencer);
   let addChannel = (sampleName) => SequencerCtrl.createChannel(sequencer, sampleName);
-  let removeChannel = (channel) => SequencerCtrl.removeChannel(sequencer, channel);
 
   let gridProps = {
-    channels,
+    sequencer,
     beats,
     currentBeat,
-    soloMode: SequencerHelper.soloMode(sequencer),
-    onRemove: removeChannel
+    soloMode: SequencerHelper.soloMode(sequencer)
   };
 
   return (

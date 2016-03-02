@@ -35,7 +35,8 @@ blipDefaults.maxOffset = beatDuration;
   is true.
 */
 Channel.prototype.playBeat = function(beat) {
-  if (this.state.solo || !this.state.mute)
+  let {archived, solo, mute} = this.state;
+  if (!archived && (solo || !mute))
     this.state.blips[beat].play();
 }
 

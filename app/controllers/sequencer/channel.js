@@ -16,6 +16,14 @@ export default {
 
   toggleSolo(channel) {
     toggleState(channel, 'solo');
+  },
+
+  archive(channel) {
+    channel.setState({archived: true});
+  },
+
+  restore(channel) {
+    channel.setState({archived: false});
   }
 
 };

@@ -7,8 +7,7 @@ import Button from 'components/ui/button';
 
 ChannelWrapper.propTypes = {
   channel: React.PropTypes.object.isRequired,
-  soloMode: React.PropTypes.bool.isRequired,
-  onRemove: React.PropTypes.func
+  soloMode: React.PropTypes.bool.isRequired
 };
 
 export default function ChannelWrapper(props) {
@@ -18,7 +17,7 @@ export default function ChannelWrapper(props) {
 
   // Event handlers
   let viewChannelDetail = () => ChannelCtrl.viewChannelDetail(channel);
-  let removeChannel = () => props.onRemove(channel);
+  let archiveChannel = () => ChannelCtrl.archive(channel);
   let toggleSolo = () => ChannelCtrl.toggleSolo(channel);
   let toggleMute = () => ChannelCtrl.toggleMute(channel);
 
@@ -31,7 +30,7 @@ export default function ChannelWrapper(props) {
           <div className="channel-title">{title}</div>
         </a>
         <div className="channel-controls">
-          <a className="remove-channel" onClick={removeChannel}><Icon name="trash" /></a>
+          <a className="archive-channel" onClick={archiveChannel}><Icon name="trash" /></a>
           <Button state={solo} onClick={toggleSolo}>Solo</Button>
           <Button state={mute} onClick={toggleMute}>Mute</Button>
         </div>

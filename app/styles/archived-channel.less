@@ -1,0 +1,24 @@
+@archiveHeight: 20px;
+
+.archived-channel {
+  display: flex;
+  margin-bottom: 6px;
+  .channel:after {.overlay(#fff, 0.6)}
+  .blip {height: @archiveHeight}
+}
+
+.archived-channel-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: @infoWidth;
+  height: @archiveHeight;
+  padding: 0 8px 0 6px;
+  font-size: 10px;
+  span {color: #999}
+  a {
+    &:last-child {margin-left: 8px}
+    text-decoration: underline;
+    text-transform: uppercase;
+  }
+}
