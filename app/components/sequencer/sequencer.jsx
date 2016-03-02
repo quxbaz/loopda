@@ -1,13 +1,9 @@
 import React from 'react';
-import watcher from 'globals/watcher';
+import watchMixin from 'components/mixins/watch';
 
 export default React.createClass({
 
-  componentDidMount() {
-    watcher.on('change', () => {
-      this.forceUpdate();
-    });
-  },
+  mixins: [watchMixin],
 
   propTypes: {
     sequencer: React.PropTypes.object.isRequired
