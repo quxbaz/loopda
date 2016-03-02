@@ -7,18 +7,15 @@ Blip.propTypes = {
   onClick: React.PropTypes.func
 };
 
-Blip.defaultProps = {
-  onClick() {}
-};
-
 export default function Blip(props) {
-  let {mute} = props.blip.state;
+  let {mute, onClick} = props.blip.state;
   return React.DOM.div({
     className: classNames({
       blip: true,
-      enabled: !mute
+      enabled: !mute,
+      clicky: props.onClick !== undefined
     }),
-    onMouseDown: () => props.onClick(props.blip),
+    onMouseDown: () => props.onClick !== undefined && props.onClick(props.blip),
     style: mute ? {} : {background: props.color}
   });
 };
