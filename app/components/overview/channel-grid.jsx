@@ -31,9 +31,11 @@ export default function ChannelGrid(props) {
 
   return (
     <div className="channel-grid">
-      {channels.length > 0 ? <TempoBarCom beat={props.currentBeat} /> : ''}
       <MasterChannelCom beats={props.beats} channels={props.channels} />
-      {channels}
+      <div className="relative">
+        {channels.length > 0 ? <TempoBarCom beat={props.currentBeat} /> : ''}
+        {channels}
+      </div>
     </div>
   );
 
