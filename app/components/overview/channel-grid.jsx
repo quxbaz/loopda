@@ -1,8 +1,8 @@
 import React from 'react';
-import ChannelWrapperCom from './channel-wrapper';
-import TempoBarCom from './tempo-bar';
-import MasterChannelCom from './master-channel';
-import ArchivedChannelCom from './archived-channel';
+import ChannelWrapper from './channel-wrapper';
+import TempoBar from './tempo-bar';
+import MasterChannel from './master-channel';
+import ArchivedChannel from './archived-channel';
 
 ChannelGrid.propTypes = {
   sequencer: React.PropTypes.object.isRequired,
@@ -24,22 +24,22 @@ export default function ChannelGrid(props) {
 
   let channelComs = sorted.map((channel) => {
     if (channel.state.archived)
-      return <ArchivedChannelCom key={channel.id} sequencer={sequencer} channel={channel} />;
+      return <ArchivedChannel key={channel.id} sequencer={sequencer} channel={channel} />;
     else {
       let channelProps = {
         key: channel.id,
         channel,
         soloMode
       };
-      return <ChannelWrapperCom {...channelProps} />;
+      return <ChannelWrapper {...channelProps} />;
     }
   });
 
   return (
     <div className="channel-grid">
-      <MasterChannelCom beats={beats} channels={channels} />
+      <MasterChannel beats={beats} channels={channels} />
       <div className="relative">
-        {channels.length > 0 ? <TempoBarCom beat={currentBeat} /> : ''}
+        {channels.length > 0 ? <TempoBar beat={currentBeat} /> : ''}
         {channelComs}
       </div>
     </div>

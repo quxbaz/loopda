@@ -1,7 +1,7 @@
 import React from 'react';
 import {capitalize, throttle} from 'lib/util';
 import BlipCtrl from 'controllers/sequencer/blip';
-import SliderCom from 'components/ui/slider';
+import Slider from 'components/ui/slider';
 
 let playBlip = throttle((blip) => BlipCtrl.playBlip(blip), 70);
 
@@ -27,7 +27,7 @@ export default React.createClass({
     let mixerProps = ['offset', 'gain', 'rate'];
 
     let sliders = mixerProps.map((prop, i) => {
-      return React.createElement(SliderCom, {
+      return React.createElement(Slider, {
         key: i,
         value: state[prop],                    // -> state['gain']
         min: state['min' + capitalize(prop)],  // -> state['minGain']

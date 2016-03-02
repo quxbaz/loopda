@@ -1,7 +1,7 @@
 import React from 'react';
 import SequencerCtrl from 'controllers/sequencer/sequencer';
 import ChannelCtrl from 'controllers/sequencer/channel';
-import ChannelCom from 'components/sequencer/channel';
+import Channel from 'components/sequencer/channel';
 
 ArchivedChannel.propTypes = {
   sequencer: React.PropTypes.object.isRequired,
@@ -25,7 +25,7 @@ export default function ArchivedChannel(props) {
           <a onClick={handleUndo}>Undo</a>
         </div>
       </div>
-      <ChannelCom channel={channel} soloMode={false} />
+      <Channel channel={channel} soloMode={false} />
     </div>
   );
 

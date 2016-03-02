@@ -1,6 +1,6 @@
 import React from 'react';
-import ChannelCom from 'components/sequencer/channel';
-import MixerCom from './mixer';
+import Channel from 'components/sequencer/channel';
+import Mixer from './mixer';
 
 export default React.createClass({
 
@@ -22,14 +22,14 @@ export default React.createClass({
 
   renderMixer() {
     if (this.state.selection)
-      return <MixerCom blip={this.state.selection} />;
+      return <Mixer blip={this.state.selection} />;
   },
 
   render() {
     let {channel} = this.props;
     return (
       <div className="channel-detail">
-        <ChannelCom channel={channel} soloMode={false} onClickBlip={this.onClickBlip} />
+        <Channel channel={channel} soloMode={false} onClickBlip={this.onClickBlip} />
         {this.renderMixer()}
       </div>
     );

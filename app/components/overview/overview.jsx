@@ -5,8 +5,8 @@
 import React from 'react';
 import SequencerCtrl from 'controllers/sequencer/sequencer';
 import SequencerHelper from 'helpers/sequencer';
-import ChannelGridCom from './channel-grid';
-import ChannelMenuCom from './channel-menu';
+import ChannelGrid from './channel-grid';
+import ChannelMenu from './channel-menu';
 
 Overview.propTypes = {
   sequencer: React.PropTypes.object
@@ -35,8 +35,8 @@ export default function Overview(props) {
       <div>
         # Channels: {channels.length}
       </div>
-      <ChannelMenuCom onClickOption={addChannel} />
-      <ChannelGridCom {...gridProps} />
+      <ChannelMenu onClickOption={addChannel} />
+      <ChannelGrid {...gridProps} />
     </div>
   );
 

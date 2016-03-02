@@ -1,8 +1,8 @@
 import React from 'react';
 import {route} from 'globals/router';
 import store from 'globals/store';
-import SequencerCom from 'components/sequencer/sequencer';
-import ChannelDetailCom from 'components/channel-detail/channel-detail';
+import Sequencer from 'components/sequencer/sequencer';
+import ChannelDetail from 'components/channel-detail/channel-detail';
 
 route('/sequencer/channel/:id', {
   resource(id) {
@@ -12,9 +12,9 @@ route('/sequencer/channel/:id', {
   },
   render([sequencer, channel]) {
     return (
-      <SequencerCom sequencer={sequencer}>
-        <ChannelDetailCom channel={channel} />
-      </SequencerCom>
+      <Sequencer sequencer={sequencer}>
+        <ChannelDetail channel={channel} />
+      </Sequencer>
     );
   }
 });

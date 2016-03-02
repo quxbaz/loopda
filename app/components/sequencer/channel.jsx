@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import BlipCom from './blip';
+import Blip from './blip';
 
 Channel.propTypes = {
   channel: React.PropTypes.object.isRequired,
@@ -13,7 +13,7 @@ export default function Channel(props) {
   let {blips, solo, mute, color} = props.channel.state;
 
   let blipComs = blips.map((blip) =>
-    React.createElement(BlipCom, {
+    React.createElement(Blip, {
       key: blip.id,
       blip,
       color,

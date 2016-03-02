@@ -1,7 +1,7 @@
 import React from 'react';
 import ChannelCtrl from 'controllers/sequencer/channel';
 import BlipCtrl from 'controllers/sequencer/blip';
-import ChannelCom from 'components/sequencer/channel';
+import Channel from 'components/sequencer/channel';
 import Icon from 'components/ui/icon';
 import Button from 'components/ui/button';
 
@@ -35,7 +35,7 @@ export default function ChannelWrapper(props) {
           <Button state={mute} onClick={toggleMute}>Mute</Button>
         </div>
       </div>
-      <ChannelCom channel={channel} soloMode={soloMode} onClickBlip={BlipCtrl.toggleMute} />
+      <Channel channel={channel} soloMode={soloMode} onClickBlip={BlipCtrl.toggleMute} />
     </div>
   );
 
