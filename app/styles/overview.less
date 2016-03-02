@@ -50,15 +50,25 @@
     border: 1px solid #fff;
   }
 
-  .channel-title {
+  .channel-text {
     z-index: 1;
-    .flex-center-xy;
     flex: 1;
+    display: flex;
+    align-items: center;
     color: #fff;
     background: #505050;
     border-bottom: 1px solid #cecece;
     box-shadow: 0 2px 4px -1px #676767;
   }
+
+  .channel-number {
+    &:after {content: "."}
+    width: 45%;
+    padding-right: 4px;
+    text-align: right;
+  }
+
+  .channel-title {width: 55%}
 
   .channel-controls {
     display: flex;

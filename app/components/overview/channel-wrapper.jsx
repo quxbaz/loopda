@@ -26,8 +26,9 @@ export default function ChannelWrapper(props) {
     <div className="channel-wrapper">
       <div className="channel-info">
         <div className="color-box" style={{background: color}} />
-        <a className="channel-title" onClick={viewChannelDetail}>
-          {number}.&nbsp;{title}
+        <a className="channel-text" onClick={viewChannelDetail}>
+          <div className="channel-number">{number}</div>
+          <div className="channel-title">{title}</div>
         </a>
         <div className="channel-controls">
           <a className="remove-channel" onClick={removeChannel}><Icon name="trash" /></a>
