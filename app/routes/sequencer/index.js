@@ -1,4 +1,4 @@
-import {route, router} from 'globals/router';
+import {route} from 'globals/router';
 import store from 'globals/store';
 
 route('/sequencer', {
