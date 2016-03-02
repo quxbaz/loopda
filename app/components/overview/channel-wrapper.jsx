@@ -31,7 +31,7 @@ export default function ChannelWrapper(props) {
         </a>
         <div className="channel-controls">
           <a className="archive-channel" onClick={archiveChannel}><Icon name="trash" /></a>
-          <Button state={solo} onClick={toggleSolo}>Solo</Button>
+          <Button className="solo-button" state={solo} onClick={toggleSolo}>Solo</Button>
           <Button state={mute} onClick={toggleMute}>Mute</Button>
         </div>
       </div>
