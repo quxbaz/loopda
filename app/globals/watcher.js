@@ -2,7 +2,7 @@ import Sentry from 'sentry';
 
 let watcher = new Sentry();
 
-watcher.include = (watchable) => {
+watcher.include = function(watchable) {
   watchable.on('change', () => {
     this.trigger('change');
   });
