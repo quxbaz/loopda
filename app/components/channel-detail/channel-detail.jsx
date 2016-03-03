@@ -1,6 +1,6 @@
 import React from 'react';
 import Channel from 'components/sequencer/channel';
-import Mixer from './mixer';
+import Mixer from 'components/mixer/mixer';
 
 export default React.createClass({
 
