@@ -9,7 +9,8 @@ import ChannelGrid from './channel-grid';
 import ChannelMenu from './channel-menu';
 
 Overview.propTypes = {
-  sequencer: React.PropTypes.object
+  sequencer: React.PropTypes.object,
+  presets: React.PropTypes.array.isRequired
 };
 
 export default function Overview(props) {
