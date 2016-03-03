@@ -5,7 +5,7 @@ import 'routes/imports';
 import {computeStyles} from 'globals/style-constants';
 
 // Audio stuff
-import sampleList from 'audio/samplelist';
+import samples from 'globals/samples';
 import {loadAudioSamples} from 'audio/audiohelper';
 import audioContext from 'globals/audiocontext';
 import audioService from 'globals/audioservice';
@@ -56,7 +56,7 @@ export default class App {
 
   init() {
     return Promise.all([
-      loadAudioSamples(audioContext, sampleList).then((sampleMap) => {
+      loadAudioSamples(audioContext, samples).then((sampleMap) => {
         audioService.sampleMap = sampleMap;
       })
     ]).then(computeStyles);
