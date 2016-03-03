@@ -45,10 +45,11 @@ export let initModels = (store) => {
   });
 
   store.registerModel('preset', '/preset/', {
+    id: attr(),
     title: attr(),
     sample: attr(),
-    gain: attr(),
-    rate: attr()
+    gain: attr(1),
+    rate: attr(1)
   });
 
 };
