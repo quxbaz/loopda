@@ -1,9 +1,21 @@
 import React from 'react';
 import {router, route} from 'globals/router';
 import store from 'globals/store';
+import {names} from 'globals/samples';
 import pending from 'pending';
 import {without} from 'lib/util';
 import App from 'components/app';
+
+function initPresets(presets) {
+  if (presets.length !== 0)
+    return;
+  names.forEach((sample) => {
+    store.createRecord('preset', {
+      title: 'default - ' + sample,
+      sample
+    }).save();
+  });
+}
 
 function startSavingRecords(sequencerRecord, interval=1000) {
   // Auto-saves all records every n interval
@@ -55,12 +67,13 @@ function mapBlips(channel, channelRecord, blips, blipRecords) {
 
 route('app', {
   resource() {
-    return store.all(['sequencer', 'channel', 'blip']);
+    return store.all(['preset', 'sequencer', 'channel', 'blip']);
   },
-  setup(recordLists) {
-    return pending(mapRecords(recordLists)).then(() => {
-      return store.one('sequencer');
-    }).then((sequencerRecord) => {
+  setup([presets, ...recordLists]) {
+    initPresets(presets);
+    return pending(mapRecords(recordLists)).then(() =>
+      store.one('sequencer')
+    ).then((sequencerRecord) => {
       startSavingRecords(sequencerRecord);
     });
   },
