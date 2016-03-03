@@ -3,6 +3,7 @@ import LinkedStateMixin from 'react/lib/LinkedStateMixin';
 import classNames from 'classnames';
 import watchMixin from 'components/mixins/watch';
 import ManagerCtrl from 'controllers/preset/manager';
+import Preset from './preset';
 import Mixer from 'components/mixer/mixer';
 import SampleSelect from './sample-select';
 
@@ -32,26 +33,23 @@ export default React.createClass({
     this.setState({title: this.defaultTitle});
   },
 
+  handleClickPreset(preset) {
+    this.setState({preset});
+  },
+
   render() {
 
     let {manager} = this.props;
     let {presets} = manager.state;
 
-    let coms = presets.map((preset, i) => {
-      let {title, sample} = preset.state;
-      let handleClick = () => this.setState({preset});
-      let className = classNames({
-        preset: true,
-        selected: this.state.preset === preset
-      });
-      return (
-        <div key={i} className={className}>
-          <a onClick={handleClick}>
-            {title} - ({sample})
-          </a>
-        </div>
-      );
-    });
+    let coms = presets.map((preset) =>
+      React.createElement(Preset, {
+        key: preset.cid,
+        preset,
+        selected: this.state.preset === preset,
+        onClick: this.handleClickPreset
+      })
+    );
 
     return (
       <div className="preset-manager">
