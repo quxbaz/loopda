@@ -29,6 +29,9 @@ export default function Overview(props) {
 
   return (
     <div className="overview">
+      <div>
+        <a href="/#/preset">presets</a>
+      </div>
       <a className="togglePlay" onClick={togglePlay}>
         {playing ? 'pause' : 'play'}
       </a>
