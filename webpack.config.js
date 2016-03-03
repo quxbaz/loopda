@@ -50,7 +50,6 @@ var config = {
     alias: {
 
       // npm
-      'react'      : resolve('node_modules/react/react.js'),
       'react-dom'  : resolve('node_modules/react/lib/ReactDOM.js'),
 
       // bower
