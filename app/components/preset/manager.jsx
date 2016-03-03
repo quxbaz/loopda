@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import watchMixin from 'components/mixins/watch';
 import ManagerCtrl from 'controllers/preset/manager';
 import Mixer from 'components/mixer/mixer';
+import SampleSelect from './sample-select';
 
 export default React.createClass({
 
@@ -14,8 +15,9 @@ export default React.createClass({
   },
 
   getInitialState() {
+    this.defaultTitle = 'untitled';
     return {
-      title: '',
+      title: this.defaultTitle,
       sample: 'hihat',
       preset: null
     };
@@ -24,8 +26,10 @@ export default React.createClass({
   handleSubmit(event) {
     event.preventDefault();
     let {title, sample} = this.state;
+    if (title === '')
+      return;
     ManagerCtrl.addPreset(this.props.manager, title, sample);
-    this.setState({title: ''});
+    this.setState({title: this.defaultTitle});
   },
 
   render() {
@@ -43,7 +47,7 @@ export default React.createClass({
       return (
         <div key={i} className={className}>
           <a onClick={handleClick}>
-            ({title}) - <i>{sample}</i>
+            {title} - ({sample})
           </a>
         </div>
       );
@@ -56,10 +60,7 @@ export default React.createClass({
         </div>
         <form onSubmit={this.handleSubmit}>
           <input type="text" placeholder="Untitled" valueLink={this.linkState('title')} />
-          <select valueLink={this.linkState('sample')}>
-            <option value="hihat">Hi-hat</option>
-            <option value="snare">Snare</option>
-          </select>
+          <SampleSelect valueLink={this.linkState('sample')} />
           <input type="submit" value="Add preset" />
         </form>
         <div>{coms}</div>
