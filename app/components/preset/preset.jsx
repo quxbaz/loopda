@@ -21,7 +21,7 @@ export default function Preset(props) {
   return (
     <div className={className}>
       <a onClick={handleClick}>
-        {title} - ({sample})
+        {title} ({sample})
       </a>
     </div>
   );
