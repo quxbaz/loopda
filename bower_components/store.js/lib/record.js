@@ -5,10 +5,11 @@ export default class Record {
 
   constructor(state={}, props) {
     this.cid = cid();
-    this.state = Object.assign({}, state);
     this.props = props;
     this.isDirty = true;
     this.event = new Sentry();
+    this.state = {};
+    this.setState(state);
   }
 
   on(...args) {this.event.on(...args)}
@@ -24,8 +25,18 @@ export default class Record {
     let validState = Object.assign({}, state);
     let schema = this.props.model.schema;
     for (let attr of Object.keys(state)) {
+
+      // Delete the property if it doesn't exist in the schema or if
+      // attempting to set on a hasMany attribute
       if (schema[attr] === undefined || schema[attr].type === 'hasMany')
         delete validState[attr];
+
+      // Convert record values to id/cid
+      else if (state[attr] instanceof Record) {
+        let record = state[attr];
+        validState[attr] = record.state.id || record.cid;
+      }
+
     }
     return validState;
   }
@@ -51,7 +62,7 @@ export default class Record {
     let {store} = this.props;
 
     let belongsTos = Object.keys(schema)
-      .filter(attr => schema[attr].type === 'belongsTo')
+      .filter(attr => ['hasOne', 'belongsTo'].includes(schema[attr].type))
       .map(attr => store.searchCache(attr, this.state[attr]))
       .filter(record => record !== undefined);
 
@@ -92,7 +103,7 @@ export default class Record {
     if (schema[attr] === undefined)
       throw new Error('Schema relation @' + attr + ' does not exist.');
     let relation = schema[attr];
-    if (relation.type === 'belongsTo') {
+    if (relation.type === 'hasOne' || relation.type === 'belongsTo') {
       let belongsToId = this.state[relation.modelName];
       return this.props.store.get(relation.modelName, belongsToId, sync);
     }
@@ -108,7 +119,7 @@ export default class Record {
 
   get(attr) {
     /*
-      For getting [hasMany, belongsTo] records. Always returns a
+      For getting [hasOne, hasMany, belongsTo] records. Always returns a
       promise.
     */
     return this._get(attr);
@@ -138,7 +149,7 @@ export default class Record {
       let record = attr;
       attr = attr.props.model.name;
       if (this.belongsTo(record))
-        this.state[attr] = undefined;
+        this.setState({[attr]: undefined})
     }
     return this;
   }
@@ -148,7 +159,9 @@ export default class Record {
       @target: The record that this one belongs to.
     */
     let attr = target.props.model.name;
-    this.state[attr] = target.state.id || target.cid;
+    this.setState({
+      [attr]: target.state.id || target.cid
+    });
     return this;
   }
 

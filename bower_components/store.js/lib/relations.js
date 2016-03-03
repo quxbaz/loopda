@@ -10,14 +10,7 @@ export class Relation {
   }
 }
 
-export let attr = (defaultValue) => {
-  return new Relation('attr', undefined, defaultValue);
-};
-
-export let hasMany = (modelName) => {
-  return new Relation('hasMany', modelName);
-};
-
-export let belongsTo = (modelName) => {
-  return new Relation('belongsTo', modelName);
-};
+export let attr = (defaultValue) => new Relation('attr', undefined, defaultValue);
+export let hasOne = (modelName) => new Relation('hasOne', modelName);
+export let hasMany = (modelName) => new Relation('hasMany', modelName);
+export let belongsTo = (modelName) =>  new Relation('belongsTo', modelName);
