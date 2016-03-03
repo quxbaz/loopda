@@ -4,6 +4,7 @@
 
 import Record from './record';
 import {Relation} from './relations';
+import {each} from './util';
 
 export default class Model {
 
@@ -34,6 +35,12 @@ export default class Model {
   }
 
   createRecord(state) {
+    let defaults = {};
+    each(this.schema, (val, key) => {
+      if (val.defaultValue !== undefined)
+        defaults[key] = val.defaultValue;
+    });
+    state = Object.assign(defaults, state);
     return new Record(state, {
       model: this,
       store: this.props.store
