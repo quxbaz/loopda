@@ -3,7 +3,7 @@
 */
 
 import {assign} from './util';
-import {Stateful} from './stateful';
+import Stateful from 'stateful';
 import {blipDefaults} from './defaults';
 
 export default class Blip extends Stateful {

@@ -22,6 +22,7 @@ var config = {
         loader: 'babel',
         include: [
           join(dir, 'node_modules/sentry'),
+          join(dir, 'node_modules/stateful'),
           join(dir, 'test'),
           join(dir, 'index.js'),
           join(dir, 'lib')

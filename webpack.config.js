@@ -26,7 +26,8 @@ var config = {
           resolve(__dirname, 'bower_components/pending.js'),
           resolve(__dirname, 'node_modules/bin.js'),
           resolve(__dirname, 'node_modules/sentry'),
-          resolve(__dirname, 'node_modules/eventnode')
+          resolve(__dirname, 'node_modules/stateful'),
+          // resolve(__dirname, 'node_modules/eventnode')
         ],
         query: {
           presets: ['es2015', 'react']

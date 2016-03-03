@@ -2,7 +2,7 @@
   channel.js
 */
 
-import {Stateful} from './stateful';
+import Stateful from 'stateful';
 import {assign} from './util';
 import Blip from './blip';
 import {channelDefaults} from './defaults';

@@ -3,7 +3,7 @@
 */
 
 import {assign} from './util';
-import {Stateful} from './stateful';
+import Stateful from 'stateful';
 import Channel from './channel';
 import Timer from 'bower_components/timer.js/timer';
 import {sequencerDefaults} from './defaults';

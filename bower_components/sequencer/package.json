@@ -26,6 +26,7 @@
     "webpack": "^1.12.10"
   },
   "dependencies": {
-    "sentry": "git+https://github.com/quxbaz/sentry.git"
+    "sentry": "git+https://github.com/quxbaz/sentry.git",
+    "stateful": "git+https://github.com/quxbaz/stateful.git"
   }
 }

@@ -9,7 +9,8 @@
     "director": "^1.2.8",
     "eventnode": "git+https://github.com/quxbaz/eventnode.git",
     "regenerator": "^0.8.42",
-    "sentry": "git+https://github.com/quxbaz/sentry.git"
+    "sentry": "git+https://github.com/quxbaz/sentry.git",
+    "stateful": "git+https://github.com/quxbaz/stateful.git"
   },
   "devDependencies": {
     "babel-core": "^6.3.26",
