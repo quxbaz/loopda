@@ -24,7 +24,7 @@ export default {
       color: ChannelHelper.randomChannelHSL(),
       time_created: time(),
       archived: false,
-      // preset
+      preset
     });
 
     let channelRecord = store.createRecord('channel', channel.state, channel);
