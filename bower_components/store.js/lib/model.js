@@ -37,8 +37,12 @@ export default class Model {
   createRecord(state) {
     let defaults = {};
     each(this.schema, (val, key) => {
-      if (val.defaultValue !== undefined)
-        defaults[key] = val.defaultValue;
+      if (val.defaultValue !== undefined) {
+        if (typeof val.defaultValue === 'function')
+          defaults[key] = val.defaultValue(state);
+        else
+          defaults[key] = val.defaultValue;
+      }
     });
     state = Object.assign(defaults, state);
     return new Record(state, {
