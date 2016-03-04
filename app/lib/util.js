@@ -69,6 +69,25 @@ export function without(obj, keys) {
   return newObj;
 }
 
+export function withOnly(obj, keys) {
+  /*
+    Returns a new object with only the keys passed.
+  */
+  keys = [].concat(keys);  // Convert to array always
+  let newObj = {};
+  keys.forEach((key) => {
+    if (obj.hasOwnProperty(key))
+      newObj[key] = obj[key];
+  });
+  // return filterMap(Object.keys(obj), (key) => {
+  //   if (keys.include(key))
+  //     return obj[key]
+  // });
+  return newObj;
+};
+
+export let assign = (...args) => Object.assign(...args);
+
 export function copy(obj) {
   /*
     Returns a shallow copy of an object.
