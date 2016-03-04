@@ -16,12 +16,15 @@ export default {
   createChannel(sequencer, preset) {
 
     let channel = sequencer.addChannel({
-      sampleName: preset.state.sample,
       number: SequencerHelper.newChannelNumber(sequencer.state.channels),
       title: preset.state.title,
+      solo: false,
+      mute: false,
+      sampleName: preset.state.sample,
       color: ChannelHelper.randomChannelHSL(),
       time_created: time(),
-      preset
+      archived: false,
+      // preset
     });
 
     let channelRecord = store.createRecord('channel', channel.state, channel);
