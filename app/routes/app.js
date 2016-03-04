@@ -11,7 +11,7 @@ function initPresets(presets) {
     return;
   names.forEach((sample) => {
     store.createRecord('preset', {
-      title: 'default - ' + sample,
+      title: sample,
       sample
     }).save();
   });
