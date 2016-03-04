@@ -1,4 +1,4 @@
-import {attr, hasMany, belongsTo} from 'store/lib/relations';
+import {attr, hasOne, hasMany, belongsTo} from 'store/lib/relations';
 
 let initialized = false;
 
@@ -23,12 +23,13 @@ export let initModels = (store) => {
     title: attr(),
     beats: attr(),
     mute: attr(),
-    solo: attr(),
+    solo: attr(false),
     sampleName: attr(),
     color: attr(),
     time_created: attr(),
-    archived: attr(),
+    archived: attr(false),
     sequencer: belongsTo('sequencer'),
+    preset: hasOne('preset'),
     blips: hasMany('blip'),
   });
 

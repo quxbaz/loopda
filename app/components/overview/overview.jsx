@@ -15,11 +15,11 @@ Overview.propTypes = {
 
 export default function Overview(props) {
 
-  let {sequencer} = props;
+  let {sequencer, presets} = props;
   let {beats, playing, channels, currentBeat} = sequencer.state;
 
   let togglePlay = () => SequencerCtrl.togglePlay(sequencer);
-  let addChannel = (sampleName) => SequencerCtrl.createChannel(sequencer, sampleName);
+  let addChannel = (preset) => SequencerCtrl.createChannel(sequencer, preset);
 
   let gridProps = {
     sequencer,
@@ -39,7 +39,7 @@ export default function Overview(props) {
       <div>
         # Channels: {channels.length}
       </div>
-      <ChannelMenu onClickOption={addChannel} />
+      <ChannelMenu presets={presets} onSelect={addChannel} />
       <ChannelGrid {...gridProps} />
     </div>
   );
