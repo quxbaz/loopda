@@ -1,20 +1,26 @@
 import React from 'react';
 import {router, route} from 'globals/router';
 import store from 'globals/store';
+import watcher from 'globals/watcher';
 import {names} from 'globals/samples';
 import pending from 'pending';
 import {without} from 'lib/util';
 import App from 'components/app';
 
 function initPresets(presets) {
-  if (presets.length !== 0)
-    return;
-  names.forEach((sample) => {
-    store.createRecord('preset', {
-      title: sample,
-      sample
-    }).save();
-  });
+  if (presets.length > 0) {
+    for (let preset of presets)
+      watcher.include(preset)
+  } else {
+    names.forEach((sample) => {
+      let preset = store.createRecord('preset', {
+        title: sample,
+        sample
+      });
+      preset.save();
+      watcher.include(preset);
+    });
+  }
 }
 
 function startSavingRecords(sequencerRecord, interval=1000) {

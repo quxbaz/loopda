@@ -49,8 +49,19 @@ export let initModels = (store) => {
     id: attr(),
     title: attr(),
     sample: attr(),
+
+    /*
+      mixable props
+    */
+
     gain: attr(1),
-    rate: attr(1)
+    minGain: attr(0),
+    maxGain: attr(10),
+
+    rate: attr(1),
+    minRate: attr(0),
+    maxRate: attr(4)
+
   });
 
 };

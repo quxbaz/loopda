@@ -1,6 +1,5 @@
 import React from 'react';
 import LinkedStateMixin from 'react/lib/LinkedStateMixin';
-import classNames from 'classnames';
 import watchMixin from 'components/mixins/watch';
 import ManagerCtrl from 'controllers/preset/manager';
 import Preset from './preset';
@@ -37,12 +36,16 @@ export default React.createClass({
     this.setState({preset});
   },
 
+  handleMix(preset, prop, value) {
+    ManagerCtrl.mix(preset, prop, value);
+  },
+
   render() {
 
     let {manager} = this.props;
     let {presets} = manager.state;
 
-    let coms = presets.map((preset) =>
+    let presetComs = presets.map((preset) =>
       React.createElement(Preset, {
         key: preset.cid,
         preset,
@@ -50,6 +53,10 @@ export default React.createClass({
         onClick: this.handleClickPreset
       })
     );
+
+    let render = {};
+    if (this.state.preset)
+      render.mixer = <Mixer mixable={this.state.preset} onMix={this.handleMix} />;
 
     return (
       <div className="preset-manager">
@@ -61,8 +68,10 @@ export default React.createClass({
           <SampleSelect valueLink={this.linkState('sample')} />
           <input type="submit" value="Add preset" />
         </form>
-        <div>{coms}</div>
-        {this.state.preset ? <Mixer mixable={this.state.preset} /> : ''}
+        <div>{presetComs}</div>
+        <div className="side-panel">
+          {render.mixer}
+        </div>
       </div>
     );
   }
