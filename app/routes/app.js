@@ -51,7 +51,13 @@ function* mapRecords([sequencers, channels, blips]) {
 
 function mapChannels(sequencer, channelRecords, blipRecords) {
   channelRecords.forEach((channelRecord) => {
-    let channel = sequencer.addChannel(without(channelRecord.state, ['id', 'blips']));
+    let preset = channelRecord.take('preset');
+    let channel = sequencer.addChannel(
+      Object.assign(
+        without(channelRecord.state, ['id', 'blips']),
+        {preset}
+      )
+    );
     store.map(channel, channelRecord);
     let blipMatches = blipRecords.filter(blipRecord => blipRecord.belongsTo(channelRecord));
     mapBlips(channel, channelRecord, channel.state.blips, blipMatches);

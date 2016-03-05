@@ -46,6 +46,8 @@ export default class App {
     window.app = this;  // Set app to global property
     this.sequencer = new Sequencer({beatDuration});
     this.sequencer.on('playBlip', (blipState, channel) => {
+      if (blipState.unmixed)
+        blipState = Object.assign({}, blipState, channel.state.preset.state);
       if (SequencerHelper.soloMode(this.sequencer)) {
         if (channel.state.solo)
           audioService.playBlip(blipState);

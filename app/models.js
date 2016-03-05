@@ -29,7 +29,7 @@ export let initModels = (store) => {
     time_created: attr(),
     archived: attr(),
     sequencer: belongsTo('sequencer'),
-    preset: hasOne('preset'),
+    preset: belongsTo('preset'),
     blips: hasMany('blip'),
   });
 
@@ -42,6 +42,7 @@ export let initModels = (store) => {
     offset: attr(),
     gain: attr(),
     rate: attr(),
+    unmixed: attr(),
     channel: belongsTo('channel')
   });
 
@@ -49,6 +50,7 @@ export let initModels = (store) => {
     id: attr(),
     title: attr(),
     sample: attr(),
+    channels: hasMany('channel'),
 
     /*
       mixable props

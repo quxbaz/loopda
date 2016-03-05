@@ -33,6 +33,9 @@ export default function Overview(props) {
       <div>
         <a href="/#/preset">presets</a>
       </div>
+      <div>
+        <a onClick={() => localStorage.clear()}>localStorage.clear()</a>
+      </div>
       <a className="togglePlay" onClick={togglePlay}>
         {playing ? 'pause' : 'play'}
       </a>
