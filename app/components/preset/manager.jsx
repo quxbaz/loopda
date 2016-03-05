@@ -1,10 +1,16 @@
 import React from 'react';
 import LinkedStateMixin from 'react/lib/LinkedStateMixin';
 import watchMixin from 'components/mixins/watch';
+import audioservice from 'globals/audioservice';
+import {throttle} from 'lib/util';
 import ManagerCtrl from 'controllers/preset/manager';
 import Preset from './preset';
 import Mixer from 'components/mixer/mixer';
 import SampleSelect from './sample-select';
+
+let previewSound = throttle((state) => {
+  audioservice.playBlip(state);
+}, 60);
 
 export default React.createClass({
 
@@ -38,6 +44,7 @@ export default React.createClass({
 
   handleMix(preset, prop, value) {
     ManagerCtrl.mix(preset, prop, value);
+    previewSound(preset.state);
   },
 
   render() {
