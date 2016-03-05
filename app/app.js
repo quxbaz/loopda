@@ -24,7 +24,7 @@ import SequencerHelper from 'helpers/sequencer';
 window.$app = document.getElementById('app-container');
 
 // Set sequencer defaults
-let beatDuration = 100;
+let beatDuration = 110;
 sequencerDefaults.playing = true;
 blipDefaults.minOffset = 0;
 blipDefaults.maxOffset = beatDuration;
