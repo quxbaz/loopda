@@ -221,4 +221,20 @@ describe("lib/util", () => {
     });
   });
 
+  describe("intersect()", () => {
+    it("Gets the intersection of two arrays.", () => {
+      util.intersect([], []).should.eql([]);
+      util.intersect([1], [1]).should.eql([1]);
+      util.intersect([1, 2], [1, 2]).should.eql([1, 2]);
+      util.intersect([1, 2, 3], [1, 2, 3]).should.eql([1, 2, 3]);
+      util.intersect([1, 2], [1, 2, 3]).should.eql([1, 2]);
+      util.intersect([1], [1, 2, 3]).should.eql([1]);
+      util.intersect([], [1, 2, 3]).should.eql([]);
+      util.intersect([0], [1, 2, 3]).should.eql([]);
+      util.intersect([0, 1], [1, 2, 3]).should.eql([1]);
+      util.intersect([0, 3, 3], [1, 2, 3]).should.eql([3]);
+      util.intersect([0, 3, 3], [1, 2, 3, 3]).should.eql([3]);
+    });
+  });
+
 });

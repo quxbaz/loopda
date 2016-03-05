@@ -136,3 +136,10 @@ export function throttle(fn, ms) {
 }
 
 export let time = () => (new Date()).getTime();
+
+// Gets the intersection of two arrays.
+export let intersect = (a, b) => {
+  let matches = a.filter(x => b.includes(x));
+  // Remove duplicates
+  return Array.from(new Set(matches));
+};
