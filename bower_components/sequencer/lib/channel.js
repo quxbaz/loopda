@@ -23,8 +23,8 @@ export default class Channel extends Stateful {
     this.props = props;
     this.state.blips.forEach((blip) => {
       blip.props.onPlay = (blipState) => props.onPlay(blipState, this);
-      if (!blip.state.sampleName)
-        blip.setState({sampleName: this.state.sampleName});
+      if (!blip.state.sample)
+        blip.setState({sample: this.state.sample});
     });
   }
 

@@ -9,12 +9,12 @@ export let sequencerDefaults = {
 export let channelDefaults = {
   beats: 16,
   mute: false,
-  sampleName: ''
+  sample: ''
 };
 
 export let blipDefaults = {
   beat: undefined,
-  sampleName: '',
+  sample: '',
   mute: false,
   duration: 0,
   offset: 0,

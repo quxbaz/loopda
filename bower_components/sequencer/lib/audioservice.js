@@ -29,13 +29,13 @@ export default class AudioService {
   }
 
   playBlip(blipState) {
-    if (blipState.mute || !blipState.sampleName)
+    if (blipState.mute || !blipState.sample)
       return;
     let source = this.audioContext.createBufferSource();
-    source.buffer = this.sampleMap[blipState.sampleName];
+    source.buffer = this.sampleMap[blipState.sample];
     this.linkModifiers(blipState, source);
     source.connect(this.audioContext.destination);
-    source.start(this.audioContext.currentTime + blipState.offset / 1000);
+    source.start(this.audioContext.currentTime + (blipState.offset || 0) / 1000);
   }
 
   linkModifiers(blipState, source) {
