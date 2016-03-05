@@ -20,7 +20,7 @@ export default {
       title: preset.state.title,
       solo: false,
       mute: false,
-      sampleName: preset.state.sample,
+      sample: preset.state.sample,
       color: ChannelHelper.randomChannelHSL(),
       time_created: time(),
       archived: false,

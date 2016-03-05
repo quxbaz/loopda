@@ -24,7 +24,7 @@ export let initModels = (store) => {
     beats: attr(),
     solo: attr(),
     mute: attr(),
-    sampleName: attr(),
+    sample: attr(),
     color: attr(),
     time_created: attr(),
     archived: attr(),
@@ -36,7 +36,7 @@ export let initModels = (store) => {
   store.registerModel('blip', '/blip/', {
     id: attr(),
     beat: attr(),
-    sampleName: attr(),
+    sample: attr(),
     mute: attr(),
     duration: attr(),
     offset: attr(),
