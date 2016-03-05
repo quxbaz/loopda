@@ -4,13 +4,12 @@
   "description": "Make sik beats.",
   "main": "app/entry.js",
   "dependencies": {
-    "babel-polyfill": "^6.3.14",
     "bin.js": "git+https://github.com/quxbaz/bin.js.git",
     "director": "^1.2.8",
-    "eventnode": "git+https://github.com/quxbaz/eventnode.git",
     "regenerator": "^0.8.42",
     "sentry": "git+https://github.com/quxbaz/sentry.git",
-    "stateful": "git+https://github.com/quxbaz/stateful.git"
+    "stateful": "git+https://github.com/quxbaz/stateful.git",
+    "react": "^0.14.5",
   },
   "devDependencies": {
     "babel-core": "^6.3.26",
@@ -22,7 +21,6 @@
     "jsx-loader": "^0.13.2",
     "less": "^2.5.3",
     "less-loader": "^2.2.2",
-    "react": "^0.14.5",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.9"
   },
