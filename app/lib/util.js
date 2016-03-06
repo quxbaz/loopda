@@ -79,10 +79,6 @@ export function pick(obj, keys) {
     if (obj.hasOwnProperty(key))
       newObj[key] = obj[key];
   });
-  // return filterMap(Object.keys(obj), (key) => {
-  //   if (keys.include(key))
-  //     return obj[key]
-  // });
   return newObj;
 };
 
