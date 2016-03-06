@@ -10,7 +10,8 @@
     "react": "^0.14.5",
     "regenerator": "^0.8.42",
     "sentry": "git+https://github.com/quxbaz/sentry.git",
-    "stateful": "git+https://github.com/quxbaz/stateful.git"
+    "stateful": "git+https://github.com/quxbaz/stateful.git",
+    "store": "git+https://github.com/quxbaz/store.git"
   },
   "devDependencies": {
     "babel-core": "^6.3.26",

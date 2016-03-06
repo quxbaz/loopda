@@ -21,7 +21,6 @@
   "dependencies": {
     "mocha": "~2.3.4",
     "chai": "~3.4.2",
-    "store.js": "https://github.com/quxbaz/store.js.git",
     "pending.js": "https://github.com/quxbaz/pending.js.git"
   }
 }
