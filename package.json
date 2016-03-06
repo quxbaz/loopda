@@ -9,7 +9,7 @@
     "regenerator": "^0.8.42",
     "sentry": "git+https://github.com/quxbaz/sentry.git",
     "stateful": "git+https://github.com/quxbaz/stateful.git",
-    "react": "^0.14.5",
+    "react": "^0.14.5"
   },
   "devDependencies": {
     "babel-core": "^6.3.26",
