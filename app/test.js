@@ -2,7 +2,7 @@
 import 'bower_components/mocha/mocha.css';
 
 // Libraries
-require('bower_components/chai/chai').should();
+require('chai').should();
 
 // Tests
 import './tests/lib/util';
