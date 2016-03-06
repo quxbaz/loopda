@@ -1,5 +1,3 @@
-import http from 'http';
-
 function decode(audioContext, audioBuffer) {
   /*
     Async function that decodes an audio buffer.
@@ -21,8 +19,9 @@ export function loadAudioBuffer(audioContext, url) {
   /*
     Makes a server request to an audio file and decodes it.
   */
-  return http.get(url, {responseType: 'arraybuffer'}).then(
-    buffer => decode(audioContext, buffer),
-    error => console.error('Error getting resource:', error)
+  return fetch(url).then((resp) =>
+    resp.arrayBuffer()
+  ).then((arrayBuffer) =>
+    decode(audioContext, arrayBuffer)
   );
 }

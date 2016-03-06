@@ -21,12 +21,12 @@ var config = {
         loader: 'babel',
         include: [
           resolve(__dirname, 'app'),
-          resolve(__dirname, 'node_modules/pending'),
-          resolve(__dirname, 'node_modules/store'),
-          resolve(__dirname, 'node_modules/sequencer'),
           resolve(__dirname, 'node_modules/bin.js'),
+          resolve(__dirname, 'node_modules/pending'),
           resolve(__dirname, 'node_modules/sentry'),
+          resolve(__dirname, 'node_modules/sequencer'),
           resolve(__dirname, 'node_modules/stateful')
+          resolve(__dirname, 'node_modules/store'),
         ],
         query: {
           presets: ['es2015', 'react']
@@ -47,16 +47,7 @@ var config = {
     root: [resolve(__dirname), resolve('app')],
     extensions: ['', '.js', '.jsx'],
     alias: {
-
-      // npm
-      'react-dom'  : resolve('node_modules/react/lib/ReactDOM.js'),
-
-      // bower
-      'http'       : resolve('bower_components/http.js/http.js'),
-
-      // app
-      // --
-
+      'react-dom'  : resolve('node_modules/react/lib/ReactDOM.js')
     }
   }
 
