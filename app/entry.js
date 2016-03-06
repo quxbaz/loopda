@@ -1,5 +1,5 @@
 // Styles
-import 'bower_components/normalize-css/normalize.css';
+import 'normalize-css/normalize.css';
 import './styles/app.less';
 
 // Modules
