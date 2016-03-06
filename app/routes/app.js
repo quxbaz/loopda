@@ -71,7 +71,7 @@ function mapBlips(channel, channelRecord, blips, blipRecords) {
       channel.setBlip(i, blipRecord.state);
     } else {
       blipRecord = store.createRecord('blip', blip.state);
-      blipRecord.attachTo(channelRecord);
+      blipRecord.setState({channel: channelRecord});
     }
     store.map(blip, blipRecord);
   });
