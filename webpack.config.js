@@ -52,7 +52,6 @@ var config = {
       'react-dom'  : resolve('node_modules/react/lib/ReactDOM.js'),
 
       // bower
-      'classnames' : resolve('bower_components/classnames/'),
       'http'       : resolve('bower_components/http.js/http.js'),
       'pending'    : resolve('bower_components/pending.js/'),
 
