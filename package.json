@@ -8,6 +8,7 @@
     "classnames": "^2.2.3",
     "director": "^1.2.8",
     "normalize-css": "^2.3.1",
+    "pending": "git+https://github.com/quxbaz/pending.git",
     "react": "^0.14.5",
     "regenerator": "^0.8.42",
     "sentry": "git+https://github.com/quxbaz/sentry.git",

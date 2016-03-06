@@ -21,7 +21,7 @@ var config = {
         loader: 'babel',
         include: [
           resolve(__dirname, 'app'),
-          resolve(__dirname, 'bower_components/pending.js'),
+          resolve(__dirname, 'node_modules/pending'),
           resolve(__dirname, 'node_modules/store'),
           resolve(__dirname, 'node_modules/sequencer'),
           resolve(__dirname, 'node_modules/bin.js'),
@@ -53,7 +53,6 @@ var config = {
 
       // bower
       'http'       : resolve('bower_components/http.js/http.js'),
-      'pending'    : resolve('bower_components/pending.js/'),
 
       // app
       // --
