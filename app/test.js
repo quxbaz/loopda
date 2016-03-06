@@ -1,5 +1,5 @@
 // // Styles
-import 'bower_components/mocha/mocha.css';
+import 'mocha/mocha.css';
 
 // Libraries
 require('chai').should();
