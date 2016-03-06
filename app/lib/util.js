@@ -69,7 +69,7 @@ export function without(obj, keys) {
   return newObj;
 }
 
-export function withOnly(obj, keys) {
+export function pick(obj, keys) {
   /*
     Returns a new object with only the keys passed.
   */

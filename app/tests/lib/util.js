@@ -145,14 +145,14 @@ describe("lib/util", () => {
     });
   });
 
-  describe("withOnly()", () => {
+  describe("pick()", () => {
     it("Picks keys from an object.", () => {
-      util.withOnly({a:1, b:2, c:3}, 'a').should.eql({a:1});
-      util.withOnly({a:1, b:2, c:3}, ['a']).should.eql({a:1});
-      util.withOnly({a:1, b:2, c:3}, ['a', 'b']).should.eql({a:1, b:2});
-      util.withOnly({a:1, b:2, c:3}, ['a', 'b', 'c']).should.eql({a:1, b:2, c:3});
-      util.withOnly({a:1, b:2, c:3}, ['a', 'd']).should.eql({a:1});
-      util.withOnly({a:1, b:2, c:3}, ['d']).should.eql({});
+      util.pick({a:1, b:2, c:3}, 'a').should.eql({a:1});
+      util.pick({a:1, b:2, c:3}, ['a']).should.eql({a:1});
+      util.pick({a:1, b:2, c:3}, ['a', 'b']).should.eql({a:1, b:2});
+      util.pick({a:1, b:2, c:3}, ['a', 'b', 'c']).should.eql({a:1, b:2, c:3});
+      util.pick({a:1, b:2, c:3}, ['a', 'd']).should.eql({a:1});
+      util.pick({a:1, b:2, c:3}, ['d']).should.eql({});
     });
   });
 

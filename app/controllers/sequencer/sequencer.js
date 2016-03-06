@@ -1,5 +1,5 @@
 import store from 'globals/store';
-import {assign, withOnly, randomChannelHSL, time} from 'lib/util';
+import {assign, pick, randomChannelHSL, time} from 'lib/util';
 import SequencerHelper from 'helpers/sequencer';
 import ChannelHelper from 'helpers/channel';
 import mixables from 'globals/mixables';
@@ -33,7 +33,7 @@ export default {
     // Create blip records and attach to new channel record
     channel.state.blips.forEach((blip) => {
       blip.setState(
-        assign({unmixed: true}, withOnly(preset.state, mixables))
+        assign({unmixed: true}, pick(preset.state, mixables))
       );
       let blipRecord = store.createRecord('blip', blip.state, blip);
       blipRecord.attachTo(channelRecord);

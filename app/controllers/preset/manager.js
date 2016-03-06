@@ -1,7 +1,6 @@
 import store from 'globals/store';
 import watcher from 'globals/watcher';
 import mixables from 'globals/mixables';
-import {withOnly} from 'lib/util';
 
 export default {
 
