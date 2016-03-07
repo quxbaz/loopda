@@ -1,5 +1,5 @@
 import store from 'globals/store';
-import {assign, pick, randomChannelHSL, time} from 'lib/util';
+import {assign, pick, randomChannelHSL, now} from 'lib/util';
 import SequencerHelper from 'helpers/sequencer';
 import ChannelHelper from 'helpers/channel';
 import mixables from 'globals/mixables';
@@ -22,7 +22,7 @@ export default {
       mute: false,
       sample: preset.state.sample,
       color: ChannelHelper.randomChannelHSL(),
-      time_created: time(),
+      time_created: now(),
       archived: false,
       preset
     });

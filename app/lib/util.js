@@ -131,7 +131,7 @@ export function throttle(fn, ms) {
   };
 }
 
-export let time = () => (new Date()).getTime();
+export let now = () => (new Date()).getTime();
 
 // Gets the intersection of two arrays.
 export let intersect = (a, b) => {
