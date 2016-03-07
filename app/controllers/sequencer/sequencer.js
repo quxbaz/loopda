@@ -27,7 +27,7 @@ export default {
       preset
     });
 
-    let channelRecord = store.createRecord('channel', channel.state, channel);
+    let channelRecord = store.create('channel', channel.state, channel);
     channelRecord.setState({sequencer: store.recordFor(sequencer)});
 
     // Create blip records and attach to new channel record
@@ -35,7 +35,7 @@ export default {
       blip.setState(
         assign({unmixed: true}, pick(preset.state, mixables))
       );
-      let blipRecord = store.createRecord('blip', blip.state, blip);
+      let blipRecord = store.create('blip', blip.state, blip);
       blipRecord.setState({channel: channelRecord});
     });
 

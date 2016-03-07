@@ -32,8 +32,8 @@ class MappedStore extends Store {
     return this._reverseMap.get(record);
   }
 
-  createRecord(modelName, state, objectToMap) {
-    let record = super.createRecord(modelName, state);
+  create(modelName, state, objectToMap) {
+    let record = super.create(modelName, state);
     if (objectToMap !== undefined)
       this.map(objectToMap, record);
     return record;

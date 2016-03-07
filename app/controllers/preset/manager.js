@@ -5,7 +5,7 @@ import mixables from 'globals/mixables';
 export default {
 
   addPreset(manager, title, sample) {
-    let preset = store.createRecord('preset', {
+    let preset = store.create('preset', {
       title,
       sample
     });

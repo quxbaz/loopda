@@ -13,7 +13,7 @@ function initPresets(presets) {
       watcher.include(preset)
   } else {
     names.forEach((sample) => {
-      let preset = store.createRecord('preset', {
+      let preset = store.create('preset', {
         title: sample,
         sample
       });
@@ -70,7 +70,7 @@ function mapBlips(channel, channelRecord, blips, blipRecords) {
     if (blipRecord) {
       channel.setBlip(i, blipRecord.state);
     } else {
-      blipRecord = store.createRecord('blip', blip.state);
+      blipRecord = store.create('blip', blip.state);
       blipRecord.setState({channel: channelRecord});
     }
     store.map(blip, blipRecord);
