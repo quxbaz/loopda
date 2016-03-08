@@ -11,23 +11,19 @@ import audioContext from 'globals/audiocontext';
 import audioService from 'globals/audioservice';
 
 // Sequencer
-import {Sequencer, Channel} from 'sequencer';
-import {sequencerDefaults, blipDefaults} from 'sequencer/lib/defaults';
+import {Channel} from 'sequencer';
+import {sequencerDefaults, /*blipDefaults*/} from 'sequencer/lib/defaults';
 
 // Router
 import {router} from 'globals/router';
-
-// Misc
-import SequencerHelper from 'helpers/sequencer';
 
 // Declare globals
 window.$app = document.getElementById('app-container');
 
 // Set sequencer defaults
-let beatDuration = 110;
 sequencerDefaults.playing = true;
-blipDefaults.minOffset = 0;
-blipDefaults.maxOffset = beatDuration;
+// blipDefaults.minOffset = 0;
+// blipDefaults.maxOffset = beatDuration;
 
 /*
   <Warning> Dirty pattern going on here. We're modifying the internals
@@ -44,16 +40,6 @@ export default class App {
 
   constructor() {
     window.app = this;  // Set app to global property
-    this.sequencer = new Sequencer({beatDuration});
-    this.sequencer.on('playBlip', (blipState, channel) => {
-      if (blipState.unmixed)
-        blipState = Object.assign({}, blipState, channel.state.preset.state);
-      if (SequencerHelper.soloMode(this.sequencer)) {
-        if (channel.state.solo)
-          audioService.playBlip(blipState);
-      } else
-        audioService.playBlip(blipState);
-    });
   }
 
   init() {

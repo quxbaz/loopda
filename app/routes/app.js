@@ -3,9 +3,32 @@ import {router, route} from 'globals/router';
 import store from 'globals/store';
 import watcher from 'globals/watcher';
 import {names} from 'globals/samples';
+import audioService from 'globals/audioservice';
 import pending from 'pending';
 import {without} from 'lib/util';
+import {Sequencer} from 'sequencer';
+import SequencerHelper from 'helpers/sequencer';
 import App from 'components/app';
+
+
+function createSequencer(record) {
+
+  // <TODO> this.sequencer = new OmniSequencer
+
+  let sequencer = new Sequencer({beatDuration: 110});
+  app.sequencer = sequencer;
+
+  sequencer.on('playBlip', (blipState, channel) => {
+    if (blipState.unmixed)
+      blipState = Object.assign({}, blipState, channel.state.preset.state);
+    if (SequencerHelper.soloMode(sequencer)) {
+      if (channel.state.solo)
+        audioService.playBlip(blipState);
+    } else
+      audioService.playBlip(blipState);
+  });
+
+}
 
 function initPresets(presets) {
   if (presets.length > 0) {
@@ -82,6 +105,7 @@ route('app', {
     return store.all(['preset', 'sequencer', 'channel', 'blip']);
   },
   setup([presets, ...recordLists]) {
+    createSequencer();
     initPresets(presets);
     return pending(mapRecords(recordLists)).then(() =>
       store.one('sequencer')
