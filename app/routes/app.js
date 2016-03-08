@@ -13,7 +13,7 @@ import App from 'components/app';
 
 function createSequencer(record) {
 
-  // <TODO> this.sequencer = new OmniSequencer
+  // <TODO> let sequencer = new OmniSequencer
 
   let sequencer = new Sequencer({beatDuration: 110});
   app.sequencer = sequencer;
