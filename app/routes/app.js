@@ -91,7 +91,7 @@ function mapBlips(channel, channelRecord, blips, blipRecords) {
   blips.forEach((blip, i) => {
     let blipRecord = blipRecords.find(record => record.state.beat === i);
     if (blipRecord) {
-      channel.setBlip(i, blipRecord.state);
+      channel.state.blips[i].setState(blipRecord.state);
     } else {
       blipRecord = store.create('blip', blip.state);
       blipRecord.setState({channel: channelRecord});
