@@ -18,12 +18,9 @@ export default {
     let channel = sequencer.addChannel({
       number: SequencerHelper.newChannelNumber(sequencer.state.channels),
       title: preset.state.title,
-      solo: false,
-      mute: false,
       sample: preset.state.sample,
       color: ChannelHelper.randomChannelHSL(),
       time_created: now(),
-      archived: false,
       preset
     });
 
