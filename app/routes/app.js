@@ -10,7 +10,6 @@ import {Sequencer} from 'sequencer';
 import SequencerHelper from 'helpers/sequencer';
 import App from 'components/app';
 
-
 function createSequencer(record) {
 
   // <TODO> let sequencer = new OmniSequencer
