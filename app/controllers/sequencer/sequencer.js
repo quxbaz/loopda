@@ -32,9 +32,10 @@ export default {
 
     // Create blip records and attach to new channel record
     channel.state.blips.forEach((blip) => {
-      blip.setState(
-        assign({unmixed: true}, pick(preset.state, mixables))
-      );
+      blip.setState(assign(
+        {unmixed: true},
+        pick(preset.state, mixables)
+      ));
       let blipRecord = store.create('blip', blip.state, blip);
       blipRecord.setState({channel: channelRecord});
     });
