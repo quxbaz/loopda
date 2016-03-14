@@ -11,8 +11,8 @@ import audioContext from 'globals/audiocontext';
 import audioService from 'globals/audioservice';
 
 // Sequencer
-import {Channel} from 'sequencer';
-import {sequencerDefaults, /*blipDefaults*/} from 'sequencer/lib/defaults';
+import {Sequencer, Channel, Blip} from 'sequencer';
+import {sequencerDefaults, channelDefaults, blipDefaults} from 'sequencer/lib/defaults';
 
 // Router
 import {router} from 'globals/router';
@@ -20,10 +20,34 @@ import {router} from 'globals/router';
 // Declare globals
 window.$app = document.getElementById('app-container');
 
-// Set sequencer defaults
-sequencerDefaults.playing = true;
-// blipDefaults.minOffset = 0;
-// blipDefaults.maxOffset = beatDuration;
+// Set defaults
+
+Object.assign(sequencerDefaults, {
+  playing: true,
+  beatDuration: 110
+});
+
+Object.assign(channelDefaults, {
+  title: '',
+  solo: false,
+  color: '#ff00ff',
+  archived: false
+});
+
+Object.assign(blipDefaults, {
+  unmixed: true
+});
+
+(function() {
+  let save = function(data) {return this.record.save(data)};
+  let destroy = function() {return this.record.destroy()};
+  Sequencer.prototype.save = save;
+  Sequencer.prototype.destroy = destroy;
+  Channel.prototype.save = save;
+  Channel.prototype.destroy = destroy;
+  Blip.prototype.save = save;
+  Blip.prototype.destroy = destroy;
+})();
 
 /*
   <Warning> Dirty pattern going on here. We're modifying the internals

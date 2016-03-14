@@ -11,7 +11,7 @@ import SequencerHelper from 'helpers/sequencer';
 import App from 'components/app';
 
 function createSequencer(record) {
-  let sequencer = new Sequencer({beatDuration: 110});
+  let sequencer = new Sequencer();
   app.sequencer = sequencer;  // Attach to global app object.
   sequencer.on('playBlip', (blipState, channel) => {
     if (blipState.unmixed)
