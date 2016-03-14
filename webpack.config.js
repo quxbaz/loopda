@@ -25,6 +25,7 @@ var config = {
           resolve(__dirname, 'node_modules/pending'),
           resolve(__dirname, 'node_modules/sentry'),
           resolve(__dirname, 'node_modules/sequencer'),
+          resolve(__dirname, 'node_modules/persist-sequencer'),
           resolve(__dirname, 'node_modules/stateful'),
           resolve(__dirname, 'node_modules/store')
         ],
