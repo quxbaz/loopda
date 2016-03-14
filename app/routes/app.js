@@ -11,12 +11,8 @@ import SequencerHelper from 'helpers/sequencer';
 import App from 'components/app';
 
 function createSequencer(record) {
-
-  // <TODO> let sequencer = new OmniSequencer
-
   let sequencer = new Sequencer({beatDuration: 110});
-  app.sequencer = sequencer;
-
+  app.sequencer = sequencer;  // Attach to global app object.
   sequencer.on('playBlip', (blipState, channel) => {
     if (blipState.unmixed)
       blipState = Object.assign({}, blipState, channel.state.preset.state);
@@ -26,7 +22,6 @@ function createSequencer(record) {
     } else
       audioService.playBlip(blipState);
   });
-
 }
 
 function initPresets(presets) {
