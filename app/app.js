@@ -11,8 +11,9 @@ import audioContext from 'globals/audiocontext';
 import audioService from 'globals/audioservice';
 
 // Sequencer
-import {Sequencer, Channel, Blip} from 'sequencer';
-import {sequencerDefaults, channelDefaults, blipDefaults} from 'sequencer/lib/defaults';
+import {Sequencer} from 'sequencer';
+import SequencerHelper from 'helpers/sequencer';
+import 'sequencer-addon/extend';
 
 // Router
 import {router} from 'globals/router';
@@ -20,50 +21,25 @@ import {router} from 'globals/router';
 // Declare globals
 window.$app = document.getElementById('app-container');
 
-// Set defaults
-
-Object.assign(sequencerDefaults, {
-  playing: true,
-  beatDuration: 110
-});
-
-Object.assign(channelDefaults, {
-  title: '',
-  solo: false,
-  color: '#ff00ff',
-  archived: false
-});
-
-Object.assign(blipDefaults, {
-  unmixed: true
-});
-
-(function() {
-  let save = function(data) {return this.record.save(data)};
-  let destroy = function() {return this.record.destroy()};
-  Sequencer.prototype.save = save;
-  Sequencer.prototype.destroy = destroy;
-  Channel.prototype.save = save;
-  Channel.prototype.destroy = destroy;
-  Blip.prototype.save = save;
-  Blip.prototype.destroy = destroy;
-})();
-
-/*
-  <Warning> Dirty pattern going on here. We're modifying the internals
-  of an library. It alters Channel to allow blips to play when @solo
-  is true.
-*/
-Channel.prototype.playBeat = function(beat) {
-  let {archived, solo, mute} = this.state;
-  if (!archived && (solo || !mute))
-    this.state.blips[beat].play();
-}
-
 export default class App {
 
   constructor() {
     window.app = this;  // Set app to global property
+    this.createSequencer();
+  }
+
+  createSequencer() {
+    let sequencer = new Sequencer();
+    this.sequencer = sequencer;
+    sequencer.on('playBlip', (blipState, channel) => {
+      if (blipState.unmixed)
+        blipState = Object.assign({}, blipState, channel.take('preset').state);
+      if (SequencerHelper.soloMode(sequencer)) {
+        if (channel.state.solo)
+          audioService.playBlip(blipState);
+      } else
+        audioService.playBlip(blipState);
+    });
   }
 
   init() {

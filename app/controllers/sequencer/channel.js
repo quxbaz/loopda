@@ -1,12 +1,10 @@
 import {router} from 'globals/router';
-import store from 'globals/store';
 import {toggleState} from 'lib/util';
 
 export default {
 
   viewChannelDetail(channel) {
-    let record = store.recordFor(channel);
-    let id = record.state.id || record.cid;
+    let id = channel.record.getId();
     router.nav('/sequencer/channel/' + id);
   },
 

@@ -2,11 +2,11 @@ import React from 'react';
 import Stateful from 'stateful';
 import {route} from 'globals/router';
 import store from 'globals/store';
-import watcher from 'globals/watcher';
+import {watch} from 'globals/watcher';
 import PresetManager from 'components/preset/manager';
 
 let manager = new Stateful({presets: []});
-watcher.include(manager);
+watch(manager);
 
 route('/preset', {
   resource() {

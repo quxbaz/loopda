@@ -6,9 +6,10 @@ import ChannelDetail from 'components/channel-detail/channel-detail';
 
 route('/sequencer/channel/:id', {
   resource(id) {
-    return store.get('channel', id).then((channel) => {
-      return [app.sequencer, store.objectFor(channel)];
-    });
+    Promise.resolve([]);
+    // return store.get('channel', id).then((channel) => {
+    //   return [app.sequencer, store.objectFor(channel)];
+    // });
   },
   render([sequencer, channel]) {
     return (

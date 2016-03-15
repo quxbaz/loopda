@@ -24,17 +24,19 @@ export default {
       preset
     });
 
-    let channelRecord = store.create('channel', channel.state, channel);
-    channelRecord.setState({sequencer: store.recordFor(sequencer)});
+    channel.record = store.Channel.create({sequencer: sequencer.record});
 
     // Create blip records and attach to new channel record
-    channel.state.blips.forEach((blip) => {
-      blip.setState(assign(
-        {unmixed: true},
-        pick(preset.state, mixables)
-      ));
-      let blipRecord = store.create('blip', blip.state, blip);
-      blipRecord.setState({channel: channelRecord});
+    channel.state.blips.forEach((blip, i) => {
+      blip.record = store.Blip.create({channel: channel.record});
+      blip.setState(pick(preset.state, mixables));
+    });
+
+    // Channel needs an id before blips can save their relation to it
+    channel.save().then(() => {
+      channel.state.blips.forEach((blip) => {
+        blip.save();
+      });
     });
 
   },
@@ -44,13 +46,10 @@ export default {
     sequencer.setState({
       channels: channels.filter(el => el !== channel)
     });
-    let channelRecord = store.recordFor(channel);
-    // Destroy blip records
-    channelRecord.get('blips').then((blipRecords) => {
-      blipRecords.forEach(record => record.destroy());
+    channel.destroy();
+    channel.state.blips.forEach((blip) => {
+      blip.destroy();
     });
-    // Destroy channel record
-    channelRecord.destroy();
   }
 
 };

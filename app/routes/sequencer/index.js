@@ -3,19 +3,13 @@ import store from 'globals/store';
 
 route('/sequencer', {
   resource() {
-    return Promise.all([
-      store.one('sequencer'),
-      app.sequencer
-    ]);
+    return Promise.resolve(app.sequencer);
   },
-  setup([record, sequencer]) {
-    if (record.state.playing)
+  setup(sequencer) {
+    if (sequencer.state.playing)
       sequencer.play();
   },
   redirect() {
     return '/sequencer/overview';
-  },
-  cleanup([record, sequencer]) {
-    // sequencer.pause();
   }
 });
