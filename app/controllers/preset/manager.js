@@ -4,6 +4,10 @@ import mixables from 'globals/mixables';
 
 export default {
 
+  viewPreset(preset) {
+    console.log('viewPreset:', preset);
+  },
+
   addPreset(manager, title, sample) {
     let preset = store.create('preset', {title, sample});
     preset.save();
