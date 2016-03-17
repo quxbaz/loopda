@@ -18,6 +18,9 @@ import 'sequencer-addon/extend';
 // Router
 import {router} from 'globals/router';
 
+// Misc
+import {pick} from 'lib/util';
+
 // Declare globals
 window.$app = document.getElementById('app-container');
 
@@ -31,14 +34,16 @@ export default class App {
   createSequencer() {
     let sequencer = new Sequencer();
     this.sequencer = sequencer;
-    sequencer.on('playBlip', (blipState, channel) => {
-      if (blipState.unmixed)
-        blipState = Object.assign({}, blipState, channel.take('preset').state);
+    sequencer.on('playBlip', (blip, channel) => {
+      let playState = Object.assign(
+        pick(blip.state, ['sample', 'mute']),
+        blip.take('mixable').state
+      );
       if (SequencerHelper.soloMode(sequencer)) {
         if (channel.state.solo)
-          audioService.playBlip(blipState);
+          audioService.playBlip(playState);
       } else
-        audioService.playBlip(blipState);
+        audioService.playBlip(playState);
     });
   }
 

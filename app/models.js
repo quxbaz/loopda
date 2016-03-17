@@ -43,12 +43,9 @@ export let initModels = (store) => {
       beat: attr(),
       sample: attr(),
       mute: attr(),
-      duration: attr(),
-      offset: attr(),
-      gain: attr(),
-      rate: attr(),
       unmixed: attr(),
-      channel: belongsTo('channel')
+      channel: belongsTo('channel'),
+      mixable: hasOne('mixable')
     }
   });
 
@@ -58,15 +55,18 @@ export let initModels = (store) => {
       title: attr(),
       sample: attr(),
       channels: hasMany('channel'),
+      mixable: hasOne('mixable')
+    }
+  });
 
-      /*
-        mixable props
-      */
-
+  store.define('mixable', {
+    schema: {
+      id: attr(),
+      // duration: attr(0),
+      // offset: attr(0),
       gain: attr(1),
       minGain: attr(0),
       maxGain: attr(10),
-
       rate: attr(1),
       minRate: attr(0),
       maxRate: attr(4)

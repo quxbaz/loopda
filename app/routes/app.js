@@ -9,11 +9,15 @@ function initPresets(presets) {
   if (presets.length !== 0)
     return;
   names.forEach((sample) => {
-    let preset = store.create('preset', {
+    let mixable = store.Mixable.create();
+    let preset = store.Preset.create({
       title: sample,
-      sample
+      sample,
+      mixable
     });
-    preset.save();
+    mixable.save().then(() => {
+      preset.save();
+    });
   });
 }
 
@@ -46,7 +50,9 @@ function loadBlips() {
 
 route('app', {
   resource() {
-    return store.all(['preset', 'sequencer', 'channel', 'blip']);
+    return store.all('mixable').then(() =>
+      store.all(['preset', 'sequencer', 'channel', 'blip'])
+    );
   },
   setup([presets, sequencers, channels]) {
     initPresets(presets);

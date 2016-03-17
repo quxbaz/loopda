@@ -8,8 +8,11 @@ import Preset from './preset';
 import Mixer from 'components/mixer/mixer';
 import SampleSelect from './sample-select';
 
-let previewSound = throttle((state) => {
-  audioservice.playBlip(state);
+let previewSound = throttle((preset, mixable) => {
+  audioservice.playBlip(Object.assign(
+    {sample: preset.state.sample},
+    mixable.state
+  ));
 }, 60);
 
 export default React.createClass({
@@ -42,9 +45,9 @@ export default React.createClass({
     this.setState({preset});
   },
 
-  handleMix(preset, prop, value) {
-    ManagerCtrl.mix(preset, prop, value);
-    previewSound(preset.state);
+  handleMix(mixable, prop, value) {
+    ManagerCtrl.mix(mixable, prop, value);
+    previewSound(this.state.preset, mixable);
   },
 
   render() {
@@ -62,8 +65,10 @@ export default React.createClass({
     );
 
     let render = {};
-    if (this.state.preset)
-      render.mixer = <Mixer mixable={this.state.preset} onMix={this.handleMix} />;
+    if (this.state.preset) {
+      let mixable = this.state.preset.take('mixable');
+      render.mixer = <Mixer mixable={mixable} onMix={this.handleMix} />;
+    }
 
     return (
       <div className="preset-manager">

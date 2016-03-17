@@ -103,7 +103,7 @@ export default React.createClass({
     return (
       <div className="ui-slider">
         <div className="ui-slider-bar" onMouseDown={this.handleBarClick} style={barCSS}>
-          <div className="ui-slider-grabber" style={grabberCSS} />
+          <div className="ui-slider-grabber clicky" style={grabberCSS} />
         </div>
         <span>
           {this.getValue(offset)}, {this.getScale(offset) * 100}%

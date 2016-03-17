@@ -1,8 +1,7 @@
 import store from 'globals/store';
-import {assign, pick, randomChannelHSL, now} from 'lib/util';
+import {without, randomChannelHSL, now} from 'lib/util';
 import SequencerHelper from 'helpers/sequencer';
 import ChannelHelper from 'helpers/channel';
-import mixables from 'globals/mixables';
 
 export default {
 
@@ -20,16 +19,22 @@ export default {
       title: preset.state.title,
       sample: preset.state.sample,
       color: ChannelHelper.randomChannelHSL(),
-      time_created: now(),
+      time_created: now()
+    });
+
+    channel.record = store.Channel.create({
+      sequencer: sequencer.record,
       preset
     });
 
-    channel.record = store.Channel.create({sequencer: sequencer.record});
+    let mixable = channel.take('preset').take('mixable');
 
     // Create blip records and attach to new channel record
     channel.state.blips.forEach((blip, i) => {
-      blip.record = store.Blip.create({channel: channel.record});
-      blip.setState(pick(preset.state, mixables));
+      blip.record = store.Blip.create({
+        channel: channel.record,
+        mixable
+      });
     });
 
     // Channel needs an id before blips can save their relation to it

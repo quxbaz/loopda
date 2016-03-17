@@ -1,6 +1,6 @@
 import React from 'react';
 import mixables from 'globals/mixables';
-import {keys, intersect, capitalize} from 'lib/util';
+import {keys, pick, capitalize} from 'lib/util';
 import Slider from 'components/ui/slider';
 
 export default React.createClass({
@@ -14,9 +14,9 @@ export default React.createClass({
 
     let {mixable, onMix} = this.props;
     let {state} = mixable;
-    let localMixables = intersect(keys(state), mixables);
+    let localMixables = pick(state, mixables);
 
-    let sliders = localMixables.map((prop) => {
+    let sliders = keys(localMixables).map((prop) => {
       return React.createElement(Slider, {
         key: prop,
         value: state[prop],                    // 'gain'

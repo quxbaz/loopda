@@ -12,10 +12,10 @@ export default {
     });
   },
 
-  mix(preset, prop, value) {
+  mix(mixable, prop, value) {
     if (!mixables.includes(prop))
       throw new Error('Prop @' + prop + ' is not a mixable.');
-    preset.setState({[prop]: value});
+    mixable.setState({[prop]: value});
   }
 
 };
