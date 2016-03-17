@@ -3,11 +3,6 @@ import {toggleState} from 'lib/util';
 
 export default {
 
-  viewChannelDetail(channel) {
-    let id = channel.record.getId();
-    router.nav('/sequencer/channel/' + id);
-  },
-
   toggleMute(channel) {
     toggleState(channel, 'mute');
   },
