@@ -20,15 +20,15 @@ export default React.createClass({
   mixins: [LinkedStateMixin, watchMixin],
 
   propTypes: {
-    manager: React.PropTypes.object.isRequired
+    manager: React.PropTypes.object.isRequired,
+    preset: React.PropTypes.object
   },
 
   getInitialState() {
     this.defaultTitle = 'untitled';
     return {
       title: this.defaultTitle,
-      sample: 'hihat',
-      preset: null
+      sample: 'hihat'
     };
   },
 
@@ -42,12 +42,12 @@ export default React.createClass({
   },
 
   handleClickPreset(preset) {
-    this.setState({preset});
+    ManagerCtrl.viewPreset(preset);
   },
 
   handleMix(mixable, prop, value) {
     ManagerCtrl.mix(mixable, prop, value);
-    previewSound(this.state.preset, mixable);
+    previewSound(this.props.preset, mixable);
   },
 
   render() {
@@ -59,14 +59,14 @@ export default React.createClass({
       React.createElement(Preset, {
         key: preset.cid,
         preset,
-        selected: this.state.preset === preset,
+        selected: this.props.preset === preset,
         onClick: this.handleClickPreset
       })
     );
 
     let render = {};
-    if (this.state.preset) {
-      let mixable = this.state.preset.take('mixable');
+    if (this.props.preset) {
+      let mixable = this.props.preset.take('mixable');
       render.mixer = <Mixer mixable={mixable} onMix={this.handleMix} />;
     }
 
