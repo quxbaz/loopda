@@ -1,3 +1,4 @@
+import {router} from 'globals/router';
 import store from 'globals/store';
 import {watch} from 'globals/watcher';
 import mixables from 'globals/mixables';
@@ -5,7 +6,7 @@ import mixables from 'globals/mixables';
 export default {
 
   viewPreset(preset) {
-    console.log('viewPreset:', preset);
+    router.nav('/preset/' + preset.state.id);
   },
 
   addPreset(manager, title, sample) {
