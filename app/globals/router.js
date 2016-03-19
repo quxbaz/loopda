@@ -31,14 +31,22 @@ class Route {
   cleanup(data) {}
 
   on(...args) {
+    let url = window.location.hash.substring(1);
     this.resource(...args).then((data) => {
       this.resourceData = data;
       return this.setup(data);
     }).then((data) => {
+      // Only redirect if the URL matches this exact path.
       let redirect = this.redirect();
-      if (redirect !== undefined && window.location.hash.substring(1) === this.path)
+      if (redirect !== undefined && url === this.path)
         this.router.nav(redirect);
       else {
+
+        // A very simplistic way of checking the browser URL against
+        // the route path. This could break in the future.
+        if (url.split('/').length !== this.path.split('/').length)
+          return;
+
         let renderOutlet = this.render(data);
         if (renderOutlet) {
           this.router.renderOutlet = renderOutlet;

@@ -73,4 +73,10 @@ export let initModels = (store) => {
     }
   });
 
+  store.define('manager', {
+    schema: {
+      presets: attr()
+    }
+  });
+
 };

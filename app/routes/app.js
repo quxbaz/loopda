@@ -4,6 +4,10 @@ import store from 'globals/store';
 import {names} from 'globals/samples';
 import App from 'components/app';
 
+// Presets manager
+let manager = store.Manager.create({presets: []});
+manager._dontPersist = true;
+
 // Create default presets.
 function initPresets(presets) {
   if (presets.length !== 0)
