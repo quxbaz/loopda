@@ -26,12 +26,12 @@ export default function ChannelWrapper(props) {
     <div className="channel-wrapper">
       <div className="channel-info">
         <div className="color-box" style={{background: color}} />
-        <a className="channel-text" onClick={viewPreset}>
-          <div className="channel-number">{number}</div>
-          <div className="channel-title">{title}</div>
-        </a>
+        <div className="channel-text">
+          <div className="channel-number hide">{number}</div>
+          <div className="channel-title clicky" onClick={viewPreset}>{title}</div>
+          <a className="archive-channel" onClick={archiveChannel}><Icon name="x" /></a>
+        </div>
         <div className="channel-controls">
-          <a className="archive-channel" onClick={archiveChannel}><Icon name="trash" /></a>
           <Button className="solo-button" state={solo} onClick={toggleSolo}>Solo</Button>
           <Button state={mute} onClick={toggleMute}>Mute</Button>
         </div>
