@@ -37,7 +37,7 @@ export default function Overview(props) {
         <a onClick={() => localStorage.clear()}>localStorage.clear()</a>
       </div>
       <a className="togglePlay" onClick={togglePlay}>
-        {playing ? 'pause' : 'play'}
+        {playing ? 'pause' : 'play'} (space)
       </a>
       <div>
         # Channels: {channels.length}
