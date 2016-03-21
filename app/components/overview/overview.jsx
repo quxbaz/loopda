@@ -30,9 +30,8 @@ export default function Overview(props) {
 
   return (
     <div className="overview">
-      <div>
-        <a href="/#/preset">presets</a>
-      </div>
+      <div><a href="/#/preset">presets</a></div>
+      <div><a href="/#/sequencer/editor">song mode</a></div>
       <div>
         <a onClick={() => localStorage.clear()}>localStorage.clear()</a>
       </div>
