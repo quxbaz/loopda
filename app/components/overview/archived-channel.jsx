@@ -19,7 +19,7 @@ export default function ArchivedChannel(props) {
   return (
     <div className="archived-channel">
       <div className="archived-channel-info">
-        <span>{number}.&nbsp;{title}</span>
+        <span>{title}</span>
         <div className="archived-channel-controls">
           <a onClick={handleDismiss}>Dismiss</a>
           <a onClick={handleUndo}>Undo</a>
