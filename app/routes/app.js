@@ -4,9 +4,13 @@ import store from 'globals/store';
 import {names} from 'globals/samples';
 import App from 'components/app';
 
-// Presets manager
+// Presets manager record
 let manager = store.Manager.create({presets: []});
 manager._dontPersist = true;
+
+// Song editor record
+let editor = store.Editor.create({songs: []});
+editor._dontPersist = true;
 
 // Create default presets.
 function initPresets(presets) {
@@ -54,7 +58,7 @@ function loadBlips() {
 
 route('app', {
   resource() {
-    return store.all('mixable').then(() =>
+    return store.all(['mixable', 'song']).then(() =>
       store.all(['preset', 'sequencer', 'channel', 'blip'])
     );
   },

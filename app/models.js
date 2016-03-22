@@ -79,4 +79,18 @@ export let initModels = (store) => {
     }
   });
 
+  store.define('editor', {
+    schema: {
+      songs: hasMany('song')
+    }
+  });
+
+  store.define('song', {
+    schema: {
+      editor: belongsTo('editor'),
+      title: attr(),
+      data: attr(() => [])
+    }
+  });
+
 };
