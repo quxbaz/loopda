@@ -35,15 +35,11 @@ export default class App {
     let sequencer = new Sequencer();
     this.sequencer = sequencer;
     sequencer.on('playBlip', (blip, channel) => {
-      let playState = Object.assign(
-        pick(blip.state, ['sample', 'mute']),
-        blip.take('mixable').state
-      );
       if (SequencerHelper.soloMode(sequencer)) {
         if (channel.state.solo)
-          audioService.playBlip(playState);
+          audioService.playBlip(blip.getPlayState());
       } else
-        audioService.playBlip(playState);
+        audioService.playBlip(blip.getPlayState());
     });
   }
 

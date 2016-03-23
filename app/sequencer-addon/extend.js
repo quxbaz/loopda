@@ -1,12 +1,13 @@
 import Base from 'sequencer/lib/base';
-import {Sequencer, Channel} from 'sequencer';
+import {Sequencer, Channel, Blip} from 'sequencer';
 import {sequencerDefaults, channelDefaults, blipDefaults} from 'sequencer/lib/defaults';
 import {watch} from 'globals/watcher';
+import {pick} from 'lib/util';
 
 // Set sequencer defaults
 Object.assign(sequencerDefaults, {
   playing: true,
-  beatDuration: 110
+  beatDuration: 100
 });
 
 Object.assign(channelDefaults, {
@@ -48,4 +49,12 @@ Channel.prototype.playBeat = function(beat) {
   let {archived, solo, mute} = this.state;
   if (!archived && (solo || !mute))
     this.state.blips[beat].play();
-}
+};
+
+Blip.prototype.getPlayState = function(state={}) {
+  return Object.assign(
+    pick(this.state, ['sample', 'mute']),
+    this.take('mixable').state,
+    state
+  );
+};
