@@ -8,6 +8,7 @@ export default {
     song.save();
   },
 
+  // <TODO> Move this to song controller
   playSong(sequencer, song) {
 
     let {data} = song.state;
