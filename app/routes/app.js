@@ -58,9 +58,12 @@ function loadBlips() {
 
 route('app', {
   resource() {
-    return store.all(['mixable', 'song']).then(() =>
-      store.all(['preset', 'sequencer', 'channel', 'blip'])
-    );
+    return store.all(['mixable', 'song']).then(([mixables, songs]) => {
+      songs.forEach((song) => {
+        song.setState({editor});
+      });
+      return store.all(['preset', 'sequencer', 'channel', 'blip'])
+    });
   },
   setup([presets, sequencers, channels]) {
     initPresets(presets);

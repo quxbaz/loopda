@@ -89,6 +89,7 @@ export let initModels = (store) => {
     schema: {
       editor: belongsTo('editor'),
       title: attr(),
+      maxChannels: attr(16),
       data: attr(() => [])
     }
   });
