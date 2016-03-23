@@ -28,7 +28,7 @@ export default function ChannelWrapper(props) {
         <div className="color-box" style={{background: color}} />
         <div className="channel-text">
           <div className="channel-number hide">{number}</div>
-          <div className="channel-title clicky" onClick={viewPreset}>{title}</div>
+          <div className="channel-title clicky" onClick={viewPreset}>{title} ({number})</div>
           <a className="archive-channel" onClick={archiveChannel}><Icon name="x" /></a>
         </div>
         <div className="channel-controls">
