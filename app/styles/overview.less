@@ -100,7 +100,23 @@
 
 }
 
-.song-mode {}
+.song-mode {
+  @narrowWidth: 24px;
+  @narrowHeight: 24px;
+  .blip {
+    transition: width 200ms ease-out;
+    width: @narrowWidth;
+    height: @narrowHeight;
+  }
+  .channel-wrapper {
+    width: @narrowWidth * @beats + @infoWidth;
+  }
+  .channel-info {
+    .archive-channel {.hide;}
+    .channel-controls {.hide;}
+  }
+  .tempo-bar {.hide;}
+}
 
 .channel-wrapper-overlay {
   .clicky;
