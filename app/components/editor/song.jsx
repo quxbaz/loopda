@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import store from 'globals/store';
 import SongCtrl from 'controllers/editor/song';
 
@@ -9,14 +10,16 @@ import SongCtrl from 'controllers/editor/song';
 Line.propTypes = {
   line: React.PropTypes.array.isRequired,
   row: React.PropTypes.number.isRequired,
+  cursorPosition: React.PropTypes.array.isRequired,
   onClickSlot: React.PropTypes.func
 };
 
 function Line(props) {
-  let {line, row, onClickSlot} = props;
-  let slots = line.map(
-    (channelId, i) => <Slot key={i} position={[i, row]} channelId={channelId} onClick={onClickSlot} />
-  );
+  let {line, row, cursorPosition, onClickSlot} = props;
+  let slots = line.map((channelId, i) => {
+    return <Slot key={i} cursorPosition={cursorPosition} position={[i, row]} channelId={channelId}
+                 onClick={onClickSlot} />
+  });
   return <div className="line">{slots}</div>;
 }
 
@@ -26,6 +29,7 @@ function Line(props) {
 */
 
 Slot.propTypes = {
+  cursorPosition: React.PropTypes.array.isRequired,
   position: React.PropTypes.array.isRequired,
   channelId(props, propName) {
     let prop = props[propName];
@@ -36,16 +40,22 @@ Slot.propTypes = {
 };
 
 function Slot(props) {
+  let {cursorPosition, position} = props;
   let id = props.channelId;
-  let onClick = () => props.onClick(props.position);
+  let isSelected = cursorPosition[0] === position[0] && cursorPosition[1] === position[1];
   let channel;
   let style = {};
   if (id) {
     channel = store.Channel.get(id, true);
     style = {background: channel.state.color};
   }
+  let className = classNames({
+    slot: true,
+    selected: isSelected
+  });
+  let onClick = () => props.onClick(props.position);
   return (
-    <div className="slot" style={style} onClick={onClick}>
+    <div className={className} style={style} onClick={onClick}>
       {id ? channel.state.sample + ' (' + channel.state.number + ')' : '-'}
     </div>
   );
@@ -90,7 +100,8 @@ export default React.createClass({
   render() {
     let {song} = this.props;
     let lines = song.state.data.map((line, i) => {
-      return <Line key={i} row={i} line={line} onClickSlot={this.handleClickSlot} />;
+      return <Line key={i} row={i} line={line} cursorPosition={song.state.position}
+                   onClickSlot={this.handleClickSlot} />;
     });
 
     return (

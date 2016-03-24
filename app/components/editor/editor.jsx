@@ -1,6 +1,7 @@
 import React from 'react';
 import LinkedStateMixin from 'react/lib/LinkedStateMixin';
 import EditorCtrl from 'controllers/editor/editor';
+import SongCtrl from 'controllers/editor/song';
 import OverviewCtrl from 'controllers/overview/overview';
 import Song from './song';
 
@@ -21,17 +22,33 @@ export default React.createClass({
     };
   },
 
-  handleEscKey(event) {
-    if (event.keyCode === 27)
+  handleKeyDown(event) {
+    // console.log(event.keyCode);
+    // console.log(event.shiftKey);
+    if (event.keyCode === 27)  // esc key
       OverviewCtrl.viewOverview();
+    else if (event.keyCode === 13) {  // enter key
+      event.preventDefault();
+      if (event.shiftKey)
+        SongCtrl.moveCursorPrevRow(this.props.currentSong);
+      else
+        SongCtrl.moveCursorNextRow(this.props.currentSong);
+    }
+    else if (event.keyCode === 9) {  // tab key
+      event.preventDefault();
+      if (event.shiftKey)
+        SongCtrl.moveCursorPrevSlot(this.props.currentSong);
+      else
+        SongCtrl.moveCursorNextSlot(this.props.currentSong);
+    }
   },
 
   componentDidMount() {
-    window.addEventListener('keydown', this.handleEscKey);
+    window.addEventListener('keydown', this.handleKeyDown);
   },
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleEscKey);
+    window.removeEventListener('keydown', this.handleKeyDown);
   },
 
   resetForm() {
