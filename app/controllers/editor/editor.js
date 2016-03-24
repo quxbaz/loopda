@@ -14,11 +14,10 @@ export default {
     let {data} = song.state;
     let {beats, beatDuration, channels} = sequencer.state;
 
-    let hihat = channels.find(channel => channel.state.sample === 'hihat').state.id;
-    let clap = channels.find(channel => channel.state.sample === 'clap').state.id;
-    let kick = channels.find(channel => channel.state.sample === 'kick').state.id;
-
     // // <TESTING> Test data
+    // let hihat = channels.find(channel => channel.state.sample === 'hihat').state.id;
+    // let clap = channels.find(channel => channel.state.sample === 'clap').state.id;
+    // let kick = channels.find(channel => channel.state.sample === 'kick').state.id;
     // data = [
     //   [hihat, clap],
     //   [kick],
