@@ -173,16 +173,16 @@ describe("lib/util", () => {
     });
   });
 
-  describe("deepCopy()", () => {
+  describe("clone()", () => {
     it("Creates a deep copy of an object.", () => {
       let a = {a: 1};
-      let b = util.deepCopy(a);
+      let b = util.clone(a);
       b.should.eql({a:1});
       (b === a).should.be.false;
     });
     it("It copies at greater depths.", () => {
       let a = {a: {a: 1}};
-      let b = util.deepCopy(a);
+      let b = util.clone(a);
       b.should.eql({a: {a: 1}});
       (b === a).should.be.false;
       b.a.should.eql({a: 1});
@@ -190,7 +190,7 @@ describe("lib/util", () => {
     });
     it("Copies an array.", () => {
       let a = [1, 2, {a:1}];
-      let b = util.deepCopy(a);
+      let b = util.clone(a);
       b.should.eql([1, 2, {a: 1}]);
       (b[2] === a[2]).should.be.false;
     });

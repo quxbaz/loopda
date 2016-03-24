@@ -91,7 +91,8 @@ export function copy(obj) {
   return Object.assign({}, obj);
 }
 
-export let deepCopy = (obj) => JSON.parse(JSON.stringify(obj));
+// Performs a deep copy of an object or array.
+export let clone = (obj) => JSON.parse(JSON.stringify(obj));
 
 export function keys(obj) {
   /*
