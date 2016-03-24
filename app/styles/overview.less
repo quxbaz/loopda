@@ -19,7 +19,9 @@
 
 .channel-wrapper {
 
+  position: relative;
   display: flex;
+  width: @channelWidth + @infoWidth;
   margin-bottom: 6px;
 
   .channel-info {
@@ -96,6 +98,10 @@
     a + a {border-left: 1px solid #d0d0d0}
   }
 
+}
+
+.channel-wrapper-overlay {
+  .overlay;
 }
 
 @import "archived-channel";
