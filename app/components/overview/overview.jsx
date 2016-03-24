@@ -3,6 +3,7 @@
 */
 
 import React from 'react';
+import classNames from 'classnames';
 import SequencerCtrl from 'controllers/sequencer/sequencer';
 import SequencerHelper from 'helpers/sequencer';
 import ChannelGrid from './channel-grid';
@@ -30,8 +31,13 @@ export default function Overview(props) {
     songMode
   };
 
+  let className = classNames({
+    overview: true,
+    'song-mode': songMode
+  });
+
   return (
-    <div className="overview">
+    <div className={className}>
       <div><a href="/#/preset">presets</a></div>
       <div><a href="/#/sequencer/editor">song mode</a></div>
       <div>
