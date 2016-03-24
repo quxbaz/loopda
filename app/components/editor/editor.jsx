@@ -23,8 +23,6 @@ export default React.createClass({
   },
 
   handleKeyDown(event) {
-    // console.log(event.keyCode);
-    // console.log(event.shiftKey);
     if (event.keyCode === 27)  // esc key
       OverviewCtrl.viewOverview();
     else if (event.keyCode === 13) {  // enter key
@@ -33,13 +31,22 @@ export default React.createClass({
         SongCtrl.moveCursorPrevRow(this.props.currentSong);
       else
         SongCtrl.moveCursorNextRow(this.props.currentSong);
-    }
-    else if (event.keyCode === 9) {  // tab key
+    } else if (event.keyCode === 9) {  // tab key
       event.preventDefault();
-      if (event.shiftKey)
-        SongCtrl.moveCursorPrevSlot(this.props.currentSong);
-      else
-        SongCtrl.moveCursorNextSlot(this.props.currentSong);
+      if (event.shiftKey) SongCtrl.moveCursorPrevSlot(this.props.currentSong);
+      else SongCtrl.moveCursorNextSlot(this.props.currentSong);
+    } else if (event.keyCode === 38) {  // up arrow
+      event.preventDefault();
+      SongCtrl.moveCursorPrevRow(this.props.currentSong);
+    } else if (event.keyCode === 40) {  // down arrow
+      event.preventDefault();
+      SongCtrl.moveCursorNextRow(this.props.currentSong);
+    } else if (event.keyCode === 37) {  // left arrow
+      event.preventDefault();
+      SongCtrl.moveCursorPrevSlot(this.props.currentSong);
+    } else if (event.keyCode === 39) {  // right arrow
+      event.preventDefault();
+      SongCtrl.moveCursorNextSlot(this.props.currentSong);
     }
   },
 
