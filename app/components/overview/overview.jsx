@@ -10,12 +10,13 @@ import ChannelMenu from './channel-menu';
 
 Overview.propTypes = {
   sequencer: React.PropTypes.object,
-  presets: React.PropTypes.array.isRequired
+  presets: React.PropTypes.array.isRequired,
+  songMode: React.PropTypes.bool
 };
 
 export default function Overview(props) {
 
-  let {sequencer, presets} = props;
+  let {sequencer, presets, songMode} = props;
   let {beats, playing, channels, currentBeat} = sequencer.state;
 
   let togglePlay = () => SequencerCtrl.togglePlay(sequencer);
@@ -25,7 +26,8 @@ export default function Overview(props) {
     sequencer,
     beats,
     currentBeat,
-    soloMode: SequencerHelper.soloMode(sequencer)
+    soloMode: SequencerHelper.soloMode(sequencer),
+    songMode
   };
 
   return (

@@ -14,7 +14,7 @@ route('/sequencer/editor', {
   render([sequencer, presets, editor]) {
     return (
       <Sequencer sequencer={sequencer}>
-        <Overview presets={presets} />
+        <Overview presets={presets} songMode={true} />
         <Editor editor={editor} />
       </Sequencer>
     );

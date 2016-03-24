@@ -8,12 +8,13 @@ import Button from 'components/ui/button';
 
 ChannelWrapper.propTypes = {
   channel: React.PropTypes.object.isRequired,
-  soloMode: React.PropTypes.bool.isRequired
+  soloMode: React.PropTypes.bool.isRequired,
+  songMode: React.PropTypes.bool
 };
 
 export default function ChannelWrapper(props) {
 
-  let {channel, soloMode} = props;
+  let {channel, soloMode, songMode} = props;
   let {number, title, solo, mute, color} = channel.state;
 
   // Event handlers
@@ -37,6 +38,7 @@ export default function ChannelWrapper(props) {
         </div>
       </div>
       <Channel channel={channel} soloMode={soloMode} onClickBlip={BlipCtrl.toggleMute} />
+      {songMode ? <div className="channel-wrapper-overlay" /> : ''}
     </div>
   );
 
