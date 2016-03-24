@@ -4,6 +4,10 @@ import audioService from 'globals/audioservice';
 
 export default {
 
+  viewEditor() {
+    router.nav('/sequencer/editor');
+  },
+
   addSong(editor, title) {
     let song = store.Song.create({editor, title});
     song.save();

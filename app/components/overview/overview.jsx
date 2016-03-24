@@ -6,8 +6,10 @@ import React from 'react';
 import classNames from 'classnames';
 import SequencerCtrl from 'controllers/sequencer/sequencer';
 import SequencerHelper from 'helpers/sequencer';
+import EditorCtrl from 'controllers/editor/editor';
 import ChannelGrid from './channel-grid';
 import ChannelMenu from './channel-menu';
+import EscapeWatcher from 'components/util/escape-watcher';
 
 Overview.propTypes = {
   sequencer: React.PropTypes.object,
@@ -22,6 +24,7 @@ export default function Overview(props) {
 
   let togglePlay = () => SequencerCtrl.togglePlay(sequencer);
   let addChannel = (preset) => SequencerCtrl.createChannel(sequencer, preset);
+  let handleEscape = () => EditorCtrl.viewEditor();
 
   let gridProps = {
     sequencer,
@@ -38,8 +41,9 @@ export default function Overview(props) {
 
   return (
     <div className={className}>
+      <EscapeWatcher onEscape={handleEscape} />
       <div><a href="/#/preset">presets</a></div>
-      <div><a href="/#/sequencer/editor">song mode</a></div>
+      <div><a href="/#/sequencer/editor">song mode (esc)</a></div>
       <div>
         <a onClick={() => localStorage.clear()}>localStorage.clear()</a>
       </div>

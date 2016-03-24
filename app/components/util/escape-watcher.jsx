@@ -22,6 +22,10 @@ export default React.createClass({
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this._handleEscKey);
+  },
+
+  render() {
+    return <div className="escape-watcher hide"></div>;
   }
 
 });
