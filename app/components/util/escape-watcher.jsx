@@ -11,17 +11,17 @@ export default React.createClass({
     onEscape: React.PropTypes.func.isRequired
   },
 
-  handleEscKey(event) {
+  _handleEscKey(event) {
     if (event.keyCode === 27)
       this.props.onEscape(event);
   },
 
   componentDidMount() {
-    window.addEventListener('keydown', this.handleEscKey);
+    window.addEventListener('keydown', this._handleEscKey);
   },
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleEscKey);
+    window.removeEventListener('keydown', this._handleEscKey);
   }
 
 });
