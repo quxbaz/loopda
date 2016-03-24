@@ -91,6 +91,8 @@ export function copy(obj) {
   return Object.assign({}, obj);
 }
 
+export let deepCopy = (obj) => JSON.parse(JSON.stringify(obj));
+
 export function keys(obj) {
   /*
     Returns the keys of an object.
