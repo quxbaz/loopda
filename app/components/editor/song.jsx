@@ -1,4 +1,5 @@
 import React from 'react';
+import store from 'globals/store';
 import SongCtrl from 'controllers/editor/song';
 
 /*
@@ -37,7 +38,17 @@ Slot.propTypes = {
 function Slot(props) {
   let id = props.channelId;
   let onClick = () => props.onClick(props.position);
-  return <div className="slot" onClick={onClick}>{id ? 'x' : '-'}</div>;
+  let channel;
+  let style = {};
+  if (id) {
+    channel = store.Channel.get(id, true);
+    style = {background: channel.state.color};
+  }
+  return (
+    <div className="slot" style={style} onClick={onClick}>
+      {id ? channel.state.sample + ' (' + channel.state.number + ')' : '-'}
+    </div>
+  );
 }
 
 

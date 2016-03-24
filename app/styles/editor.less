@@ -1,6 +1,11 @@
+@slotColor: #fff;
+@altSlotColor: #f2f2f2;
+
 .editor {
   .side-panel;
+  width: 680px;
   padding: 12px 24px;
+  background: #fff;
 }
 
 .line-grid {
@@ -8,13 +13,19 @@
 
 .line {
   display: flex;
+  &:nth-child(odd) .slot:nth-child(odd) {
+    background: @altSlotColor;
+  }
+  &:nth-child(even) .slot:nth-child(even) {
+    background: @altSlotColor;
+  }
 }
 
 .slot {
   .clicky;
-  .border;
-  display: flex;
+  .flex-center;
   flex: 1;
-  justify-content: center;
-  align-items: center;
+  height: 32px;
+  font-size: 12px;
+  background: @slotColor;
 }

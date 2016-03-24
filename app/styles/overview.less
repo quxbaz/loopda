@@ -101,20 +101,24 @@
 }
 
 .song-mode {
-  @narrowWidth: 24px;
-  @narrowHeight: 32px;
+  @narrowBlipWidth: 24px;
+  @narrowBlipHeight: 32px;
+  @narrowInfoWidth: 100px;
   .blip {
-    width: @narrowWidth;
-    height: @narrowHeight;
+    width: @narrowBlipWidth;
+    height: @narrowBlipHeight;
   }
   .channel-wrapper {
-    width: @narrowWidth * @beats + @infoWidth;
+    width: @narrowBlipWidth * @beats + @narrowInfoWidth;
   }
   .channel-info {
+    width: @narrowInfoWidth;
     .archive-channel {.hide;}
     .channel-controls {.hide;}
+    .channel-title {padding-left: 4px}
   }
   .tempo-bar {.hide;}
+  .master-channel {margin-left: @narrowInfoWidth}
 }
 
 .channel-wrapper-overlay {
