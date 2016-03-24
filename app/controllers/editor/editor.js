@@ -1,3 +1,4 @@
+import {router} from 'globals/router';
 import store from 'globals/store';
 import audioService from 'globals/audioservice';
 
@@ -39,6 +40,10 @@ export default {
       });
     });
 
+  },
+
+  changeSong(editor, song) {
+    router.nav('/sequencer/editor/' + song.state.id);
   }
 
 };

@@ -81,13 +81,16 @@ export let initModels = (store) => {
 
   store.define('editor', {
     schema: {
-      songs: hasMany('song')
+      songs: hasMany('song'),
+      currentSong: hasOne('song')
     }
   });
 
   store.define('song', {
     schema: {
+      id: attr(),
       editor: belongsTo('editor'),
+      position: attr(),  // The current position of the cursor
       title: attr(),
       maxChannels: attr(8),
       data: attr(() => [])

@@ -5,21 +5,22 @@ import Sequencer from 'components/sequencer/sequencer';
 import Overview from 'components/overview/overview';
 import Editor from 'components/editor/editor';
 
-route('/sequencer/editor', {
-  resource() {
+route('/sequencer/editor/:id', {
+  resource(id) {
     return store.all(['preset', 'editor']).then(([presets, editors]) => {
-      return [app.sequencer, presets, editors[0]]
+      return [app.sequencer, presets, editors[0], id];
     });
   },
-  setup([sequencer, presets, editor]) {
-    editor.setState({currentSong: undefined});
-    return [sequencer, presets, editor];
+  setup([sequencer, presets, editor, id]) {
+    let currentSong = editor.take('songs').find(song => song.state.id === id);
+    editor.setState({currentSong});
+    return [sequencer, presets, editor, currentSong];
   },
-  render([sequencer, presets, editor]) {
+  render([sequencer, presets, editor, currentSong]) {
     return (
       <Sequencer sequencer={sequencer}>
         <Overview presets={presets} songMode={true} />
-        <Editor editor={editor} />
+        <Editor editor={editor} currentSong={currentSong} />
       </Sequencer>
     );
   }

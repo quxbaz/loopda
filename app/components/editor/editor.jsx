@@ -9,14 +9,14 @@ export default React.createClass({
 
   propTypes: {
     sequencer: React.PropTypes.object,
-    editor: React.PropTypes.object.isRequired
+    editor: React.PropTypes.object.isRequired,
+    currentSong: React.PropTypes.object
   },
 
   getInitialState() {
     this.defaultTitle = 'untitled';
     return {
       title: this.defaultTitle,
-      songId: null
     };
   },
 
@@ -33,25 +33,27 @@ export default React.createClass({
   },
 
   playSong() {
-    let {sequencer, editor} = this.props;
-    if (this.state.songId) {
-      EditorCtrl.playSong(sequencer, editor.take('songs').find(
-        song => song.cid === this.state.songId
-      ));
-    }
+    let {sequencer, editor, currentSong} = this.props;
+    if (currentSong)
+      EditorCtrl.playSong(sequencer, currentSong);
+  },
+
+  handleSelectChange(event) {
+    let {editor} = this.props;
+    let song = editor.take('songs').find(
+      song => song.cid === event.target.value
+    );
+    EditorCtrl.changeSong(editor, song);
   },
 
   render() {
-    let {editor} = this.props;
-    let {songId} = this.state;
+    let {editor, currentSong} = this.props;
     let songs = editor.take('songs').map(
       song => <option key={song.cid} value={song.cid}>{song.state.title}</option>
     );
     let render = {};
-    if (songId) {
-      let song = editor.take('songs').find(song => song.cid === songId);
-      render.song = <Song song={song} />;
-    }
+    if (currentSong)
+      render.song = <Song song={currentSong} />;
     return (
       <div className="editor">
         <div>
@@ -61,7 +63,7 @@ export default React.createClass({
           <input type="text" placeholder="Untitled" valueLink={this.linkState('title')} />
           <input type="submit" value="Add song" />
         </form>
-        <select defaultValue="default" valueLink={this.linkState('songId')}>
+        <select value={currentSong ? currentSong.cid : 'default'} onChange={this.handleSelectChange}>
           <option value="default" disabled>Select a song</option>
           {songs}
         </select>
