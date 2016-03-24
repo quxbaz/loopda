@@ -37,7 +37,7 @@ Slot.propTypes = {
 function Slot(props) {
   let id = props.channelId;
   let onClick = () => props.onClick(props.position);
-  return <span className="slot" onClick={onClick}>{id ? id : '-'}</span>;
+  return <div className="slot" onClick={onClick}>{id ? 'x' : '-'}</div>;
 }
 
 
