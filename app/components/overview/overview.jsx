@@ -24,7 +24,10 @@ export default function Overview(props) {
 
   let togglePlay = () => SequencerCtrl.togglePlay(sequencer);
   let addChannel = (preset) => SequencerCtrl.createChannel(sequencer, preset);
-  let handleEscape = () => EditorCtrl.viewEditor();
+  let navSongMode = () => {
+    if (!songMode)
+      EditorCtrl.viewLastSong();
+  };
 
   let gridProps = {
     sequencer,
@@ -41,9 +44,9 @@ export default function Overview(props) {
 
   return (
     <div className={className}>
-      <EscapeWatcher onEscape={handleEscape} />
+      <EscapeWatcher onEscape={navSongMode} />
       <div><a href="/#/preset">presets</a></div>
-      <div><a href="/#/sequencer/editor">song mode (esc)</a></div>
+      <div><a onClick={navSongMode}>song mode (esc)</a></div>
       <div>
         <a onClick={() => localStorage.clear()}>localStorage.clear()</a>
       </div>

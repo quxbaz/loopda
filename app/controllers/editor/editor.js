@@ -8,6 +8,15 @@ export default {
     router.nav('/sequencer/editor');
   },
 
+  viewLastSong() {
+    let editor = store.Editor.one(true);
+    let {currentSong} = editor.state;
+    if (currentSong)
+      router.nav('/sequencer/editor/' + currentSong);
+    else
+      router.nav('/sequencer/editor');
+  },
+
   addSong(editor, title) {
     let song = store.Song.create({editor, title});
     song.save();

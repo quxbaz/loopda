@@ -18,7 +18,7 @@ export default {
   },
 
   setChannel(channel) {
-    let editor = store.Editor.all(true)[0];
+    let editor = store.Editor.one(true);
     if (!editor.state.currentSong)
       return;
     let song = editor.take('currentSong');
