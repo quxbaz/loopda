@@ -1,6 +1,7 @@
 import React from 'react';
 import LinkedStateMixin from 'react/lib/LinkedStateMixin';
 import EditorCtrl from 'controllers/editor/editor';
+import OverviewCtrl from 'controllers/overview/overview';
 import Song from './song';
 
 export default React.createClass({
@@ -18,6 +19,19 @@ export default React.createClass({
     return {
       title: this.defaultTitle,
     };
+  },
+
+  handleEscKey(event) {
+    if (event.keyCode === 27)
+      OverviewCtrl.viewOverview();
+  },
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleEscKey);
+  },
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleEscKey);
   },
 
   resetForm() {
