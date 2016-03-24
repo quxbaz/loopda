@@ -16,7 +16,7 @@ function Line(props) {
   let slots = line.map(
     (channelId, i) => <Slot key={i} position={[i, row]} channelId={channelId} onClick={onClickSlot} />
   );
-  return <div>{slots}</div>;
+  return <div className="line">{slots}</div>;
 }
 
 
@@ -37,7 +37,7 @@ Slot.propTypes = {
 function Slot(props) {
   let id = props.channelId;
   let onClick = () => props.onClick(props.position);
-  return <span className="clicky" onClick={onClick}>{id ? id : '-'}</span>;
+  return <span className="slot" onClick={onClick}>{id ? id : '-'}</span>;
 }
 
 
@@ -83,9 +83,9 @@ export default React.createClass({
     });
 
     return (
-      <div>
+      <div className="song">
         <h4>{song.state.title}</h4>
-        <div>
+        <div className="song-grid">
           {lines}
           <AddNewLine onClick={this.addNewLine} />
         </div>
