@@ -37,6 +37,12 @@ Base.prototype.take = function(...args) {
   return this.record.take(...args);
 };
 
+Object.defineProperty(Base.prototype, 'cid', {
+  get() {
+    return this.record.cid;
+  }
+});
+
 // Watch all sequencer objects
 Base.on('new', watch);
 
