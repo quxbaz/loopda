@@ -25,6 +25,10 @@ Object.assign(blipDefaults, {
   Allow interfacing with sequencer objects as if they were records.
 */
 
+Base.prototype.hasId = function(id) {
+  return this.record.hasId(id);
+};
+
 Base.prototype.save = function() {
   return this.record.save(this.state);
 };

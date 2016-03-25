@@ -44,7 +44,7 @@ export default {
       line.forEach((channelId) => {
         if (!channelId)
           return;
-        let channel = channels.find(channel => channel.state.id === channelId);
+        let channel = channels.find(channel => channel.hasId(channelId));
         channel.state.blips.forEach((blip, beat) => {
           audioService.playBlip(blip.getPlayState({
             offset: (beatDuration * beats * i) + (beatDuration * beat)
