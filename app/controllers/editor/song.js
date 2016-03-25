@@ -26,7 +26,7 @@ export default {
     let song = editor.take('currentSong');
     let data = clone(song.state.data);
     let pos = song.state.position;
-    data[pos[1]][pos[0]] = channel.state.id;
+    data[pos[1]][pos[0]] = channel.cid;
     song.setState({data});
   },
 
