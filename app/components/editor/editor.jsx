@@ -47,6 +47,9 @@ export default React.createClass({
     } else if (event.keyCode === 39) {  // right arrow
       event.preventDefault();
       SongCtrl.moveCursorNextSlot(this.props.currentSong);
+    } else if (event.keyCode === 8 || event.keyCode === 46) {  // backspace or delete
+      event.preventDefault();
+      SongCtrl.clearChannel();
     }
   },
 

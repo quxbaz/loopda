@@ -17,6 +17,9 @@ export default {
   },
 
   setChannel(channel) {
+    /*
+      Sets a channel at a position.
+    */
     let editor = store.Editor.one(true);
     if (!editor.state.currentSong)
       return;
@@ -24,6 +27,20 @@ export default {
     let data = clone(song.state.data);
     let pos = song.state.position;
     data[pos[1]][pos[0]] = channel.state.id;
+    song.setState({data});
+  },
+
+  clearChannel() {
+    /*
+      Clears a channel at a position.
+    */
+    let editor = store.Editor.one(true);
+    if (!editor.state.currentSong)
+      return;
+    let song = editor.take('currentSong');
+    let data = clone(song.state.data);
+    let pos = song.state.position;
+    data[pos[1]][pos[0]] = null;
     song.setState({data});
   },
 
