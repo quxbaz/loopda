@@ -47,8 +47,18 @@ export default React.createClass({
     } else if (event.keyCode === 39) {  // right arrow
       event.preventDefault();
       SongCtrl.moveCursorNextSlot(this.props.currentSong);
-    } else if (event.keyCode === 8 || event.keyCode === 46) {  // backspace or delete
+    } else if (event.keyCode === 8) {  // backspace
       event.preventDefault();
+      SongCtrl.clearChannel();
+      /*
+        <BUG> When clearing an empty cell after moving onto it, the
+        cursor will not move unless the function below is placed in a
+        timeout function. I do not know why this is.
+      */
+      setTimeout(() => {
+        SongCtrl.moveCursorPrevSlot(this.props.currentSong);
+      }, 10)
+    } else if (event.keyCode === 46) {  // delete
       SongCtrl.clearChannel();
     }
   },

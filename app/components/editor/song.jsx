@@ -103,7 +103,6 @@ export default React.createClass({
       return <Line key={i} row={i} line={line} cursorPosition={song.state.position}
                    onClickSlot={this.handleClickSlot} />;
     });
-
     return (
       <div className="song">
         <h4>{song.state.title}</h4>
