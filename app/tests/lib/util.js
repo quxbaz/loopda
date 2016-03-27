@@ -268,4 +268,13 @@ describe("lib/util", () => {
     });
   });
 
+  describe("repeat()", () => {
+    it("Repeats a value n times as an array.", () => {
+      util.repeat('a', 0).should.eql([]);
+      util.repeat('a', 5).should.eql(['a', 'a', 'a', 'a', 'a']);
+      util.repeat(12, 3).should.eql([12, 12, 12]);
+      util.repeat([1], 3).should.eql([[1], [1], [1]]);
+    });
+  });
+
 });

@@ -142,3 +142,10 @@ export let intersect = (a, b) => {
   // Remove duplicates
   return Array.from(new Set(matches));
 };
+
+export function repeat(value, times) {
+  let l = [];
+  for (let i=0; i < times; i++)
+    l.push(value);
+  return l;
+};
