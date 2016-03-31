@@ -5,16 +5,16 @@ import audioService from 'globals/audioservice';
 export default {
 
   viewEditor() {
-    router.nav('/sequencer/editor');
+    router.nav('/editor');
   },
 
   viewLastSong() {
     let editor = store.Editor.one(true);
     let {currentSong} = editor.state;
     if (currentSong)
-      router.nav('/sequencer/editor/' + currentSong);
+      router.nav('/editor/' + currentSong);
     else
-      router.nav('/sequencer/editor');
+      router.nav('/editor');
   },
 
   addSong(editor, title) {
@@ -56,7 +56,7 @@ export default {
   },
 
   changeSong(editor, song) {
-    router.nav('/sequencer/editor/' + song.state.id);
+    router.nav('/editor/' + song.state.id);
   }
 
 };

@@ -10,14 +10,13 @@ import SongCtrl from 'controllers/editor/song';
 Line.propTypes = {
   line: React.PropTypes.array.isRequired,
   row: React.PropTypes.number.isRequired,
-  cursorPosition: React.PropTypes.array.isRequired,
   onClickSlot: React.PropTypes.func
 };
 
 function Line(props) {
-  let {line, row, cursorPosition, onClickSlot} = props;
+  let {line, row, onClickSlot} = props;
   let slots = line.map((channelId, i) => {
-    return <Slot key={i} cursorPosition={cursorPosition} position={[i, row]} channelId={channelId}
+    return <Slot key={i} position={[i, row]} channelId={channelId}
                  onClick={onClickSlot} />
   });
   return <div className="line">{slots}</div>;
@@ -29,7 +28,6 @@ function Line(props) {
 */
 
 Slot.propTypes = {
-  cursorPosition: React.PropTypes.array.isRequired,
   position: React.PropTypes.array.isRequired,
   channelId(props, propName) {
     let prop = props[propName];
@@ -40,9 +38,8 @@ Slot.propTypes = {
 };
 
 function Slot(props) {
-  let {cursorPosition, position} = props;
+  let {position} = props;
   let id = props.channelId;
-  let isSelected = cursorPosition[0] === position[0] && cursorPosition[1] === position[1];
   let channel;
   let style = {};
   if (id) {
@@ -50,8 +47,7 @@ function Slot(props) {
     style = {background: channel.state.color};
   }
   let className = classNames({
-    slot: true,
-    selected: isSelected
+    slot: true
   });
   let onClick = () => props.onClick(props.position);
   return (
@@ -90,7 +86,7 @@ export default React.createClass({
   },
 
   handleClickSlot(position) {
-    SongCtrl.setPosition(this.props.song, position);
+    // SongCtrl.setPosition(this.props.song, position);
   },
 
   addNewLine() {
@@ -100,8 +96,7 @@ export default React.createClass({
   render() {
     let {song} = this.props;
     let lines = song.state.data.map((line, i) => {
-      return <Line key={i} row={i} line={line} cursorPosition={song.state.position}
-                   onClickSlot={this.handleClickSlot} />;
+      return <Line key={i} row={i} line={line} onClickSlot={this.handleClickSlot} />;
     });
     return (
       <div className="song">

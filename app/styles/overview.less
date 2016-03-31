@@ -100,35 +100,35 @@
 
 }
 
-.song-mode {
-  @narrowBlipWidth: 24px;
-  @narrowBlipHeight: 32px;
-  @narrowInfoWidth: 100px;
-  .blip {
-    width: @narrowBlipWidth;
-    height: @narrowBlipHeight;
-  }
-  .channel-wrapper {
-    width: @narrowBlipWidth * @beats + @narrowInfoWidth;
-  }
-  .channel-info {
-    width: @narrowInfoWidth;
-    .archive-channel {.hide;}
-    .channel-controls {.hide;}
-    .channel-title {padding-left: 4px}
-  }
-  .tempo-bar {.hide;}
-  .master-channel {margin-left: @narrowInfoWidth}
-}
+// .song-mode {
+//   @narrowBlipWidth: 24px;
+//   @narrowBlipHeight: 32px;
+//   @narrowInfoWidth: 100px;
+//   .blip {
+//     width: @narrowBlipWidth;
+//     height: @narrowBlipHeight;
+//   }
+//   .channel-wrapper {
+//     width: @narrowBlipWidth * @beats + @narrowInfoWidth;
+//   }
+//   .channel-info {
+//     width: @narrowInfoWidth;
+//     .archive-channel {.hide;}
+//     .channel-controls {.hide;}
+//     .channel-title {padding-left: 4px}
+//   }
+//   .tempo-bar {.hide;}
+//   .master-channel {margin-left: @narrowInfoWidth}
+// }
 
-.channel-wrapper-overlay {
-  .clicky;
-  .overlay(none);
-  z-index: 10;
-  &:hover {
-    background: #f00;
-  }
-}
+// .channel-wrapper-overlay {
+//   .clicky;
+//   .overlay(none);
+//   z-index: 10;
+//   &:hover {
+//     background: #f00;
+//   }
+// }
 
 @import "archived-channel";
 @import "tempo-bar";

@@ -2,20 +2,18 @@ import React from 'react';
 import ChannelCtrl from 'controllers/sequencer/channel';
 import BlipCtrl from 'controllers/sequencer/blip';
 import ManagerCtrl from 'controllers/preset/manager';
-import SongCtrl from 'controllers/editor/song';
 import Channel from 'components/sequencer/channel';
 import Icon from 'components/ui/icon';
 import Button from 'components/ui/button';
 
 ChannelWrapper.propTypes = {
   channel: React.PropTypes.object.isRequired,
-  soloMode: React.PropTypes.bool.isRequired,
-  songMode: React.PropTypes.bool
+  soloMode: React.PropTypes.bool.isRequired
 };
 
 export default function ChannelWrapper(props) {
 
-  let {channel, soloMode, songMode} = props;
+  let {channel, soloMode} = props;
   let {number, title, solo, mute, color} = channel.state;
 
   // Event handlers
@@ -23,7 +21,6 @@ export default function ChannelWrapper(props) {
   let archiveChannel = () => ChannelCtrl.archive(channel);
   let toggleSolo = () => ChannelCtrl.toggleSolo(channel);
   let toggleMute = () => ChannelCtrl.toggleMute(channel);
-  let handleClickOverlay = () => SongCtrl.setChannel(channel);
 
   return (
     <div className="channel-wrapper">
@@ -40,7 +37,6 @@ export default function ChannelWrapper(props) {
         </div>
       </div>
       <Channel channel={channel} soloMode={soloMode} onClickBlip={BlipCtrl.toggleMute} />
-      {songMode ? <div className="channel-wrapper-overlay" onClick={handleClickOverlay} /> : ''}
     </div>
   );
 

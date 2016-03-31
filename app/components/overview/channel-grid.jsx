@@ -9,12 +9,11 @@ ChannelGrid.propTypes = {
   beats: React.PropTypes.number.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   soloMode: React.PropTypes.bool.isRequired,
-  songMode: React.PropTypes.bool
 };
 
 export default function ChannelGrid(props) {
 
-  let {sequencer, soloMode, beats, currentBeat, songMode} = props;
+  let {sequencer, soloMode, beats, currentBeat} = props;
   let {channels} = sequencer.state;
 
   // Sort channels by time created
@@ -30,8 +29,7 @@ export default function ChannelGrid(props) {
       let channelProps = {
         key: channel.id,
         channel,
-        soloMode,
-        songMode
+        soloMode
       };
       return <ChannelWrapper {...channelProps} />;
     }

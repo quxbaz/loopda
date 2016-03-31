@@ -108,7 +108,7 @@ export default React.createClass({
     return (
       <div className="editor">
         <div>
-          <a href="/#/sequencer/overview">Close</a> <a onClick={this.playSong}>Play</a>
+          <a href="/#/sequencer/overview">Overview</a> <a onClick={this.playSong}>Play</a>
         </div>
         <form onSubmit={this.addSong}>
           <input type="text" placeholder="Untitled" valueLink={this.linkState('title')} />

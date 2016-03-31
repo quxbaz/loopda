@@ -1,3 +1,4 @@
+import {repeat} from 'lib/util';
 import {attr, hasOne, hasMany, belongsTo} from 'store/lib/relations';
 
 let initialized = false;
@@ -90,15 +91,9 @@ export let initModels = (store) => {
     schema: {
       id: attr(),
       editor: belongsTo('editor'),
-      position: attr([0, 0]),  // The current position of the cursor
       title: attr(),
       maxChannels: attr(8),
-      data: attr(() => {
-        let l = [];
-        for (let i=0; i < 8; i++)
-          l.push(null);
-        return [l];
-      })
+      data: attr(() => [repeat(null, 8)])
     }
   });
 

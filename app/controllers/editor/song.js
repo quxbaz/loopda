@@ -1,14 +1,11 @@
 import store from 'globals/store';
-import {clone} from 'lib/util';
+import {clone, repeat} from 'lib/util';
 
 export default {
 
   addLine(song) {
-    let line = [];
-    for (let i=0; i < song.state.maxChannels; i++)
-      line.push(null);
     song.setState({
-      data: [...song.state.data,  line]
+      data: [...song.state.data, repeat(null, song.state.maxChannels)]
     });
   },
 
@@ -16,33 +13,35 @@ export default {
     song.setState({position});
   },
 
-  setChannel(channel) {
-    /*
-      Sets a channel at a position.
-    */
-    let editor = store.Editor.one(true);
-    if (!editor.state.currentSong)
-      return;
-    let song = editor.take('currentSong');
-    let data = clone(song.state.data);
-    let pos = song.state.position;
-    data[pos[1]][pos[0]] = channel.cid;
-    song.setState({data});
-  },
+  // // <TODO> Should take a song/position
+  // setChannel(channel) {
+  //   /*
+  //     Sets a channel at a position.
+  //   */
+  //   let editor = store.Editor.one(true);
+  //   if (!editor.state.currentSong)
+  //     return;
+  //   let song = editor.take('currentSong');
+  //   let data = clone(song.state.data);
+  //   let pos = song.state.position;
+  //   data[pos[1]][pos[0]] = channel.cid;
+  //   song.setState({data});
+  // },
 
-  clearChannel() {
-    /*
-      Clears a channel at a position.
-    */
-    let editor = store.Editor.one(true);
-    if (!editor.state.currentSong)
-      return;
-    let song = editor.take('currentSong');
-    let data = clone(song.state.data);
-    let pos = song.state.position;
-    data[pos[1]][pos[0]] = null;
-    song.setState({data});
-  },
+  // // <TODO> Should take a song/position
+  // clearChannel() {
+  //   /*
+  //     Clears a channel at a position.
+  //   */
+  //   let editor = store.Editor.one(true);
+  //   if (!editor.state.currentSong)
+  //     return;
+  //   let song = editor.take('currentSong');
+  //   let data = clone(song.state.data);
+  //   let pos = song.state.position;
+  //   data[pos[1]][pos[0]] = null;
+  //   song.setState({data});
+  // },
 
   moveCursorNextSlot(song) {
     if (!song)

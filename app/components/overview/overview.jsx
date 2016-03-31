@@ -7,43 +7,33 @@ import classNames from 'classnames';
 import SequencerCtrl from 'controllers/sequencer/sequencer';
 import SequencerHelper from 'helpers/sequencer';
 import EditorCtrl from 'controllers/editor/editor';
+import EscapeWatcher from 'components/util/escape-watcher';
 import ChannelGrid from './channel-grid';
 import ChannelMenu from './channel-menu';
-import EscapeWatcher from 'components/util/escape-watcher';
 
 Overview.propTypes = {
   sequencer: React.PropTypes.object,
-  presets: React.PropTypes.array.isRequired,
-  songMode: React.PropTypes.bool
+  presets: React.PropTypes.array.isRequired
 };
 
 export default function Overview(props) {
 
-  let {sequencer, presets, songMode} = props;
+  let {sequencer, presets} = props;
   let {beats, playing, channels, currentBeat} = sequencer.state;
 
   let togglePlay = () => SequencerCtrl.togglePlay(sequencer);
   let addChannel = (preset) => SequencerCtrl.createChannel(sequencer, preset);
-  let navSongMode = () => {
-    if (!songMode)
-      EditorCtrl.viewLastSong();
-  };
+  let navSongMode = () => EditorCtrl.viewLastSong();
 
   let gridProps = {
     sequencer,
     beats,
     currentBeat,
-    soloMode: SequencerHelper.soloMode(sequencer),
-    songMode
+    soloMode: SequencerHelper.soloMode(sequencer)
   };
 
-  let className = classNames({
-    overview: true,
-    'song-mode': songMode
-  });
-
   return (
-    <div className={className}>
+    <div className="overview">
       <EscapeWatcher onEscape={navSongMode} />
       <div><a href="/#/preset">presets</a></div>
       <div><a onClick={navSongMode}>song mode (esc)</a></div>
