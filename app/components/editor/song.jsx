@@ -102,10 +102,18 @@ export default React.createClass({
   },
 
   renderMenu() {
-    let handleSelect = () => {
+    let {song} = this.props;
+    let {menuPosition} = this.state;
+    let handleSelect = (channel) => {
+      SongCtrl.setChannel(song, channel, menuPosition);
       this.setState({menuPosition: undefined});
     };
-    return <ChannelMenu channels={this.props.channels} onSelect={handleSelect} />;
+    let handleEmpty = () => {
+      SongCtrl.clearChannel(song, menuPosition);
+      this.setState({menuPosition: undefined});
+    };
+    return <ChannelMenu channels={this.props.channels}
+                        onSelect={handleSelect} onEmpty={handleEmpty} />;
   },
 
   render() {

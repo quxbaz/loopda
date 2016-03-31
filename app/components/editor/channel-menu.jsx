@@ -3,11 +3,12 @@ import Channel from 'components/sequencer/channel';
 
 ChannelMenu.propTypes = {
   channels: React.PropTypes.array.isRequired,
-  onSelect: React.PropTypes.func
+  onSelect: React.PropTypes.func,
+  onEmpty: React.PropTypes.func
 };
 
 export default function ChannelMenu(props) {
-  let {channels, onSelect} = props;
+  let {channels, onSelect, onEmpty} = props;
   let render = {};
   render.channels = channels.map((channel) => {
     let handleClick = () => onSelect(channel);
@@ -19,6 +20,7 @@ export default function ChannelMenu(props) {
   });
   return (
     <div className="editor-channel-menu">
+      <div onClick={onEmpty}>Empty</div>
       {render.channels}
     </div>
   );
