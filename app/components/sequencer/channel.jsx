@@ -5,7 +5,14 @@ import Blip from './blip';
 Channel.propTypes = {
   channel: React.PropTypes.object.isRequired,
   soloMode: React.PropTypes.bool.isRequired,
+  className: React.PropTypes.string,
+  onClick: React.PropTypes.func,
   onClickBlip: React.PropTypes.func
+};
+
+Channel.defaultProps = {
+  className: '',
+  onClick: () => {}
 };
 
 export default function Channel(props) {
@@ -27,7 +34,9 @@ export default function Channel(props) {
     channel: true,
     enabled,
     mute: !enabled
-  });
+  }) + ' ' + props.className;
 
-  return <div className={classes}>{blipComs}</div>;
+  let handleClick = () => props.onClick(props.channel);
+
+  return <div className={classes} onClick={handleClick}>{blipComs}</div>;
 };
