@@ -1,5 +1,6 @@
 import React from 'react';
 import LinkedStateMixin from 'react/lib/LinkedStateMixin';
+import watchMixin from 'components/mixins/watch';
 import EditorCtrl from 'controllers/editor/editor';
 import SongCtrl from 'controllers/editor/song';
 import OverviewCtrl from 'controllers/overview/overview';
@@ -7,7 +8,7 @@ import Song from './song';
 
 export default React.createClass({
 
-  mixins: [LinkedStateMixin],
+  mixins: [LinkedStateMixin, watchMixin],
 
   propTypes: {
     sequencer: React.PropTypes.object,
