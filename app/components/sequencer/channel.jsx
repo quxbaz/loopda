@@ -4,13 +4,14 @@ import Blip from './blip';
 
 Channel.propTypes = {
   channel: React.PropTypes.object.isRequired,
-  soloMode: React.PropTypes.bool.isRequired,
+  soloMode: React.PropTypes.bool,
   className: React.PropTypes.string,
   onClick: React.PropTypes.func,
   onClickBlip: React.PropTypes.func
 };
 
 Channel.defaultProps = {
+  soloMode: false,
   className: '',
   onClick: () => {}
 };
