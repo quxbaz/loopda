@@ -16,6 +16,6 @@ route('/editor/:id', {
     return [editor, currentSong];
   },
   render([editor, currentSong]) {
-    return <Editor editor={editor} currentSong={currentSong} />
+    return <Editor sequencer={app.sequencer} editor={editor} currentSong={currentSong} />
   }
 });

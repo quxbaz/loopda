@@ -2,7 +2,6 @@ import React from 'react';
 import LinkedStateMixin from 'react/lib/LinkedStateMixin';
 import watchMixin from 'components/mixins/watch';
 import EditorCtrl from 'controllers/editor/editor';
-import SongCtrl from 'controllers/editor/song';
 import OverviewCtrl from 'controllers/overview/overview';
 import Song from './song';
 
@@ -26,42 +25,6 @@ export default React.createClass({
   handleKeyDown(event) {
     if (event.keyCode === 27)  // esc key
       OverviewCtrl.viewOverview();
-    else if (event.keyCode === 13) {  // enter key
-      event.preventDefault();
-      if (event.shiftKey)
-        SongCtrl.moveCursorPrevRow(this.props.currentSong);
-      else
-        SongCtrl.moveCursorNextRow(this.props.currentSong);
-    } else if (event.keyCode === 9) {  // tab key
-      event.preventDefault();
-      if (event.shiftKey) SongCtrl.moveCursorPrevSlot(this.props.currentSong);
-      else SongCtrl.moveCursorNextSlot(this.props.currentSong);
-    } else if (event.keyCode === 38) {  // up arrow
-      event.preventDefault();
-      SongCtrl.moveCursorPrevRow(this.props.currentSong);
-    } else if (event.keyCode === 40) {  // down arrow
-      event.preventDefault();
-      SongCtrl.moveCursorNextRow(this.props.currentSong);
-    } else if (event.keyCode === 37) {  // left arrow
-      event.preventDefault();
-      SongCtrl.moveCursorPrevSlot(this.props.currentSong);
-    } else if (event.keyCode === 39) {  // right arrow
-      event.preventDefault();
-      SongCtrl.moveCursorNextSlot(this.props.currentSong);
-    } else if (event.keyCode === 8) {  // backspace
-      event.preventDefault();
-      SongCtrl.clearChannel();
-      /*
-        <BUG> When clearing an empty cell after moving onto it, the
-        cursor will not move unless the function below is placed in a
-        timeout function. I do not know why this is.
-      */
-      setTimeout(() => {
-        SongCtrl.moveCursorPrevSlot(this.props.currentSong);
-      }, 10)
-    } else if (event.keyCode === 46) {  // delete
-      SongCtrl.clearChannel();
-    }
   },
 
   componentDidMount() {
@@ -99,13 +62,13 @@ export default React.createClass({
   },
 
   render() {
-    let {editor, currentSong} = this.props;
+    let {sequencer, editor, currentSong} = this.props;
     let songs = editor.take('songs').map(
       song => <option key={song.cid} value={song.cid}>{song.state.title}</option>
     );
     let render = {};
     if (currentSong)
-      render.song = <Song song={currentSong} />;
+      render.song = <Song song={currentSong} channels={sequencer.state.channels} />;
     return (
       <div className="editor">
         <div>

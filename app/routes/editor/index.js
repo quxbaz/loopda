@@ -12,6 +12,6 @@ route('/editor', {
     return editor;
   },
   render(editor) {
-    return <Editor editor={editor} />;
+    return <Editor sequencer={app.sequencer} editor={editor} />;
   }
 });

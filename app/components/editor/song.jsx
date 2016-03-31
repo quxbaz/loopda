@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import store from 'globals/store';
 import SongCtrl from 'controllers/editor/song';
+import ChannelMenu from './channel-menu';
 
 /*
   Line component
@@ -82,15 +83,29 @@ function AddNewLine(props) {
 export default React.createClass({
 
   propTypes: {
-    song: React.PropTypes.object.isRequired
+    song: React.PropTypes.object.isRequired,
+    channels: React.PropTypes.array.isRequired
+  },
+
+  getInitialState() {
+    return {
+      menuPosition: undefined
+    };
   },
 
   handleClickSlot(position) {
-    // SongCtrl.setPosition(this.props.song, position);
+    this.setState({menuPosition: position});
   },
 
   addNewLine() {
     SongCtrl.addLine(this.props.song);
+  },
+
+  renderMenu() {
+    let handleSelect = () => {
+      this.setState({menuPosition: undefined});
+    };
+    return <ChannelMenu channels={this.props.channels} onSelect={handleSelect} />;
   },
 
   render() {
@@ -102,6 +117,7 @@ export default React.createClass({
       <div className="song">
         <h4>{song.state.title}</h4>
         <div className="song-grid">
+          {this.state.menuPosition ? this.renderMenu() : ''}
           {lines}
           <AddNewLine onClick={this.addNewLine} />
         </div>

@@ -25,7 +25,7 @@ export default function ArchivedChannel(props) {
           <a onClick={handleUndo}>Undo</a>
         </div>
       </div>
-      <Channel channel={channel} soloMode={false} />
+      <Channel channel={channel} />
     </div>
   );
 
