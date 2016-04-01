@@ -1,9 +1,14 @@
+@slotHeight: 32px;
 @slotColor: #fff;
 @altSlotColor: #f2f2f2;
 
 .editor {
   .outline;
   background: #fff;
+}
+
+.song-grid {
+  position: relative;
 }
 
 .line-grid {}
@@ -22,11 +27,39 @@
   .clicky;
   .flex-center;
   flex: 1;
-  height: 32px;
+  height: @slotHeight;
   font-size: 12px;
   background: @slotColor;
 }
 
 .editor-channel-menu {
   position: absolute;
+  margin-top: @slotHeight;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #f0f;
+  box-shadow: 0 2px 8px #e0e0e0;
+  .empty-option {
+    .clicky;
+  }
+  .channel-option {
+    .clicky;
+    margin-bottom: 2px;
+  }
+  .channel-tag {
+    position: absolute;
+    z-index: 1;
+    padding: 0 1px;
+    font-size: 12px;
+    font-weight: bold;
+    background: #000;
+    color: #fff;
+    opacity: 0.6;
+  }
+  .channel {
+  }
+  .blip {
+    width: 16px;
+    height: 36px;
+  }
 }

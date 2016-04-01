@@ -3,24 +3,35 @@ import Channel from 'components/sequencer/channel';
 
 ChannelMenu.propTypes = {
   channels: React.PropTypes.array.isRequired,
+  offset: React.PropTypes.array,
   onSelect: React.PropTypes.func,
   onEmpty: React.PropTypes.func
 };
 
+ChannelMenu.defaultProps = {
+  offset: [0, 0]
+};
+
 export default function ChannelMenu(props) {
-  let {channels, onSelect, onEmpty} = props;
+  let {channels, offset, onSelect, onEmpty} = props;
   let render = {};
   render.channels = channels.map((channel) => {
-    let handleClick = () => onSelect(channel);
-    return React.createElement(Channel, {
-      key: channel.cid,
-      channel,
-      onClick: onSelect
-    });
+    return (
+      <div key={channel.id} className="channel-option" onClick={() => onSelect(channel)}>
+        <div className="channel-tag">
+          {channel.state.title} ({channel.state.number})
+        </div>
+        <Channel channel={channel} />
+      </div>
+    );
   });
+  let style = {
+    left: offset[0],
+    top: offset[1]
+  };
   return (
-    <div className="editor-channel-menu">
-      <div onClick={onEmpty}>Empty</div>
+    <div className="editor-channel-menu" style={style}>
+      <div className="empty-option" onClick={onEmpty}>Empty</div>
       {render.channels}
     </div>
   );

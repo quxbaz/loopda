@@ -28,35 +28,34 @@ function Line(props) {
   Slot component
 */
 
-Slot.propTypes = {
-  position: React.PropTypes.array.isRequired,
-  channelId(props, propName) {
-    let prop = props[propName];
-    if (typeof prop !== 'string' && prop !== null)
-      throw new Error('@channelId must be an id or null.');
+const Slot = React.createClass({
+  propTypes: {
+    position: React.PropTypes.array.isRequired,
+    channelId(props, propName) {
+      let prop = props[propName];
+      if (typeof prop !== 'string' && prop !== null)
+        throw new Error('@channelId must be an id or null.');
+    },
+    onClick: React.PropTypes.func
   },
-  onClick: React.PropTypes.func
-};
-
-function Slot(props) {
-  let {position} = props;
-  let id = props.channelId;
-  let channel;
-  let style = {};
-  if (id) {
-    channel = store.Channel.get(id, true);
-    style = {background: channel.state.color};
+  render() {
+    let {position, channelId} = this.props;
+    let style = {};
+    if (channelId) {
+      var channel = store.Channel.get(channelId, true);
+      style = {background: channel.state.color};
+    }
+    let onClick = () => {
+      let el = this.refs.slot;
+      this.props.onClick(position, [el.offsetLeft, el.offsetTop]);
+    };
+    return (
+      <div ref="slot" className="slot" style={style} onClick={onClick}>
+        {channelId ? channel.state.sample + ' (' + channel.state.number + ')' : '-'}
+      </div>
+    );
   }
-  let className = classNames({
-    slot: true
-  });
-  let onClick = () => props.onClick(props.position);
-  return (
-    <div className={className} style={style} onClick={onClick}>
-      {id ? channel.state.sample + ' (' + channel.state.number + ')' : '-'}
-    </div>
-  );
-}
+});
 
 
 /*
@@ -93,8 +92,11 @@ export default React.createClass({
     };
   },
 
-  handleClickSlot(position) {
-    this.setState({menuPosition: position});
+  handleClickSlot(position, xy) {
+    this.setState({
+      menuPosition: position,
+      menuDomOffset: xy
+    });
   },
 
   addNewLine() {
@@ -112,7 +114,7 @@ export default React.createClass({
       SongCtrl.clearChannel(song, menuPosition);
       this.setState({menuPosition: undefined});
     };
-    return <ChannelMenu channels={this.props.channels}
+    return <ChannelMenu channels={this.props.channels} offset={this.state.menuDomOffset}
                         onSelect={handleSelect} onEmpty={handleEmpty} />;
   },
 
