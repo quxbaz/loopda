@@ -3,6 +3,7 @@ import LinkedStateMixin from 'react/lib/LinkedStateMixin';
 import watchMixin from 'components/mixins/watch';
 import EditorCtrl from 'controllers/editor/editor';
 import OverviewCtrl from 'controllers/overview/overview';
+import ChannelHelper from 'helpers/channel';
 import Song from './song';
 
 export default React.createClass({
@@ -62,13 +63,19 @@ export default React.createClass({
   },
 
   render() {
+
     let {sequencer, editor, currentSong} = this.props;
+    let channels = ChannelHelper.sorted(sequencer.state.channels);
+
+    // Render song option components
     let songs = editor.take('songs').map(
       song => <option key={song.cid} value={song.cid}>{song.state.title}</option>
     );
+
     let render = {};
     if (currentSong)
-      render.song = <Song song={currentSong} channels={sequencer.state.channels} />;
+      render.song = <Song song={currentSong} channels={channels} />;
+
     return (
       <div className="editor">
         <div>
@@ -85,6 +92,7 @@ export default React.createClass({
         {render.song}
       </div>
     );
+
   }
 
 });
