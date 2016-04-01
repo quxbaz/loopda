@@ -1,4 +1,5 @@
 import React from 'react';
+import ChannelHelper from 'helpers/channel';
 import ChannelWrapper from './channel-wrapper';
 import TempoBar from './tempo-bar';
 import MasterChannel from './master-channel';
@@ -17,10 +18,7 @@ export default function ChannelGrid(props) {
   let {channels} = sequencer.state;
 
   // Sort channels by time created
-  let sorted = [...channels].sort((a, b) => {
-    let diff = a.state.time_created - b.state.time_created;
-    return diff / Math.abs(diff);
-  });
+  let sorted = ChannelHelper.sorted(channels);
 
   let channelComs = sorted.map((channel) => {
     if (channel.state.archived)
