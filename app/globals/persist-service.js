@@ -4,6 +4,7 @@
 */
 
 export default function(object) {
-  if (object.save && !object._dontPersist)
+  if (object.save && !object._dontPersist) {
     object.save();
+  }
 };
