@@ -14,7 +14,7 @@ export default {
     */
     let [x, y] = position;
     let data = clone(song.state.data);
-    data[y][x] = channel.cid;
+    data[y][x] = channel.state.id;
     song.setState({data});
   },
 

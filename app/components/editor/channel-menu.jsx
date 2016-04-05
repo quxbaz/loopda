@@ -17,7 +17,7 @@ export default function ChannelMenu(props) {
   let render = {};
   render.channels = channels.map((channel) => {
     return (
-      <div key={channel.id} className="channel-option" onClick={() => onSelect(channel)}>
+      <div key={channel.cid} className="channel-option" onClick={() => onSelect(channel)}>
         <div className="channel-tag">
           {channel.state.title} ({channel.state.number})
         </div>

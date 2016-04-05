@@ -39,8 +39,11 @@ export default {
 
     // Channel needs an id before blips can save their relation to it
     channel.save().then(() => {
+      channel.state.id = channel.record.state.id;
       channel.state.blips.forEach((blip) => {
-        blip.save();
+        blip.save().then(() => {
+          blip.state.id = blip.record.state.id;
+        });
       });
     });
 
