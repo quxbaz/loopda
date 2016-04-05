@@ -22,10 +22,10 @@ export default function ChannelGrid(props) {
 
   let channelComs = sorted.map((channel) => {
     if (channel.state.archived)
-      return <ArchivedChannel key={channel.id} sequencer={sequencer} channel={channel} />;
+      return <ArchivedChannel key={channel.cid} sequencer={sequencer} channel={channel} />;
     else {
       let channelProps = {
-        key: channel.id,
+        key: channel.cid,
         channel,
         soloMode
       };

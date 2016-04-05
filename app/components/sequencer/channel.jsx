@@ -22,7 +22,7 @@ export default function Channel(props) {
 
   let blipComs = blips.map((blip) =>
     React.createElement(Blip, {
-      key: blip.id,
+      key: blip.cid,
       blip,
       color,
       onClick: props.onClickBlip
