@@ -48,7 +48,7 @@ var config = {
     root: [resolve(__dirname), resolve('app')],
     extensions: ['', '.js', '.jsx'],
     alias: {
-      'react-dom'  : resolve('node_modules/react/lib/ReactDOM.js')
+      'react-dom': resolve('node_modules/react/lib/ReactDOM.js')
     }
   }
 
