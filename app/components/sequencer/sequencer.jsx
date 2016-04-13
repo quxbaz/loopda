@@ -24,9 +24,12 @@ export default React.createClass({
   },
 
   renderChildren() {
-    return React.Children.map(this.props.children, (child) =>
-      React.cloneElement(child, {sequencer: this.props.sequencer})
-    );
+    return React.Children.map(this.props.children, (child) => {
+      if (typeof child === 'string')
+        return child;
+      else
+        return React.cloneElement(child, {sequencer: this.props.sequencer});
+    });
   },
 
   render() {
