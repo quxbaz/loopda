@@ -5,7 +5,7 @@ import 'mocha/mocha.css';
 require('chai').should();
 
 // Tests
-import './tests/lib/util';
-import './tests/helpers/blip';
+import './lib/util';
+import './helpers/blip';
 
 mocha.run();
