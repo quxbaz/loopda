@@ -30,7 +30,8 @@ var config = {
           resolve(__dirname, 'node_modules/store')
         ],
         query: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react'],
+          plugins: ["transform-object-rest-spread"]
         }
       },
       {
@@ -48,7 +49,7 @@ var config = {
     root: [resolve(__dirname), resolve('app')],
     extensions: ['', '.js', '.jsx'],
     alias: {
-      'loopdaloop': resolve(__dirname),
+      'loopdaloop': resolve(__dirname, 'app'),
       'react-dom': resolve('node_modules/react/lib/ReactDOM.js')
     }
   }
