@@ -32,7 +32,8 @@
     "webpack": "^1.12.9"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "webpack-dev-server --content-base=public",
+    "test": "webpack-dev-server --content-base=test --entry=app/tests"
   },
   "repository": {
     "type": "git",
