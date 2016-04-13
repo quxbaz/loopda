@@ -48,14 +48,11 @@ var config = {
     root: [resolve(__dirname), resolve('app')],
     extensions: ['', '.js', '.jsx'],
     alias: {
+      'loopdaloop': resolve(__dirname),
       'react-dom': resolve('node_modules/react/lib/ReactDOM.js')
     }
   }
 
 };
-
-if (process.env.mode == 'test') {
-  config.entry = './app/test.js';
-}
 
 module.exports = config;
