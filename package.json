@@ -1,21 +1,22 @@
 {
-  "name": "loopdaloop",
+  "name": "loopda",
   "version": "0.0.1",
-  "description": "Make sik beats.",
-  "main": "app/entry.js",
+  "description": "simple and flexible music prototyping tool. Make sik beats",
+  "main": "index.js",
   "dependencies": {
-    "bin.js": "git+https://github.com/quxbaz/bin.js.git",
     "classnames": "^2.2.3",
-    "director": "^1.2.8",
     "lodash": "^4.11.0",
     "normalize-css": "^2.3.1",
-    "pending": "git+https://github.com/quxbaz/pending.git",
     "react": "^0.14.5",
+    "react-redux": "^4.4.5",
+    "redux": "^3.4.0",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.0.1",
     "regenerator": "^0.8.42",
     "sentry": "git+https://github.com/quxbaz/sentry.git",
-    "sequencer": "git+https://github.com/quxbaz/sequencer.git",
     "stateful": "git+https://github.com/quxbaz/stateful.git",
-    "store": "git+https://github.com/quxbaz/store.git"
+    "stateful-router": "git+https://github.com/quxbaz/stateful-router.git",
+    "trax": "git+https://github.com/quxbaz/trax.git"
   },
   "devDependencies": {
     "babel-core": "^6.3.26",
@@ -23,7 +24,6 @@
     "babel-plugin-transform-object-rest-spread": "^6.6.5",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
-    "chai": "^3.5.0",
     "css-loader": "^0.23.1",
     "es6-promise": "^3.0.2",
     "install": "^0.6.1",
@@ -36,16 +36,16 @@
   },
   "scripts": {
     "serve": "webpack-dev-server --content-base=public",
-    "test": "webpack-dev-server --content-base=test --entry=app/tests"
+    "test": "webpack-dev-server --content-base=public_test --entry=tests"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quxbaz/loopdaloop2.git"
+    "url": "git+https://github.com/quxbaz/loopda.git"
   },
   "author": "quxbaz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/quxbaz/loopdaloop2/issues"
+    "url": "https://github.com/quxbaz/loopda/issues"
   },
-  "homepage": "https://github.com/quxbaz/loopdaloop2#readme"
+  "homepage": "https://github.com/quxbaz/loopda#readme"
 }
