@@ -23,6 +23,7 @@ var config = {
           resolve(__dirname, 'index'),
           resolve(__dirname, 'src'),
           resolve(__dirname, 'node_modules/trax'),
+          resolve(__dirname, 'node_modules/stateful-router'),
           // resolve(__dirname, 'node_modules/bin.js'),
           // resolve(__dirname, 'node_modules/pending'),
           // resolve(__dirname, 'node_modules/sentry'),
