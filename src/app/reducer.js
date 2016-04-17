@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux'
-import {sequencer as _sequencer} from 'trax'
+import {sequencer} from 'trax'
+import url from '../modules/url'
 
-const sequencer = _sequencer.reducer
-
-const app = combineReducers({sequencer})
+const app = combineReducers({
+  sequencer: sequencer.reducer,
+  url: url.reducer
+})
 
 export default app

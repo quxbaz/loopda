@@ -1,5 +1,5 @@
 import actions from './actions'
 import reducer from './reducer'
-import AppContainer from './AppContainer'
+import containers from './containers'
 
-export default {actions, reducer, AppContainer}
+export default {actions, reducer, containers}

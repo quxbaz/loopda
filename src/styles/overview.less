@@ -1,4 +1,4 @@
-@infoWidth: 160px;
+@controlsWidth: 160px;
 
 .overview {}
 
@@ -9,26 +9,26 @@
   .preset-option {padding: 0 2px}
 }
 
-.channel-grid {position: relative}
+.channel-list {position: relative}
 
 .master-channel {
-  margin: 0 0 6px @infoWidth;
+  margin: 0 0 6px @controlsWidth;
   opacity: 0.8;
   .blip {height: @blipHeight}
 }
 
-.channel-wrapper {
+.channel-block {
 
   position: relative;
   display: flex;
-  width: @channelWidth + @infoWidth;
+  width: @channelWidth + @controlsWidth;
   margin-bottom: 6px;
 
-  .channel-info {
+  .channel-controls {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: @infoWidth;
+    width: @controlsWidth;
     padding-right: 2px;  // Acts as a margin
   }
 
@@ -103,25 +103,25 @@
 // .song-mode {
 //   @narrowBlipWidth: 24px;
 //   @narrowBlipHeight: 32px;
-//   @narrowInfoWidth: 100px;
+//   @narrowControlsWidth: 100px;
 //   .blip {
 //     width: @narrowBlipWidth;
 //     height: @narrowBlipHeight;
 //   }
-//   .channel-wrapper {
-//     width: @narrowBlipWidth * @beats + @narrowInfoWidth;
+//   .channel-block {
+//     width: @narrowBlipWidth * @beats + @narrowControlsWidth;
 //   }
-//   .channel-info {
-//     width: @narrowInfoWidth;
+//   .channel-controls {
+//     width: @narrowControlsWidth;
 //     .archive-channel {.hide;}
 //     .channel-controls {.hide;}
 //     .channel-title {padding-left: 4px}
 //   }
 //   .tempo-bar {.hide;}
-//   .master-channel {margin-left: @narrowInfoWidth}
+//   .master-channel {margin-left: @narrowControlsWidth}
 // }
 
-// .channel-wrapper-overlay {
+// .channel-block-overlay {
 //   .clicky;
 //   .overlay(none);
 //   z-index: 10;

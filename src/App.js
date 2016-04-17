@@ -11,13 +11,20 @@
 // import {Sequencer} from 'trax'
 // import SequencerHelper from 'helpers/sequencer'
 
+// React stuff
 import React from 'react'
 import {render} from 'react-dom'
-import {compose, createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
+import {Router} from 'stateful-router'
+
+// Redux stuff
+import {compose, createStore, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
+
+// Own stuff
 import app from './app'
+import url from './modules/url'
 
 export default class App {
 
@@ -58,15 +65,34 @@ export default class App {
   }
 
   start() {
+
+    window.addEventListener('hashchange', () => {
+      this.store.dispatch(url.actions.setUrl(
+        location.hash.slice(1)
+      ))
+    })
+
     this.store.subscribe(() => {
+      const state = this.store.getState()
       render(
         <Provider store={this.store}>
-          <app.AppContainer />
+          <Router path={state.url}>
+            <app.containers.App />
+          </Router>
         </Provider>,
         document.getElementById('root')
       )
     })
-    this.store.dispatch({type: null})
+
+    this.store.dispatch(url.actions.setUrl(
+      location.hash.slice(1)
+    ))
+
+    // testing
+    this.store.dispatch({
+      type: 'trax/CREATE_CHANNEL'
+    })
+
   }
 
 }
