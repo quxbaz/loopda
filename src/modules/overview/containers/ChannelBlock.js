@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import trax from '../../trax'
+import traxExt from '../../trax-ext'
 import ChannelControls from './ChannelControls'
 
 const ChannelBlock = ({channel}) => (
   <div className="channel-block">
     <ChannelControls channel={channel} />
-    <trax.containers.Channel channel={channel} />
+    <traxExt.containers.Channel channel={channel} />
   </div>
 )
 

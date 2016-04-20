@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import trax from '../../trax'
+import traxExt from '../../trax-ext'
 
 const AddChannel = ({onSelect}) => (
   <div>
@@ -21,7 +21,7 @@ AddChannel.propTypes = {
 const mapDispatchToProps = (dispatch) => ({
   onSelect: (sample) => {
     dispatch(
-      trax.actions.createChannel({sample})
+      traxExt.actions.createChannel({sample})
     )
   }
 })

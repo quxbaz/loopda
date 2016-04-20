@@ -7,10 +7,6 @@
 // import audioContext from 'globals/audioContext'
 // import audioService from 'globals/audioService'
 
-// Sequencer
-// import {Sequencer} from 'trax'
-// import SequencerHelper from 'helpers/sequencer'
-
 // React stuff
 import React from 'react'
 import {render} from 'react-dom'
@@ -23,12 +19,12 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 
 // Lib
-import {sequencer, channels} from 'trax'
+import {sequencer} from 'trax'
 
 // Own stuff
 import app from './app'
 import url from './modules/url'
-import trax from './modules/trax'
+import traxExt from './modules/trax-ext'
 
 export default class App {
 
@@ -93,7 +89,7 @@ export default class App {
     )
 
     this.store.dispatch(
-      trax.actions.createChannel({
+      traxExt.actions.createChannel({
         sample: 'hihat'
       })
     )
