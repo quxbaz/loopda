@@ -1,11 +1,12 @@
 {
   "name": "loopda",
   "version": "0.0.1",
-  "description": "simple and flexible music prototyping tool. Make sik beats",
+  "description": "Flexible music prototyping tool for the web",
   "main": "index.js",
   "dependencies": {
     "classnames": "^2.2.3",
     "lodash": "^4.11.0",
+    "node-uuid": "^1.4.7",
     "normalize-css": "^2.3.1",
     "react": "^0.14.5",
     "react-redux": "^4.4.5",
