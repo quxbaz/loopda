@@ -43,13 +43,13 @@ const mapDispatchToProps = (dispatch) => ({
     /* view preset */
   },
   onClickArchive: (id) => {
-    /* archive channel */
+    dispatch(channels.actions.archiveChannel(id))
   },
   onClickMute: (id) => {
-    /* toggle mute channel */
+    dispatch(channels.actions.toggleMuteChannel(id))
   },
   onClickSolo: (id) => {
-    /* toggle solo channel */
+    dispatch(channels.actions.toggleSoloChannel(id))
   }
 })
 

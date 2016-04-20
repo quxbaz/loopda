@@ -2,12 +2,15 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {channels} from 'trax'
 import ChannelBlock from './ChannelBlock'
+import ArchivedChannel from './ArchivedChannel'
 
 const ChannelList = ({channels}) => (
   <div className="channel-list">
-    {channels.map(channel =>
-      <ChannelBlock key={channel.id} channel={channel} />
-    )}
+    {channels.map(channel => {
+      if (channel.archived)
+        return <ArchivedChannel key={channel.id} channel={channel} />
+      return <ChannelBlock key={channel.id} channel={channel} />
+    })}
   </div>
 )
 
