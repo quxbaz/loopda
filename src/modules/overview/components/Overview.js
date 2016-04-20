@@ -1,11 +1,12 @@
 import React from 'react'
-import ChannelList from './ChannelList'
+import ChannelList from '../containers/ChannelList'
 
 const Overview = ({sequencer}) => {
 
   // temp vars
   const playing = false
   //
+
 
   const {channels} = sequencer
 
@@ -24,7 +25,7 @@ const Overview = ({sequencer}) => {
         # Channels: {channels.length}
       </div>
       {/*<ChannelMenu presets={presets} onSelect={addChannel} />*/}
-      <ChannelList channels={channels} />
+      <ChannelList />
     </div>
   )
 

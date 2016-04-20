@@ -1,3 +1,4 @@
 import components from './components'
+import containers from './containers'
 
-export default {components}
+export default {components, containers}

@@ -22,6 +22,9 @@ import {compose, createStore, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 
+// Lib
+import {sequencer, channels} from 'trax'
+
 // Own stuff
 import app from './app'
 import url from './modules/url'
@@ -29,8 +32,6 @@ import url from './modules/url'
 export default class App {
 
   constructor() {
-    // window.app = this  // Set app to global property
-    // this.createSequencer()
     this.store = createStore(
       app.reducer,
       compose(
@@ -66,12 +67,6 @@ export default class App {
 
   start() {
 
-    window.addEventListener('hashchange', () => {
-      this.store.dispatch(url.actions.setUrl(
-        location.hash.slice(1)
-      ))
-    })
-
     this.store.subscribe(() => {
       const state = this.store.getState()
       render(
@@ -84,14 +79,26 @@ export default class App {
       )
     })
 
+    window.addEventListener('hashchange', () => {
+      this.store.dispatch(url.actions.setUrl(
+        location.hash.slice(1)
+      ))
+    })
+
+    // <Testing>
+
+    this.store.dispatch(
+      sequencer.actions.createSequencer()
+    )
+
+    this.store.dispatch(
+      // sequencer.actions.addChannel()
+      channels.actions.createChannel()
+    )
+
     this.store.dispatch(url.actions.setUrl(
       location.hash.slice(1)
     ))
-
-    // testing
-    this.store.dispatch({
-      type: 'trax/CREATE_CHANNEL'
-    })
 
   }
 
