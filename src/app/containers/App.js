@@ -8,7 +8,6 @@ const App = ({sequencer}) => (
     <ul>
       <li><a href='/#/'>Index</a></li>
       <li><a href='/#/overview'>Overview</a></li>
-      <li><a href='/#/test'>Test</a></li>
     </ul>
     <Route route="overview">
       <overview.components.Overview sequencer={sequencer} />
