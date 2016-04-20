@@ -92,7 +92,6 @@ export default class App {
     )
 
     this.store.dispatch(
-      // sequencer.actions.addChannel()
       channels.actions.createChannel()
     )
 
