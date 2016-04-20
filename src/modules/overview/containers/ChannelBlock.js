@@ -6,7 +6,7 @@ import ChannelControls from './ChannelControls'
 const ChannelBlock = ({channel}) => (
   <div className="channel-block">
     <ChannelControls channel={channel} />
-    <traxExt.containers.Channel channel={channel} />
+    <traxExt.components.Channel channel={channel} />
   </div>
 )
 

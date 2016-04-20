@@ -1,17 +1,16 @@
 import React from 'react'
-import Blip from './Blip'
+import Blip from '../containers/Blip'
 
-const Channel = ({channel, blips}) => (
+const Channel = ({channel}) => (
   <div className="channel">
-    {blips.map(blip =>
-      <Blip key={blip.id} blip={blip} />
+    {channel.blips.map(id =>
+      <Blip key={id} id={id} />
     )}
   </div>
 )
 
 Channel.defaultProps = {
-  channel: React.PropTypes.object.isRequired,
-  blips: React.PropTypes.array.isRequired
+  channel: React.PropTypes.object.isRequired
 }
 
 export default Channel

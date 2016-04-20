@@ -19,7 +19,7 @@ const ArchivedChannel = ({channel, onClickRestore, onClickDismiss}) => {
           <a onClick={handleRestore}>Undo</a>
         </div>
       </div>
-      <traxExt.containers.Channel channel={channel} />
+      <traxExt.components.Channel channel={channel} />
     </div>
   )
 

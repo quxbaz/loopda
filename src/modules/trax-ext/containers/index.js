@@ -1,3 +1,3 @@
-import Channel from './Channel'
+import Blip from './Blip'
 
-export default {Channel}
+export default {Blip}
