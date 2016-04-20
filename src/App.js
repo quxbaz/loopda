@@ -92,7 +92,11 @@ export default class App {
     )
 
     this.store.dispatch(
-      channels.actions.createChannel()
+      channels.actions.createChannel({
+        sample: 'hihat',
+        title: 'hihat',
+        number: 1
+      })
     )
 
     this.store.dispatch(url.actions.setUrl(
