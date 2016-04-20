@@ -28,6 +28,7 @@ import {sequencer, channels} from 'trax'
 // Own stuff
 import app from './app'
 import url from './modules/url'
+import trax from './modules/trax'
 
 export default class App {
 
@@ -92,10 +93,8 @@ export default class App {
     )
 
     this.store.dispatch(
-      channels.actions.createChannel({
-        sample: 'hihat',
-        title: 'hihat',
-        number: 1
+      trax.actions.createChannel({
+        sample: 'hihat'
       })
     )
 
