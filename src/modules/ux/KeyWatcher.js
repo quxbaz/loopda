@@ -9,8 +9,14 @@ class KeyWatcher extends React.Component {
 
   handleKey(event) {
     const {props} = this
-    if (event.keyCode === 32 && props.onKeySpace)
-      props.onKeySpace()
+    switch (event.keyCode) {
+      case 27:
+        props.onKeyEscape && props.onKeyEscape()
+        break
+      case 32:
+        props.onKeySpace && props.onKeySpace()
+        break
+    }
   }
 
   componentDidMount() {
@@ -21,9 +27,7 @@ class KeyWatcher extends React.Component {
     document.removeEventListener('keydown', this.handleKey);
   }
 
-  render() {
-    return null
-  }
+  render() {return null}
 
   // // Is this necessary to implement?
   // willReceiveProps(nextProps) {
@@ -33,6 +37,7 @@ class KeyWatcher extends React.Component {
 }
 
 KeyWatcher.propTypes = {
+  onKeyEscape: React.PropTypes.func,
   onKeySpace: React.PropTypes.func
 }
 
