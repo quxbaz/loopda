@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {channels} from 'trax'
 import traxExt from '../../trax-ext'
 import ChannelControls from './ChannelControls'
 
@@ -14,11 +15,10 @@ ChannelBlock.propTypes = {
   channel: React.PropTypes.object.isRequired
 }
 
-const mapDispatchToProps = (state, props) => ({
-  onClickMute: (id) => {},
-  onClickArchive: (id) => {}
+const mapStateToProps = (state, {id}) => ({
+  channel: channels.selectors.getById(id)(state)
 })
 
 export default connect(
-  mapDispatchToProps
+  mapStateToProps
 )(ChannelBlock)
