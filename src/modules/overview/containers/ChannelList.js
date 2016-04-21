@@ -8,7 +8,7 @@ const ChannelList = ({channels}) => (
   <div className="channel-list">
     {channels.map(channel => {
       if (channel.archived)
-        return <ArchivedChannel key={channel.id} channel={channel} />
+        return <ArchivedChannel key={channel.id} id={channel.id} />
       return <ChannelBlock key={channel.id} id={channel.id} />
     })}
   </div>

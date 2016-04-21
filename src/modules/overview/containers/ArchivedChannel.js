@@ -3,41 +3,37 @@ import {connect} from 'react-redux'
 import {channels} from 'trax'
 import traxExt from '../../trax-ext'
 
-const ArchivedChannel = ({channel, onClickRestore, onClickDismiss}) => {
-
-  let {id, number, title, blips} = channel
-
-  let handleRestore = () => onClickRestore(id)
-  let handleDismiss = () => onClickDismiss(id)
-
-  return (
-    <div className="archived-channel">
-      <div className="archived-channel-info">
-        <span>{title}</span>
-        <div className="archived-channel-controls">
-          <a onClick={handleDismiss}>Dismiss</a>
-          <a onClick={handleRestore}>Undo</a>
-        </div>
+const ArchivedChannel = ({channel, onClickRestore, onClickDismiss}) => (
+  <div className="archived-channel">
+    <div className="archived-channel-info">
+      <span>{channel.title}</span>
+      <div className="archived-channel-controls">
+        <a onClick={onClickDismiss}>Dismiss</a>
+        <a onClick={onClickRestore}>Undo</a>
       </div>
-      <traxExt.components.Channel channel={channel} />
     </div>
-  )
-
-}
+    <traxExt.components.Channel channel={channel} />
+  </div>
+)
 
 ArchivedChannel.propTypes = {
   channel: React.PropTypes.object.isRequired
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onClickRestore: (id) => {
+const mapStateToProps = (state, {id}) => ({
+  channel: channels.selectors.getById(id)(state)
+})
+
+const mapDispatchToProps = (dispatch, {id}) => ({
+  onClickRestore: () => {
     dispatch(channels.actions.restoreChannel(id))
   },
-  onClickDismiss: (id) => {
+  onClickDismiss: () => {
     dispatch(channels.actions.removeChannel(id))
   }
 })
 
 export default connect(
-  null, mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ArchivedChannel)
