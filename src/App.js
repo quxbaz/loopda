@@ -84,7 +84,7 @@ export default class App {
     // <Testing>
 
     this.store.dispatch(
-      sequencer.actions.createSequencer({playing: true})
+      sequencer.actions.createSequencer({playing: false})
     )
 
     this.store.dispatch(
@@ -107,6 +107,18 @@ export default class App {
 
     this.player.start()
 
+    // this.perfTest()
+
+  }
+
+  perfTest() {
+    console.time('perf')
+    for (let i=0; i < 50; i++) {
+      this.store.dispatch(traxExt.actions.createChannel({
+        sample: 'hihat'
+      }))
+    }
+    console.timeEnd('perf')
   }
 
 }
