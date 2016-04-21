@@ -38,7 +38,12 @@ ChannelControls.propTypes = {
   onClickSolo: React.PropTypes.func
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapStateToProps = (state, {id}) => ({
+  channel: channels.selectors.getById(id)(state)
+})
+
+// <TODO> Curry id
+const mapDispatchToProps = (dispatch, {id}) => ({
   onClickTitle: (id) => {
     /* view preset */
   },
@@ -54,5 +59,6 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(
-  null, mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ChannelControls)
