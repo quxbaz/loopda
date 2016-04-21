@@ -7,23 +7,19 @@ const ChannelControls = ({
   channel, onClickTitle, onClickArchive, onClickMute, onClickSolo
 }) => {
 
-  const {id, color, number, title, mute, solo} = channel
-  const handleClickTitle = () => onClickTitle(/*preset id*/)
-  const handleClickArchive = () => onClickArchive(id)
-  const handleClickMute = () => onClickMute(id)
-  const handleClickSolo = () => onClickSolo(id)
+  const {color, number, title, mute, solo} = channel
 
   return (
     <div className="channel-controls">
       <div className="color-box" style={{background: channel.color}} />
       <div className="channel-text">
         <div className="channel-number hide">{number}</div>
-        <div className="channel-title clicky" onClick={handleClickTitle}>{title} ({number})</div>
-        <a className="archive-channel" onClick={handleClickArchive}><ui.Icon name="x" /></a>
+        <div className="channel-title clicky" onClick={onClickTitle}>{title} ({number})</div>
+        <a className="archive-channel" onClick={onClickArchive}><ui.Icon name="x" /></a>
       </div>
       <div className="channel-play-controls">
-        <ui.Button className="solo-button" state={solo} onClick={handleClickSolo}>Solo</ui.Button>
-        <ui.Button className="mute-button" state={mute} onClick={handleClickMute}>Mute</ui.Button>
+        <ui.Button className="solo-button" state={solo} onClick={onClickSolo}>Solo</ui.Button>
+        <ui.Button className="mute-button" state={mute} onClick={onClickMute}>Mute</ui.Button>
       </div>
     </div>
   )
@@ -42,18 +38,17 @@ const mapStateToProps = (state, {id}) => ({
   channel: channels.selectors.getById(id)(state)
 })
 
-// <TODO> Curry id
 const mapDispatchToProps = (dispatch, {id}) => ({
-  onClickTitle: (id) => {
+  onClickTitle: (/* preset id*/) => {
     /* view preset */
   },
-  onClickArchive: (id) => {
+  onClickArchive: () => {
     dispatch(channels.actions.archiveChannel(id))
   },
-  onClickMute: (id) => {
+  onClickMute: () => {
     dispatch(channels.actions.toggleMuteChannel(id))
   },
-  onClickSolo: (id) => {
+  onClickSolo: () => {
     dispatch(channels.actions.toggleSoloChannel(id))
   }
 })
