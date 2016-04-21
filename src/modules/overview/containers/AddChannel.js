@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import traxExt from '../../trax-ext'
 
-const AddChannel = ({onSelect}) => (
+const AddChannel = ({onSelect, onTestSelect}) => (
   <div>
     <strong>Add a channel</strong>
     <ul>
@@ -10,6 +10,7 @@ const AddChannel = ({onSelect}) => (
       <li><a onClick={() => onSelect('snare')}>snare</a></li>
       <li><a onClick={() => onSelect('kick')}>kick</a></li>
       <li><a onClick={() => onSelect('clap')}>clap</a></li>
+      <li><a onClick={() => onTestSelect('kick')}>Add ten channels (TEST)</a></li>
     </ul>
   </div>
 )
@@ -23,6 +24,15 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(
       traxExt.actions.createChannel({sample})
     )
+  },
+  onTestSelect: (sample) => {
+    console.time('onTestSelect')
+    for (let i=0; i < 10; i ++) {
+     dispatch(
+       traxExt.actions.createChannel({sample})
+     )
+    }
+    console.timeEnd('onTestSelect')
   }
 })
 
