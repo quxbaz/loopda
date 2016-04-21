@@ -6,8 +6,8 @@ const mapStateToProps = (state, {id}) => ({
   blip: blips.selectors.getById(id)(state)
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  onClick: (id) => {
+const mapDispatchToProps = (dispatch, {id}) => ({
+  onClick: () => {
     dispatch(blips.actions.toggleMuteBlip(id))
   }
 })

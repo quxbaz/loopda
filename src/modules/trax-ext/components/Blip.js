@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 const Blip = ({blip, onClick}) => {
 
-  let {id, mute, color} = blip
+  let {mute, color} = blip
 
   const cssClass = classNames({
     blip: true,
@@ -11,10 +11,8 @@ const Blip = ({blip, onClick}) => {
     enabled: !mute,
   })
 
-  const handleClick = () => onClick(id)
-
   return <div className={cssClass} style={{background: !mute && color}}
-              onMouseDown={handleClick} />
+              onMouseDown={onClick} />
 
 }
 
