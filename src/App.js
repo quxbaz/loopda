@@ -1,11 +1,5 @@
-// CSS stuff
-// import {computeStyles} from 'globals/style-constants'
-
-// Audio stuff
-// import samples from 'globals/samples'
-// import {loadAudioSamples} from 'audio/audiohelper'
-// import audioContext from 'globals/audioContext'
-// import audioService from 'globals/audioService'
+// External libs
+import _ from 'lodash'
 
 // React stuff
 import React from 'react'
@@ -18,8 +12,17 @@ import {compose, createStore, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 
-// Lib
-import {sequencer} from 'trax'
+// App-related libs
+import {sequencer, AudioService, Player} from 'trax'
+
+// CSS stuff
+import {computeStyles} from './globals/style-constants'
+
+// Audio stuff
+import samples from './globals/samples'
+import audioContext from './globals/audioContext'
+import audioService from './globals/audioService'
+import {loadAudioSamples} from './audio/audiohelper'
 
 // Own stuff
 import app from './app'
@@ -54,12 +57,11 @@ export default class App {
   // }
 
   init() {
-    return Promise.resolve()
-    // return Promise.all([
-    //   loadAudioSamples(audioContext, samples).then((sampleMap) => {
-    //     audioService.sampleMap = sampleMap
-    //   })
-    // ]).then(computeStyles)
+    return Promise.all([
+      loadAudioSamples(audioContext, samples).then((sampleMap) => {
+        audioService.sampleMap = sampleMap
+      })
+    ]).then(computeStyles)
   }
 
   start() {
@@ -85,7 +87,7 @@ export default class App {
     // <Testing>
 
     this.store.dispatch(
-      sequencer.actions.createSequencer()
+      sequencer.actions.createSequencer({playing: true})
     )
 
     this.store.dispatch(
@@ -97,6 +99,16 @@ export default class App {
     this.store.dispatch(url.actions.setUrl(
       location.hash.slice(1)
     ))
+
+    // Creating audio player
+
+    this.player = new Player({
+      audioService,
+      store: this.store,
+      tickInterval: this.store.getState().sequencer.beatDuration
+    })
+
+    this.player.start()
 
   }
 
