@@ -5,6 +5,12 @@ import ux from '../../ux'
 const mapDispatchToProps = (dispatch) => ({
   onKeySpace: () => {
     dispatch(sequencer.actions.togglePlay())
+  },
+  onKeyEscape: () => {
+    /*
+      <TEST>
+    */
+    console.clear()
   }
 })
 
