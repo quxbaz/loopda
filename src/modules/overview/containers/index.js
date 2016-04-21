@@ -1,1 +1,3 @@
-export default {}
+import Overview from './Overview'
+
+export default {Overview}

@@ -10,7 +10,7 @@ const App = ({sequencer}) => (
       <li><a href='/#/overview'>Overview</a></li>
     </ul>
     <Route route="overview">
-      <overview.components.Overview sequencer={sequencer} />
+      <overview.containers.Overview sequencer={sequencer} />
     </Route>
   </div>
 )

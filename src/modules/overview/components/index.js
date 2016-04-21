@@ -1,5 +1,1 @@
-import Overview from './Overview'
-
-export default {
-  Overview
-}
+export default {}
