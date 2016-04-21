@@ -1,6 +1,3 @@
-// External libs
-import _ from 'lodash'
-
 // React stuff
 import React from 'react'
 import {render} from 'react-dom'
