@@ -33,10 +33,10 @@ export default class App {
       app.reducer,
       compose(
         applyMiddleware(
-          thunkMiddleware,
-          createLogger({collapsed: true})
-        ),
-        window.devToolsExtension ? window.devToolsExtension() : undefined
+          thunkMiddleware
+          // , createLogger({collapsed: true})
+        )
+        // , window.devToolsExtension ? window.devToolsExtension() : undefined
       )
     )
   }
