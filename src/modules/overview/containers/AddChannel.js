@@ -21,17 +21,12 @@ AddChannel.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onSelect: (sample) => {
-    dispatch(
-      traxExt.actions.createChannel({sample})
-    )
+    dispatch(traxExt.actions.createChannel({sample}))
   },
   onTestSelect: (sample) => {
     console.time('onTestSelect')
-    for (let i=0; i < 10; i ++) {
-     dispatch(
-       traxExt.actions.createChannel({sample})
-     )
-    }
+    for (let i=0; i < 10; i ++)
+      dispatch(traxExt.actions.createChannel({sample}))
     console.timeEnd('onTestSelect')
   }
 })
