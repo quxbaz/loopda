@@ -11,7 +11,7 @@ const ChannelControls = ({
 
   return (
     <div className="channel-controls">
-      <div className="color-box" style={{background: channel.color}} />
+      <div className="color-box" style={{background: color}} />
       <div className="channel-text">
         <div className="channel-number hide">{number}</div>
         <div className="channel-title clicky" onClick={onClickTitle}>{title} ({number})</div>
