@@ -1,22 +1,29 @@
 import React from 'react'
 import classNames from 'classnames'
+import {PureComponent} from 'loopda/lib/react-ext'
 
-const Button = ({state, text, className, children, onClick}) => {
+class Button extends PureComponent {
 
-  const cssClass = classNames({
-    button: true,
-    active: state
-  }) + ' ' + (className || '')
+  render() {
 
-  let stateText
-  if (text)
-    stateText = state ? text[1] : text[0]
+    const {state, text, className, children, onClick} = this.props
 
-  return (
-    <a className={cssClass} onClick={onClick}>
-      {text ? stateText : children}
-    </a>
-  )
+    const cssClass = classNames({
+      button: true,
+      active: state
+    }) + ' ' + className
+
+    let stateText
+    if (text)
+      stateText = state ? text[1] : text[0]
+
+    return (
+      <a className={cssClass} onClick={onClick}>
+        {text ? stateText : children}
+      </a>
+    )
+
+  }
 
 }
 
@@ -25,6 +32,10 @@ Button.propTypes = {
   text: React.PropTypes.array,
   className: React.PropTypes.string,
   onClick: React.PropTypes.func
+}
+
+Button.defaultProps = {
+  className: ''
 }
 
 export default Button
