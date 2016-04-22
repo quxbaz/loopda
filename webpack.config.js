@@ -22,14 +22,9 @@ var config = {
         include: [
           resolve(__dirname, 'index'),
           resolve(__dirname, 'src'),
+          resolve(__dirname, 'lib'),
           resolve(__dirname, 'node_modules/trax'),
-          resolve(__dirname, 'node_modules/stateful-router'),
-          // resolve(__dirname, 'node_modules/bin.js'),
-          // resolve(__dirname, 'node_modules/pending'),
-          // resolve(__dirname, 'node_modules/sentry'),
-          // resolve(__dirname, 'node_modules/sequencer'),
-          // resolve(__dirname, 'node_modules/stateful'),
-          // resolve(__dirname, 'node_modules/store')
+          resolve(__dirname, 'node_modules/stateful-router')
         ],
         query: {
           presets: ['es2015', 'react'],
@@ -48,11 +43,10 @@ var config = {
   },
 
   resolve: {
-    // root: [resolve(__dirname), resolve('app')],
     root: resolve(__dirname),
     extensions: ['', '.js'],
     alias: {
-      'loopda': resolve(__dirname, 'src'),
+      'loopda': resolve(__dirname),
       'react-dom': resolve('node_modules/react/lib/ReactDOM.js')
     }
   }
