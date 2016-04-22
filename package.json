@@ -14,8 +14,6 @@
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
     "regenerator": "^0.8.42",
-    "sentry": "git+https://github.com/quxbaz/sentry.git",
-    "stateful": "git+https://github.com/quxbaz/stateful.git",
     "stateful-router": "git+https://github.com/quxbaz/stateful-router.git",
     "trax": "git+https://github.com/quxbaz/trax.git"
   },
