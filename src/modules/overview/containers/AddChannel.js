@@ -2,6 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import traxExt from '../../trax-ext'
 
+// <TESTING>
+import {reactProfile} from 'loopda/lib/perf'
+
 const AddChannel = ({onSelect, onTestSelect}) => (
   <div>
     <strong>Add a channel</strong>
@@ -24,10 +27,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(traxExt.actions.createChannel({sample}))
   },
   onTestSelect: (sample) => {
-    console.time('onTestSelect')
-    for (let i=0; i < 10; i ++)
-      dispatch(traxExt.actions.createChannel({sample}))
-    console.timeEnd('onTestSelect')
+    setTimeout(() => {
+      reactProfile(() => {
+        for (let i=0; i < 10; i++)
+          dispatch(traxExt.actions.createChannel({sample}))
+      }, true)
+    }, 0)
   }
 })
 
