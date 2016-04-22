@@ -115,7 +115,7 @@ export default class App {
   }
 
   perfTest() {
-    for (let i=0; i < 30; i++) {
+    for (let i=0; i < 10; i++) {
       this.store.dispatch(traxExt.actions.createChannel({
         sample: 'hihat'
       }))
