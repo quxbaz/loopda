@@ -9,13 +9,18 @@ class KeyWatcher extends React.Component {
 
   handleKey(event) {
     const {props} = this
-    switch (event.keyCode) {
-      case 27:
-        props.onKeyEscape && props.onKeyEscape(event)
-        break
-      case 32:
-        props.onKeySpace && props.onKeySpace(event)
-        break
+    if (props.keyCode) {
+      if (event.keyCode === props.keyCode)
+        props.handler(event)
+    } else {
+      switch (event.keyCode) {
+        case 27:
+          props.onKeyEscape && props.onKeyEscape(event)
+          break
+        case 32:
+          props.onKeySpace && props.onKeySpace(event)
+          break
+      }
     }
   }
 
@@ -37,6 +42,8 @@ class KeyWatcher extends React.Component {
 }
 
 KeyWatcher.propTypes = {
+  keyCode: React.PropTypes.number,
+  handler: React.PropTypes.func,
   onKeyEscape: React.PropTypes.func,
   onKeySpace: React.PropTypes.func
 }
