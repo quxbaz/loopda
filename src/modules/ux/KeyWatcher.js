@@ -11,10 +11,10 @@ class KeyWatcher extends React.Component {
     const {props} = this
     switch (event.keyCode) {
       case 27:
-        props.onKeyEscape && props.onKeyEscape()
+        props.onKeyEscape && props.onKeyEscape(event)
         break
       case 32:
-        props.onKeySpace && props.onKeySpace()
+        props.onKeySpace && props.onKeySpace(event)
         break
     }
   }

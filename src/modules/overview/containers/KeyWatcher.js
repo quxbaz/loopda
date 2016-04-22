@@ -3,7 +3,8 @@ import {sequencer} from 'trax'
 import ux from '../../ux'
 
 const mapDispatchToProps = (dispatch) => ({
-  onKeySpace: () => {
+  onKeySpace: (event) => {
+    event.preventDefault()
     dispatch(sequencer.actions.togglePlay())
   },
   onKeyEscape: () => {
