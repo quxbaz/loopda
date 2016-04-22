@@ -1,44 +1,46 @@
 import React from 'react'
 import ReactPerf from 'react/lib/ReactDefaultPerf'
+import ux from '../../ux'
 
 class Profiler extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {started: false}
-    this.startProfiling = this.startProfiling.bind(this)
-    this.stopProfiling = this.stopProfiling.bind(this)
+    this.start = this.start.bind(this)
+    this.stop = this.stop.bind(this)
+    this.toggle = this.toggle.bind(this)
   }
 
-  startProfiling() {
+  start() {
     this.setState({running: true})
     ReactPerf.start()
   }
 
-  stopProfiling() {
+  stop() {
     ReactPerf.stop()
     ReactPerf.printWasted()
     this.setState({running: false})
   }
 
+  toggle() {
+    if (this.state.running)
+      this.stop()
+    else
+      this.start()
+  }
+
   render() {
     return (
       <div>
+        <ux.KeyWatcher keyCode={82 /* r */} handler={this.toggle} />
         {this.state.running ?
-          <button style={{color: 'white', background: 'black'}} onClick={this.stopProfiling}>Stop profiling</button> :
-          <button onClick={this.startProfiling}>Start profiling</button>}
+          <button style={{color: 'white', background: 'black'}} onClick={this.stop}>Stop profiling</button> :
+          <button onClick={this.start}>Start profiling</button>}
       </div>
     )
   }
 
 }
-
-// const Profiler = () => (
-//   <div>
-//     Profile:{' '}
-//     <button onClick={startProfiling}>Start</button>{' '}
-//     <button onClick={stopProfiling}>Stop</button>
-//   </div>
-// )
 
 export default Profiler
