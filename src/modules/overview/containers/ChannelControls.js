@@ -1,28 +1,32 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {PureComponent} from 'loopda/lib/react-ext'
 import {channels} from 'trax'
 import ui from '../../ui'
 
-const ChannelControls = ({
-  channel, onClickTitle, onClickArchive, onClickMute, onClickSolo
-}) => {
+class ChannelControls extends PureComponent {
 
-  const {color, number, title, mute, solo} = channel
+  render() {
 
-  return (
-    <div className="channel-controls">
-      <div className="color-box" style={{background: color}} />
-      <div className="channel-text">
-        <div className="channel-number hide">{number}</div>
-        <div className="channel-title clicky" onClick={onClickTitle}>{title} ({number})</div>
-        <a className="archive-channel" onClick={onClickArchive}><ui.Icon name="x" /></a>
+    const {channel, onClickTitle, onClickArchive, onClickMute, onClickSolo} = this.props
+    const {color, number, title, mute, solo} = channel
+
+    return (
+      <div>
+        <div className="color-box" style={{background: color}} />
+        <div className="channel-text">
+          <div className="channel-number hide">{number}</div>
+          <div className="channel-title clicky" onClick={onClickTitle}>{title} ({number})</div>
+          <a className="archive-channel" onClick={onClickArchive}><ui.Icon name="x" /></a>
+        </div>
+        <div className="channel-play-controls">
+          <ui.Button className="solo-button" state={solo} onClick={onClickSolo}>Solo</ui.Button>
+          <ui.Button className="mute-button" state={mute} onClick={onClickMute}>Mute</ui.Button>
+        </div>
       </div>
-      <div className="channel-play-controls">
-        <ui.Button className="solo-button" state={solo} onClick={onClickSolo}>Solo</ui.Button>
-        <ui.Button className="mute-button" state={mute} onClick={onClickMute}>Mute</ui.Button>
-      </div>
-    </div>
-  )
+    )
+
+  }
 
 }
 
