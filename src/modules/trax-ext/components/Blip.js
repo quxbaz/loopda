@@ -1,18 +1,24 @@
 import React from 'react'
 import classNames from 'classnames'
+import {PureComponent} from 'loopda/lib/react-ext'
 
-const Blip = ({blip, onClick}) => {
+class Blip extends PureComponent {
 
-  let {mute, color} = blip
+  render() {
 
-  const cssClass = classNames({
-    blip: true,
-    clicky: true,
-    enabled: !mute,
-  })
+    const {blip, onClick} = this.props
+    const {mute, color} = blip
 
-  return <div className={cssClass} style={{background: !mute && color}}
-              onMouseDown={onClick} />
+    const cssClass = classNames({
+      blip: true,
+      clicky: true,
+      enabled: !mute,
+    })
+
+    return <div className={cssClass} style={{background: !mute && color}}
+                onMouseDown={onClick} />
+
+  }
 
 }
 
