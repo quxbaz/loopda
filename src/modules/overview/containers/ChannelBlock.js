@@ -2,14 +2,20 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {channels} from 'trax'
 import traxExt from '../../trax-ext'
+import {PureComponent} from 'loopda/lib/react-ext'
 import ChannelControls from './ChannelControls'
 
-const ChannelBlock = ({channel}) => (
-  <div className="channel-block">
-    <ChannelControls id={channel.id} />
-    <traxExt.components.Channel channel={channel} />
-  </div>
-)
+class ChannelBlock extends PureComponent {
+  render() {
+    const {channel} = this.props
+    return (
+      <div className="channel-block">
+        <ChannelControls id={channel.id} />
+        <traxExt.components.Channel channel={channel} />
+      </div>
+    )
+  }
+}
 
 ChannelBlock.propTypes = {
   channel: React.PropTypes.object.isRequired
