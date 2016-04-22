@@ -27,12 +27,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(traxExt.actions.createChannel({sample}))
   },
   onTestSelect: (sample) => {
-    setTimeout(() => {
-      reactProfile(() => {
-        for (let i=0; i < 10; i++)
-          dispatch(traxExt.actions.createChannel({sample}))
-      }, true)
-    }, 0)
+    for (let i=0; i < 10; i++)
+      dispatch(traxExt.actions.createChannel({sample}))
   }
 })
 
