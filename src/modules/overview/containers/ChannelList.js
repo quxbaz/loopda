@@ -24,7 +24,9 @@ ChannelList.propTypes = {
   channels: React.PropTypes.array.isRequired
 }
 
-// <TODO> Fix: This query creates a new array and breaks identity comparison
+// <TODO> Fix: This query creates a new array and breaks identity
+// comparison. Should cache the result. Afterwards, it shouldn't
+// matter if ChannelList extends PureComponent or not
 const mapStateToProps = (state) => ({
   channels: channels.selectors.getAll(state)
 })
