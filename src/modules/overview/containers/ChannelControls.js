@@ -12,7 +12,7 @@ class ChannelControls extends PureComponent {
     const {color, number, title, mute, solo} = channel
 
     return (
-      <div>
+      <div className="channel-controls">
         <div className="color-box" style={{background: color}} />
         <div className="channel-text">
           <div className="channel-number hide">{number}</div>
