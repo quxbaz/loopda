@@ -27,4 +27,8 @@ Blip.propTypes = {
   onClick: React.PropTypes.func
 }
 
+Blip.defaultProps = {
+  onClick: () => {}
+}
+
 export default Blip
