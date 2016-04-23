@@ -11,7 +11,7 @@ const mapDispatchToProps = (dispatch) => ({
     /*
       <TEST>
     */
-    console.clear()
+    // console.clear()
   }
 })
 
