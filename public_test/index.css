@@ -1,0 +1,4 @@
+/* Mocha for some reason shows two idential fail panels for each failed test. */
+.test.fail + .test.fail {
+  display: none;
+}
