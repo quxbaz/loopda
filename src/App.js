@@ -34,7 +34,7 @@ export default class App {
       compose(
         applyMiddleware(
           thunkMiddleware
-          // , createLogger({collapsed: true})
+          , createLogger({collapsed: true})
         )
         // , window.devToolsExtension ? window.devToolsExtension() : undefined
       )

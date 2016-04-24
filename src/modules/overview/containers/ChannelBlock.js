@@ -11,7 +11,7 @@ class ChannelBlock extends PureComponent {
     return (
       <div className="channel-block">
         <ChannelControls id={channel.id} />
-        <traxExt.components.Channel channel={channel} />
+        <traxExt.containers.Channel channel={channel} />
       </div>
     )
   }
