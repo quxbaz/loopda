@@ -3,13 +3,15 @@ import {actionTypes} from './actions'
 
 export const pagerInitialState = {
   current: 0,  // The current page
-  size: 50,
+  size: 20,
 }
 
 const pager = (state=pagerInitialState, action) => {
   switch (action.type) {
     case actionTypes.SET_PAGE:
       return {...state, current: action.payload}
+    case actionTypes.SET_SIZE:
+      return {...state, size: action.payload}
     case actionTypes.FIRST_PAGE:
       return {...state, current: 0}
     case actionTypes.LAST_PAGE:

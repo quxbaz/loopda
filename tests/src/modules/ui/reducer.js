@@ -4,10 +4,21 @@ import ui from 'loopda/src/modules/ui'
 describe("reducer", () => {
 
   describe("setPage", () => {
-    it("Sets the page.", () => {
+    it("Sets the current page.", () => {
       const stateBefore = {pager: {current: 0}}
       const action = ui.actions.setPage(10)
       const stateAfter = {pager: {current: 10}}
+      expect(
+        ui.reducer(stateBefore, action)
+      ).toEqual(stateAfter)
+    })
+  })
+
+  describe("setSize", () => {
+    it("Sets the page size.", () => {
+      const stateBefore = {pager: {size: 30}}
+      const action = ui.actions.setSize(100)
+      const stateAfter = {pager: {size: 100}}
       expect(
         ui.reducer(stateBefore, action)
       ).toEqual(stateAfter)
