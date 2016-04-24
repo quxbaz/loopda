@@ -54,9 +54,10 @@
   width: @blipWidth;
   height: @blipHeight;
   opacity: 0;
-  transition: opacity 180ms linear;
+  transition: opacity 300ms ease-out;
   &.enabled {
     opacity: 1;
+    transition: none;
     animation: 180ms linear fadeOpacity;
   }
 
