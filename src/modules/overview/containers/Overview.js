@@ -1,10 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {sequencer} from 'trax'
-import KeyWatcher from '../containers/KeyWatcher'
 import TempoBar from '../components/TempoBar'
-import ChannelList from '../containers/ChannelList'
-import AddChannel from '../containers/AddChannel'
+import KeyWatcher from './KeyWatcher'
+import Pager from './Pager'
+import ChannelList from './ChannelList'
+import AddChannel from './AddChannel'
 
 const TestControls = () => (
   <ul>
@@ -29,6 +30,7 @@ const Overview = ({sequencer, onClickPlay}) => (
     <a onClick={onClickPlay}>{sequencer.playing ? 'Pause' : 'Play'} (space)</a>
     <div># Channels: {sequencer.channels.length}</div>
     <AddChannel />
+    <Pager />
     <div className="relative">
       <TempoBar beat={sequencer.currentBeat} />
       <ChannelList />
