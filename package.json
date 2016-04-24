@@ -25,6 +25,7 @@
     "babel-preset-react": "^6.3.13",
     "css-loader": "^0.23.1",
     "es6-promise": "^3.0.2",
+    "expect": "^1.18.0",
     "install": "^0.6.1",
     "jsx-loader": "^0.13.2",
     "less": "^2.5.3",
