@@ -18,7 +18,7 @@ class Blip extends PureComponent {
 
     const style = {
       left: beat * constants.blipWidth,
-      background: !mute && color
+      background: color
     }
 
     return <div className={cssClass} style={style} />

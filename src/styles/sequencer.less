@@ -40,35 +40,24 @@
   // }
 }
 
+@keyframes fadeOpacity {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
 .blip {
-
   z-index: 1;
-
   .flex-center;
-
   position: absolute;
   top: 0;
-
   -webkit-user-select: none;
-
   width: @blipWidth;
   height: @blipHeight;
-
-  background: lighten(@blipBorderColor, 54%);
-
-  // Animation
-  transform-origin: 50% 50%;
-  transform: perspective(1000px) rotateX(-180deg);
-  transition: transform 240ms linear, background 240ms ease-out, width 160ms ease-out, height 160ms ease-out;
-
-  // Stripe blips in blocks of four
-  &:nth-child(n+5):nth-child(-n+8),
-  &:nth-child(n+13):nth-child(-n+16) {
-    background: lighten(@blipBorderColor, 60%);
-  }
-
+  opacity: 0;
+  transition: opacity 180ms linear;
   &.enabled {
-    transform: perspective(40px) rotateX(0);
+    opacity: 1;
+    animation: 180ms linear fadeOpacity;
   }
 
 }
