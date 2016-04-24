@@ -25,6 +25,7 @@ import {loadAudioSamples} from './audio/audiohelper'
 import app from './app'
 import url from './modules/url'
 import traxExt from './modules/trax-ext'
+import ui from './modules/ui'
 
 export default class App {
 
@@ -91,6 +92,10 @@ export default class App {
       traxExt.actions.createChannel({
         sample: 'hihat'
       })
+    )
+
+    this.store.dispatch(
+      ui.actions.setSize(100)
     )
 
     this.store.dispatch(url.actions.setUrl(
