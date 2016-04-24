@@ -16,12 +16,28 @@
 }
 
 .channel {
+  .clicky;
   position: relative;  // Needed to position overlay
   display: flex;
-  &.mute:after {
-    .overlay(#541751);
-    pointer-events: none;  // Prevent overlay from capturing click events
+  width: @channelWidth;
+  height: @blipHeight;
+  background: lighten(@blipBorderColor, 54%);
+  &:before, &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: @blipWidth * 4;
+    width: @blipWidth * 4;
+    height: 100%;
+    background: lighten(@blipBorderColor, 60%);
   }
+  &:after {
+    left: @blipWidth * 12;
+  }
+  // &.mute:after {
+  //   .overlay(#541751);
+  //   pointer-events: none;  // Prevent overlay from capturing click events
+  // }
 }
 
 .blip {
