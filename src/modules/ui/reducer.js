@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux'
 import {actionTypes} from './actions'
 
-export const pageInitialState = {
+export const pagerInitialState = {
   current: 0,  // The current page
   size: 50,
 }
 
-const page = (state=pageInitialState, action) => {
+const pager = (state=pagerInitialState, action) => {
   switch (action.type) {
     case actionTypes.SET_PAGE:
       return {...state, current: action.payload}
@@ -29,6 +29,6 @@ const page = (state=pageInitialState, action) => {
   }
 }
 
-const ui = combineReducers({page})
+const ui = combineReducers({pager})
 
 export default ui
