@@ -22,6 +22,7 @@ var config = {
         include: [
           resolve(__dirname, 'index'),
           resolve(__dirname, 'src'),
+          resolve(__dirname, 'tests'),
           resolve(__dirname, 'lib'),
           resolve(__dirname, 'node_modules/trax'),
           resolve(__dirname, 'node_modules/stateful-router')
