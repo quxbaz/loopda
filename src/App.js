@@ -26,9 +26,6 @@ import app from './app'
 import url from './modules/url'
 import traxExt from './modules/trax-ext'
 
-// Testing
-import {reactProfile} from '../lib/perf'
-
 export default class App {
 
   constructor() {
@@ -110,16 +107,6 @@ export default class App {
 
     this.player.start()
 
-    reactProfile(this.perfTest.bind(this))
-
-  }
-
-  perfTest() {
-    for (let i=0; i < 30; i++) {
-      this.store.dispatch(traxExt.actions.createChannel({
-        sample: 'hihat'
-      }))
-    }
   }
 
 }
