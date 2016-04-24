@@ -7,9 +7,11 @@ class Channel extends PureComponent {
     const {channel} = this.props
     return (
       <div className="channel">
-        {channel.blips.map(id =>
-          <Blip key={id} id={id} />
-        )}
+        {channel.blips.map((id, i) => {
+          if (id === undefined)
+            return null
+          return <Blip key={i} id={id} />
+        })}
       </div>
     )
   }
