@@ -1,4 +1,6 @@
-import Button from './Button'
-import Icon from './Icon'
+import actionTypes from './actions'
+import actions from './actions'
+import reducer from './reducer'
+import components from './components'
 
-export default {Button, Icon}
+export default {actionTypes, actions, reducer, components}

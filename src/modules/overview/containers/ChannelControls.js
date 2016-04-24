@@ -4,6 +4,8 @@ import {PureComponent} from 'loopda/lib/react-ext'
 import {channels} from 'trax'
 import ui from '../../ui'
 
+const {Button, Icon} = ui.components
+
 class ChannelControls extends PureComponent {
 
   render() {
@@ -17,11 +19,11 @@ class ChannelControls extends PureComponent {
         <div className="channel-text">
           <div className="channel-number hide">{number}</div>
           <div className="channel-title clicky" onClick={onClickTitle}>{title} ({number})</div>
-          <a className="archive-channel" onClick={onClickArchive}><ui.Icon name="x" /></a>
+          <a className="archive-channel" onClick={onClickArchive}><Icon name="x" /></a>
         </div>
         <div className="channel-play-controls">
-          <ui.Button className="solo-button" state={solo} onClick={onClickSolo}>Solo</ui.Button>
-          <ui.Button className="mute-button" state={mute} onClick={onClickMute}>Mute</ui.Button>
+          <Button className="solo-button" state={solo} onClick={onClickSolo}>Solo</Button>
+          <Button className="mute-button" state={mute} onClick={onClickMute}>Mute</Button>
         </div>
       </div>
     )
