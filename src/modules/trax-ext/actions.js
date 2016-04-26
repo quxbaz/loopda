@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import {channels} from 'trax'
 import util from './util'
 
