@@ -38,7 +38,7 @@
     "test": "webpack-dev-server --content-base=public_test --entry=tests",
     "build": "NODE_ENV=production webpack --progress --colors",
     "analyze": "webpack --json | webpack-bundle-size-analyzer",
-    "local-tunnel": "lt --port 6060"
+    "local-tunnel": "lt --port 6060 --subdomain loopda"
   },
   "repository": {
     "type": "git",
