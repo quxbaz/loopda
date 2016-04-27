@@ -37,7 +37,8 @@
     "serve": "webpack-dev-server --content-base=public",
     "test": "webpack-dev-server --content-base=public_test --entry=tests",
     "build": "NODE_ENV=production webpack --progress --colors",
-    "analyze": "webpack --json | webpack-bundle-size-analyzer"
+    "analyze": "webpack --json | webpack-bundle-size-analyzer",
+    "local-tunnel": "lt --port 6060"
   },
   "repository": {
     "type": "git",
