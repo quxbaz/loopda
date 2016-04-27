@@ -80,8 +80,8 @@ if (process.env.NODE_ENV === 'production') {
 
   })
 
-  // config.resolve.alias['react$'] = resolve(__dirname, 'node_modules/react/dist/react.min.js')
-  // config.resolve.alias['react-dom$'] = resolve(__dirname, 'node_modules/react-dom/dist/react-dom.min.js')
+  config.resolve.alias['react$'] = resolve(__dirname, 'node_modules/react/dist/react.min.js')
+  config.resolve.alias['react-dom$'] = resolve(__dirname, 'node_modules/react-dom/dist/react-dom.min.js')
 
 }
 
