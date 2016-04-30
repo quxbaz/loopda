@@ -10,7 +10,7 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 
 // App-related libs
-import {sequencer, AudioService, Player} from 'trax'
+import {sequencer, presets, AudioService, Player} from 'trax'
 
 // CSS stuff
 import {computeStyles} from './globals/style-constants'
@@ -95,15 +95,20 @@ export default class App {
     )
 
     this.store.dispatch(
-      ui.actions.setSize(100)
+      ui.actions.setSize(50)
     )
+
+    // Create presets
+    this.store.dispatch(presets.actions.createPreset({sample: 'hihat'}))
+    this.store.dispatch(presets.actions.createPreset({sample: 'snare'}))
+    this.store.dispatch(presets.actions.createPreset({sample: 'kick'}))
+    this.store.dispatch(presets.actions.createPreset({sample: 'clap'}))
 
     this.store.dispatch(url.actions.setUrl(
       location.hash.slice(1)
     ))
 
     // Creating audio player
-
     this.player = new Player({
       audioService,
       store: this.store,
