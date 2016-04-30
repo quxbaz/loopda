@@ -77,11 +77,14 @@ export default class App {
       )
     })
 
-    window.addEventListener('hashchange', () => {
-      this.store.dispatch(url.actions.setUrl(
-        location.hash.slice(1)
-      ))
-    })
+    const processUrl = () => {
+      let hash = location.hash.slice(1)
+      if (hash === '' || hash === '/') {
+        location.hash = '/overview'
+      } else {
+        this.store.dispatch(url.actions.setUrl(hash))
+      }
+    }
 
     // <Testing>
 
@@ -100,14 +103,11 @@ export default class App {
     this.store.dispatch(presets.actions.createPreset({sample: 'clap'}))
 
     each(this.store.getState().presets, (preset) => {
-      this.store.dispatch(
-        traxExt.actions.createChannel({preset: preset.id})
-      )
+      this.store.dispatch(traxExt.actions.createChannel({preset: preset.id}))
     })
 
-    this.store.dispatch(url.actions.setUrl(
-      location.hash.slice(1)
-    ))
+    window.addEventListener('hashchange', processUrl)
+    processUrl()
 
     // Creating audio player
     this.player = new Player({
