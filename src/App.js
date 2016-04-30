@@ -89,12 +89,6 @@ export default class App {
     )
 
     this.store.dispatch(
-      traxExt.actions.createChannel({
-        sample: 'hihat'
-      })
-    )
-
-    this.store.dispatch(
       ui.actions.setSize(50)
     )
 
@@ -103,6 +97,12 @@ export default class App {
     this.store.dispatch(presets.actions.createPreset({sample: 'snare'}))
     this.store.dispatch(presets.actions.createPreset({sample: 'kick'}))
     this.store.dispatch(presets.actions.createPreset({sample: 'clap'}))
+
+    // this.store.dispatch(
+    //   traxExt.actions.createChannel({
+    //     sample: 'hihat'
+    //   })
+    // )
 
     this.store.dispatch(url.actions.setUrl(
       location.hash.slice(1)
