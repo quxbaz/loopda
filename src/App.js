@@ -10,6 +10,7 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 
 // App-related libs
+import each from 'qux/lib/each'
 import {sequencer, presets, AudioService, Player} from 'trax'
 
 // CSS stuff
@@ -98,11 +99,11 @@ export default class App {
     this.store.dispatch(presets.actions.createPreset({sample: 'kick'}))
     this.store.dispatch(presets.actions.createPreset({sample: 'clap'}))
 
-    // this.store.dispatch(
-    //   traxExt.actions.createChannel({
-    //     sample: 'hihat'
-    //   })
-    // )
+    each(this.store.getState().presets, (preset) => {
+      this.store.dispatch(
+        traxExt.actions.createChannel({preset: preset.id})
+      )
+    })
 
     this.store.dispatch(url.actions.setUrl(
       location.hash.slice(1)
