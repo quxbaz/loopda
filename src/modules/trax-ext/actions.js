@@ -1,12 +1,13 @@
-import {channels} from 'trax'
+import {channels, presets} from 'trax'
 import util from './util'
 
 const createChannel = (state) => (dispatch, getState) => {
-  const all = channels.selectors.getAll(getState())
+  const storeState = getState()
+  const all = channels.selectors.getAll(storeState)
   dispatch(
     channels.actions.createChannel({
       number: util.getNextNumber(all),
-      title: state.sample,
+      title: presets.selectors.getById(state.preset)(storeState).sample,
       color: util.randomChannelHSL(),
       ...state
     })
