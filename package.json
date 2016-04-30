@@ -6,6 +6,7 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "normalize-css": "^2.3.1",
+    "qux": "git+https://github.com/quxbaz/qux.git",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.5",
