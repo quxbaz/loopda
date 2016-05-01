@@ -26,6 +26,7 @@ var config = {
           resolve(__dirname, 'lib'),
           resolve(__dirname, 'tests'),
           resolve(__dirname, 'node_modules/qux'),
+          resolve(__dirname, 'node_modules/dom-util'),
           resolve(__dirname, 'node_modules/trax'),
           resolve(__dirname, 'node_modules/stateful-router')
         ],
