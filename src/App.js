@@ -27,6 +27,7 @@ import app from './app'
 import url from './modules/url'
 import traxExt from './modules/trax-ext'
 import ui from './modules/ui'
+import audio from './modules/audio'
 
 export default class App {
 
@@ -36,7 +37,7 @@ export default class App {
       compose(
         applyMiddleware(
           thunkMiddleware
-          // , createLogger({collapsed: true})
+          , createLogger({collapsed: true})
         )
         // , window.devToolsExtension ? window.devToolsExtension() : undefined
       )
@@ -101,6 +102,12 @@ export default class App {
     this.store.dispatch(presets.actions.createPreset({sample: 'snare'}))
     this.store.dispatch(presets.actions.createPreset({sample: 'kick'}))
     this.store.dispatch(presets.actions.createPreset({sample: 'clap'}))
+
+    // Add samples
+    this.store.dispatch(audio.actions.addSample('hihat'))
+    this.store.dispatch(audio.actions.addSample('snare'))
+    this.store.dispatch(audio.actions.addSample('kick'))
+    this.store.dispatch(audio.actions.addSample('clap'))
 
     each(this.store.getState().presets, (preset) => {
       this.store.dispatch(traxExt.actions.createChannel({preset: preset.id}))
