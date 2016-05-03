@@ -7,4 +7,10 @@ const setUrl = (url) => ({
   payload: url
 })
 
-export default {setUrl}
+// Changes the browser url along with the store url
+const setBrowserUrl = (url) => (dispatch) => {
+  location.hash = url
+  dispatch(setUrl(url))
+}
+
+export default {setUrl, setBrowserUrl}
