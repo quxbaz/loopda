@@ -80,6 +80,8 @@ export default class App {
 
     const processUrl = () => {
       let hash = location.hash.slice(1)
+      if (this.store.getState().url === hash)
+        return
       if (hash === '' || hash === '/') {
         location.hash = '/overview'
       } else {
