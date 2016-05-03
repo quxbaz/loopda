@@ -19,7 +19,7 @@ const App = ({sequencer}) => (
       <overview.containers.Overview sequencer={sequencer} />
     </Route>
     <Route route="presets">
-      <presets.containers.Presets />
+      <presets.components.Presets />
     </Route>
   </div>
 )

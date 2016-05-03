@@ -1,1 +1,3 @@
-export default {}
+import Presets from './Presets'
+
+export default {Presets}
