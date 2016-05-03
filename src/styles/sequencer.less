@@ -34,10 +34,10 @@
   &:after {
     left: @blipWidth * 12;
   }
-  // &.mute:after {
-  //   .overlay(#541751);
-  //   pointer-events: none;  // Prevent overlay from capturing click events
-  // }
+  &.mute:after {
+    .overlay(#541751);
+    pointer-events: none;  // Prevent overlay from capturing click events
+  }
 }
 
 @keyframes fadeOpacity {
