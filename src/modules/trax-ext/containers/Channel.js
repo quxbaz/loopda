@@ -1,8 +1,17 @@
 import {connect} from 'react-redux'
 import Channel from '../components/Channel'
-import {channels} from 'trax'
+import {sequencer, channels} from 'trax'
 
-const mapDispatchToProps = (dispatch, {channel}) => ({
+const mapStateToProps = (state, {id}) => {
+  const channel = channels.selectors.getById(id)(state)
+  const soloMode = sequencer.selectors.isSoloMode(state)
+  return {
+    channel,
+    enabled: (soloMode && channel.solo) || (!soloMode && !channel.mute)
+  }
+}
+
+const mapDispatchToProps = (dispatch, {id}) => ({
   onMouseDown: (event, el) => {
     /*
       Detects which beat position was clicked by looking at the
@@ -16,12 +25,12 @@ const mapDispatchToProps = (dispatch, {channel}) => ({
     const blipWidth = channelWidth / beats
     const beatClicked = Math.floor((event.clientX - left) / blipWidth)
     dispatch(
-      channels.actions.toggleBlipAt(channel.id, beatClicked)
+      channels.actions.toggleBlipAt(id, beatClicked)
     )
   }
 })
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Channel)
