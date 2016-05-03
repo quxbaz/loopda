@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import {channels} from 'trax'
 import ui from '../../ui'
 import {PureComponent} from 'loopda/lib/react-ext'
-import ChannelBlock from './ChannelBlock'
 import ArchivedChannel from './ArchivedChannel'
+import ChannelBlock from '../components/ChannelBlock'
 
 class ChannelList extends PureComponent {
   renderPagedList() {
