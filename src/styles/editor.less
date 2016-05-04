@@ -1,64 +1,29 @@
-@slotHeight: 32px;
-@slotColor: #fff;
-@altSlotColor: #f2f2f2;
-
-.editor {
-  background: #fff;
-}
+@cellHeight: 32px;
+@cellColor: #fff;
+@altCellColor: #f2f2f2;
 
 .song-grid {
   position: relative;
 }
 
-.line-grid {}
-
-.line {
+.song-grid-line {
   display: flex;
-  &:nth-child(odd) .slot:nth-child(odd) {
-    background: @altSlotColor;
+  &:nth-child(odd) .song-grid-cell:nth-child(odd) {
+    background: @altCellColor;
   }
-  &:nth-child(even) .slot:nth-child(even) {
-    background: @altSlotColor;
+  &:nth-child(even) .song-grid-cell:nth-child(even) {
+    background: @altCellColor;
   }
 }
 
-.slot {
+.song-grid-cell {
   .clicky;
   .flex-center;
   flex: 1;
-  height: @slotHeight;
+  height: @cellHeight;
   font-size: 12px;
-  background: @slotColor;
-}
-
-.editor-channel-menu {
-  position: absolute;
-  margin-top: @slotHeight;
-  padding: 16px;
-  background: #fff;
-  border: 1px solid #f0f;
-  box-shadow: 0 2px 8px #e0e0e0;
-  .empty-option {
-    .clicky;
-  }
-  .channel-option {
-    .clicky;
-    margin-bottom: 2px;
-  }
-  .channel-tag {
-    position: absolute;
-    z-index: 1;
-    padding: 0 1px;
-    font-size: 12px;
-    font-weight: bold;
-    background: #000;
-    color: #fff;
-    opacity: 0.6;
-  }
-  .channel {
-  }
-  .blip {
-    width: 16px;
-    height: 36px;
+  background: @cellColor;
+  &.active {
+    z-index: 0;
   }
 }
