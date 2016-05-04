@@ -1,10 +1,10 @@
 import {connect} from 'react-redux'
 import Channel from '../components/Channel'
-import {sequencer, channels} from 'trax'
+import {channels} from 'trax'
 
 const mapStateToProps = (state, {id}) => {
   const channel = channels.selectors.getById(id)(state)
-  const soloMode = sequencer.selectors.isSoloMode(state)
+  const soloMode = channels.selectors.isSoloMode(state)
   return {
     channel,
     enabled: (soloMode && channel.solo) || (!soloMode && !channel.mute)
