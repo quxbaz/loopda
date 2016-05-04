@@ -84,7 +84,7 @@ export default class App {
     )
 
     this.store.dispatch(
-      ui.actions.setSize(50)
+      ui.actions.setPageSize(50)
     )
 
     // Create presets

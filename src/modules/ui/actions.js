@@ -1,6 +1,6 @@
 export const actionTypes = {
   SET_PAGE: 'loopda/ui/SET_PAGE',
-  SET_SIZE: 'loopda/ui/SET_SIZE',
+  SET_PAGE_SIZE: 'loopda/ui/SET_PAGE_SIZE',
   FIRST_PAGE: 'loopda/ui/FIRST_PAGE',
   LAST_PAGE: 'loopda/ui/LAST_PAGE',
   NEXT_PAGE: 'loopda/ui/NEXT_PAGE',
@@ -12,8 +12,8 @@ const setPage = (page) => ({
   payload: page
 })
 
-const setSize = (size) => ({
-  type: actionTypes.SET_SIZE,
+const setPageSize = (size) => ({
+  type: actionTypes.SET_PAGE_SIZE,
   payload: size
 })
 
@@ -34,7 +34,7 @@ const prevPage = () => ({
 })
 
 export default {
-  setPage, setSize,
+  setPage, setPageSize,
   firstPage, lastPage,
   nextPage, prevPage
 }

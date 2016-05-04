@@ -10,7 +10,7 @@ const pager = (state=pagerInitialState, action) => {
   switch (action.type) {
     case actionTypes.SET_PAGE:
       return {...state, current: action.payload}
-    case actionTypes.SET_SIZE:
+    case actionTypes.SET_PAGE_SIZE:
       return {...state, size: action.payload}
     case actionTypes.FIRST_PAGE:
       return {...state, current: 0}
