@@ -4,7 +4,7 @@ import Song from './Song'
 
 const EditorPanel = ({id}) => (
   <div className="editor-panel">
-    <ChannelList />
+    <ChannelList id={id} />
     <Song id={id} />
   </div>
 )

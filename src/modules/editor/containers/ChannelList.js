@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {channels} from 'trax'
+import {channels, songs} from 'trax'
 import traxExt from '../../trax-ext'
 
 const ChannelList = ({channels, onClickEmpty, onClickChannel}) => (
@@ -14,6 +14,7 @@ const ChannelList = ({channels, onClickEmpty, onClickChannel}) => (
 )
 
 ChannelList.propTypes = {
+  id: React.PropTypes.string.isRequired,
   channels: React.PropTypes.array.isRequired,
 }
 
@@ -21,12 +22,18 @@ const mapStateToProps = (state) => ({
   channels: channels.selectors.getAll(state),
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, {id}) => ({
   onClickEmpty: () => {
-    console.log('click empty')
+    dispatch(
+      songs.actions.emptyCell(id)
+    )
   },
-  onClickChannel: (id) => {
-    console.log('click channel')
+  onClickChannel: (channel) => {
+    dispatch(
+      songs.actions.setCell(id, channel.id)
+    )
+    // <TODO>
+    // Move cursor down
   },
 })
 

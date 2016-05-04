@@ -20,7 +20,7 @@ const Cell = ({active, channel, onClick}) => {
 
   return (
     <a className={cssClass} style={style} onClick={onClick}>
-      {channel !== null ? `${channel.sample} (${channel.number})` : '-'}
+      {channel !== null ? `${channel.title} (${channel.number})` : '-'}
     </a>
   )
 
