@@ -27,13 +27,17 @@ const mapDispatchToProps = (dispatch, {id}) => ({
     dispatch(
       songs.actions.emptyCell(id)
     )
+    dispatch(
+      songs.actions.moveCursorDown(id)
+    )
   },
   onClickChannel: (channel) => {
     dispatch(
       songs.actions.setCell(id, channel.id)
     )
-    // <TODO>
-    // Move cursor down
+    dispatch(
+      songs.actions.moveCursorDown(id)
+    )
   },
 })
 
