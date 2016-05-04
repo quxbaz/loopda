@@ -44,18 +44,6 @@ export default class App {
     )
   }
 
-  // createSequencer() {
-  //   let sequencer = new Sequencer()
-  //   this.sequencer = sequencer
-  //   sequencer.on('playBlip', (blip, channel) => {
-  //     if (SequencerHelper.soloMode(sequencer)) {
-  //       if (channel.state.solo)
-  //         audioService.playBlip(blip.getPlayState())
-  //     } else
-  //       audioService.playBlip(blip.getPlayState())
-  //   })
-  // }
-
   init() {
     return Promise.all([
       loadAudioSamples(audioContext, samples).then((sampleMap) => {
