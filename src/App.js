@@ -11,7 +11,7 @@ import createLogger from 'redux-logger';
 
 // App-related libs
 import each from 'qux/lib/each'
-import {sequencer, presets, AudioService, Player} from 'trax'
+import {sequencer, presets, AudioService, AudioPlayer} from 'trax'
 
 // CSS stuff
 import {computeStyles} from './globals/style-constants'
@@ -107,7 +107,7 @@ export default class App {
     processUrl()
 
     // Creating audio player
-    this.player = new Player({
+    this.player = new AudioPlayer({
       audioService,
       store: this.store,
       tickInterval: this.store.getState().sequencer.beatDuration
