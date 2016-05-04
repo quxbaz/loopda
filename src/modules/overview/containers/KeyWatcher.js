@@ -1,11 +1,11 @@
 import {connect} from 'react-redux'
-import {sequencer} from 'trax'
+import {player} from 'trax'
 import ux from '../../ux'
 
 const mapDispatchToProps = (dispatch) => ({
   onKeySpace: (event) => {
     event.preventDefault()
-    dispatch(sequencer.actions.togglePlay())
+    dispatch(player.actions.togglePlay())
   },
   onKeyEscape: () => {
     /*

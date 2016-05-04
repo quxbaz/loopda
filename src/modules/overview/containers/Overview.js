@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {sequencer} from 'trax'
+import {channels, player} from 'trax'
 import TempoBar from '../components/TempoBar'
 import KeyWatcher from './KeyWatcher'
 import Pager from './Pager'
@@ -22,35 +22,41 @@ const Nav = () => (
   </div>
 )
 
-const Overview = ({sequencer, onClickPlay}) => (
+const Overview = ({player, nChannels, onClickPlay}) => (
   <div className="overview sequencer">
     <KeyWatcher />
     {/*<Nav />*/}
     <TestControls />
-    <a onClick={onClickPlay}>{sequencer.playing ? 'Pause' : 'Play'} (space)</a>
-    <div># Channels: {sequencer.channels.length}</div>
+    <a onClick={onClickPlay}>{player.playing ? 'Pause' : 'Play'} (space)</a>
+    <div># Channels: {nChannels}</div>
     <AddChannel />
     <Pager />
     <div className="relative">
-      <TempoBar beat={sequencer.currentBeat} />
+      <TempoBar beat={player.currentBeat} />
       <ChannelList />
     </div>
   </div>
 )
 
 Overview.propTypes = {
-  sequencer: React.PropTypes.object
+  player: React.PropTypes.object.isRequired,
+  nChannels: React.PropTypes.number.isRequired,
+  onClickPlay: React.PropTypes.func.isRequired,
 }
+
+const mapStateToProps = (state) => ({
+  nChannels: channels.selectors.getAll(state).length
+})
 
 const mapDispatchToProps = (dispatch) => ({
   onClickPlay: () => {
     dispatch(
-      sequencer.actions.togglePlay()
+      player.actions.togglePlay()
     )
   }
 })
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Overview)

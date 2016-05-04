@@ -8,7 +8,7 @@ import editor from '../../modules/editor'
 // <TESTING>
 import test from '../../modules/test'
 
-const App = ({sequencer}) => (
+const App = ({player}) => (
   <div className="app">
     <ul>
       <li><a href='/#/'>Index</a></li>
@@ -18,7 +18,7 @@ const App = ({sequencer}) => (
     </ul>
     <test.components.Profiler />
     <Route route="overview">
-      <overview.containers.Overview sequencer={sequencer} />
+      <overview.containers.Overview player={player} />
     </Route>
     <Route route="presets">
       <presets.components.Presets />
@@ -30,7 +30,7 @@ const App = ({sequencer}) => (
 )
 
 const mapStateToProps = (state) => ({
-  sequencer: state.sequencer
+  player: state.player
 })
 
 export default connect(
