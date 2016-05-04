@@ -7,7 +7,7 @@ class AddSong extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {title: ''}
+    this.state = {title: 'Untitled'}
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
