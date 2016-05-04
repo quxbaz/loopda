@@ -1,11 +1,11 @@
 import React from 'react'
 import ChannelList from './ChannelList'
-import SongGrid from './SongGrid'
+import Song from './Song'
 
 const EditorPanel = ({id}) => (
   <div className="editor-panel">
     <ChannelList />
-    <SongGrid />
+    <Song id={id} />
   </div>
 )
 
