@@ -7,7 +7,12 @@ class Channel extends PureComponent {
 
   constructor(props) {
     super(props)
+    this.handleClick = this.handleClick.bind(this)
     this.handleMouseDown = this.handleMouseDown.bind(this)
+  }
+
+  handleClick() {
+    this.props.onClick(this.props.channel)
   }
 
   handleMouseDown(event) {
@@ -16,7 +21,7 @@ class Channel extends PureComponent {
 
   render() {
 
-    const {channel, enabled, onMouseDown} = this.props
+    const {channel, enabled, onMouseDown, onClickBlip} = this.props
 
     const cssClass = classNames({
       channel: true,
@@ -25,11 +30,11 @@ class Channel extends PureComponent {
     })
 
     return (
-      <div ref="div" className={cssClass} onMouseDown={this.handleMouseDown}>
+      <div ref="div" className={cssClass} onClick={this.handleClick} onMouseDown={this.handleMouseDown}>
         {channel.blips.map((id, i) => {
           if (!id)
             return null
-          return <Blip key={i} id={id} />
+          return <Blip key={i} id={id} onClickBlip={onClickBlip} />
         })}
       </div>
     )
@@ -41,12 +46,15 @@ class Channel extends PureComponent {
 Channel.propTypes = {
   channel: React.PropTypes.object.isRequired,
   enabled: React.PropTypes.bool,
-  onMouseDown: React.PropTypes.func
+  onClick: React.PropTypes.func,
+  onMouseDown: React.PropTypes.func,
+  onClickBlip: React.PropTypes.func,
 }
 
 Channel.defaultProps = {
   enabled: true,
-  onMouseDown: () => {}
+  onClick: () => {},
+  onMouseDown: () => {},
 }
 
 export default Channel

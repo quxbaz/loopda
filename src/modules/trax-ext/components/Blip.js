@@ -5,6 +5,15 @@ import {PureComponent} from 'loopda/lib/react-ext'
 
 class Blip extends PureComponent {
 
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick() {
+    this.props.onClick(this.props.blip)
+  }
+
   render() {
 
     const {blip} = this.props
@@ -18,17 +27,22 @@ class Blip extends PureComponent {
 
     const style = {
       left: beat * constants.blipWidth,
-      background: color
+      background: color,
     }
 
-    return <div className={cssClass} style={style} />
+    return <div className={cssClass} style={style} onClick={this.handleClick} />
 
   }
 
 }
 
 Blip.propTypes = {
-  blip: React.PropTypes.object.isRequired
+  blip: React.PropTypes.object.isRequired,
+  onClick: React.PropTypes.func,
+}
+
+Blip.defaultProps = {
+  onClick: () => {},
 }
 
 export default Blip
