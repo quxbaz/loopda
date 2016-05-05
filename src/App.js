@@ -107,13 +107,13 @@ export default class App {
     processUrl()
 
     // Creating audio player
-    this.player = new AudioPlayer({
+    this.audioPlayer = new AudioPlayer({
       audioService,
       store: this.store,
       tickInterval: this.store.getState().player.beatDuration
     })
 
-    this.player.start()
+    this.audioPlayer.start()
 
   }
 
