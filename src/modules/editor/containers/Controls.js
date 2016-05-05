@@ -5,17 +5,18 @@ import url from '../../url'
 import SongSelect from './SongSelect'
 import Playback from '../components/Playback'
 
-const Controls = ({id, onClickDelete, onClickPlay, onClickStop}) => (
+const Controls = ({id, onClickDelete, onClickRestart, onClickPlay, onClickStop}) => (
   <div className="editor-controls">
     <SongSelect value={id} />
     <button onClick={onClickDelete}>Delete song</button>
-    <Playback onClickPlay={onClickPlay} onClickStop={onClickStop} />
+    <Playback onClickRestart={onClickRestart} onClickPlay={onClickPlay} onClickStop={onClickStop} />
   </div>
 )
 
 Controls.propTypes = {
   id: React.PropTypes.string.isRequired,
   onClickDelete: React.PropTypes.func.isRequired,
+  onClickRestart: React.PropTypes.func.isRequired,
   onClickPlay: React.PropTypes.func.isRequired,
   onClickStop: React.PropTypes.func.isRequired,
 }
@@ -28,6 +29,9 @@ const mapDispatchToProps = (dispatch, {id}) => ({
     dispatch(
       url.actions.setBrowserUrl('/songs')
     )
+  },
+  onClickRestart: () => {
+    // player play
   },
   onClickPlay: () => {
     // player play
