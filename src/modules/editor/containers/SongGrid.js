@@ -36,6 +36,9 @@ const mapDispatchToProps = (dispatch, {id}) => ({
     dispatch(
       songs.actions.setCursor(id, position)
     )
+    dispatch(
+      songPlayer.actions.setStart(position[1])
+    )
   }
 })
 
