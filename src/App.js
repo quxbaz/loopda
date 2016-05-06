@@ -32,6 +32,7 @@ import audio from './modules/audio'
 export default class App {
 
   constructor() {
+    window.loopda = this  // Set to global object
     this.store = createStore(
       app.reducer,
       compose(

@@ -31,13 +31,13 @@ const mapDispatchToProps = (dispatch, {id}) => ({
     )
   },
   onClickRestart: () => {
-    // player play
+    window.loopda.audioPlayer.playSong(id, 0)
   },
   onClickPlay: () => {
-    // player play
+    window.loopda.audioPlayer.playSong(id)
   },
   onClickStop: () => {
-    // player stop
+    window.loopda.audioPlayer.stopSong()
   },
 })
 
