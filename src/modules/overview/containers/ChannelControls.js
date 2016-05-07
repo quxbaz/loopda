@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {PureComponent} from 'loopda/lib/react-ext'
 import {channels} from 'trax'
 import ui from '../../ui'
+import url from '../../url'
 
 const {Button, Icon} = ui.components
 
@@ -45,8 +46,14 @@ const mapStateToProps = (state, {id}) => ({
 })
 
 const mapDispatchToProps = (dispatch, {id}) => ({
-  onClickTitle: (/* preset id*/) => {
-    /* view preset */
+  onClickTitle: () => {
+    dispatch((dispatch, getState) => {
+      const state = getState()
+      const channel = channels.selectors.getById(id)(state)
+      dispatch(
+        url.actions.setBrowserUrl('/presets/' + channel.preset)
+      )
+    })
   },
   onClickArchive: () => {
     dispatch(channels.actions.archiveChannel(id))
