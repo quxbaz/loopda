@@ -7,6 +7,7 @@
 }
 
 .song-grid-line {
+  position: relative;
   display: flex;
   &:nth-child(odd) .song-grid-cell:nth-child(odd) {
     background: @altCellColor;
@@ -16,6 +17,9 @@
   }
   &.is-start-line {
     outline: 1px solid #0f0;
+  }
+  &.is-playing:after {
+    .overlay(#ff0)
   }
 }
 

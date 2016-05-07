@@ -6,12 +6,13 @@ import Line from '../components/Line'
 class SongGrid extends React.Component {
 
   render() {
-    const {song, startLine, onClickCell} = this.props
+    const {song, startLine, currentPlayingLine, onClickCell} = this.props
     return (
       <div className="song-grid">
         {song.data.map((line, i) =>
           <Line key={i} song={song} row={i} cells={line}
            isStartLine={i === startLine}
+           isPlaying={i === currentPlayingLine}
            onClickCell={onClickCell} />
         )}
       </div>
@@ -29,6 +30,7 @@ SongGrid.propTypes = {
 const mapStateToProps = (state, {id}) => ({
   song: songs.selectors.getById(id)(state),
   startLine: state.songPlayer.startLine,
+  currentPlayingLine: state.songPlayer.currentPlayingLine,
 })
 
 const mapDispatchToProps = (dispatch, {id}) => ({
