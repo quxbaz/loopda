@@ -15,7 +15,7 @@ const pager = (state=pagerInitialState, action) => {
     case actionTypes.FIRST_PAGE:
       return {...state, current: 0}
     case actionTypes.LAST_PAGE:
-      throw new Error('<TODO>')
+      return {...state, current: action.payload}
     case actionTypes.NEXT_PAGE:
       return {
         ...state,

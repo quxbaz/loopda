@@ -1,3 +1,5 @@
+import {channels} from 'trax'
+
 export const actionTypes = {
   SET_PAGE: 'loopda/ui/SET_PAGE',
   SET_PAGE_SIZE: 'loopda/ui/SET_PAGE_SIZE',
@@ -21,9 +23,14 @@ const firstPage = () => ({
   type: actionTypes.FIRST_PAGE
 })
 
-const lastPage = () => ({
-  type: actionTypes.LAST_PAGE
-})
+const lastPage = () => (dispatch, getState) => {
+  const state = getState()
+  const nChannels = channels.selectors.getAll(state).length
+  dispatch({
+    type: actionTypes.LAST_PAGE,
+    payload: Math.ceil(nChannels / state.ui.pager.size) - 1,
+  })
+}
 
 const nextPage = () => ({
   type: actionTypes.NEXT_PAGE

@@ -1,4 +1,7 @@
 import expect from 'expect'
+import {createStore, combineReducers, applyMiddleware} from 'redux'
+import thunk from 'redux-thunk'
+import {channels} from 'trax'
 import ui from 'loopda/src/modules/ui'
 
 describe("reducer", () => {
@@ -38,7 +41,45 @@ describe("reducer", () => {
 
   describe("lastPage", () => {
     it("Goes to the last page.", () => {
-      expect(false).toBe(true)
+      const stateBefore = {
+        ui: {
+          pager: {
+            current: 0,
+            size: 2,
+          },
+        },
+        channels: {
+          1: {}, 2: {},
+          3: {}, 4: {},
+          5: {}, 6: {},
+        }
+      }
+      const store = createStore(
+        combineReducers({
+          ui: ui.reducer,
+          channels: channels.reducer,
+        }),
+        stateBefore,
+        applyMiddleware(thunk)
+      )
+      const action = ui.actions.lastPage()
+      const stateAfter = {
+        ui: {
+          pager: {
+            current: 2,
+            size: 2,
+          },
+        },
+        channels: {
+          1: {}, 2: {},
+          3: {}, 4: {},
+          5: {}, 6: {},
+        }
+      }
+      store.dispatch(action)
+      expect(
+        store.getState()
+      ).toEqual(stateAfter)
     })
   })
 
