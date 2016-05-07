@@ -14,10 +14,10 @@ describe("reducer", () => {
     })
   })
 
-  describe("setSize", () => {
+  describe("setPageSize", () => {
     it("Sets the page size.", () => {
       const stateBefore = {pager: {size: 30}}
-      const action = ui.actions.setSize(100)
+      const action = ui.actions.setPageSize(100)
       const stateAfter = {pager: {size: 100}}
       expect(
         ui.reducer(stateBefore, action)
