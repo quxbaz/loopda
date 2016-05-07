@@ -10,6 +10,7 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 
 // App-related libs
+import isNil from 'qux/lib/isNil'
 import each from 'qux/lib/each'
 import {presets, player, AudioService, AudioPlayer} from 'trax'
 
@@ -33,8 +34,11 @@ export default class App {
 
   constructor() {
     window.loopda = this  // Set to global object
+    const data = localStorage.getItem('loopda')
+    this.isNew = isNil(data)
     this.store = createStore(
       app.reducer,
+      this.isNew ? {} : JSON.parse(data),
       compose(
         applyMiddleware(
           thunkMiddleware
@@ -80,30 +84,35 @@ export default class App {
 
     // <Testing>
 
-    this.store.dispatch(
-      player.actions.createPlayer({playing: false})
-    )
+    if (this.isNew) {
 
-    this.store.dispatch(
-      ui.actions.setPageSize(50)
-    )
+      this.store.dispatch(
+        player.actions.createPlayer({playing: false})
+      )
 
-    // Create presets
-    this.store.dispatch(presets.actions.createPreset({sample: 'hihat'}))
-    this.store.dispatch(presets.actions.createPreset({sample: 'snare'}))
-    this.store.dispatch(presets.actions.createPreset({sample: 'kick'}))
-    this.store.dispatch(presets.actions.createPreset({sample: 'clap'}))
+      this.store.dispatch(
+        ui.actions.setPageSize(50)
+      )
 
-    // Add samples
-    this.store.dispatch(audio.actions.addSample('hihat'))
-    this.store.dispatch(audio.actions.addSample('snare'))
-    this.store.dispatch(audio.actions.addSample('kick'))
-    this.store.dispatch(audio.actions.addSample('clap'))
+      // Create presets
+      this.store.dispatch(presets.actions.createPreset({sample: 'hihat'}))
+      this.store.dispatch(presets.actions.createPreset({sample: 'snare'}))
+      this.store.dispatch(presets.actions.createPreset({sample: 'kick'}))
+      this.store.dispatch(presets.actions.createPreset({sample: 'clap'}))
 
-    each(this.store.getState().presets, (preset) => {
-      this.store.dispatch(traxExt.actions.createChannel({preset: preset.id}))
-    })
+      // Add samples
+      this.store.dispatch(audio.actions.addSample('hihat'))
+      this.store.dispatch(audio.actions.addSample('snare'))
+      this.store.dispatch(audio.actions.addSample('kick'))
+      this.store.dispatch(audio.actions.addSample('clap'))
 
+      each(this.store.getState().presets, (preset) => {
+        this.store.dispatch(traxExt.actions.createChannel({preset: preset.id}))
+      })
+
+    }
+
+    this.store.dispatch(url.actions.setUrl('no known url'))
     window.addEventListener('hashchange', processUrl)
     processUrl()
 

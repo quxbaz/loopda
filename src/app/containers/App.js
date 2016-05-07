@@ -4,6 +4,7 @@ import {Route} from 'stateful-router'
 import overview from '../../modules/overview'
 import presets from '../../modules/presets'
 import editor from '../../modules/editor'
+import Saver from './Saver'
 
 // <TESTING>
 import test from '../../modules/test'
@@ -25,6 +26,7 @@ const App = ({player}) => (
     </ul>
     <test.components.Profiler />
     <TestControls />
+    <Saver />
     <Route route="overview">
       <overview.containers.Overview player={player} />
     </Route>
