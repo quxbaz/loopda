@@ -8,6 +8,13 @@ import editor from '../../modules/editor'
 // <TESTING>
 import test from '../../modules/test'
 
+const TestControls = () => (
+  <ul>
+    <li><a onClick={() => console.clear()}>console.clear()</a></li>
+    <li><a onClick={() => localStorage.clear()}>localStorage.clear()</a></li>
+  </ul>
+)
+
 const App = ({player}) => (
   <div className="app">
     <ul>
@@ -17,6 +24,7 @@ const App = ({player}) => (
       <li><a href='/#/songs'>Editor</a></li>
     </ul>
     <test.components.Profiler />
+    <TestControls />
     <Route route="overview">
       <overview.containers.Overview player={player} />
     </Route>
