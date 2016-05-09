@@ -36,7 +36,7 @@ const loadAudioFile = (dispatch, file) => {
   const {name, type} = file
   const reader = new FileReader()
   reader.readAsArrayBuffer(file)
-  return new Promise((resolve) => {
+  const promise =  Promise((resolve, reject) => {
     reader.onload = (event) => {
       const url = window.URL.createObjectURL(
         new Blob([event.target.result], {type})
@@ -44,9 +44,10 @@ const loadAudioFile = (dispatch, file) => {
       loadAudioSamples(dispatch, {[name]: url}).then(() => {
         window.URL.revokeObjectURL(url)
         resolve()
-      })
+      }).catch((error) => reject(error))
     }
   })
+  return promise
 }
 
 export {
