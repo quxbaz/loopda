@@ -1,4 +1,6 @@
-function decode(audioContext, audioBuffer) {
+import audioContext from 'loopda/src/globals/audioContext'
+
+const decode = (audioBuffer) => {
   /*
     Async function that decodes an audio buffer.
   */
@@ -7,21 +9,21 @@ function decode(audioContext, audioBuffer) {
       audioBuffer,
       (decoded) => {
         if (!decoded)
-          reject('Decoding error:', url)
+          reject('webaudio.decode Error:', url)
         resolve(decoded)
       },
-      (error) => reject('decodeAudioData error:', error)
+      (error) => reject('AudioContext.decodeAudioData error:', error)
     )
   })
 }
 
-export function loadAudioBuffer(audioContext, url) {
+const fetchAudio = (url) => {
   /*
     Makes a server request to an audio file and decodes it.
   */
-  return fetch(url).then((resp) =>
-    resp.arrayBuffer()
-  ).then((arrayBuffer) =>
-    decode(audioContext, arrayBuffer)
-  )
+  return fetch(url)
+    .then(resp => resp.arrayBuffer())
+    .then(decode)
 }
+
+export {fetchAudio, decode}
