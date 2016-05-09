@@ -51,9 +51,7 @@ export default class App {
 
   init() {
     return Promise.all([
-      loadAudioSamples(audioContext, samples).then((sampleMap) => {
-        audioService.sampleMap = sampleMap
-      })
+      loadAudioSamples(this.store, audioContext, samples),
     ]).then(computeStyles)
   }
 
@@ -99,12 +97,6 @@ export default class App {
       this.store.dispatch(presets.actions.createPreset({sample: 'snare'}))
       this.store.dispatch(presets.actions.createPreset({sample: 'kick'}))
       this.store.dispatch(presets.actions.createPreset({sample: 'clap'}))
-
-      // Add samples
-      this.store.dispatch(audio.actions.addSample('hihat'))
-      this.store.dispatch(audio.actions.addSample('snare'))
-      this.store.dispatch(audio.actions.addSample('kick'))
-      this.store.dispatch(audio.actions.addSample('clap'))
 
       each(this.store.getState().presets, (preset) => {
         this.store.dispatch(traxExt.actions.createChannel({preset: preset.id}))
