@@ -1,9 +1,10 @@
 import each from 'qux/lib/each'
 import {loadAudioBuffer} from './webaudio'
+import audioContext from '../globals/audioContext'
 import audioService from '../globals/audioService'
 import audio from '../modules/audio'
 
-export function loadAudioSamples(store, audioContext, samples) {
+const loadAudioSamples = (dispatch, samples) => {
 
   const sampleList = Object.keys(samples).map((key) => ({
     name: key,
@@ -25,8 +26,30 @@ export function loadAudioSamples(store, audioContext, samples) {
     Object.assign(audioService.sampleMap, sampleMap)
     // Dispatch changes to Redux store
     each(sampleMap, (val, key) => {
-      store.dispatch(audio.actions.addSample(key))
+      dispatch(audio.actions.addSample(key))
     })
   })
 
+}
+
+const loadAudioFile = (dispatch, file) => {
+  const {name, type} = file
+  const reader = new FileReader()
+  reader.readAsArrayBuffer(file)
+  return new Promise((resolve) => {
+    reader.onload = (event) => {
+      const url = window.URL.createObjectURL(
+        new Blob([event.target.result], {type})
+      )
+      loadAudioSamples(dispatch, {[name]: url}).then(() => {
+        window.URL.revokeObjectURL(url)
+        resolve()
+      })
+    }
+  })
+}
+
+export {
+  loadAudioSamples,
+  loadAudioFile,
 }
