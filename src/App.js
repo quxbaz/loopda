@@ -19,7 +19,6 @@ import {computeStyles} from './globals/style-constants'
 
 // Audio stuff
 import samples from './globals/samples'
-import audioContext from './globals/audioContext'
 import audioService from './globals/audioService'
 import {loadAudioSamples} from './audio/audiohelper'
 
@@ -47,11 +46,12 @@ export default class App {
         // , window.devToolsExtension ? window.devToolsExtension() : undefined
       )
     )
+    this.dispatch = this.store.dispatch.bind(this.store)
   }
 
   init() {
     return Promise.all([
-      loadAudioSamples(this.store, audioContext, samples),
+      loadAudioSamples(this.dispatch, samples),
     ]).then(computeStyles)
   }
 
