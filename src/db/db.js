@@ -42,6 +42,9 @@ const getSamples = () => {
 }
 
 const addSample = (sample) => {
+  /*
+    @sample takes the form {name, data}
+  */
   const transaction = db.transaction('samples', 'readwrite')
   transaction.objectStore('samples').put(sample)
   return new Promise((resolve, reject) => {
