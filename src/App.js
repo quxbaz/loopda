@@ -22,6 +22,9 @@ import samples from './globals/samples'
 import audioService from './globals/audioService'
 import {loadAudioSamples} from './audio/audiohelper'
 
+// Database stuff
+import db from './db'
+
 // Own stuff
 import app from './app'
 import url from './modules/url'
@@ -56,6 +59,14 @@ export default class App {
   }
 
   start() {
+
+    // db.create().then(() => {
+    //   db.getSamples().then((samples) => {
+    //     console.log(samples)
+    //   })
+    //   // db.addSample({name: 'bong', data: 'wuuunngwuuung'})
+    // })
+    // return
 
     this.store.subscribe(() => {
       const state = this.store.getState()
@@ -112,7 +123,7 @@ export default class App {
     this.audioPlayer = new AudioPlayer({
       audioService,
       store: this.store,
-      tickInterval: this.store.getState().player.beatDuration
+      tickInterval: this.store.getState().player.beatDuration,
     })
 
     this.audioPlayer.start()
