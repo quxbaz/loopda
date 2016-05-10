@@ -33,7 +33,6 @@ const loadAudioSamples = (dispatch, samples) => {
 
 }
 
-// <TODO> Add to indexedDB
 const loadAudioFile = (dispatch, file) => {
 
   const {name, type} = file
