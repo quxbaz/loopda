@@ -1,16 +1,16 @@
 import audioContext from 'loopda/src/globals/audioContext'
 
-const decode = (audioBuffer) => {
+const decode = (arrayBuffer) => {
   /*
     Async function that decodes an audio buffer.
   */
   return new Promise((resolve, reject) => {
     audioContext.decodeAudioData(
-      audioBuffer,
-      (decoded) => {
-        if (!decoded)
+      arrayBuffer,
+      (audioBuffer) => {
+        if (!audioBuffer)
           reject('webaudio.decode Error:', url)
-        resolve(decoded)
+        resolve(audioBuffer)
       },
       (error) => reject('AudioContext.decodeAudioData error:', error)
     )
@@ -22,7 +22,7 @@ const fetchAudio = (url) => {
     Makes a server request to an audio file and decodes it.
   */
   return fetch(url)
-    .then(resp => resp.arrayBuffer())
+    .then(response => response.arrayBuffer())
     .then(decode)
 }
 
