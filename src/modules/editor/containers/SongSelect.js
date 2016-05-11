@@ -25,7 +25,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onChange: (event) => {
     dispatch(
-      url.actions.setBrowserUrl('/songs/' + event.target.value)
+      url.actions.setBrowserUrl('/songs/' + event.target.value, {replaceState: true})
     )
   }
 })

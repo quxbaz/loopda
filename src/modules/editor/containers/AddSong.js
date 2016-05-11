@@ -46,7 +46,7 @@ const mapDispatchToProps = (dispatch) => ({
       const action = songs.actions.createSong({title})
       dispatch(action)
       dispatch(
-        url.actions.setBrowserUrl('/songs/' + action.payload.id)
+        url.actions.setBrowserUrl('/songs/' + action.payload.id, {replaceState: true})
       )
     })
   }

@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch, {id}) => ({
       songs.actions.removeSong(id)
     )
     dispatch(
-      url.actions.setBrowserUrl('/songs')
+      url.actions.setBrowserUrl('/songs', {replaceState: true})
     )
   },
   onClickRestart: () => {
