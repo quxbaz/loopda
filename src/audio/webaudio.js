@@ -17,13 +17,4 @@ const decode = (arrayBuffer) => {
   })
 }
 
-const fetchAudio = (url) => {
-  /*
-    Makes a server request to an audio file and decodes it.
-  */
-  return fetch(url)
-    .then(response => response.arrayBuffer())
-    .then(decode)
-}
-
-export {fetchAudio, decode}
+export {decode}
