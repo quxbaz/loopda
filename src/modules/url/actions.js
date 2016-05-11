@@ -8,8 +8,13 @@ const setUrl = (url) => ({
 })
 
 // Changes the browser url along with the store url
-const setBrowserUrl = (url) => (dispatch) => {
-  location.hash = url
+const setBrowserUrl = (url, options={}) => (dispatch) => {
+  if (options.replaceState) {
+    const prepend = '/#' + (url.startsWith('/') ? '' : '/')
+    window.history.replaceState({}, '', prepend + url)
+  } else {
+    location.hash = url
+  }
   dispatch(setUrl(url))
 }
 

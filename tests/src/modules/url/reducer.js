@@ -26,6 +26,19 @@ describe("reducer", () => {
       expect(store.getState()).toEqual({url: '/all'})
       expect(location.hash).toEqual('#/all')
     })
+    it("Sets the store url and the actual browser url with history.replaceState()", () => {
+      const store = createStore(
+        combineReducers({url: url.reducer}),
+        applyMiddleware(thunk)
+      )
+      store.dispatch(url.actions.setBrowserUrl('/all', {replaceState: true}))
+      expect(store.getState()).toEqual({url: '/all'})
+      expect(location.hash).toEqual('#/all')
+      // Without leading slash
+      store.dispatch(url.actions.setBrowserUrl('all', {replaceState: true}))
+      expect(store.getState()).toEqual({url: 'all'})
+      expect(location.hash).toEqual('#/all')
+    })
   })
 
 })
