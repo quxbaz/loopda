@@ -1,4 +1,4 @@
-const VERSION = 3
+const VERSION = 4
 
 const {indexedDB} = window
 let db
@@ -13,7 +13,7 @@ const create = () => {
 
   request.onupgradeneeded = (event) => {
     var db = event.target.result
-    db.createObjectStore('samples', {autoIncrement: true})
+    db.createObjectStore('samples', {keyPath: 'name'})
   }
 
   return new Promise((resolve) => {

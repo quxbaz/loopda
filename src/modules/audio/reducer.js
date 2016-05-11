@@ -1,11 +1,12 @@
+import uniq from 'qux/lib/uniq'
 import {actionTypes} from './actions'
 
 const samples = (state=[], action) => {
   switch (action.type) {
     case actionTypes.ADD_SAMPLE:
-      return [...state, action.payload]
+      return uniq([...state, action.payload])
     default:
-      return state
+      return uniq(state)
   }
 }
 

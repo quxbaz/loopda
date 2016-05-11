@@ -47,26 +47,28 @@ const toAudioBuffer = (arrayBuffer, options={}) => {
 
 const createAudioBuffer = {from: {}}
 
-createAudioBuffer.from.url = (url, options) => {
+createAudioBuffer.from.url = (url, name) => {
   return fetch(url).then(
     (response) => response.arrayBuffer()
   ).then(
-    (arrayBuffer) => toAudioBuffer(arrayBuffer, options)
+    (arrayBuffer) => toAudioBuffer(arrayBuffer, {name})
   )
 }
 
-createAudioBuffer.from.file = (file, options) => {
+createAudioBuffer.from.file = (file) => {
   const fileReader = new FileReader()
   fileReader.readAsArrayBuffer(file)
   return new Promise((resolve, reject) => {
     fileReader.onload = (event) => {
       const arrayBuffer = event.target.result
-      return toAudioBuffer(arrayBuffer, {name: file.name})
+      resolve(
+        toAudioBuffer(arrayBuffer, {name: file.name})
+      )
     }
   })
 }
 
-createAudioBuffer.from.db = (record, options) => {
+createAudioBuffer.from.db = (record) => {
   const {name, data} = record
   const arrayBuffer = fromStringToArrayBuffer(data)
   return toAudioBuffer(arrayBuffer, {name, cache: false})

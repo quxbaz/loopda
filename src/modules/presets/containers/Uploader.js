@@ -1,10 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
-// TEST
-import audioContext from 'loopda/src/globals/audioContext'
-import audioService from 'loopda/src/globals/audioService'
-import {loadAudioFile} from 'loopda/src//audio/audiohelper'
 import audio from '../../audio'
 
 class Uploader extends React.Component {
@@ -31,7 +26,9 @@ class Uploader extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   onChange: (event, input) => {
     for (let i=0; i < input.files.length; i++) {
-      loadAudioFile(dispatch, input.files[i])
+      dispatch(
+        audio.actions.uploadSampleFile(input.files[i])
+      )
     }
   },
 })

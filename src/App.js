@@ -18,9 +18,8 @@ import {presets, player, AudioService, AudioPlayer} from 'trax'
 import {computeStyles} from './globals/style-constants'
 
 // Audio stuff
-import samples from './globals/samples'
 import audioService from './globals/audioService'
-import {loadAudioSamples} from './audio/audiohelper'
+import {createAudioBuffer} from './audio/helper'
 
 // Database stuff
 import db from './db'
@@ -53,20 +52,38 @@ export default class App {
   }
 
   init() {
-    return Promise.all([
-      loadAudioSamples(this.dispatch, samples),
-    ]).then(computeStyles)
+
+    const defaultSamples = ['hihat', 'snare', 'kick', 'clap']
+
+    return db.create().then(
+      db.getSamples
+    ).then((samples) => {
+      if (samples.length === 0) {
+        // Fetch initial samples if none were found in cache.
+        const pending = defaultSamples.map(
+          (name) => createAudioBuffer.from.url(`media/samples/${name}.mp3`, name)
+        )
+        return Promise.all(pending).then(() => {
+          defaultSamples.forEach((name) => {
+            this.store.dispatch(audio.actions.addSample(name))
+          })
+        })
+      } else {
+        // Load samples from cache.
+        const pending = samples.map(
+          (sample) => createAudioBuffer.from.db(sample)
+        )
+        return Promise.all(pending).then(() => {
+          samples.forEach(({name}) => {
+            this.store.dispatch(audio.actions.addSample(name))
+          })
+        })
+      }
+    }).then(computeStyles)
+
   }
 
   start() {
-
-    // db.create().then(() => {
-    //   db.getSamples().then((samples) => {
-    //     console.log(samples)
-    //   })
-    //   // db.addSample({name: 'bong', data: 'wuuunngwuuung'})
-    // })
-    // return
 
     this.store.subscribe(() => {
       const state = this.store.getState()
