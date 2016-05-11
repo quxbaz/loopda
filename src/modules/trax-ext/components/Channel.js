@@ -31,7 +31,7 @@ class Channel extends PureComponent {
 
     return (
       <div ref="div" className={cssClass} onClick={this.handleClick} onMouseDown={this.handleMouseDown}>
-        {channel.blips.map((id, i) => {
+        {channel.blips.map((id) => {
           if (!id)
             return null
           return <Blip key={id} id={id} onClickBlip={onClickBlip} />
