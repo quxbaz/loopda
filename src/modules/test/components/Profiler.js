@@ -19,7 +19,10 @@ class Profiler extends React.Component {
 
   stop() {
     ReactPerf.stop()
+    // ReactPerf.printInclusive()
+    // ReactPerf.printExclusive()
     ReactPerf.printWasted()
+    // ReactPerf.printOperations()
     this.setState({running: false})
   }
 
