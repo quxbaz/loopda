@@ -5,13 +5,9 @@ describe("reducer", () => {
 
   describe("addSample", () => {
     it("Adds a sample.", () => {
-      const stateBefore = {
-        samples: []
-      }
+      const stateBefore = {samples: []}
       const action = audio.actions.addSample('hihat')
-      const stateAfter = {
-        samples: ['hihat']
-      }
+      const stateAfter = {samples: ['hihat']}
       expect(
         audio.reducer(stateBefore, action)
       ).toEqual(stateAfter)
@@ -22,6 +18,14 @@ describe("reducer", () => {
       ).toEqual({
         samples: ['hihat', 'kick']
       })
+    })
+    it("Does not add duplicate samples.", () => {
+      const stateBefore = {samples: ['hihat']}
+      const action = audio.actions.addSample('hihat')
+      const stateAfter = {samples: ['hihat']}
+      expect(
+        audio.reducer(stateBefore, action)
+      ).toEqual(stateAfter)
     })
   })
 
