@@ -34,7 +34,7 @@ class Channel extends PureComponent {
         {channel.blips.map((id, i) => {
           if (!id)
             return null
-          return <Blip key={i} id={id} onClickBlip={onClickBlip} />
+          return <Blip key={id} id={id} onClickBlip={onClickBlip} />
         })}
       </div>
     )
