@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {channels, player} from 'trax'
 import TempoBar from '../components/TempoBar'
 import KeyWatcher from './KeyWatcher'
-import Pager from './Pager'
 import ChannelList from './ChannelList'
 import AddChannel from './AddChannel'
 
@@ -13,7 +12,6 @@ const Overview = ({player, nChannels, onClickPlay}) => (
     <a onClick={onClickPlay}>{player.playing ? 'Pause' : 'Play'} (space)</a>
     <div># Channels: {nChannels}</div>
     <AddChannel />
-    <Pager />
     <div className="relative">
       <TempoBar beat={player.currentBeat} />
       <ChannelList />

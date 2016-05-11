@@ -28,7 +28,6 @@ import db from './db'
 import app from './app'
 import url from './modules/url'
 import traxExt from './modules/trax-ext'
-import ui from './modules/ui'
 import audio from './modules/audio'
 
 export default class App {
@@ -43,7 +42,7 @@ export default class App {
       compose(
         applyMiddleware(
           thunkMiddleware
-          , createLogger({collapsed: true})
+          // , createLogger({collapsed: true})
         )
         // , window.devToolsExtension ? window.devToolsExtension() : undefined
       )
@@ -114,10 +113,6 @@ export default class App {
 
       this.store.dispatch(
         player.actions.createPlayer({playing: false})
-      )
-
-      this.store.dispatch(
-        ui.actions.setPageSize(50)
       )
 
       // Create presets
