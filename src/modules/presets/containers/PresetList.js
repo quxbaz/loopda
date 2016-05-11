@@ -7,7 +7,12 @@ class PresetItem extends React.Component {
 
   constructor(props) {
     super(props)
+    this.handleClickItem = this.handleClickItem.bind(this)
     this.handleClickRemove = this.handleClickRemove.bind(this)
+  }
+
+  handleClickItem() {
+    this.props.onClickItem(this.props.preset.id)
   }
 
   handleClickRemove() {
@@ -18,7 +23,7 @@ class PresetItem extends React.Component {
     const {id, title, sample} = this.props.preset
     return (
       <li className="preset-item">
-        <a href={'/#/presets/' + id}>
+        <a onClick={this.handleClickItem}>
           {title || 'untitled'} ({sample})
         </a>{' '}
         <a onClick={this.handleClickRemove}>remove</a>
@@ -30,13 +35,15 @@ class PresetItem extends React.Component {
 
 PresetItem.propTypes = {
   preset: React.PropTypes.object.isRequired,
-  onClickRemove: React.PropTypes.func.isRequired
+  onClickItem: React.PropTypes.func.isRequired,
+  onClickRemove: React.PropTypes.func.isRequired,
 }
 
-const PresetList = ({presets, onClickRemovePreset}) => (
+const PresetList = ({presets, onClickPreset, onClickRemovePreset}) => (
   <ul>
     {presets.map(preset => (
       <PresetItem key={preset.id} preset={preset}
+       onClickItem={onClickPreset}
        onClickRemove={onClickRemovePreset} />
     ))}
   </ul>
@@ -44,14 +51,20 @@ const PresetList = ({presets, onClickRemovePreset}) => (
 
 PresetList.propTypes = {
   presets: React.PropTypes.array.isRequired,
-  onClickRemovePreset: React.PropTypes.func.isRequired
+  onClickPreset: React.PropTypes.func.isRequired,
+  onClickRemovePreset: React.PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
-  presets: presets.selectors.getAll(state)
+  presets: presets.selectors.getAll(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  onClickPreset: (id) => {
+    dispatch(
+      url.actions.setBrowserUrl('/presets/' + id, {replaceState: true})
+    )
+  },
   onClickRemovePreset: (id) => {
     dispatch(
       url.actions.setBrowserUrl('/presets')
@@ -59,7 +72,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(
       presets.actions.removePreset(id)
     )
-  }
+  },
 })
 
 export default connect(
