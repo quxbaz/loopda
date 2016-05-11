@@ -3,7 +3,7 @@ import traxExt from '../../trax-ext'
 import {PureComponent} from 'loopda/lib/react-ext'
 import ChannelControls from '../containers/ChannelControls'
 
-class ChannelBlock extends PureComponent {
+class ListItem extends PureComponent {
   render() {
     const {id} = this.props
     return (
@@ -15,8 +15,8 @@ class ChannelBlock extends PureComponent {
   }
 }
 
-ChannelBlock.propTypes = {
+ListItem.propTypes = {
   id: React.PropTypes.string.isRequired
 }
 
-export default ChannelBlock
+export default ListItem

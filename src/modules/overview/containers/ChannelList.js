@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {channels} from 'trax'
 import {PureComponent} from 'loopda/lib/react-ext'
 import ArchivedChannel from './ArchivedChannel'
-import ChannelBlock from '../components/ChannelBlock'
+import ListItem from '../components/ListItem'
 
 class ChannelList extends PureComponent {
   renderChannels() {
@@ -11,7 +11,7 @@ class ChannelList extends PureComponent {
     return channels.map((channel) => {
       if (channel.archived)
         return <ArchivedChannel key={channel.id} id={channel.id} />
-      return <ChannelBlock key={channel.id} id={channel.id} />
+      return <ListItem key={channel.id} id={channel.id} />
     })
   }
   render() {
