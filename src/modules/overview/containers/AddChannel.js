@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {presets} from 'trax'
+import {blocks, blockAdmin, presets} from 'trax'
 import traxExt from '../../trax-ext'
 
 const AddChannel = ({presets, onSelect, onTestSelect}) => (
@@ -34,7 +34,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onSelect: (preset) => {
-    dispatch(traxExt.actions.createChannel({preset}))
+    const channelAction = dispatch(
+      traxExt.actions.createChannel({preset})
+    )
+    dispatch((dispatch, getState) => {
+      const state = getState()
+      const block = blockAdmin.selectors.getCurrentBlock(state)
+      dispatch(blocks.actions.addChannel(block.id, channelAction.payload.id))
+    })
   },
   onTestSelect: (preset, n=10) => {
     for (let i=0; i < n; i++)
