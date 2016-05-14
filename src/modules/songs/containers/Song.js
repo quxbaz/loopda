@@ -7,6 +7,7 @@ import BlockControls from './BlockControls'
 
 const Song = ({song, currentBlock}) => (
   <div className="song">
+    <h2>{song.title}</h2>
     <BlockControls block={currentBlock} />
     <Route route=":id">
        <blocks.containers.Block />
