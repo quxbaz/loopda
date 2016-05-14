@@ -1,12 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Route} from 'stateful-router'
 import {channels, player} from 'trax'
+import songs from '../../songs'
 import TempoBar from '../components/TempoBar'
 import KeyWatcher from './KeyWatcher'
 import ChannelList from './ChannelList'
 import AddChannel from './AddChannel'
 
-const Overview = ({player, nChannels, onClickPlay}) => (
+const Overview = ({children, player, nChannels, onClickPlay}) => (
   <div className="overview sequencer">
     <KeyWatcher />
     <a onClick={onClickPlay}>{player.playing ? 'Pause' : 'Play'} (space)</a>
@@ -16,6 +18,9 @@ const Overview = ({player, nChannels, onClickPlay}) => (
       <TempoBar beat={player.currentBeat} />
       <ChannelList />
     </div>
+    <Route route=":id">
+      <songs.containers.Song />
+    </Route>
   </div>
 )
 
@@ -26,7 +31,8 @@ Overview.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  nChannels: channels.selectors.getAll(state).length
+  player: state.player,
+  nChannels: channels.selectors.getAll(state).length,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -34,7 +40,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(
       player.actions.togglePlay()
     )
-  }
+  },
 })
 
 export default connect(

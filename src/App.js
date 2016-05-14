@@ -12,7 +12,12 @@ import createLogger from 'redux-logger';
 // App-related libs
 import isNil from 'qux/lib/isNil'
 import each from 'qux/lib/each'
-import {presets, player, AudioService, AudioPlayer} from 'trax'
+import {
+  blocks, blockAdmin,
+  songs, songAdmin,
+  presets, player,
+  AudioService, AudioPlayer,
+} from 'trax'
 
 // CSS stuff
 import {computeStyles} from './globals/style-constants'
@@ -42,7 +47,7 @@ export default class App {
       compose(
         applyMiddleware(
           thunkMiddleware
-          // , createLogger({collapsed: true})
+          , createLogger({collapsed: true})
         )
         // , window.devToolsExtension ? window.devToolsExtension() : undefined
       )
@@ -84,10 +89,12 @@ export default class App {
 
   start() {
 
-    this.store.subscribe(() => {
-      const state = this.store.getState()
+    const {store} = this
+
+    store.subscribe(() => {
+      const state = store.getState()
       render(
-        <Provider store={this.store}>
+        <Provider store={store}>
           <Router path={state.url}>
             <app.containers.App />
           </Router>
@@ -98,44 +105,66 @@ export default class App {
 
     const processUrl = () => {
       let hash = location.hash.slice(1)
-      if (this.store.getState().url === hash)
+      if (store.getState().url === hash)
         return
-      if (hash === '' || hash === '/') {
-        location.hash = '/overview'
-      } else {
-        this.store.dispatch(url.actions.setUrl(hash))
-      }
+      store.dispatch(url.actions.setUrl(hash))
+      // if (hash === '' || hash === '/') {
+      //   location.hash = '/overview'
+      // } else {
+      //   store.dispatch(url.actions.setUrl(hash))
+      // }
     }
 
     // <Testing>
 
     if (this.isNew) {
 
-      this.store.dispatch(
+      store.dispatch(
         player.actions.createPlayer({playing: false})
       )
 
       // Create presets
-      this.store.dispatch(presets.actions.createPreset({sample: 'hihat'}))
-      this.store.dispatch(presets.actions.createPreset({sample: 'snare'}))
-      this.store.dispatch(presets.actions.createPreset({sample: 'kick'}))
-      this.store.dispatch(presets.actions.createPreset({sample: 'clap'}))
+      store.dispatch(presets.actions.createPreset({sample: 'hihat'}))
+      store.dispatch(presets.actions.createPreset({sample: 'snare'}))
+      store.dispatch(presets.actions.createPreset({sample: 'kick'}))
+      store.dispatch(presets.actions.createPreset({sample: 'clap'}))
 
-      each(this.store.getState().presets, (preset) => {
-        this.store.dispatch(traxExt.actions.createChannel({preset: preset.id}))
+      each(store.getState().presets, (preset) => {
+        store.dispatch(traxExt.actions.createChannel({preset: preset.id}))
       })
+
+      const blockAction = blocks.actions.createBlock({
+        channels: Object.keys(store.getState().channels),
+      })
+      store.dispatch(blockAction)
+      store.dispatch(
+        blockAdmin.actions.setCurrentBlock(blockAction.payload.id)
+      )
+
+      const songAction = songs.actions.createSong({
+        title: 'my first song',
+        blocks: [blockAction.payload.id],
+      })
+      store.dispatch(songAction)
+      store.dispatch(
+        songAdmin.actions.setCurrentSong(songAction.payload.id)
+      )
+
+      store.dispatch(url.actions.setBrowserUrl(
+        '/songs/' + songAction.payload.id + '/blocks/' + blockAction.payload.id
+      ))
 
     }
 
-    this.store.dispatch(url.actions.setUrl('no known url'))
+    // store.dispatch(url.actions.setUrl('no known url'))
     window.addEventListener('hashchange', processUrl)
-    processUrl()
+    // processUrl()
 
     // Creating audio player
     this.audioPlayer = new AudioPlayer({
       audioService,
-      store: this.store,
-      tickInterval: this.store.getState().player.beatDuration,
+      store: store,
+      tickInterval: store.getState().player.beatDuration,
     })
 
     this.audioPlayer.start()

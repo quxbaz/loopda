@@ -19,13 +19,13 @@ const App = ({player}) => (
   <div className="app">
     <ul>
       <li><a href='/#/'>Index</a></li>
-      <li><a href='/#/overview'>Overview</a></li>
+      {/*<li><a href='/#/overview'>Overview</a></li>*/}
       <li><a href='/#/presets'>Presets</a></li>
     </ul>
     <test.components.Profiler />
     <TestControls />
     <Saver />
-    <Route route="overview">
+    <Route route="songs">
       <overview.containers.Overview player={player} />
     </Route>
     <Route route="presets">
