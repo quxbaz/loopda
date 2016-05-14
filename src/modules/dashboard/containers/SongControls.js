@@ -53,7 +53,7 @@ const mapDispatchToProps = (dispatch) => ({
       title: title.trim(),
     })
     dispatch(action)
-  }
+  },
 })
 
 export default connect(
