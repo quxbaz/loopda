@@ -1,10 +1,11 @@
 import {connect} from 'react-redux'
 import Channel from '../components/Channel'
-import {channels} from 'trax'
+import {channels, blocks, blockAdmin} from 'trax'
 
 const mapStateToProps = (state, {id}) => {
   const channel = channels.selectors.getById(id)(state)
-  const soloMode = channels.selectors.isSoloMode(state)
+  const block = blockAdmin.selectors.getCurrentBlock(state)
+  const soloMode = blocks.selectors.isSoloMode(block.id)(state)
   return {
     channel,
     enabled: (soloMode && channel.solo) || (!soloMode && !channel.mute)
