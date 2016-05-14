@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {songs} from 'trax'
+import actions from '../actions'
 import SongList from './SongList'
 
 class SongControls extends React.Component {
@@ -49,10 +49,7 @@ SongControls.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (title) => {
-    const action = songs.actions.createSong({
-      title: title.trim(),
-    })
-    dispatch(action)
+    dispatch(actions.createDefaultSong(title))
   },
 })
 
