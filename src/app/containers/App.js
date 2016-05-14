@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Route} from 'stateful-router'
+import dashboard from '../../modules/dashboard'
 import overview from '../../modules/overview'
 import presets from '../../modules/presets'
 import Saver from './Saver'
@@ -18,13 +19,16 @@ const TestControls = () => (
 const App = ({player}) => (
   <div className="app">
     <ul>
-      <li><a href='/#/'>Index</a></li>
-      {/*<li><a href='/#/overview'>Overview</a></li>*/}
+      <li><a href='/#/'>Dashboard</a></li>
       <li><a href='/#/presets'>Presets</a></li>
+      <li><a href='/#/songs'>Songs</a></li>
     </ul>
     <test.components.Profiler />
     <TestControls />
     <Saver />
+    <Route route="/">
+      <dashboard.containers.Dashboard />
+    </Route>
     <Route route="songs">
       <overview.containers.Overview player={player} />
     </Route>

@@ -150,15 +150,15 @@ export default class App {
         songAdmin.actions.setCurrentSong(songAction.payload.id)
       )
 
-      store.dispatch(url.actions.setBrowserUrl(
-        '/songs/' + songAction.payload.id + '/blocks/' + blockAction.payload.id
-      ))
+      // store.dispatch(url.actions.setBrowserUrl(
+      //   '/songs/' + songAction.payload.id + '/blocks/' + blockAction.payload.id
+      // ))
 
     }
 
-    // store.dispatch(url.actions.setUrl('no known url'))
+    store.dispatch(url.actions.setUrl('no known url'))
     window.addEventListener('hashchange', processUrl)
-    // processUrl()
+    processUrl()
 
     // Creating audio player
     this.audioPlayer = new AudioPlayer({
