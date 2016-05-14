@@ -5,7 +5,6 @@ import {channels, player} from 'trax'
 import songs from '../../songs'
 import TempoBar from '../components/TempoBar'
 import KeyWatcher from './KeyWatcher'
-import ChannelList from './ChannelList'
 import AddChannel from './AddChannel'
 
 const Overview = ({children, player, nChannels, onClickPlay}) => (
@@ -16,7 +15,6 @@ const Overview = ({children, player, nChannels, onClickPlay}) => (
     <AddChannel />
     <div className="relative">
       <TempoBar beat={player.currentBeat} />
-      <ChannelList />
     </div>
     <Route route=":id">
       <songs.containers.Song />
