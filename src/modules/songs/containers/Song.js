@@ -1,30 +1,54 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Route} from 'stateful-router'
-import {blockAdmin, songs} from 'trax'
+import {songs, songPlayer} from 'trax'
 import blocks from '../../blocks'
-import BlockControls from './BlockControls'
 
-const Song = ({song, currentBlock}) => (
-  <div className="song">
-    <h2>{song.title}</h2>
-    <BlockControls block={currentBlock} />
-    <Route route=":id">
-      <blocks.containers.Block />
-    </Route>
-  </div>
-)
+class Song extends React.Component {
+
+  componentWillMount() {
+    this.props.onMount()
+  }
+
+  componentWillUnmount() {
+    this.props.onUnmount()
+  }
+
+  render() {
+    const {song} = this.props
+    return (
+      <div className="song">
+        <h2>{song.title}</h2>
+        <Route route="/blocks/:id">
+          <blocks.containers.Block />
+        </Route>
+      </div>
+    )
+  }
+
+}
 
 Song.propTypes = {
   song: React.PropTypes.object.isRequired,
-  currentBlock: React.PropTypes.object.isRequired,
+  onMount: React.PropTypes.func.isRequired,
+  onUnmount: React.PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, {id}) => ({
   song: songs.selectors.getById(id)(state),
-  currentBlock: blockAdmin.selectors.getCurrentBlock(state),
+})
+
+const mapDispatchToProps = (dispatch, {id}) => ({
+  onMount: () => {
+    dispatch(songPlayer.actions.setCurrentSong(id))
+  },
+  onUnmount: () => {
+    dispatch(songPlayer.actions.stop())
+    dispatch(songPlayer.actions.clearCurrentSong())
+  },
 })
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Song)

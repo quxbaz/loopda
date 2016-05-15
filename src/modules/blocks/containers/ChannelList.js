@@ -7,13 +7,14 @@ import ChannelItem from '../components/ChannelItem'
 
 class ChannelList extends PureComponent {
   render() {
-    const {channels} = this.props
+    const {channels, isSoloMode} = this.props
     return (
       <div className="channel-list">
-        {channels.map((channel) => (
-          channel.archived ?
-            <ArchivedChannel key={channel.id} id={channel.id} /> :
-            <ChannelItem key={channel.id} id={channel.id} />
+        {channels.map(({id, mute, solo, archived}) => (
+          archived ?
+            <ArchivedChannel key={id} id={id} /> :
+            <ChannelItem key={id} id={id}
+              enabled={(isSoloMode && solo) || (!isSoloMode && !mute)} />
         ))}
       </div>
     )
@@ -23,9 +24,10 @@ class ChannelList extends PureComponent {
 ChannelList.propTypes = {
   ids: React.PropTypes.array.isRequired,
   channels: React.PropTypes.array.isRequired,
+  isSoloMode: React.PropTypes.bool.isRequired,
 }
 
-// <TODO> Fix: This query creates a new array and breaks identity
+// <LATER> Fix: This query creates a new array and breaks identity
 // comparison. Should cache the result. Afterwards, it shouldn't
 // matter if ChannelList extends PureComponent or not
 const mapStateToProps = (state, {ids}) => ({

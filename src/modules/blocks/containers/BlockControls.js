@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {blocks, blockAdmin} from 'trax'
+import {blocks} from 'trax'
 import url from '../../url'
 
 const BlockControls = ({block, onClickPrev, onClickNext, onClickRemove}) => (
@@ -20,13 +20,15 @@ BlockControls.propTypes = {
 
 const mapDispatchToProps = (dispatch, {block}) => ({
   onClickPrev: () => {
-    dispatch(blockAdmin.actions.prevBlock())
+    // <TODO>
+    console.log('prev')
   },
   onClickNext: () => {
-    dispatch(blockAdmin.actions.nextBlock(true))
+    // <TODO>
+    console.log('next')
   },
   onClickRemove: () => {
-    dispatch(url.actions.setBrowserUrl('/'))
+    // <TODO> Set browser url to prev block
     dispatch(blocks.actions.removeBlock(block.id))
   },
 })

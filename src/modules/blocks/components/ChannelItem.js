@@ -5,18 +5,19 @@ import ChannelControls from '../containers/ChannelControls'
 
 class ChannelItem extends PureComponent {
   render() {
-    const {id} = this.props
+    const {id, enabled} = this.props
     return (
       <div className="channel-block">
         <ChannelControls id={id} />
-        <traxExt.containers.Channel id={id} />
+        <traxExt.containers.Channel id={id} enabled={enabled} />
       </div>
     )
   }
 }
 
 ChannelItem.propTypes = {
-  id: React.PropTypes.string.isRequired
+  id: React.PropTypes.string.isRequired,
+  enabled: React.PropTypes.bool.isRequired,
 }
 
 export default ChannelItem

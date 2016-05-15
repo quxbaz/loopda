@@ -13,8 +13,7 @@ import createLogger from 'redux-logger';
 import isNil from 'qux/lib/isNil'
 import each from 'qux/lib/each'
 import {
-  blocks, blockAdmin,
-  songs, songAdmin,
+  blocks, songs,
   presets, player,
   AudioService, AudioPlayer,
 } from 'trax'
@@ -107,12 +106,11 @@ export default class App {
       let hash = location.hash.slice(1)
       if (store.getState().url === hash)
         return
-      store.dispatch(url.actions.setUrl(hash))
-      // if (hash === '' || hash === '/') {
-      //   location.hash = '/overview'
-      // } else {
-      //   store.dispatch(url.actions.setUrl(hash))
-      // }
+      if (hash === '' || hash === '/') {
+        location.hash = '/dashboard'
+      } else {
+        store.dispatch(url.actions.setUrl(hash))
+      }
     }
 
     // <Testing>
@@ -136,23 +134,15 @@ export default class App {
       const blockAction = blocks.actions.createBlock({
         channels: Object.keys(store.getState().channels),
       })
+
       store.dispatch(blockAction)
-      store.dispatch(
-        blockAdmin.actions.setCurrentBlock(blockAction.payload.id)
-      )
 
-      const songAction = songs.actions.createSong({
-        title: 'my first song',
-        blocks: [blockAction.payload.id],
-      })
-      store.dispatch(songAction)
       store.dispatch(
-        songAdmin.actions.setCurrentSong(songAction.payload.id)
+        songs.actions.createSong({
+          title: 'my first song',
+          blocks: [blockAction.payload.id],
+        })
       )
-
-      // store.dispatch(url.actions.setBrowserUrl(
-      //   '/songs/' + songAction.payload.id + '/blocks/' + blockAction.payload.id
-      // ))
 
     }
 

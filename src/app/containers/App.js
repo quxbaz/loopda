@@ -21,12 +21,11 @@ const App = ({player}) => (
     <ul>
       <li><a href='/#/'>Dashboard</a></li>
       <li><a href='/#/presets'>Presets</a></li>
-      <li><a href='/#/songs'>Songs</a></li>
     </ul>
     <test.components.Profiler />
     <TestControls />
     <Saver />
-    <Route route="/">
+    <Route route="dashboard">
       <dashboard.containers.Dashboard />
     </Route>
     <Route route="songs">

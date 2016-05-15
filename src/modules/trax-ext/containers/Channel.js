@@ -1,16 +1,10 @@
 import {connect} from 'react-redux'
 import Channel from '../components/Channel'
-import {channels, blocks, blockAdmin} from 'trax'
+import {channels} from 'trax'
 
-const mapStateToProps = (state, {id}) => {
-  const channel = channels.selectors.getById(id)(state)
-  const block = blockAdmin.selectors.getCurrentBlock(state)
-  const soloMode = blocks.selectors.isSoloMode(block.id)(state)
-  return {
-    channel,
-    enabled: (soloMode && channel.solo) || (!soloMode && !channel.mute)
-  }
-}
+const mapStateToProps = (state, {id}) => ({
+  channel: channels.selectors.getById(id)(state),
+})
 
 const mapDispatchToProps = (dispatch, {id}) => ({
   onMouseDown: (event, el) => {
