@@ -18,6 +18,11 @@ class Song extends React.Component {
     this.props.onUnmount()
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.id !== this.props.id)
+      this.props.onSwitchSong(nextProps.id)
+  }
+
   render() {
     const {song, onClickPrevBlock, onClickNextBlock, onClickRemoveBlock} = this.props
     return (
@@ -40,6 +45,7 @@ Song.propTypes = {
   song: React.PropTypes.object.isRequired,
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
+  onSwitchSong: React.PropTypes.func.isRequired,
   onClickPrevBlock: React.PropTypes.func.isRequired,
   onClickNextBlock: React.PropTypes.func.isRequired,
   onClickRemoveBlock: React.PropTypes.func.isRequired,
@@ -56,6 +62,9 @@ const mapDispatchToProps = (dispatch, {id}) => ({
   onUnmount: () => {
     dispatch(songPlayer.actions.stop())
     dispatch(songPlayer.actions.clearCurrentSong())
+  },
+  onSwitchSong: (id) => {
+    dispatch(songPlayer.actions.setCurrentSong(id))
   },
   onClickPrevBlock: (blockId) => {
     dispatch((dispatch, getState) => {

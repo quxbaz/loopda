@@ -16,6 +16,11 @@ class Block extends React.Component {
     this.props.onUnmount()
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.id !== this.props.id)
+      this.props.onSwitchBlock(nextProps.id)
+  }
+
   render() {
     const {
       id, block, currentBeat, isSoloMode,
@@ -45,6 +50,7 @@ Block.propTypes = {
   isSoloMode: React.PropTypes.bool.isRequired,
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
+  onSwitchBlock: React.PropTypes.func.isRequired,
   onClickPrevBlock: React.PropTypes.func.isRequired,
   onClickNextBlock: React.PropTypes.func.isRequired,
   onClickRemoveBlock: React.PropTypes.func.isRequired,
@@ -59,11 +65,13 @@ const mapStateToProps = (state, {id}) => ({
 const mapDispatchToProps = (dispatch, {id}) => ({
   onMount: () => {
     dispatch(player.actions.setCurrentBlock(id))
-    dispatch(player.actions.restart())
   },
   onUnmount: () => {
     dispatch(player.actions.pause())
     dispatch(player.actions.clearCurrentBlock())
+  },
+  onSwitchBlock: (id) => {
+    dispatch(player.actions.setCurrentBlock(id))
   },
 })
 
