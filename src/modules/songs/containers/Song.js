@@ -10,8 +10,8 @@ const Song = ({song, currentBlock}) => (
     <h2>{song.title}</h2>
     <BlockControls block={currentBlock} />
     <Route route=":id">
-       <blocks.containers.Block />
-     </Route>
+      <blocks.containers.Block />
+    </Route>
   </div>
 )
 
