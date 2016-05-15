@@ -118,7 +118,7 @@ export default class App {
     if (this.isNew) {
 
       store.dispatch(
-        player.actions.createPlayer({playing: false})
+        player.actions.createPlayer({playing: false /* <LATER> true */})
       )
 
       // Create presets
