@@ -11,13 +11,13 @@ const setUrl = (url) => ({
 
 // Changes the browser url along with the store url
 const setBrowserUrl = (url, options={}) => (dispatch) => {
+  dispatch(setUrl(url))
   if (options.replaceState) {
     const prepend = '/#' + (url.startsWith('/') ? '' : '/')
     window.history.replaceState({}, '', prepend + url)
   } else {
     location.hash = url
   }
-  dispatch(setUrl(url))
 }
 
 const navToSong = (id) => (dispatch, getState) => {
