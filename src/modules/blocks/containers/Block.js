@@ -17,11 +17,17 @@ class Block extends React.Component {
   }
 
   render() {
-    const {block, currentBeat, isSoloMode} = this.props
+    const {
+      id, block, currentBeat, isSoloMode,
+      onClickPrevBlock, onClickNextBlock, onClickRemoveBlock,
+    } = this.props
     return (
       <div className="block">
-        <AddChannel id={block.id} />
-        <BlockControls block={block} />
+        <AddChannel id={id} />
+        <BlockControls id={id}
+          onClickPrev={onClickPrevBlock}
+          onClickNext={onClickNextBlock}
+          onClickRemove={onClickRemoveBlock} />
         <div className="relative">
           <TempoBar beat={currentBeat} />
           <ChannelList ids={block.channels} isSoloMode={isSoloMode} />
@@ -33,11 +39,15 @@ class Block extends React.Component {
 }
 
 Block.propTypes = {
+  id: React.PropTypes.string.isRequired,
   block: React.PropTypes.object.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   isSoloMode: React.PropTypes.bool.isRequired,
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
+  onClickPrevBlock: React.PropTypes.func.isRequired,
+  onClickNextBlock: React.PropTypes.func.isRequired,
+  onClickRemoveBlock: React.PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, {id}) => ({
