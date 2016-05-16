@@ -1,4 +1,6 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {songs} from 'trax'
 import BlockGrid from './BlockGrid'
 
 class SongOverview extends React.Component {
@@ -8,11 +10,11 @@ class SongOverview extends React.Component {
   }
 
   render() {
-    const {song, blocks} = this.props
+    const {song, blocks, onClickBlock} = this.props
     return (
       <div className="song-overview">
         {/* song player controls */}
-        <BlockGrid blocks={blocks} />
+        <BlockGrid blocks={blocks} onClickBlock={onClickBlock} />
       </div>
     )
   }
@@ -22,6 +24,20 @@ class SongOverview extends React.Component {
 SongOverview.propTypes = {
   song: React.PropTypes.object.isRequired,
   blocks: React.PropTypes.array.isRequired,
+  onClickBlock: React.PropTypes.func.isRequired,
 }
 
-export default SongOverview
+const mapStateToProps = (state, {song}) => ({
+  blocks: songs.selectors.getBlocks(song.id)(state),
+})
+
+const mapDispatchToProps = (dispatch, {song}) => ({
+  onClickBlock: (id) => {
+    console.log('click:', id)
+  },
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SongOverview)

@@ -26,7 +26,7 @@ class Song extends React.Component {
 
   render() {
     const {
-      song, blocks,
+      song,
       onClickNextBlock, onClickPrevBlock,
       onClickAddBlock, onClickRemoveBlock,
     } = this.props
@@ -35,7 +35,7 @@ class Song extends React.Component {
         <h2>{song.title}</h2>
         <Route route="/">
           <button onClick={onClickAddBlock}>Add block</button>
-          <SongOverview song={song} blocks={blocks} />
+          <SongOverview song={song} />
         </Route>
         <Route route="/blocks/:id">
           <blocksModule.containers.Block
@@ -52,7 +52,6 @@ class Song extends React.Component {
 Song.propTypes = {
   id: React.PropTypes.string.isRequired,
   song: React.PropTypes.object.isRequired,
-  blocks: React.PropTypes.array.isRequired,
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
   onSwitchSong: React.PropTypes.func.isRequired,
@@ -64,7 +63,6 @@ Song.propTypes = {
 
 const mapStateToProps = (state, {id}) => ({
   song: songs.selectors.getById(id)(state),
-  blocks: songs.selectors.getBlocks(id)(state),
 })
 
 const mapDispatchToProps = (dispatch, {id}) => ({
