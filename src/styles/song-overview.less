@@ -2,16 +2,25 @@
 
   .outline;
 
-  // <TODO> What about blocks that have alot of channels?
-
   .channel {
     width: 100%;
-    // height: ;
+    height: auto;
   }
 
   .blip {
     width: 100% / @beats;
     height: 100%;
+  }
+
+  .channel-list {
+    display: flex;
+    flex-direction: column;
+    height: 240px;
+  }
+
+  .channel-item {
+    flex: 1;
+    display: flex;
   }
 
 }
@@ -22,5 +31,6 @@
 }
 
 .block-item {
+  .outline;
   width: 25%;
 }
