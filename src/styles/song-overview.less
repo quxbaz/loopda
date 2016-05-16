@@ -22,12 +22,16 @@
     height: 240px;
     background: lighten(@blipBorderColor, 54%);
     &:before, &:after {
+      .overlay(lighten(@blipBorderColor, 60%), 1);
       left: 25%;
       width: 25%;
-      .overlay(lighten(@blipBorderColor, 60%), 1);
     }
-    &:before {z-index: 1}
-    &:after {left: 75%}
+    &:before {
+      z-index: 1;
+    }
+    &:after {
+      left: 75%;
+    }
   }
 
   .channel-item {

@@ -23,13 +23,9 @@
   height: @blipHeight;
   background: lighten(@blipBorderColor, 54%);
   &:before, &:after {
-    content: "";
-    position: absolute;
-    top: 0;
+    .overlay(lighten(@blipBorderColor, 60%), 1);
     left: 25%;
     width: 25%;
-    height: 100%;
-    background: lighten(@blipBorderColor, 60%);
   }
   &:after {
     left: 75%;
