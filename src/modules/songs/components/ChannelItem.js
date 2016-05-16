@@ -11,7 +11,7 @@ class ChannelItem extends React.Component {
   render() {
     const {channel} = this.props
     return (
-      <div>
+      <div className="channel-item">
         <traxExt.components.Channel channel={channel} />
       </div>
     )

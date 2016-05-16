@@ -7,7 +7,7 @@ import ChannelItem from '../components/ChannelItem'
 // channels
 
 const ChannelList = ({channels}) => (
-  <div>
+  <div className="channel-list">
     {channels.map((channel) => (
       <ChannelItem key={channel.id} channel={channel} />
     ))}
