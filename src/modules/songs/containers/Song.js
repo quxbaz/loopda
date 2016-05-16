@@ -7,6 +7,7 @@ import {Route} from 'stateful-router'
 import {blocks, songs, songPlayer} from 'trax'
 import blocksModule from '../../blocks'
 import url from '../../url'
+import SongOverview from '../components/SongOverview'
 
 class Song extends React.Component {
 
@@ -24,10 +25,18 @@ class Song extends React.Component {
   }
 
   render() {
-    const {song, onClickPrevBlock, onClickNextBlock, onClickRemoveBlock} = this.props
+    const {
+      song, blocks,
+      onClickNextBlock, onClickPrevBlock,
+      onClickAddBlock, onClickRemoveBlock,
+    } = this.props
     return (
       <div className="song">
         <h2>{song.title}</h2>
+        <Route route="/">
+          <button onClick={onClickAddBlock}>Add block</button>
+          <SongOverview song={song} blocks={blocks} />
+        </Route>
         <Route route="/blocks/:id">
           <blocksModule.containers.Block
             onClickPrevBlock={onClickPrevBlock}
@@ -43,16 +52,19 @@ class Song extends React.Component {
 Song.propTypes = {
   id: React.PropTypes.string.isRequired,
   song: React.PropTypes.object.isRequired,
+  blocks: React.PropTypes.array.isRequired,
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
   onSwitchSong: React.PropTypes.func.isRequired,
   onClickPrevBlock: React.PropTypes.func.isRequired,
   onClickNextBlock: React.PropTypes.func.isRequired,
+  onClickAddBlock: React.PropTypes.func.isRequired,
   onClickRemoveBlock: React.PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, {id}) => ({
   song: songs.selectors.getById(id)(state),
+  blocks: songs.selectors.getBlocks(id)(state),
 })
 
 const mapDispatchToProps = (dispatch, {id}) => ({
@@ -101,6 +113,11 @@ const mapDispatchToProps = (dispatch, {id}) => ({
         ))
       }
     })
+  },
+  onClickAddBlock: () => {
+    const blockAction = blocks.actions.createBlock()
+    dispatch(blockAction)
+    dispatch(songs.actions.addBlock(id, blockAction.payload.id))
   },
   onClickRemoveBlock: (blockId) => {
     dispatch(url.actions.setBrowserUrl('/songs/' + id, {replaceState: true}))
