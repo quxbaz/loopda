@@ -6,7 +6,7 @@
 @blipHeight: 42px;
 
 // Channels
-@channelWidth: @blipWidth * @beats;
+@channelWidth: @blipWidth * @beats;  // 48 * 16 = 768px
 
 // Colors
 @blipBorderColor: #5f3b81;
@@ -26,13 +26,13 @@
     content: "";
     position: absolute;
     top: 0;
-    left: @blipWidth * 4;
-    width: @blipWidth * 4;
+    left: 25%;
+    width: 25%;
     height: 100%;
     background: lighten(@blipBorderColor, 60%);
   }
   &:after {
-    left: @blipWidth * 12;
+    left: 75%;
   }
   &.mute:after {
     .overlay(#541751);
