@@ -13,7 +13,7 @@ const createDefaultSong = (title) => (dispatch) => {
     blocks: [blockAction.payload.id],
   })
   dispatch(songAction)
-  dispatch(url.actions.navToSong(songAction.payload.id))
+  dispatch(url.actions.setBrowserUrl('/songs/' + songAction.payload.id))
 }
 
 export default {
