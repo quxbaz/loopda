@@ -103,8 +103,8 @@ const mapDispatchToProps = (dispatch, {id}) => ({
     })
   },
   onClickRemoveBlock: (blockId) => {
-    // <TODO>
-    console.log('remove')
+    dispatch(url.actions.setBrowserUrl('/songs/' + id, {replaceState: true}))
+    dispatch(blocks.actions.removeBlock(blockId))
   },
 })
 
