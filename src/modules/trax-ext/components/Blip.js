@@ -1,6 +1,5 @@
 import React from 'react'
 import classNames from 'classnames'
-import constants from 'loopda/src/globals/style-constants'
 import {PureComponent} from 'loopda/lib/react-ext'
 
 class Blip extends PureComponent {
@@ -16,7 +15,7 @@ class Blip extends PureComponent {
 
   render() {
 
-    const {blip} = this.props
+    const {blip, width} = this.props
     const {mute, beat, color} = blip
 
     const cssClass = classNames({
@@ -26,8 +25,8 @@ class Blip extends PureComponent {
     })
 
     const style = {
-      left: beat * constants.blipWidth,
       background: color,
+      left: beat * width,
     }
 
     return <div className={cssClass} style={style} onClick={this.handleClick} />
@@ -38,6 +37,7 @@ class Blip extends PureComponent {
 
 Blip.propTypes = {
   blip: React.PropTypes.object.isRequired,
+  width: React.PropTypes.number.isRequired,
   onClick: React.PropTypes.func,
 }
 

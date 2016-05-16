@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import isNil from 'qux/lib/isNil'
 import {fireOnce} from 'dom-util'
 import {PureComponent} from 'loopda/lib/react-ext'
 import Blip from '../containers/Blip'
@@ -15,6 +16,13 @@ class Channel extends PureComponent {
       mouseDown: false,
       blipWasMuted: false,
     }
+  }
+
+  componentDidMount() {
+    // Calculate the pixel width of one blip
+    const {beats} = this.props.channel
+    const {width} = this.refs.div.getBoundingClientRect()
+    this.blipWidth = width / beats
   }
 
   handleClick() {
@@ -49,11 +57,11 @@ class Channel extends PureComponent {
       <div ref="div" className={cssClass} onClick={this.handleClick}
         onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove} >
-        {channel.blips.map((id) => {
-          if (!id)
-            return null
-          return <Blip key={id} id={id} onClickBlip={onClickBlip} />
-        })}
+        {channel.blips.map((id, i) => (
+          isNil(id) ?
+            null :
+            <Blip key={id} id={id} width={this.blipWidth} onClickBlip={onClickBlip} />
+        ))}
       </div>
     )
 
