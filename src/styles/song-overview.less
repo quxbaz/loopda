@@ -5,6 +5,9 @@
   .channel {
     width: 100%;
     height: auto;
+    &:before, &:after {
+      display: none;
+    }
   }
 
   .blip {
@@ -13,9 +16,18 @@
   }
 
   .channel-list {
+    position: relative;
     display: flex;
     flex-direction: column;
     height: 240px;
+    background: lighten(@blipBorderColor, 54%);
+    &:before, &:after {
+      left: 25%;
+      width: 25%;
+      .overlay(lighten(@blipBorderColor, 60%), 1);
+    }
+    &:before {z-index: 1}
+    &:after {left: 75%}
   }
 
   .channel-item {
