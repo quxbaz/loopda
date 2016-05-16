@@ -18,13 +18,6 @@ class Channel extends PureComponent {
     }
   }
 
-  componentDidMount() {
-    // Calculate the pixel width of one blip
-    const {beats} = this.props.channel
-    const {width} = this.refs.div.getBoundingClientRect()
-    this.blipWidth = width / beats
-  }
-
   handleClick() {
     this.props.onClick(this.props.channel)
   }
@@ -60,7 +53,7 @@ class Channel extends PureComponent {
         {channel.blips.map((id, i) => (
           isNil(id) ?
             null :
-            <Blip key={id} id={id} width={this.blipWidth} onClickBlip={onClickBlip} />
+            <Blip key={id} id={id} onClickBlip={onClickBlip} />
         ))}
       </div>
     )
