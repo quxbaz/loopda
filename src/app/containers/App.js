@@ -26,7 +26,7 @@ const App = ({player}) => (
     <TestControls />
     <Saver />
     <Route route="dashboard">
-      <dashboard.containers.Dashboard />
+      <dashboard.components.Dashboard />
     </Route>
     <Route route="songs">
       <overview.containers.Overview player={player} />
