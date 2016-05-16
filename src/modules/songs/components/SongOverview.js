@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {songs} from 'trax'
+import url from '../../url'
 import BlockGrid from './BlockGrid'
 
 class SongOverview extends React.Component {
@@ -33,7 +34,7 @@ const mapStateToProps = (state, {song}) => ({
 
 const mapDispatchToProps = (dispatch, {song}) => ({
   onClickBlock: (id) => {
-    console.log('click:', id)
+    dispatch(url.actions.setBrowserUrl('/songs/' + song.id + '/blocks/' + id))
   },
 })
 

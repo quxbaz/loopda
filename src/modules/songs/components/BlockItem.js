@@ -1,4 +1,5 @@
 import React from 'react'
+import ChannelList from '../containers/ChannelList'
 
 class BlockItem extends React.Component {
 
@@ -15,9 +16,8 @@ class BlockItem extends React.Component {
     const {block} = this.props
     return (
       <div className="block-item">
-        <a onClick={this.handleClick}>
-          {block.id}
-        </a>
+        <a onClick={this.handleClick}>{block.id}</a>
+        <ChannelList ids={block.channels} />
       </div>
     )
   }
