@@ -26,7 +26,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onClickSongItem: (id) => {
-    dispatch(url.actions.navToSong(id))
+    dispatch(url.actions.setBrowserUrl('/songs/' + id))
+    // dispatch(url.actions.navToSong(id))
   },
   onClickRemoveSong: (id) => {
     dispatch(songs.actions.removeSong(id))
