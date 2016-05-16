@@ -48,7 +48,7 @@ export default class App {
           thunkMiddleware
           , createLogger({collapsed: true})
         )
-        , window.devToolsExtension ? window.devToolsExtension() : undefined
+        // , window.devToolsExtension ? window.devToolsExtension() : undefined
       )
     )
     this.dispatch = this.store.dispatch.bind(this.store)
