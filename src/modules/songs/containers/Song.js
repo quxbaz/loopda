@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import isNil from 'qux/lib/isNil'
+import last from 'qux/lib/last'
 import after from 'qux/lib/after'
 import before from 'qux/lib/before'
 import {Route} from 'stateful-router'
@@ -8,6 +9,22 @@ import {blocks, songs, songPlayer} from 'trax'
 import blocksModule from '../../blocks'
 import url from '../../url'
 import SongOverview from '../components/SongOverview'
+
+const BlockWrapper = ({id, blocks, onClickPrevBlock, onClickNextBlock, onClickRemoveBlock}) => (
+  <blocksModule.containers.Block id={id}
+    isLastBlock={id === last(blocks)}
+    onClickPrevBlock={onClickPrevBlock}
+    onClickNextBlock={onClickNextBlock}
+    onClickRemoveBlock={onClickRemoveBlock} />
+)
+
+BlockWrapper.propTypes = {
+  id: React.PropTypes.string,
+  blocks: React.PropTypes.array.isRequired,
+  onClickPrevBlock: React.PropTypes.func.isRequired,
+  onClickNextBlock: React.PropTypes.func.isRequired,
+  onClickRemoveBlock: React.PropTypes.func.isRequired,
+}
 
 class Song extends React.Component {
 
@@ -38,7 +55,7 @@ class Song extends React.Component {
           <SongOverview song={song} />
         </Route>
         <Route route="/blocks/:id">
-          <blocksModule.containers.Block
+          <BlockWrapper blocks={song.blocks}
             onClickPrevBlock={onClickPrevBlock}
             onClickNextBlock={onClickNextBlock}
             onClickRemoveBlock={onClickRemoveBlock} />

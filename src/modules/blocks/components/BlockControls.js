@@ -22,10 +22,11 @@ class BlockControls extends React.Component {
   }
 
   render() {
+    const {isLastBlock} = this.props
     return (
       <div className="block-controls">
         <button onClick={this.handleClickPrev}>Prev</button>
-        <button onClick={this.handleClickNext}>Next block</button>
+        <button onClick={this.handleClickNext}>{isLastBlock ? 'Add' : 'Next'} block</button>
         <button onClick={this.handleClickRemove}>Remove block</button>
       </div>
     )
@@ -35,9 +36,14 @@ class BlockControls extends React.Component {
 
 BlockControls.propTypes = {
   id: React.PropTypes.string.isRequired,
+  isLastBlock: React.PropTypes.bool,
   onClickPrev: React.PropTypes.func.isRequired,
   onClickNext: React.PropTypes.func.isRequired,
   onClickRemove: React.PropTypes.func.isRequired,
+}
+
+BlockControls.defaultProps = {
+  isLastBlock: false,
 }
 
 export default BlockControls

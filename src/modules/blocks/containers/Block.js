@@ -23,13 +23,13 @@ class Block extends React.Component {
 
   render() {
     const {
-      id, block, currentBeat, isSoloMode,
+      id, isLastBlock, block, currentBeat, isSoloMode,
       onClickPrevBlock, onClickNextBlock, onClickRemoveBlock,
     } = this.props
     return (
       <div className="block">
         <AddChannel id={id} />
-        <BlockControls id={id}
+        <BlockControls id={id} isLastBlock={isLastBlock}
           onClickPrev={onClickPrevBlock}
           onClickNext={onClickNextBlock}
           onClickRemove={onClickRemoveBlock} />
@@ -45,6 +45,7 @@ class Block extends React.Component {
 
 Block.propTypes = {
   id: React.PropTypes.string.isRequired,
+  isLastBlock: React.PropTypes.bool,
   block: React.PropTypes.object.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   isSoloMode: React.PropTypes.bool.isRequired,
