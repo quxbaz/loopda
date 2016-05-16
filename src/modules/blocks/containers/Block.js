@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {blocks, player} from 'trax'
 import AddChannel from './AddChannel'
-import BlockControls from './BlockControls'
+import BlockControls from '../components/BlockControls'
 import TempoBar from '../components/TempoBar'
 import ChannelList from './ChannelList'
 

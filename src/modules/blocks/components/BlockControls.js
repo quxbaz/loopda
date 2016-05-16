@@ -1,7 +1,5 @@
 import React from 'react'
 
-// <TODO> Move to component
-
 class BlockControls extends React.Component {
 
   constructor(props) {
