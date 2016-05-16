@@ -23,27 +23,19 @@ const mapStateToProps = (state, {id}) => ({
 
 const mapDispatchToProps = (dispatch, {id}) => ({
   onMouseDown: (event, el) => {
-    const beatClicked = getBeatClicked(event, el)
-    dispatch(
-      channels.actions.toggleBlipAt(id, beatClicked)
-    )
+    const beat = getBeatClicked(event, el)
+    dispatch(channels.actions.toggleBlipAt(id, beat))
+    return dispatch((dispatch, getState) => {
+      return channels.selectors.getBlipAt(id, beat)(getState()).mute
+    })
   },
-  onMouseMove: (event, el, toggleSwitch) => {
-
-    console.log('move')
-
-    // let blip
-    // dispatch((dispatch, getState) => {
-    //   blip = channels.selectors.getBlipAt(id, beatClicked)(getState())
-    // })
-
-    // // fireOnce(window, 'mouseup', removeeventlistener)
-
-    // if (toggleSwitch)
-    //   dispatch(channels.actions.enableBlipAt(id, beatClicked))
-    // else
-    //   dispatch(channels.actions.disableBlipAt(id, beatClicked))
-
+  onMouseMove: (event, el, blipWasMuted) => {
+    const beat = getBeatClicked(event, el)
+    if (blipWasMuted) {
+      dispatch(channels.actions.muteBlipAt(id, beat))
+    } else {
+      dispatch(channels.actions.unmuteBlipAt(id, beat))
+    }
   }
 })
 

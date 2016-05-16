@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import {fireOnce} from 'dom-util'
 import {PureComponent} from 'loopda/lib/react-ext'
 import Blip from '../containers/Blip'
 
@@ -9,6 +10,11 @@ class Channel extends PureComponent {
     super(props)
     this.handleClick = this.handleClick.bind(this)
     this.handleMouseDown = this.handleMouseDown.bind(this)
+    this.handleMouseMove = this.handleMouseMove.bind(this)
+    this.state = {
+      mouseDown: false,
+      blipWasMuted: false,
+    }
   }
 
   handleClick() {
@@ -16,7 +22,17 @@ class Channel extends PureComponent {
   }
 
   handleMouseDown(event) {
-    this.props.onMouseDown(event, this.refs.div)
+    const blipWasMuted = this.props.onMouseDown(event, this.refs.div)
+    this.setState({mouseDown: true, blipWasMuted})
+    fireOnce(window, 'mouseup', () => {
+      this.setState({mouseDown: false})
+    })
+  }
+
+  handleMouseMove(event) {
+    if (this.state.mouseDown) {
+      this.props.onMouseMove(event, this.refs.div, this.state.blipWasMuted)
+    }
   }
 
   render() {
@@ -30,7 +46,9 @@ class Channel extends PureComponent {
     })
 
     return (
-      <div ref="div" className={cssClass} onClick={this.handleClick} onMouseDown={this.handleMouseDown}>
+      <div ref="div" className={cssClass} onClick={this.handleClick}
+        onMouseDown={this.handleMouseDown}
+        onMouseMove={this.handleMouseMove} >
         {channel.blips.map((id) => {
           if (!id)
             return null
@@ -48,6 +66,7 @@ Channel.propTypes = {
   enabled: React.PropTypes.bool,
   onClick: React.PropTypes.func,
   onMouseDown: React.PropTypes.func,
+  onMouseMove: React.PropTypes.func,
   onClickBlip: React.PropTypes.func,
 }
 
@@ -55,6 +74,7 @@ Channel.defaultProps = {
   enabled: true,
   onClick: () => {},
   onMouseDown: () => {},
+  onMouseMove: () => {},
 }
 
 export default Channel
