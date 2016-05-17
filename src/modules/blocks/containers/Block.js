@@ -22,10 +22,11 @@ class Block extends React.Component {
   }
 
   render() {
-    const {id, block, song, currentBeat, isSoloMode} = this.props
+    const {id, block, song, i, currentBeat, isSoloMode} = this.props
     return (
       <div className="block">
         <AddChannel id={id} />
+        <div>Block #{i + 1}</div>
         <BlockControls id={id} song={song} />
         <div className="relative">
           <div className="tempo-bar-wrapper">
@@ -43,6 +44,7 @@ Block.propTypes = {
   id: React.PropTypes.string.isRequired,
   block: React.PropTypes.object.isRequired,
   song: React.PropTypes.object.isRequired,
+  i: React.PropTypes.number.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   isSoloMode: React.PropTypes.bool.isRequired,
   onMount: React.PropTypes.func.isRequired,
@@ -50,8 +52,9 @@ Block.propTypes = {
   onSwitchBlock: React.PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state, {id}) => ({
+const mapStateToProps = (state, {id, song}) => ({
   block: blocks.selectors.getById(id)(state),
+  i: song.blocks.indexOf(id),
   currentBeat: state.player.currentBeat,
   isSoloMode: blocks.selectors.isSoloMode(id)(state),
 })
