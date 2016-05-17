@@ -8,6 +8,7 @@ import {Route} from 'stateful-router'
 import {blocks, songs, songPlayer} from 'trax'
 import blocksModule from '../../blocks'
 import url from '../../url'
+import SongControls from '../components/SongControls'
 import SongOverview from '../components/SongOverview'
 
 const BlockWrapper = ({id, blocks, onClickPrevBlock, onClickNextBlock, onClickRemoveBlock}) => (
@@ -43,14 +44,19 @@ class Song extends React.Component {
 
   render() {
     const {
-      song,
-      onClickNextBlock, onClickPrevBlock,
-      onClickAddBlock, onClickRemoveBlock,
+      song, playing,
+      onClickRestart, onClickPlay, onClickPause, onClickStop,
+      onClickNextBlock, onClickPrevBlock, onClickAddBlock, onClickRemoveBlock,
     } = this.props
     return (
       <div className="song">
         <h2>{song.title}</h2>
         <Route route="/">
+          <SongControls playing={playing}
+            onClickRestart={onClickRestart}
+            onClickPlay={onClickPlay}
+            onClickPause={onClickPause}
+            onClickStop={onClickStop} />
           <button onClick={onClickAddBlock}>Add block</button>
           <SongOverview song={song} />
         </Route>
@@ -69,9 +75,14 @@ class Song extends React.Component {
 Song.propTypes = {
   id: React.PropTypes.string.isRequired,
   song: React.PropTypes.object.isRequired,
+  playing: React.PropTypes.bool.isRequired,
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
   onSwitchSong: React.PropTypes.func.isRequired,
+  onClickRestart: React.PropTypes.func.isRequired,
+  onClickPlay: React.PropTypes.func.isRequired,
+  onClickPause: React.PropTypes.func.isRequired,
+  onClickStop: React.PropTypes.func.isRequired,
   onClickPrevBlock: React.PropTypes.func.isRequired,
   onClickNextBlock: React.PropTypes.func.isRequired,
   onClickAddBlock: React.PropTypes.func.isRequired,
@@ -80,6 +91,7 @@ Song.propTypes = {
 
 const mapStateToProps = (state, {id}) => ({
   song: songs.selectors.getById(id)(state),
+  playing: state.songPlayer.playing,
 })
 
 const mapDispatchToProps = (dispatch, {id}) => ({
@@ -92,6 +104,18 @@ const mapDispatchToProps = (dispatch, {id}) => ({
   },
   onSwitchSong: (id) => {
     dispatch(songPlayer.actions.setCurrentSong(id))
+  },
+  onClickRestart: () => {
+    window.loopda.audioPlayer.restartSong()
+  },
+  onClickPlay: () => {
+    window.loopda.audioPlayer.startSong()
+  },
+  onClickPause: () => {
+    window.loopda.audioPlayer.pauseSong()
+  },
+  onClickStop: () => {
+    window.loopda.audioPlayer.stopSong()
   },
   onClickPrevBlock: (blockId) => {
     dispatch((dispatch, getState) => {

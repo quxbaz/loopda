@@ -14,7 +14,6 @@ class SongOverview extends React.Component {
     const {song, blocks, onClickBlock} = this.props
     return (
       <div className="song-overview">
-        {/* song player controls */}
         <BlockGrid blocks={blocks} onClickBlock={onClickBlock} />
       </div>
     )
