@@ -11,11 +11,12 @@ class SongOverview extends React.Component {
   }
 
   render() {
-    const {song, currentBeat, blocks, onClickBlock} = this.props
+    const {song, currentBeat, blocks, onClickBlock, onClickBeat} = this.props
     return (
       <div className="song-overview">
         <BlockGrid currentBeat={currentBeat} blocks={blocks}
-          onClickBlock={onClickBlock} />
+          onClickBlock={onClickBlock}
+          onClickBeat={onClickBeat} />
       </div>
     )
   }
@@ -27,6 +28,7 @@ SongOverview.propTypes = {
   currentBeat: React.PropTypes.number.isRequired,
   blocks: React.PropTypes.array.isRequired,
   onClickBlock: React.PropTypes.func.isRequired,
+  onClickBeat: React.PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, {song}) => ({

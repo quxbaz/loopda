@@ -45,7 +45,7 @@ class Song extends React.Component {
   render() {
     const {
       song, songPlayer,
-      onClickRestart, onClickPlay, onClickPause, onClickStop,
+      onClickRestart, onClickPlay, onClickPause, onClickStop, onClickBeat,
       onClickNextBlock, onClickPrevBlock, onClickAddBlock, onClickRemoveBlock,
     } = this.props
     return (
@@ -58,7 +58,8 @@ class Song extends React.Component {
             onClickPause={onClickPause}
             onClickStop={onClickStop} />
           <button onClick={onClickAddBlock}>Add block</button>
-          <SongOverview song={song} currentBeat={songPlayer.currentBeat} />
+          <SongOverview song={song} currentBeat={songPlayer.currentBeat}
+            onClickBeat={onClickBeat} />
         </Route>
         <Route route="/blocks/:id">
           <BlockWrapper blocks={song.blocks}
@@ -83,6 +84,7 @@ Song.propTypes = {
   onClickPlay: React.PropTypes.func.isRequired,
   onClickPause: React.PropTypes.func.isRequired,
   onClickStop: React.PropTypes.func.isRequired,
+  onClickBeat: React.PropTypes.func.isRequired,
   onClickPrevBlock: React.PropTypes.func.isRequired,
   onClickNextBlock: React.PropTypes.func.isRequired,
   onClickAddBlock: React.PropTypes.func.isRequired,
@@ -123,6 +125,10 @@ const mapDispatchToProps = (dispatch, {id}) => ({
 
   onClickStop: () => {
     window.loopda.audioPlayer.stopSong()
+  },
+
+  onClickBeat: (i) => {
+    dispatch(songPlayer.actions.setCurrentBeat(i))
   },
 
   onClickPrevBlock: (blockId) => {

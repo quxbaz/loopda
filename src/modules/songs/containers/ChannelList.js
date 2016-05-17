@@ -6,13 +6,20 @@ import ChannelItem from '../components/ChannelItem'
 // <TODO> Also show any channels in mute or solo, but not archived
 // channels
 
-const ChannelList = ({channels}) => (
-  <div className="channel-list">
-    {channels.map((channel) => (
-      <ChannelItem key={channel.id} channel={channel} />
-    ))}
-  </div>
-)
+class ChannelList extends React.Component {
+
+  render() {
+    const {channels} = this.props
+    return (
+      <div className="channel-list">
+        {channels.map((channel) => (
+          <ChannelItem key={channel.id} channel={channel} />
+        ))}
+      </div>
+    )
+  }
+
+}
 
 ChannelList.propTypes = {
   ids: React.PropTypes.array.isRequired,
@@ -24,11 +31,6 @@ const mapStateToProps = (state, {ids}) => ({
   channels: channels.selectors.getMany(ids)(state),
 })
 
-const mapDispatchToProps = (dispatch, {ids}) => ({
-
-})
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(ChannelList)
