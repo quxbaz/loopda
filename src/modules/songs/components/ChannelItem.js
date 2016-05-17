@@ -9,10 +9,10 @@ class ChannelItem extends React.Component {
   }
 
   render() {
-    const {channel} = this.props
+    const {channel, enabled} = this.props
     return (
       <div className="channel-item">
-        <traxExt.components.Channel channel={channel} />
+        <traxExt.components.Channel channel={channel} enabled={enabled} />
       </div>
     )
   }
@@ -21,7 +21,7 @@ class ChannelItem extends React.Component {
 
 ChannelItem.propTypes = {
   channel: React.PropTypes.object.isRequired,
-  // onClick: React.PropTypes.func.isRequired,
+  enabled: React.PropTypes.bool.isRequired,
 }
 
 export default ChannelItem

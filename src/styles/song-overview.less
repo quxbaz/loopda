@@ -5,9 +5,8 @@
   .channel {
     width: 100%;
     height: auto;
-    &:before, &:after {
-      display: none;
-    }
+    &:not(.mute) {&:before, &:after {display: none}}
+    &.mute:after {z-index: 1}
   }
 
   .blip {
