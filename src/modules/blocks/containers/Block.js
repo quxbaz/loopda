@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {blocks, player} from 'trax'
 import AddChannel from './AddChannel'
-import BlockControls from '../components/BlockControls'
+import BlockControls from './BlockControls'
 import TempoBar from '../components/TempoBar'
 import ChannelList from './ChannelList'
 
@@ -22,18 +22,11 @@ class Block extends React.Component {
   }
 
   render() {
-    const {
-      id, isLastBlock, block, currentBeat, isSoloMode,
-      onClickPlay, onClickPrev, onClickNext, onClickRemove,
-    } = this.props
+    const {id, block, song, currentBeat, isSoloMode} = this.props
     return (
       <div className="block">
         <AddChannel id={id} />
-        <BlockControls id={id} isLastBlock={isLastBlock}
-          onClickPlay={onClickPlay}
-          onClickPrev={onClickPrev}
-          onClickNext={onClickNext}
-          onClickRemove={onClickRemove} />
+        <BlockControls id={id} song={song} />
         <div className="relative">
           <div className="tempo-bar-wrapper">
             <TempoBar beat={currentBeat} />
@@ -48,17 +41,13 @@ class Block extends React.Component {
 
 Block.propTypes = {
   id: React.PropTypes.string.isRequired,
-  isLastBlock: React.PropTypes.bool,
   block: React.PropTypes.object.isRequired,
+  song: React.PropTypes.object.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   isSoloMode: React.PropTypes.bool.isRequired,
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
   onSwitchBlock: React.PropTypes.func.isRequired,
-  onClickPlay: React.PropTypes.func.isRequired,
-  onClickPrev: React.PropTypes.func.isRequired,
-  onClickNext: React.PropTypes.func.isRequired,
-  onClickRemove: React.PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, {id}) => ({

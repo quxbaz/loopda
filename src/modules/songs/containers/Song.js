@@ -7,26 +7,10 @@ import before from 'qux/lib/before'
 import {Route} from 'stateful-router'
 import {blocks, songs, songPlayer} from 'trax'
 import blocksModule from '../../blocks'
-import url from '../../url'
 import SongControls from './SongControls'
 import SongOverview from './SongOverview'
 
-const BlockWrapper = ({id, blocks, onClickPlay, onClickPrev, onClickNext, onClickRemove}) => (
-  <blocksModule.containers.Block id={id}
-    isLastBlock={id === last(blocks)}
-    onClickPlay={onClickPlay}
-    onClickPrev={onClickPrev}
-    onClickNext={onClickNext}
-    onClickRemove={onClickRemove} />
-)
-
-BlockWrapper.propTypes = {
-  id: React.PropTypes.string,
-  blocks: React.PropTypes.array.isRequired,
-  onClickPrev: React.PropTypes.func.isRequired,
-  onClickNext: React.PropTypes.func.isRequired,
-  onClickRemove: React.PropTypes.func.isRequired,
-}
+// <TODO> Cleanup imports
 
 class Song extends React.Component {
 
@@ -44,23 +28,16 @@ class Song extends React.Component {
   }
 
   render() {
-    const {
-      id, song, songPlayer,
-      onClickPlayBlock, onClickPrevBlock, onClickNextBlock, onClickRemoveBlock,
-    } = this.props
+    const {id, song, playing, currentBeat} = this.props
     return (
       <div className="song">
         <h2>{song.title}</h2>
         <Route route="/">
-          <SongControls id={id} playing={songPlayer.playing} />
-          <SongOverview song={song} currentBeat={songPlayer.currentBeat} />
+          <SongControls id={id} playing={playing} />
+          <SongOverview song={song} currentBeat={currentBeat} />
         </Route>
         <Route route="/blocks/:id">
-          <BlockWrapper blocks={song.blocks}
-            onClickPlay={onClickPlayBlock}
-            onClickPrev={onClickPrevBlock}
-            onClickNext={onClickNextBlock}
-            onClickRemove={onClickRemoveBlock} />
+          <blocksModule.containers.Block song={song} blocks={song.blocks} />
         </Route>
       </div>
     )
@@ -71,19 +48,17 @@ class Song extends React.Component {
 Song.propTypes = {
   id: React.PropTypes.string.isRequired,
   song: React.PropTypes.object.isRequired,
-  songPlayer: React.PropTypes.object.isRequired,
+  playing: React.PropTypes.bool.isRequired,
+  currentBeat: React.PropTypes.number.isRequired,
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
   onSwitchSong: React.PropTypes.func.isRequired,
-  onClickPlayBlock: React.PropTypes.func.isRequired,
-  onClickPrevBlock: React.PropTypes.func.isRequired,
-  onClickNextBlock: React.PropTypes.func.isRequired,
-  onClickRemoveBlock: React.PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, {id}) => ({
   song: songs.selectors.getById(id)(state),
-  songPlayer: state.songPlayer,
+  playing: state.songPlayer.playing,
+  currentBeat: state.songPlayer.currentBeat,
 })
 
 const mapDispatchToProps = (dispatch, {id}) => ({
@@ -99,53 +74,6 @@ const mapDispatchToProps = (dispatch, {id}) => ({
 
   onSwitchSong: (id) => {
     dispatch(songPlayer.actions.setCurrentSong(id))
-  },
-
-  onClickPlayBlock: () => {
-    console.log('play')
-  },
-
-  onClickPrevBlock: (blockId) => {
-    dispatch((dispatch, getState) => {
-      const song = songs.selectors.getById(id)(getState())
-      if (!song.blocks.includes(blockId))
-        return
-      const prevBlock = before(song.blocks, blockId)
-      if (!isNil(prevBlock)) {
-        dispatch(url.actions.setBrowserUrl(
-          `/songs/${id}/blocks/${prevBlock}`
-          , {replaceState: true}
-        ))
-      }
-    })
-  },
-
-  onClickNextBlock: (blockId) => {
-    dispatch((dispatch, getState) => {
-      const song = songs.selectors.getById(id)(getState())
-      if (!song.blocks.includes(blockId))
-        return
-      const nextBlock = after(song.blocks, blockId)
-      if (!isNil(nextBlock)) {
-        dispatch(url.actions.setBrowserUrl(
-          `/songs/${id}/blocks/${nextBlock}` ,
-          {replaceState: true}
-        ))
-      } else {
-        const blockAction = blocks.actions.createBlock()
-        dispatch(blockAction)
-        dispatch(songs.actions.addBlock(id, blockAction.payload.id))
-        dispatch(url.actions.setBrowserUrl(
-          `/songs/${id}/blocks/${blockAction.payload.id}`,
-          {replaceState: true}
-        ))
-      }
-    })
-  },
-
-  onClickRemoveBlock: (blockId) => {
-    dispatch(url.actions.setBrowserUrl('/songs/' + id, {replaceState: true}))
-    dispatch(blocks.actions.removeBlock(blockId))
   },
 
 })
