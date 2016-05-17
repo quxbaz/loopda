@@ -1,33 +1,30 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-const SongControls = (props) => (
+const SongControls = ({playing, onClickRestart, onClickToggle, onClickStop}) => (
   <div className="song-controls">
-    <button onClick={props.onClickRestart}>Restart</button>
-    {props.playing ?
-      <button onClick={props.onClickPause}>Pause</button> :
-      <button onClick={props.onClickPlay}>Play</button>}
-    <button onClick={props.onClickStop}>Stop</button>
+    <button onClick={onClickRestart}>Restart</button>
+    <button onClick={onClickToggle}>{playing ? 'Pause' : 'Play'}</button>
+    <button onClick={onClickStop}>Stop</button>
   </div>
 )
 
 SongControls.propTypes = {
   playing: React.PropTypes.bool.isRequired,
   onClickRestart: React.PropTypes.func.isRequired,
-  onClickPlay: React.PropTypes.func.isRequired,
-  onClickPause: React.PropTypes.func.isRequired,
+  onClickToggle: React.PropTypes.func.isRequired,
   onClickStop: React.PropTypes.func.isRequired,
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, {playing}) => ({
   onClickRestart: () => {
     window.loopda.audioPlayer.restartSong()
   },
-  onClickPlay: () => {
-    window.loopda.audioPlayer.startSong()
-  },
-  onClickPause: () => {
-    window.loopda.audioPlayer.pauseSong()
+  onClickToggle: () => {
+    if (playing)
+      window.loopda.audioPlayer.pauseSong()
+    else
+      window.loopda.audioPlayer.startSong()
   },
   onClickStop: () => {
     window.loopda.audioPlayer.stopSong()
