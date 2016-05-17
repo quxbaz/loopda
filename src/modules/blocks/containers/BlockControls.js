@@ -10,7 +10,7 @@ import url from '../../url'
 const BlockControls = ({isFirstBlock, isLastBlock, onClickPlay, onClickPrev, onClickNext, onClickRemove}) => (
   <div className="block-controls">
     <button onClick={onClickPlay}>Play</button>
-    <button onClick={onClickPrev}>Prev</button>
+    <button disabled={isFirstBlock} onClick={onClickPrev}>Prev</button>
     <button onClick={onClickNext}>{isLastBlock ? 'Add' : 'Next'} block</button>
     <button onClick={onClickRemove}>Remove block</button>
   </div>
@@ -29,7 +29,7 @@ BlockControls.propTypes = {
 
 
 BlockControls.defaultProps = {
-  isFirstBlock: false, // <TODO>
+  isFirstBlock: false,
   isLastBlock: false,
 }
 
