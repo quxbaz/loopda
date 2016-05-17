@@ -26,7 +26,8 @@ class BlockItem extends React.Component {
       <div className="block-item">
         <a onClick={this.handleClick}>{block.id}</a>
         <div ref="channels" className="relative" onClick={this.handleClickBeat}>
-          <blocks.components.TempoBar beat={currentBeat - i * 16} />
+          {currentBeat >= i * 16 && currentBeat < (i + 1) * 16 ?
+            <blocks.components.TempoBar beat={currentBeat - i * 16} /> : null}
           <ChannelList ids={block.channels} />
         </div>
       </div>
