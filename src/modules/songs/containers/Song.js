@@ -1,16 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import isNil from 'qux/lib/isNil'
-import last from 'qux/lib/last'
-import after from 'qux/lib/after'
-import before from 'qux/lib/before'
 import {Route} from 'stateful-router'
 import {blocks, songs, songPlayer} from 'trax'
 import blocksModule from '../../blocks'
 import SongControls from './SongControls'
 import SongOverview from './SongOverview'
-
-// <TODO> Cleanup imports
 
 class Song extends React.Component {
 
@@ -37,7 +31,7 @@ class Song extends React.Component {
           <SongOverview song={song} currentBeat={currentBeat} />
         </Route>
         <Route route="/blocks/:id">
-          <blocksModule.containers.Block song={song} blocks={song.blocks} />
+          <blocksModule.containers.Block song={song} />
         </Route>
       </div>
     )
@@ -62,20 +56,16 @@ const mapStateToProps = (state, {id}) => ({
 })
 
 const mapDispatchToProps = (dispatch, {id}) => ({
-
   onMount: () => {
     dispatch(songPlayer.actions.setCurrentSong(id))
   },
-
   onUnmount: () => {
     dispatch(songPlayer.actions.stop())
     dispatch(songPlayer.actions.clearCurrentSong())
   },
-
   onSwitchSong: (id) => {
     dispatch(songPlayer.actions.setCurrentSong(id))
   },
-
 })
 
 export default connect(
