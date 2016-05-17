@@ -18,6 +18,10 @@ class Channel extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('mouseup', this.onMouseUp)
+  }
+
   handleClick() {
     this.props.onClick(this.props.channel)
   }
@@ -25,9 +29,10 @@ class Channel extends PureComponent {
   handleMouseDown(event) {
     const blipWasMuted = this.props.onMouseDown(event, this.refs.div)
     this.setState({mouseDown: true, blipWasMuted})
-    fireOnce(window, 'mouseup', () => {
-      this.setState({mouseDown: false})
+    this.onMouseUp = fireOnce(window, 'mouseup', () => {
+      this.setState({mouseDown: false, blipWasMuted})
     })
+
   }
 
   handleMouseMove(event) {
