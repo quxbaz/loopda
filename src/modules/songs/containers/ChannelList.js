@@ -3,9 +3,6 @@ import {connect} from 'react-redux'
 import {channels} from 'trax'
 import ChannelItem from '../components/ChannelItem'
 
-// <TODO> Also show any channels in mute or solo, but not archived
-// channels
-
 class ChannelList extends React.Component {
 
   render() {
@@ -29,7 +26,9 @@ ChannelList.propTypes = {
 }
 
 const mapStateToProps = (state, {ids}) => ({
-  channels: channels.selectors.getMany(ids)(state),
+  channels: channels.selectors.getMany(ids)(state).filter(
+    c => !c.archived
+  ),
 })
 
 export default connect(
