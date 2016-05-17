@@ -1,4 +1,5 @@
 import React from 'react'
+import blocks from '../../blocks'
 import ChannelList from '../containers/ChannelList'
 
 class BlockItem extends React.Component {
@@ -13,11 +14,14 @@ class BlockItem extends React.Component {
   }
 
   render() {
-    const {block} = this.props
+    const {i, block, currentBeat} = this.props
     return (
       <div className="block-item">
         <a onClick={this.handleClick}>{block.id}</a>
-        <ChannelList ids={block.channels} />
+        <div className="relative">
+          <blocks.components.TempoBar beat={currentBeat - i * 16} />
+          <ChannelList ids={block.channels} />
+        </div>
       </div>
     )
   }
@@ -25,7 +29,9 @@ class BlockItem extends React.Component {
 }
 
 BlockItem.propTypes = {
+  i: React.PropTypes.number.isRequired,
   block: React.PropTypes.object.isRequired,
+  currentBeat: React.PropTypes.number.isRequired,
   onClick: React.PropTypes.func.isRequired,
 }
 

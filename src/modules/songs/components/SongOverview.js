@@ -11,10 +11,11 @@ class SongOverview extends React.Component {
   }
 
   render() {
-    const {song, blocks, onClickBlock} = this.props
+    const {song, currentBeat, blocks, onClickBlock} = this.props
     return (
       <div className="song-overview">
-        <BlockGrid blocks={blocks} onClickBlock={onClickBlock} />
+        <BlockGrid currentBeat={currentBeat} blocks={blocks}
+          onClickBlock={onClickBlock} />
       </div>
     )
   }
@@ -23,6 +24,7 @@ class SongOverview extends React.Component {
 
 SongOverview.propTypes = {
   song: React.PropTypes.object.isRequired,
+  currentBeat: React.PropTypes.number.isRequired,
   blocks: React.PropTypes.array.isRequired,
   onClickBlock: React.PropTypes.func.isRequired,
 }

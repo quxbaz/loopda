@@ -44,7 +44,7 @@ class Song extends React.Component {
 
   render() {
     const {
-      song, playing,
+      song, songPlayer,
       onClickRestart, onClickPlay, onClickPause, onClickStop,
       onClickNextBlock, onClickPrevBlock, onClickAddBlock, onClickRemoveBlock,
     } = this.props
@@ -52,13 +52,13 @@ class Song extends React.Component {
       <div className="song">
         <h2>{song.title}</h2>
         <Route route="/">
-          <SongControls playing={playing}
+          <SongControls playing={songPlayer.playing}
             onClickRestart={onClickRestart}
             onClickPlay={onClickPlay}
             onClickPause={onClickPause}
             onClickStop={onClickStop} />
           <button onClick={onClickAddBlock}>Add block</button>
-          <SongOverview song={song} />
+          <SongOverview song={song} currentBeat={songPlayer.currentBeat} />
         </Route>
         <Route route="/blocks/:id">
           <BlockWrapper blocks={song.blocks}
@@ -75,7 +75,7 @@ class Song extends React.Component {
 Song.propTypes = {
   id: React.PropTypes.string.isRequired,
   song: React.PropTypes.object.isRequired,
-  playing: React.PropTypes.bool.isRequired,
+  songPlayer: React.PropTypes.object.isRequired,
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
   onSwitchSong: React.PropTypes.func.isRequired,
@@ -91,7 +91,7 @@ Song.propTypes = {
 
 const mapStateToProps = (state, {id}) => ({
   song: songs.selectors.getById(id)(state),
-  playing: state.songPlayer.playing,
+  songPlayer: state.songPlayer,
 })
 
 const mapDispatchToProps = (dispatch, {id}) => ({

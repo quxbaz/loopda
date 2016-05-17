@@ -1,10 +1,10 @@
 import React from 'react'
 import BlockItem from './BlockItem'
 
-const BlockGrid = ({blocks, onClickBlock}) => (
+const BlockGrid = ({blocks, currentBeat, onClickBlock}) => (
   <div className="block-grid">
-    {blocks.map((block) => (
-      <BlockItem key={block.id} block={block}
+    {blocks.map((block, i) => (
+      <BlockItem key={block.id} i={i} currentBeat={currentBeat} block={block}
         onClick={onClickBlock} />
     ))}
   </div>
@@ -12,6 +12,7 @@ const BlockGrid = ({blocks, onClickBlock}) => (
 
 BlockGrid.propTypes = {
   blocks: React.PropTypes.array.isRequired,
+  currentBeat: React.PropTypes.number.isRequired,
   onClickBlock: React.PropTypes.func.isRequired,
 }
 
