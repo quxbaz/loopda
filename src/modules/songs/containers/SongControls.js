@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
 const SongControls = (props) => (
   <div className="song-controls">
@@ -18,4 +19,22 @@ SongControls.propTypes = {
   onClickStop: React.PropTypes.func.isRequired,
 }
 
-export default SongControls
+const mapDispatchToProps = (dispatch) => ({
+  onClickRestart: () => {
+    window.loopda.audioPlayer.restartSong()
+  },
+  onClickPlay: () => {
+    window.loopda.audioPlayer.startSong()
+  },
+  onClickPause: () => {
+    window.loopda.audioPlayer.pauseSong()
+  },
+  onClickStop: () => {
+    window.loopda.audioPlayer.stopSong()
+  },
+})
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SongControls)

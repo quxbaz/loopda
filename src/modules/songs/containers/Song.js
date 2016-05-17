@@ -8,7 +8,7 @@ import {Route} from 'stateful-router'
 import {blocks, songs, songPlayer} from 'trax'
 import blocksModule from '../../blocks'
 import url from '../../url'
-import SongControls from '../components/SongControls'
+import SongControls from './SongControls'
 import SongOverview from '../components/SongOverview'
 
 const BlockWrapper = ({id, blocks, onClickPlay, onClickPrev, onClickNext, onClickRemove}) => (
@@ -45,19 +45,14 @@ class Song extends React.Component {
 
   render() {
     const {
-      song, songPlayer,
-      onClickRestartSong, onClickPlaySong, onClickPauseSong, onClickStopSong, onClickBeat,
+      song, songPlayer, onClickBeat,
       onClickPlayBlock, onClickPrevBlock, onClickNextBlock, onClickAddBlock, onClickRemoveBlock,
     } = this.props
     return (
       <div className="song">
         <h2>{song.title}</h2>
         <Route route="/">
-          <SongControls playing={songPlayer.playing}
-            onClickRestart={onClickRestartSong}
-            onClickPlay={onClickPlaySong}
-            onClickPause={onClickPauseSong}
-            onClickStop={onClickStopSong} />
+          <SongControls playing={songPlayer.playing} />
           <button onClick={onClickAddBlock}>Add block</button>
           <SongOverview song={song} currentBeat={songPlayer.currentBeat}
             onClickBeat={onClickBeat} />
@@ -82,10 +77,6 @@ Song.propTypes = {
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
   onSwitchSong: React.PropTypes.func.isRequired,
-  onClickRestartSong: React.PropTypes.func.isRequired,
-  onClickPlaySong: React.PropTypes.func.isRequired,
-  onClickPauseSong: React.PropTypes.func.isRequired,
-  onClickStopSong: React.PropTypes.func.isRequired,
   onClickBeat: React.PropTypes.func.isRequired,
   onClickPlayBlock: React.PropTypes.func.isRequired,
   onClickPrevBlock: React.PropTypes.func.isRequired,
@@ -112,22 +103,6 @@ const mapDispatchToProps = (dispatch, {id}) => ({
 
   onSwitchSong: (id) => {
     dispatch(songPlayer.actions.setCurrentSong(id))
-  },
-
-  onClickRestartSong: () => {
-    window.loopda.audioPlayer.restartSong()
-  },
-
-  onClickPlaySong: () => {
-    window.loopda.audioPlayer.startSong()
-  },
-
-  onClickPauseSong: () => {
-    window.loopda.audioPlayer.pauseSong()
-  },
-
-  onClickStopSong: () => {
-    window.loopda.audioPlayer.stopSong()
   },
 
   onClickBeat: (i) => {
