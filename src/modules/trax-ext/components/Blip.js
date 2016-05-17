@@ -22,7 +22,6 @@ class Blip extends PureComponent {
 
     const cssClass = classNames({
       blip: true,
-      clicky: true,
       enabled: !mute,
     })
 
