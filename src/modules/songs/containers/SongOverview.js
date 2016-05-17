@@ -1,10 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {songs} from 'trax'
-import url from '../../url'
-import BlockGrid from './BlockGrid'
-
-// <TODO> Move to containers
+import BlockGrid from '../components/BlockGrid'
 
 class SongOverview extends React.Component {
 

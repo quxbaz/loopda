@@ -9,7 +9,7 @@ import {blocks, songs, songPlayer} from 'trax'
 import blocksModule from '../../blocks'
 import url from '../../url'
 import SongControls from './SongControls'
-import SongOverview from '../components/SongOverview'
+import SongOverview from './SongOverview'
 
 const BlockWrapper = ({id, blocks, onClickPlay, onClickPrev, onClickNext, onClickRemove}) => (
   <blocksModule.containers.Block id={id}
