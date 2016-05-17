@@ -34,7 +34,9 @@ class Block extends React.Component {
           onClickNext={onClickNextBlock}
           onClickRemove={onClickRemoveBlock} />
         <div className="relative">
-          <TempoBar beat={currentBeat} />
+          <div className="tempo-bar-wrapper">
+            <TempoBar beat={currentBeat} />
+          </div>
           <ChannelList ids={block.channels} isSoloMode={isSoloMode} />
         </div>
       </div>
