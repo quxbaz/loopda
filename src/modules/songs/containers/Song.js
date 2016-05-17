@@ -95,28 +95,36 @@ const mapStateToProps = (state, {id}) => ({
 })
 
 const mapDispatchToProps = (dispatch, {id}) => ({
+
   onMount: () => {
     dispatch(songPlayer.actions.setCurrentSong(id))
   },
+
   onUnmount: () => {
     dispatch(songPlayer.actions.stop())
     dispatch(songPlayer.actions.clearCurrentSong())
   },
+
   onSwitchSong: (id) => {
     dispatch(songPlayer.actions.setCurrentSong(id))
   },
+
   onClickRestart: () => {
     window.loopda.audioPlayer.restartSong()
   },
+
   onClickPlay: () => {
     window.loopda.audioPlayer.startSong()
   },
+
   onClickPause: () => {
     window.loopda.audioPlayer.pauseSong()
   },
+
   onClickStop: () => {
     window.loopda.audioPlayer.stopSong()
   },
+
   onClickPrevBlock: (blockId) => {
     dispatch((dispatch, getState) => {
       const song = songs.selectors.getById(id)(getState())
@@ -131,6 +139,7 @@ const mapDispatchToProps = (dispatch, {id}) => ({
       }
     })
   },
+
   onClickNextBlock: (blockId) => {
     dispatch((dispatch, getState) => {
       const song = songs.selectors.getById(id)(getState())
@@ -153,15 +162,18 @@ const mapDispatchToProps = (dispatch, {id}) => ({
       }
     })
   },
+
   onClickAddBlock: () => {
     const blockAction = blocks.actions.createBlock()
     dispatch(blockAction)
     dispatch(songs.actions.addBlock(id, blockAction.payload.id))
   },
+
   onClickRemoveBlock: (blockId) => {
     dispatch(url.actions.setBrowserUrl('/songs/' + id, {replaceState: true}))
     dispatch(blocks.actions.removeBlock(blockId))
   },
+
 })
 
 export default connect(
