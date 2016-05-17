@@ -32,7 +32,6 @@ class Channel extends PureComponent {
     this.onMouseUp = fireOnce(window, 'mouseup', () => {
       this.setState({mouseDown: false, blipWasMuted})
     })
-
   }
 
   handleMouseMove(event) {
