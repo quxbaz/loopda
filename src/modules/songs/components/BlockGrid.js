@@ -1,20 +1,18 @@
 import React from 'react'
-import BlockItem from './BlockItem'
+import BlockItem from '../containers/BlockItem'
 
-const BlockGrid = ({blocks, currentBeat, onClickBlock, onClickBeat}) => (
+const BlockGrid = ({songId, blocks, currentBeat, onClickBlock}) => (
   <div className="block-grid">
     {blocks.map((block, i) => (
-      <BlockItem key={block.id} i={i} currentBeat={currentBeat} block={block}
-        onClick={onClickBlock} onClickBeat={onClickBeat} />
+      <BlockItem key={block.id} i={i} songId={songId} currentBeat={currentBeat} block={block} />
     ))}
   </div>
 )
 
 BlockGrid.propTypes = {
+  songId: React.PropTypes.string.isRequired,
   blocks: React.PropTypes.array.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
-  onClickBlock: React.PropTypes.func.isRequired,
-  onClickBeat: React.PropTypes.func.isRequired,
 }
 
 export default BlockGrid

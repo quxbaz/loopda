@@ -45,7 +45,7 @@ class Song extends React.Component {
 
   render() {
     const {
-      id, song, songPlayer, onClickBeat,
+      id, song, songPlayer,
       onClickPlayBlock, onClickPrevBlock, onClickNextBlock, onClickRemoveBlock,
     } = this.props
     return (
@@ -53,8 +53,7 @@ class Song extends React.Component {
         <h2>{song.title}</h2>
         <Route route="/">
           <SongControls id={id} playing={songPlayer.playing} />
-          <SongOverview song={song} currentBeat={songPlayer.currentBeat}
-            onClickBeat={onClickBeat} />
+          <SongOverview song={song} currentBeat={songPlayer.currentBeat} />
         </Route>
         <Route route="/blocks/:id">
           <BlockWrapper blocks={song.blocks}
@@ -76,7 +75,6 @@ Song.propTypes = {
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
   onSwitchSong: React.PropTypes.func.isRequired,
-  onClickBeat: React.PropTypes.func.isRequired,
   onClickPlayBlock: React.PropTypes.func.isRequired,
   onClickPrevBlock: React.PropTypes.func.isRequired,
   onClickNextBlock: React.PropTypes.func.isRequired,
@@ -101,10 +99,6 @@ const mapDispatchToProps = (dispatch, {id}) => ({
 
   onSwitchSong: (id) => {
     dispatch(songPlayer.actions.setCurrentSong(id))
-  },
-
-  onClickBeat: (i) => {
-    dispatch(songPlayer.actions.setCurrentBeat(i))
   },
 
   onClickPlayBlock: () => {
