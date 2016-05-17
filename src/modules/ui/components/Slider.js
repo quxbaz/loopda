@@ -53,8 +53,13 @@ const Slider = React.createClass({
     }
   },
 
+  componentWillUnmount() {
+    window.removeEventListener('mouseup', this.onMouseUp)
+    window.removeEventListener('mousemove', this.handleMouseMove)
+  },
+
   handleBarClick(event) {
-    fireOnce(window, 'mouseup', this.handleMouseUp)
+    this.onMouseUp = fireOnce(window, 'mouseup', this.handleMouseUp)
     window.addEventListener('mousemove', this.handleMouseMove)
     this.onNewOffset(event.clientX)
   },
