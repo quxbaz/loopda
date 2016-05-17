@@ -45,7 +45,7 @@ class Song extends React.Component {
   render() {
     const {
       song, songPlayer,
-      onClickRestart, onClickPlay, onClickPause, onClickStop, onClickBeat,
+      onClickRestartSong, onClickPlaySong, onClickPauseSong, onClickStopSong, onClickBeat,
       onClickNextBlock, onClickPrevBlock, onClickAddBlock, onClickRemoveBlock,
     } = this.props
     return (
@@ -53,10 +53,10 @@ class Song extends React.Component {
         <h2>{song.title}</h2>
         <Route route="/">
           <SongControls playing={songPlayer.playing}
-            onClickRestart={onClickRestart}
-            onClickPlay={onClickPlay}
-            onClickPause={onClickPause}
-            onClickStop={onClickStop} />
+            onClickRestart={onClickRestartSong}
+            onClickPlay={onClickPlaySong}
+            onClickPause={onClickPauseSong}
+            onClickStop={onClickStopSong} />
           <button onClick={onClickAddBlock}>Add block</button>
           <SongOverview song={song} currentBeat={songPlayer.currentBeat}
             onClickBeat={onClickBeat} />
@@ -80,10 +80,10 @@ Song.propTypes = {
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
   onSwitchSong: React.PropTypes.func.isRequired,
-  onClickRestart: React.PropTypes.func.isRequired,
-  onClickPlay: React.PropTypes.func.isRequired,
-  onClickPause: React.PropTypes.func.isRequired,
-  onClickStop: React.PropTypes.func.isRequired,
+  onClickRestartSong: React.PropTypes.func.isRequired,
+  onClickPlaySong: React.PropTypes.func.isRequired,
+  onClickPauseSong: React.PropTypes.func.isRequired,
+  onClickStopSong: React.PropTypes.func.isRequired,
   onClickBeat: React.PropTypes.func.isRequired,
   onClickPrevBlock: React.PropTypes.func.isRequired,
   onClickNextBlock: React.PropTypes.func.isRequired,
@@ -111,19 +111,19 @@ const mapDispatchToProps = (dispatch, {id}) => ({
     dispatch(songPlayer.actions.setCurrentSong(id))
   },
 
-  onClickRestart: () => {
+  onClickRestartSong: () => {
     window.loopda.audioPlayer.restartSong()
   },
 
-  onClickPlay: () => {
+  onClickPlaySong: () => {
     window.loopda.audioPlayer.startSong()
   },
 
-  onClickPause: () => {
+  onClickPauseSong: () => {
     window.loopda.audioPlayer.pauseSong()
   },
 
-  onClickStop: () => {
+  onClickStopSong: () => {
     window.loopda.audioPlayer.stopSong()
   },
 
