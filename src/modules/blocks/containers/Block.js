@@ -24,15 +24,16 @@ class Block extends React.Component {
   render() {
     const {
       id, isLastBlock, block, currentBeat, isSoloMode,
-      onClickPrevBlock, onClickNextBlock, onClickRemoveBlock,
+      onClickPlay, onClickPrev, onClickNext, onClickRemove,
     } = this.props
     return (
       <div className="block">
         <AddChannel id={id} />
         <BlockControls id={id} isLastBlock={isLastBlock}
-          onClickPrev={onClickPrevBlock}
-          onClickNext={onClickNextBlock}
-          onClickRemove={onClickRemoveBlock} />
+          onClickPlay={onClickPlay}
+          onClickPrev={onClickPrev}
+          onClickNext={onClickNext}
+          onClickRemove={onClickRemove} />
         <div className="relative">
           <div className="tempo-bar-wrapper">
             <TempoBar beat={currentBeat} />
@@ -54,9 +55,10 @@ Block.propTypes = {
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
   onSwitchBlock: React.PropTypes.func.isRequired,
-  onClickPrevBlock: React.PropTypes.func.isRequired,
-  onClickNextBlock: React.PropTypes.func.isRequired,
-  onClickRemoveBlock: React.PropTypes.func.isRequired,
+  onClickPlay: React.PropTypes.func.isRequired,
+  onClickPrev: React.PropTypes.func.isRequired,
+  onClickNext: React.PropTypes.func.isRequired,
+  onClickRemove: React.PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, {id}) => ({

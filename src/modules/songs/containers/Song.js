@@ -11,20 +11,21 @@ import url from '../../url'
 import SongControls from '../components/SongControls'
 import SongOverview from '../components/SongOverview'
 
-const BlockWrapper = ({id, blocks, onClickPrevBlock, onClickNextBlock, onClickRemoveBlock}) => (
+const BlockWrapper = ({id, blocks, onClickPlay, onClickPrev, onClickNext, onClickRemove}) => (
   <blocksModule.containers.Block id={id}
     isLastBlock={id === last(blocks)}
-    onClickPrevBlock={onClickPrevBlock}
-    onClickNextBlock={onClickNextBlock}
-    onClickRemoveBlock={onClickRemoveBlock} />
+    onClickPlay={onClickPlay}
+    onClickPrev={onClickPrev}
+    onClickNext={onClickNext}
+    onClickRemove={onClickRemove} />
 )
 
 BlockWrapper.propTypes = {
   id: React.PropTypes.string,
   blocks: React.PropTypes.array.isRequired,
-  onClickPrevBlock: React.PropTypes.func.isRequired,
-  onClickNextBlock: React.PropTypes.func.isRequired,
-  onClickRemoveBlock: React.PropTypes.func.isRequired,
+  onClickPrev: React.PropTypes.func.isRequired,
+  onClickNext: React.PropTypes.func.isRequired,
+  onClickRemove: React.PropTypes.func.isRequired,
 }
 
 class Song extends React.Component {
@@ -46,7 +47,7 @@ class Song extends React.Component {
     const {
       song, songPlayer,
       onClickRestartSong, onClickPlaySong, onClickPauseSong, onClickStopSong, onClickBeat,
-      onClickNextBlock, onClickPrevBlock, onClickAddBlock, onClickRemoveBlock,
+      onClickPlayBlock, onClickPrevBlock, onClickNextBlock, onClickAddBlock, onClickRemoveBlock,
     } = this.props
     return (
       <div className="song">
@@ -63,9 +64,10 @@ class Song extends React.Component {
         </Route>
         <Route route="/blocks/:id">
           <BlockWrapper blocks={song.blocks}
-            onClickPrevBlock={onClickPrevBlock}
-            onClickNextBlock={onClickNextBlock}
-            onClickRemoveBlock={onClickRemoveBlock} />
+            onClickPlay={onClickPlayBlock}
+            onClickPrev={onClickPrevBlock}
+            onClickNext={onClickNextBlock}
+            onClickRemove={onClickRemoveBlock} />
         </Route>
       </div>
     )
@@ -85,6 +87,7 @@ Song.propTypes = {
   onClickPauseSong: React.PropTypes.func.isRequired,
   onClickStopSong: React.PropTypes.func.isRequired,
   onClickBeat: React.PropTypes.func.isRequired,
+  onClickPlayBlock: React.PropTypes.func.isRequired,
   onClickPrevBlock: React.PropTypes.func.isRequired,
   onClickNextBlock: React.PropTypes.func.isRequired,
   onClickAddBlock: React.PropTypes.func.isRequired,
@@ -129,6 +132,10 @@ const mapDispatchToProps = (dispatch, {id}) => ({
 
   onClickBeat: (i) => {
     dispatch(songPlayer.actions.setCurrentBeat(i))
+  },
+
+  onClickPlayBlock: () => {
+    console.log('play')
   },
 
   onClickPrevBlock: (blockId) => {
