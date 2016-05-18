@@ -25,11 +25,11 @@ class KeyWatcher extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', this.handleKey);
+    document.addEventListener('keydown', this.handleKey)
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKey);
+    document.removeEventListener('keydown', this.handleKey)
   }
 
   render() {return null}
