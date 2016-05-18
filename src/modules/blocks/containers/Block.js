@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {blocks, player} from 'trax'
+import {blocks, player, songPlayer} from 'trax'
 import AddChannel from './AddChannel'
 import BlockControls from './BlockControls'
 import TempoBar from '../components/TempoBar'
@@ -61,6 +61,7 @@ const mapStateToProps = (state, {id, song}) => ({
 
 const mapDispatchToProps = (dispatch, {id}) => ({
   onMount: () => {
+    dispatch(songPlayer.actions.stop())
     dispatch(player.actions.setCurrentBlock(id))
   },
   onUnmount: () => {
