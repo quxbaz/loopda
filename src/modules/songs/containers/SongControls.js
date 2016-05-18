@@ -42,8 +42,9 @@ const mapDispatchToProps = (dispatch, {id, playing}) => ({
     const action = dispatch(blocks.actions.createBlock())
     dispatch(songs.actions.addBlock(id, action.payload.id))
   },
-  onClickLoop: () => {
+  onClickLoop: (event) => {
     dispatch(songPlayer.actions.toggleLoop())
+    event.target.blur()
   },
 })
 
