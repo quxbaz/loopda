@@ -89,6 +89,7 @@ export default class App {
   start() {
 
     const {store} = this
+    const {dispatch} = store
 
     store.subscribe(() => {
       const state = store.getState()
@@ -109,7 +110,7 @@ export default class App {
       if (hash === '' || hash === '/') {
         location.hash = '/dashboard'
       } else {
-        store.dispatch(url.actions.setUrl(hash))
+        dispatch(url.actions.setUrl(hash))
       }
     }
 
@@ -117,36 +118,38 @@ export default class App {
 
     if (this.isNew) {
 
-      store.dispatch(
+      dispatch(
         player.actions.createPlayer({playing: false /* <LATER> true */})
       )
 
       // Create presets
-      store.dispatch(presets.actions.createPreset({sample: 'hihat'}))
-      store.dispatch(presets.actions.createPreset({sample: 'snare'}))
-      store.dispatch(presets.actions.createPreset({sample: 'kick'}))
-      store.dispatch(presets.actions.createPreset({sample: 'clap'}))
+      dispatch(presets.actions.createPreset({sample: 'hihat'}))
+      dispatch(presets.actions.createPreset({sample: 'snare'}))
+      dispatch(presets.actions.createPreset({sample: 'kick'}))
+      dispatch(presets.actions.createPreset({sample: 'clap'}))
 
       each(store.getState().presets, (preset) => {
-        store.dispatch(traxExt.actions.createChannel({preset: preset.id}))
+        dispatch(traxExt.actions.createChannel({preset: preset.id}))
       })
 
-      const blockAction = blocks.actions.createBlock({
-        channels: Object.keys(store.getState().channels),
-      })
+      const blockAction = dispatch(
+        blocks.actions.createBlock({
+          channels: Object.keys(store.getState().channels),
+        })
+      )
 
-      store.dispatch(blockAction)
-
-      store.dispatch(
+      const songAction = dispatch(
         songs.actions.createSong({
           title: 'my first song',
           blocks: [blockAction.payload.id],
         })
       )
 
+      dispatch(url.actions.navToSong(songAction.payload.id))
+
     }
 
-    store.dispatch(url.actions.setUrl('no known url'))
+    // dispatch(url.actions.setUrl('no known url'))
     window.addEventListener('hashchange', processUrl)
     processUrl()
 
