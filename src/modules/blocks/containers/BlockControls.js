@@ -4,12 +4,16 @@ import isNil from 'qux/lib/isNil'
 import last from 'qux/lib/last'
 import before from 'qux/lib/before'
 import after from 'qux/lib/after'
-import {blocks, songs} from 'trax'
+import {blocks, songs, player} from 'trax'
 import url from '../../url'
+import ux from '../../ux'
 
-const BlockControls = ({isFirstBlock, isLastBlock, onClickPlay, onClickPrev, onClickNext, onClickRemove}) => (
+const BlockControls = ({playing, isFirstBlock, isLastBlock, onClickPlay, onClickPrev, onClickNext, onClickRemove}) => (
   <div className="block-controls">
-    <button onClick={onClickPlay}>Play</button>
+    <ux.KeyWatcher onKeySpace={onClickPlay} />
+    <div>
+      <button onClick={onClickPlay}>{playing ? 'Pause' : 'Play'} (space)</button>
+    </div>
     <button disabled={isFirstBlock} onClick={onClickPrev}>Prev</button>
     <button onClick={onClickNext}>{isLastBlock ? 'Add' : 'Next'} block</button>
     <button onClick={onClickRemove}>Remove block</button>
@@ -19,8 +23,9 @@ const BlockControls = ({isFirstBlock, isLastBlock, onClickPlay, onClickPrev, onC
 BlockControls.propTypes = {
   id: React.PropTypes.string.isRequired,
   song: React.PropTypes.object.isRequired,
-  isFirstBlock: React.PropTypes.bool,
-  isLastBlock: React.PropTypes.bool,
+  playing: React.PropTypes.bool.isRequired,
+  isFirstBlock: React.PropTypes.bool.isRequired,
+  isLastBlock: React.PropTypes.bool.isRequired,
   onClickPlay: React.PropTypes.func.isRequired,
   onClickPrev: React.PropTypes.func.isRequired,
   onClickNext: React.PropTypes.func.isRequired,
@@ -34,6 +39,7 @@ BlockControls.defaultProps = {
 }
 
 const mapStateToProps = (state, {id, song}) => ({
+  playing: state.player.playing,
   isFirstBlock: id === song.blocks[0],
   isLastBlock: id === last(song.blocks),
 })
@@ -41,7 +47,7 @@ const mapStateToProps = (state, {id, song}) => ({
 const mapDispatchToProps = (dispatch, {id, song}) => ({
 
   onClickPlay: () => {
-    console.log('play')
+    dispatch(player.actions.togglePlay())
   },
 
   onClickPrev: () => {
