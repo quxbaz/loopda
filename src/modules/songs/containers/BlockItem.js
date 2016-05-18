@@ -1,11 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import classNames from 'classnames'
-import {blocks, songs, songPlayer} from 'trax'
+import {channels, blocks, songs, songPlayer} from 'trax'
 import blocksModule from '../../blocks'
 import traxExt from '../../trax-ext'
 import url from '../../url'
-import ChannelList from '../containers/ChannelList'
 
 class BlockItem extends React.Component {
 
@@ -48,7 +47,7 @@ class BlockItem extends React.Component {
   }
 
   render() {
-    const {i, block, currentBeat, isSoloMode} = this.props
+    const {i, block, channels, currentBeat, isSoloMode} = this.props
     const dragProps = {
       draggable: true,
       onDragStart: this.handleDragStart,
@@ -66,7 +65,7 @@ class BlockItem extends React.Component {
         <div ref="channels" className={innerCssClass} onClick={this.handleClickBeat} {...dragProps}>
           {currentBeat >= i * 16 && currentBeat < (i + 1) * 16 ?
             <blocksModule.components.TempoBar beat={currentBeat - i * 16} /> : null}
-          <ChannelList ids={block.channels} isSoloMode={isSoloMode} />
+          <traxExt.components.ChannelList channels={channels} isSoloMode={isSoloMode} />
         </div>
       </div>
     )
@@ -77,6 +76,7 @@ BlockItem.propTypes = {
   i: React.PropTypes.number.isRequired,
   songId: React.PropTypes.string.isRequired,
   block: React.PropTypes.object.isRequired,
+  channels: React.PropTypes.array.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   isSoloMode: React.PropTypes.bool.isRequired,
   onClickTitle: React.PropTypes.func.isRequired,
@@ -89,6 +89,9 @@ BlockItem.propTypes = {
 }
 
 const mapStateToProps = (state, {block}) => ({
+  channels: channels.selectors.getMany(block.channels)(state).filter(
+    c => !c.archived
+  ),
   isSoloMode: blocks.selectors.isSoloMode(block.id)(state),
 })
 

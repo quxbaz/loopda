@@ -3,6 +3,8 @@
   .outline;
 
   .channel {
+    display: flex;
+    flex: 1;
     width: 100%;
     height: auto;
     &:not(.mute) {&:before, &:after {display: none}}
@@ -31,11 +33,6 @@
     &:after {
       left: 75%;
     }
-  }
-
-  .channel-item {
-    display: flex;
-    flex: 1;
   }
 
 }
