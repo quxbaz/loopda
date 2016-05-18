@@ -1,25 +1,28 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {songs, blocks} from 'trax'
+import {songs, blocks, songPlayer} from 'trax'
 import ux from '../../ux'
 
-const SongControls = ({playing, onClickRestart, onClickToggle, onClickStop, onClickAddBlock}) => (
+const SongControls = ({playing, loop, onClickRestart, onClickToggle, onClickStop, onClickAddBlock, onClickLoop}) => (
   <div className="song-controls">
     <ux.KeyWatcher onKeySpace={onClickToggle} />
     <button onClick={onClickRestart}>Restart</button>
     <button onClick={onClickToggle}>{playing ? 'Pause' : 'Play'}</button>
     <button onClick={onClickStop}>Stop</button>
-    <button onClick={onClickAddBlock}>Add block</button>
+    <button onClick={onClickAddBlock}>Add block</button>{' '}
+    <label><input type="checkbox" checked={loop} onChange={onClickLoop} /> Loop</label>
   </div>
 )
 
 SongControls.propTypes = {
   id: React.PropTypes.string.isRequired,
   playing: React.PropTypes.bool.isRequired,
+  loop: React.PropTypes.bool.isRequired,
   onClickRestart: React.PropTypes.func.isRequired,
   onClickToggle: React.PropTypes.func.isRequired,
   onClickStop: React.PropTypes.func.isRequired,
   onClickAddBlock: React.PropTypes.func.isRequired,
+  onClickLoop: React.PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch, {id, playing}) => ({
@@ -38,6 +41,9 @@ const mapDispatchToProps = (dispatch, {id, playing}) => ({
   onClickAddBlock: () => {
     const action = dispatch(blocks.actions.createBlock())
     dispatch(songs.actions.addBlock(id, action.payload.id))
+  },
+  onClickLoop: () => {
+    dispatch(songPlayer.actions.toggleLoop())
   },
 })
 

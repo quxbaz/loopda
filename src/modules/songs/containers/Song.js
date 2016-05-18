@@ -22,12 +22,12 @@ class Song extends React.Component {
   }
 
   render() {
-    const {id, song, playing, currentBeat} = this.props
+    const {id, song, playing, loop, currentBeat} = this.props
     return (
       <div className="song">
         <h2>{song.title}</h2>
         <Route route="/">
-          <SongControls id={id} playing={playing} />
+          <SongControls id={id} playing={playing} loop={loop} />
           <SongOverview song={song} currentBeat={currentBeat} />
         </Route>
         <Route route="/blocks/:id">
@@ -43,6 +43,7 @@ Song.propTypes = {
   id: React.PropTypes.string.isRequired,
   song: React.PropTypes.object.isRequired,
   playing: React.PropTypes.bool.isRequired,
+  loop: React.PropTypes.bool.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
@@ -52,6 +53,7 @@ Song.propTypes = {
 const mapStateToProps = (state, {id}) => ({
   song: songs.selectors.getById(id)(state),
   playing: state.songPlayer.playing,
+  loop: state.songPlayer.loop,
   currentBeat: state.songPlayer.currentBeat,
 })
 
