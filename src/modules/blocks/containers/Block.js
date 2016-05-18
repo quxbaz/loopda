@@ -5,6 +5,7 @@ import AddChannel from './AddChannel'
 import BlockControls from './BlockControls'
 import TempoBar from '../components/TempoBar'
 import ChannelList from './ChannelList'
+import NavPane from './NavPane'
 
 class Block extends React.Component {
 
@@ -34,6 +35,7 @@ class Block extends React.Component {
           </div>
           <ChannelList ids={block.channels} isSoloMode={isSoloMode} />
         </div>
+        <NavPane />
       </div>
     )
   }
