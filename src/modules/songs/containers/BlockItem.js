@@ -14,8 +14,10 @@ class BlockItem extends React.Component {
     this.handleClickTitle = this.handleClickTitle.bind(this)
     this.handleClickBeat = this.handleClickBeat.bind(this)
     this.handleDragStart = this.handleDragStart.bind(this)
+    this.handleDragEnd = this.handleDragEnd.bind(this)
     this.handleDragOver = this.handleDragOver.bind(this)
     this.handleDrop = this.handleDrop.bind(this)
+    this.state = {dragging: false}
   }
 
   handleClickTitle() {
@@ -28,7 +30,12 @@ class BlockItem extends React.Component {
   }
 
   handleDragStart(event) {
+    this.setState({dragging: true})
     this.props.onDragStart(this.props.i)
+  }
+
+  handleDragEnd(event) {
+    this.setState({dragging: false})
   }
 
   handleDragOver(event) {
@@ -45,13 +52,18 @@ class BlockItem extends React.Component {
     const dragProps = {
       draggable: true,
       onDragStart: this.handleDragStart,
+      onDragEnd: this.handleDragEnd,
       onDragOver: this.handleDragOver,
       onDrop: this.handleDrop,
     }
+    const innerCssClass = classNames({
+      relative: true,
+      dragging: this.state.dragging,
+    })
     return (
       <div className="block-item">
         <a onClick={this.handleClickTitle}>{block.id}</a>
-        <div ref="channels" className="relative" onClick={this.handleClickBeat} {...dragProps}>
+        <div ref="channels" className={innerCssClass} onClick={this.handleClickBeat} {...dragProps}>
           {currentBeat >= i * 16 && currentBeat < (i + 1) * 16 ?
             <blocksModule.components.TempoBar beat={currentBeat - i * 16} /> : null}
           <ChannelList ids={block.channels} isSoloMode={isSoloMode} />
