@@ -1,9 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {songs, blocks} from 'trax'
+import ux from '../../ux'
 
 const SongControls = ({playing, onClickRestart, onClickToggle, onClickStop, onClickAddBlock}) => (
   <div className="song-controls">
+    <ux.KeyWatcher onKeySpace={onClickToggle} />
     <button onClick={onClickRestart}>Restart</button>
     <button onClick={onClickToggle}>{playing ? 'Pause' : 'Play'}</button>
     <button onClick={onClickStop}>Stop</button>
