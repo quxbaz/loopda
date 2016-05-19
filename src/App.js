@@ -108,10 +108,10 @@ export default class App {
       if (store.getState().url === hash)
         return
       if (hash === '' || hash === '/') {
-        location.hash = '/dashboard'
-      } else {
-        dispatch(url.actions.setUrl(hash))
+        window.history.replaceState({}, '', '/#/dashboard')
+        hash = '/dashboard'
       }
+      dispatch(url.actions.setUrl(hash))
     }
 
     // <Testing>
