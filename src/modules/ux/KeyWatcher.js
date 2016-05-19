@@ -15,10 +15,16 @@ class KeyWatcher extends React.Component {
     } else {
       switch (event.keyCode) {
         case 27:
-          props.onKeyEscape && props.onKeyEscape(event)
+          if (props.onKeyEscape) {
+            event.preventDefault()
+            props.onKeyEscape(event)
+          }
           break
         case 32:
-          props.onKeySpace && props.onKeySpace(event)
+          if (props.onKeySpace) {
+            event.preventDefault()
+            props.onKeySpace(event)
+          }
           break
       }
     }

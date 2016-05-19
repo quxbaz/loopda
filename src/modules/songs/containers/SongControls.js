@@ -44,7 +44,6 @@ const mapDispatchToProps = (dispatch, {id, playing}) => ({
   },
   onClickLoop: (event) => {
     dispatch(songPlayer.actions.toggleLoop())
-    event.target.blur()
   },
 })
 
