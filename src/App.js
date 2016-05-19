@@ -13,8 +13,7 @@ import createLogger from 'redux-logger';
 import isNil from 'qux/lib/isNil'
 import each from 'qux/lib/each'
 import {
-  blocks, songs,
-  presets, player,
+  songs, presets, player,
   AudioService, AudioPlayer,
 } from 'trax'
 
@@ -132,20 +131,15 @@ export default class App {
         dispatch(traxExt.actions.createChannel({preset: preset.id}))
       })
 
-      const blockAction = dispatch(
-        blocks.actions.createBlock({
-          channels: Object.keys(store.getState().channels),
-        })
-      )
+      const songId = dispatch(songs.actions.createSong({
+        title: 'my first song',
+      })).payload.id
 
-      const songAction = dispatch(
-        songs.actions.createSong({
-          title: 'my first song',
-          blocks: [blockAction.payload.id],
-        })
-      )
+      dispatch(songs.actions.createBlock(songId, {
+        channels: Object.keys(store.getState().channels),
+      }))
 
-      dispatch(url.actions.navToSong(songAction.payload.id))
+      dispatch(url.actions.navToSong(songId))
 
     }
 

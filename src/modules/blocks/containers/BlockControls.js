@@ -4,7 +4,7 @@ import isNil from 'qux/lib/isNil'
 import last from 'qux/lib/last'
 import before from 'qux/lib/before'
 import after from 'qux/lib/after'
-import {blocks, songs, player} from 'trax'
+import {songs, player} from 'trax'
 import url from '../../url'
 import ux from '../../ux'
 
@@ -72,10 +72,9 @@ const mapDispatchToProps = (dispatch, {id, song}) => ({
         {replaceState: true}
       ))
     } else {
-      const newId = dispatch(blocks.actions.createBlock()).payload.id
-      dispatch(songs.actions.addBlock(song.id, newId))
+      const blockId = dispatch(songs.actions.createBlock(song.id)).payload.id
       dispatch(url.actions.setBrowserUrl(
-        `/songs/${song.id}/blocks/${newId}`,
+        `/songs/${song.id}/blocks/${blockId}`,
         {replaceState: true}
       ))
     }

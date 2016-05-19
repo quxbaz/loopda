@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {songs, blocks, songPlayer} from 'trax'
+import {songs, songPlayer} from 'trax'
 import ux from '../../ux'
 
 const SongControls = ({playing, loop, onClickRestart, onClickToggle, onClickStop, onClickAddBlock, onClickLoop}) => (
@@ -39,8 +39,7 @@ const mapDispatchToProps = (dispatch, {id, playing}) => ({
     window.loopda.audioPlayer.stopSong()
   },
   onClickAddBlock: () => {
-    const action = dispatch(blocks.actions.createBlock())
-    dispatch(songs.actions.addBlock(id, action.payload.id))
+    dispatch(songs.actions.createBlock(id))
   },
   onClickLoop: (event) => {
     dispatch(songPlayer.actions.toggleLoop())
