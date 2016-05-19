@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {blocks, player, songPlayer} from 'trax'
+import {blocks, songs, player, songPlayer} from 'trax'
 import AddChannel from './AddChannel'
 import BlockControls from './BlockControls'
 import TempoBar from '../components/TempoBar'
@@ -23,7 +23,7 @@ class Block extends React.Component {
   }
 
   render() {
-    const {id, i, channels, song, currentBeat, isSoloMode} = this.props
+    const {id, song, i, channels, currentBeat, isSoloMode} = this.props
     return (
       <div className="block overview sequencer">
         <AddChannel id={id} />
@@ -44,10 +44,10 @@ class Block extends React.Component {
 
 Block.propTypes = {
   id: React.PropTypes.string.isRequired,
+  song: React.PropTypes.object.isRequired,
   block: React.PropTypes.object.isRequired,
   i: React.PropTypes.number.isRequired,
   channels: React.PropTypes.array.isRequired,
-  song: React.PropTypes.object.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   isSoloMode: React.PropTypes.bool.isRequired,
   onMount: React.PropTypes.func.isRequired,
@@ -56,13 +56,18 @@ Block.propTypes = {
 }
 
 
-const mapStateToProps = (state, {id, song}) => ({
-  block: blocks.selectors.getById(id)(state),
-  i: song.blocks.indexOf(id),
-  channels: blocks.selectors.getChannels(id)(state),
-  currentBeat: state.player.currentBeat,
-  isSoloMode: blocks.selectors.isSoloMode(id)(state),
-})
+const mapStateToProps = (state, {id}) => {
+  const block = blocks.selectors.getById(id)(state)
+  const song = songs.selectors.getById(block.song)(state)
+  return {
+    block,
+    song,
+    i: song.blocks.indexOf(id),
+    channels: blocks.selectors.getChannels(id)(state),
+    currentBeat: state.player.currentBeat,
+    isSoloMode: blocks.selectors.isSoloMode(id)(state),
+  }
+}
 
 const mapDispatchToProps = (dispatch, {id}) => ({
   onMount: () => {

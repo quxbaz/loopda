@@ -35,6 +35,9 @@ const App = ({player}) => (
     <Route route="songs/:id">
       <songs.containers.Song />
     </Route>
+    <Route route="blocks/:id">
+      <blocks.containers.Block />
+    </Route>
   </div>
 )
 

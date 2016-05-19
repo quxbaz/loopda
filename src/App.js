@@ -135,11 +135,12 @@ export default class App {
         title: 'my first song',
       })).payload.id
 
-      dispatch(songs.actions.createBlock(songId, {
+      const blockId = dispatch(songs.actions.createBlock(songId, {
         channels: Object.keys(store.getState().channels),
-      }))
+      })).payload.id
 
-      dispatch(url.actions.navToSong(songId))
+      // dispatch(url.actions.setBrowserUrl('/songs/' + songId))
+      dispatch(url.actions.setBrowserUrl('/blocks/' + blockId))
 
     }
 

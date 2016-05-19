@@ -47,46 +47,4 @@ describe("reducer", () => {
 
   })
 
-  describe("navToSong", () => {
-
-    it("Sets the url to a song and its first block.", () => {
-      const store = createStore(
-        combineReducers({
-          url: url.reducer,
-          songs: songs.reducer,
-          blocks: blocks.reducer,
-        }),
-        {
-          songs: {
-            mysong: {id: 'mysong', blocks: ['myblock']},
-          },
-          blocks: {
-            myblock: {id: 'myblock'},
-          }
-        },
-        applyMiddleware(thunk)
-      )
-      store.dispatch(url.actions.navToSong('mysong'))
-      // expect(store.getState()).toEqual({
-        // url: '/songs/mysong/blocks/myblock',
-      // })
-      // expect(location.hash).toEqual('#/songs/mysong/blocks/myblock')
-    })
-
-    it("Sets a url to a song index if it has no blocks.", () => {
-      const store = createStore(
-        combineReducers({url: url.reducer}),
-        applyMiddleware(thunk)
-      )
-      store.dispatch(url.actions.setBrowserUrl('/all', {replaceState: true}))
-      expect(store.getState()).toEqual({url: '/all'})
-      expect(location.hash).toEqual('#/all')
-      // Without leading slash
-      store.dispatch(url.actions.setBrowserUrl('all', {replaceState: true}))
-      expect(store.getState()).toEqual({url: 'all'})
-      expect(location.hash).toEqual('#/all')
-    })
-
-  })
-
 })

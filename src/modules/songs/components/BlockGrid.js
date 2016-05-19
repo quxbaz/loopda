@@ -14,11 +14,11 @@ class BlockGrid extends React.Component {
   }
 
   render() {
-    const {songId, blocks, currentBeat, onBlockDragStart} = this.props
+    const {blocks, currentBeat, onBlockDragStart} = this.props
     return (
       <div className="block-grid">
         {blocks.map((block, i) => (
-          <BlockItem key={block.id} i={i} songId={songId} currentBeat={currentBeat} block={block}
+          <BlockItem key={block.id} i={i} currentBeat={currentBeat} block={block}
             dragSource={this.state.dragSource} onDragStart={this.handleBlockDragStart} />
         ))}
       </div>
@@ -28,7 +28,6 @@ class BlockGrid extends React.Component {
 }
 
 BlockGrid.propTypes = {
-  songId: React.PropTypes.string.isRequired,
   blocks: React.PropTypes.array.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
 }

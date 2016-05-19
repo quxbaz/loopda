@@ -20,21 +20,6 @@ const setBrowserUrl = (url, options={}) => (dispatch) => {
   }
 }
 
-const navToSong = (id) => (dispatch, getState) => {
-  /*
-    Navigates to a song url and its first block if it exists.
-  */
-  const {blocks} = songs.selectors.getById(id)(getState())
-  const blockId = blocks.length === 0 ? undefined : blocks[0]
-  let songUrl = '/songs/' + id
-  if (blockId)
-    songUrl += '/blocks/' + blockId
-  dispatch(
-    setBrowserUrl(songUrl)
-  )
-}
-
 export default {
   setUrl, setBrowserUrl,
-  navToSong,
 }

@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {songs} from 'trax'
 import BlockGrid from '../components/BlockGrid'
 
+// <TODO> Change to stateless function
+
 class SongOverview extends React.Component {
 
   constructor(props) {
@@ -13,7 +15,7 @@ class SongOverview extends React.Component {
     const {song, currentBeat, blocks} = this.props
     return (
       <div className="song-overview">
-        <BlockGrid songId={song.id} currentBeat={currentBeat} blocks={blocks} />
+        <BlockGrid currentBeat={currentBeat} blocks={blocks} />
       </div>
     )
   }

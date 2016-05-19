@@ -1,8 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Route} from 'stateful-router'
-import {blocks, songs, songPlayer} from 'trax'
-import blocksModule from '../../blocks'
+import {songs, songPlayer} from 'trax'
 import SongControls from './SongControls'
 import SongOverview from './SongOverview'
 
@@ -26,13 +24,8 @@ class Song extends React.Component {
     return (
       <div className="song">
         <h2>{song.title}</h2>
-        <Route route="/">
-          <SongControls id={id} playing={playing} loop={loop} />
-          <SongOverview song={song} currentBeat={currentBeat} />
-        </Route>
-        <Route route="/blocks/:id">
-          <blocksModule.containers.Block song={song} />
-        </Route>
+        <SongControls id={id} playing={playing} loop={loop} />
+        <SongOverview song={song} currentBeat={currentBeat} />
       </div>
     )
   }

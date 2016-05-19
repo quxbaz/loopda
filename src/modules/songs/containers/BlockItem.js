@@ -74,7 +74,6 @@ class BlockItem extends React.Component {
 
 BlockItem.propTypes = {
   i: React.PropTypes.number.isRequired,
-  songId: React.PropTypes.string.isRequired,
   block: React.PropTypes.object.isRequired,
   channels: React.PropTypes.array.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
@@ -95,15 +94,15 @@ const mapStateToProps = (state, {block}) => ({
   isSoloMode: blocks.selectors.isSoloMode(block.id)(state),
 })
 
-const mapDispatchToProps = (dispatch, {songId, block, dragSource}) => ({
+const mapDispatchToProps = (dispatch, {block, dragSource}) => ({
   onClickTitle: () => {
-    dispatch(url.actions.setBrowserUrl('/songs/' + songId + '/blocks/' + block.id))
+    dispatch(url.actions.setBrowserUrl('/blocks/' + block.id))
   },
   onClickBeat: (i) => {
     dispatch(songPlayer.actions.setCurrentBeat(i))
   },
   onDrop: (to) => {
-    dispatch(songs.actions.moveBlock(songId, dragSource, to))
+    dispatch(songs.actions.moveBlock(block.song, dragSource, to))
   },
 })
 
