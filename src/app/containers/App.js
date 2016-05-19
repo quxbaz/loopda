@@ -19,7 +19,7 @@ const TestControls = () => (
 const App = ({player}) => (
   <div className="app">
     <ul>
-      <li><a href='/#/'>Dashboard</a></li>
+      <li><a href='/#/dashboard'>Dashboard</a></li>
       <li><a href='/#/presets'>Presets</a></li>
     </ul>
     <test.components.Profiler />
