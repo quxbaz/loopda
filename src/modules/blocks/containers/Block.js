@@ -29,7 +29,7 @@ class Block extends React.Component {
         <AddChannel id={id} />
         <div>Block #{i + 1}</div>
         <BlockControls id={id} song={song} />
-        <div className="relative">
+        <div className="content relative">
           <div className="tempo-bar-wrapper">
             <TempoBar beat={currentBeat} />
           </div>
