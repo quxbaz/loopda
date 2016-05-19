@@ -2,14 +2,15 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {blocks} from 'trax'
 import traxExt from '../../trax-ext'
+import url from '../../url'
 
 class NavPane extends React.Component {
 
   render() {
-    const {blocks} = this.props
+    const {blocks, onClickBlock} = this.props
     return (
       <div className="block-nav-pane">
-        <traxExt.components.BlockList blocks={blocks} />
+        <traxExt.components.BlockList blocks={blocks} onClickBlock={onClickBlock} />
       </div>
     )
   }
@@ -27,6 +28,15 @@ const mapStateToProps = (state, {ids}) => ({
   ),
 })
 
+const mapDispatchToProps = (dispatch) => ({
+  onClickBlock: (id) => {
+    console.log('click block:', id)
+    // <TODO>
+    // dispatch(url.actions.setBrowserUrl('/blocks/' + id))
+  },
+})
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(NavPane)
