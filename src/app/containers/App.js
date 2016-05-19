@@ -2,8 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Route} from 'stateful-router'
 import dashboard from '../../modules/dashboard'
-import overview from '../../modules/overview'
 import presets from '../../modules/presets'
+import blocks from '../../modules/blocks'
+import songs from '../../modules/songs'
 import Saver from './Saver'
 
 // <TESTING>
@@ -28,11 +29,11 @@ const App = ({player}) => (
     <Route route="dashboard">
       <dashboard.components.Dashboard />
     </Route>
-    <Route route="songs">
-      <overview.containers.Overview player={player} />
-    </Route>
     <Route route="presets">
       <presets.components.Presets />
+    </Route>
+    <Route route="songs/:id">
+      <songs.containers.Song />
     </Route>
   </div>
 )
