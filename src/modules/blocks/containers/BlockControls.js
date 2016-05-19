@@ -4,7 +4,7 @@ import isNil from 'qux/lib/isNil'
 import last from 'qux/lib/last'
 import before from 'qux/lib/before'
 import after from 'qux/lib/after'
-import {songs, player} from 'trax'
+import {blocks, songs, player} from 'trax'
 import url from '../../url'
 import ux from '../../ux'
 
@@ -56,8 +56,7 @@ const mapDispatchToProps = (dispatch, {id, song}) => ({
     const prevBlock = before(song.blocks, id)
     if (!isNil(prevBlock)) {
       dispatch(url.actions.setBrowserUrl(
-        `/songs/${song.id}/blocks/${prevBlock}`
-        , {replaceState: true}
+        '/blocks/' + prevBlock , {replaceState: true}
       ))
     }
   },
@@ -68,20 +67,32 @@ const mapDispatchToProps = (dispatch, {id, song}) => ({
     const nextBlock = after(song.blocks, id)
     if (!isNil(nextBlock)) {
       dispatch(url.actions.setBrowserUrl(
-        `/songs/${song.id}/blocks/${nextBlock}` ,
-        {replaceState: true}
+        '/blocks/' + nextBlock, {replaceState: true}
       ))
     } else {
       const blockId = dispatch(songs.actions.createBlock(song.id)).payload.id
-      dispatch(url.actions.setBrowserUrl(
-        `/songs/${song.id}/blocks/${blockId}`,
-        {replaceState: true}
-      ))
+      dispatch(url.actions.setBrowserUrl('/blocks/' + blockId, {replaceState: true}))
     }
   },
 
   onClickRemove: () => {
-    dispatch(url.actions.setBrowserUrl('/songs/' + song.id, {replaceState: true}))
+    if (!song.blocks.includes(id))
+      return
+    const prevBlock = before(song.blocks, id)
+    const nextBlock = after(song.blocks, id)
+    if (!isNil(prevBlock)) {
+      dispatch(url.actions.setBrowserUrl(
+        '/blocks/' + prevBlock , {replaceState: true}
+      ))
+    } else if (!isNil(nextBlock)) {
+      dispatch(url.actions.setBrowserUrl(
+        '/blocks/' + nextBlock, {replaceState: true}
+      ))
+    } else {
+      dispatch(url.actions.setBrowserUrl(
+        '/songs/' + song.id, {replaceState: true}
+      ))
+    }
     dispatch(blocks.actions.removeBlock(id))
   },
 

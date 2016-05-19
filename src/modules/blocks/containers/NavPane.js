@@ -30,9 +30,7 @@ const mapStateToProps = (state, {ids}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onClickBlock: (id) => {
-    console.log('click block:', id)
-    // <TODO>
-    // dispatch(url.actions.setBrowserUrl('/blocks/' + id))
+    dispatch(url.actions.setBrowserUrl('/blocks/' + id))
   },
 })
 
