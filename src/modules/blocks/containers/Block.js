@@ -25,7 +25,7 @@ class Block extends React.Component {
   render() {
     const {id, i, channels, song, currentBeat, isSoloMode} = this.props
     return (
-      <div className="block">
+      <div className="block overview sequencer">
         <AddChannel id={id} />
         <div>Block #{i + 1}</div>
         <BlockControls id={id} song={song} />
