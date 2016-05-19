@@ -25,7 +25,7 @@ class Song extends React.Component {
       <div className="song">
         <h2>{song.title}</h2>
         <SongControls id={id} playing={playing} loop={loop} />
-        <SongOverview song={song} currentBeat={currentBeat} />
+        <SongOverview id={id} currentBeat={currentBeat} />
       </div>
     )
   }

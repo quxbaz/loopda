@@ -3,33 +3,20 @@ import {connect} from 'react-redux'
 import {songs} from 'trax'
 import BlockGrid from '../components/BlockGrid'
 
-// <TODO> Change to stateless function
-
-class SongOverview extends React.Component {
-
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    const {song, currentBeat, blocks} = this.props
-    return (
-      <div className="song-overview">
-        <BlockGrid currentBeat={currentBeat} blocks={blocks} />
-      </div>
-    )
-  }
-
-}
+const SongOverview = ({id, currentBeat, blocks}) => (
+  <div className="song-overview">
+    <BlockGrid currentBeat={currentBeat} blocks={blocks} />
+  </div>
+)
 
 SongOverview.propTypes = {
-  song: React.PropTypes.object.isRequired,
+  id: React.PropTypes.string.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   blocks: React.PropTypes.array.isRequired,
 }
 
-const mapStateToProps = (state, {song}) => ({
-  blocks: songs.selectors.getBlocks(song.id)(state),
+const mapStateToProps = (state, {id}) => ({
+  blocks: songs.selectors.getBlocks(id)(state),
 })
 
 export default connect(
