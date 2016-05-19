@@ -4,9 +4,9 @@ import Channel from './Channel'
 const ChannelList = ({channels, isSoloMode, onClickChannel}) => (
   <div className="channel-list">
     {channels.map((channel) => (
-        <Channel key={channel.id} channel={channel}
-          enabled={(isSoloMode && channel.solo) || (!isSoloMode && !channel.mute)}
-          onClick={onClickChannel} />
+      <Channel key={channel.id} channel={channel}
+        enabled={(isSoloMode && channel.solo) || (!isSoloMode && !channel.mute)}
+        onClick={onClickChannel} />
     ))}
   </div>
 )
