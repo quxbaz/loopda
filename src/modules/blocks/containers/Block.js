@@ -4,7 +4,7 @@ import {blocks, player, songPlayer} from 'trax'
 import AddChannel from './AddChannel'
 import BlockControls from './BlockControls'
 import TempoBar from '../components/TempoBar'
-import ChannelList from './ChannelList'
+import ChannelList from '../components/ChannelList'
 import NavPane from './NavPane'
 
 class Block extends React.Component {
@@ -23,7 +23,7 @@ class Block extends React.Component {
   }
 
   render() {
-    const {id, block, song, i, currentBeat, isSoloMode} = this.props
+    const {id, i, channels, song, currentBeat, isSoloMode} = this.props
     return (
       <div className="block">
         <AddChannel id={id} />
@@ -33,9 +33,9 @@ class Block extends React.Component {
           <div className="tempo-bar-wrapper">
             <TempoBar beat={currentBeat} />
           </div>
-          <ChannelList ids={block.channels} isSoloMode={isSoloMode} />
+          <ChannelList channels={channels} isSoloMode={isSoloMode} />
         </div>
-        <NavPane />
+        <NavPane channels={channels} isSoloMode={isSoloMode} />
       </div>
     )
   }
@@ -45,8 +45,9 @@ class Block extends React.Component {
 Block.propTypes = {
   id: React.PropTypes.string.isRequired,
   block: React.PropTypes.object.isRequired,
-  song: React.PropTypes.object.isRequired,
   i: React.PropTypes.number.isRequired,
+  channels: React.PropTypes.array.isRequired,
+  song: React.PropTypes.object.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   isSoloMode: React.PropTypes.bool.isRequired,
   onMount: React.PropTypes.func.isRequired,
@@ -54,9 +55,11 @@ Block.propTypes = {
   onSwitchBlock: React.PropTypes.func.isRequired,
 }
 
+
 const mapStateToProps = (state, {id, song}) => ({
   block: blocks.selectors.getById(id)(state),
   i: song.blocks.indexOf(id),
+  channels: blocks.selectors.getChannels(id)(state),
   currentBeat: state.player.currentBeat,
   isSoloMode: blocks.selectors.isSoloMode(id)(state),
 })
