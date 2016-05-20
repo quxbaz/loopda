@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import classNames from 'classnames'
 import {fireOnce} from 'dom-util'
 import {blocks} from 'trax'
 import traxExt from '../../trax-ext'
@@ -9,9 +10,11 @@ class NavPane extends React.Component {
 
   constructor(props) {
     super(props)
+    this.toggle = this.toggle.bind(this)
     this.handleMouseDown = this.handleMouseDown.bind(this)
     this.handleMouseMove = this.handleMouseMove.bind(this)
     this.state = {
+      hidden: false,
       isMouseDown: false,
       isDragging: false,
       originX: undefined,
@@ -21,6 +24,10 @@ class NavPane extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener(window, 'mouseup', this.onMouseUp)
+  }
+
+  toggle() {
+    this.setState({hidden: !this.state.hidden})
   }
 
   handleMouseDown(event) {
@@ -45,11 +52,23 @@ class NavPane extends React.Component {
   }
 
   render() {
+    const {hidden} = this.state
     const {selected, blocks, onClickBlock} = this.props
+    const cssClass = classNames({
+      'block-nav-pane': true,
+      'minimized': hidden,
+    })
     return (
-      <div ref="el" className="block-nav-pane" onMouseDown={this.handleMouseDown} onMouseMove={this.handleMouseMove}>
-        <traxExt.components.BlockList selected={selected} blocks={blocks}
-          onClickBlock={this.state.isDragging ? undefined : onClickBlock} />
+      <div className={cssClass}>
+        <div className="toggle-bar" onClick={this.toggle}>
+          {hidden ? 'Show previewer' : 'Hide previewer'}
+        </div>
+        <div ref="el" className="block-nav-scroll-pane"
+          onMouseDown={this.handleMouseDown} onMouseMove={this.handleMouseMove}>
+          {hidden ? null :
+            <traxExt.components.BlockList selected={selected} blocks={blocks}
+              onClickBlock={this.state.isDragging ? undefined : onClickBlock} />}
+        </div>
       </div>
     )
   }
