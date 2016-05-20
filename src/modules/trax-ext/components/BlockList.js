@@ -3,9 +3,10 @@ import Block from './Block'
 
 const BlockList = ({Child, blocks, selected, onClickBlock}) => (
   <div className="block-list">
-    {blocks.map((block) => React.createElement(Child ? Child : Block, {
+    {blocks.map((block, i) => React.createElement(Child ? Child : Block, {
       key: block.id,
       block: block,
+      i,
       selected: selected === block.id,
       onClick: onClickBlock,
     }))}

@@ -30,6 +30,7 @@ class Block extends React.Component {
 
 Block.propTypes = {
   block: React.PropTypes.object.isRequired,
+  i: React.PropTypes.number.isRequired,
   selected: React.PropTypes.bool,
   onClick: React.PropTypes.func,
 }
