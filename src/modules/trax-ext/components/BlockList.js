@@ -39,15 +39,19 @@ Block.defaultProps = {
   onClick: () => {},
 }
 
-const BlockList = ({blocks, selected, onClickBlock}) => (
+const BlockList = ({Child, blocks, selected, onClickBlock}) => (
   <div className="block-list">
-    {blocks.map((block) => (
-      <Block key={block.id} block={block} selected={selected === block.id} onClick={onClickBlock} />
-    ))}
+    {blocks.map((block) => React.createElement(Child ? Child : Block, {
+      key: block.id,
+      block: block,
+      selected: selected === block.id,
+      onClick: onClickBlock,
+    }))}
   </div>
 )
 
 BlockList.propTypes = {
+  Child: React.PropTypes.func,
   blocks: React.PropTypes.array.isRequired,
   selected: React.PropTypes.string,
   onClickBlock: React.PropTypes.func,
