@@ -39,7 +39,11 @@ a {
   text-decoration: none;
 }
 
-#root {}
+#root {
+  // This makes the app more useable by preventing text selection when
+  // dragging, clicking, or sliding was intended.
+  .disable-selection;
+}
 
 @import "sequencer";
 @import "overview";
