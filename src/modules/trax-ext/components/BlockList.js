@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import ChannelList from '../containers/ChannelList'
 
 class Block extends React.Component {
@@ -13,9 +14,13 @@ class Block extends React.Component {
   }
 
   render() {
-    const {block} = this.props
+    const {block, selected} = this.props
+    const cssClass = classNames({
+      'block': true,
+      selected,
+    })
     return (
-      <div className="block" onClick={this.handleClick}>
+      <div className={cssClass} onClick={this.handleClick}>
         <ChannelList ids={block.channels} />
       </div>
     )
@@ -25,23 +30,26 @@ class Block extends React.Component {
 
 Block.propTypes = {
   block: React.PropTypes.object.isRequired,
+  selected: React.PropTypes.bool,
   onClick: React.PropTypes.func,
 }
 
 Block.defaultProps = {
+  selected: false,
   onClick: () => {},
 }
 
-const BlockList = ({blocks, onClickBlock}) => (
+const BlockList = ({blocks, selected, onClickBlock}) => (
   <div className="block-list">
     {blocks.map((block) => (
-      <Block key={block.id} block={block} onClick={onClickBlock} />
+      <Block key={block.id} block={block} selected={selected === block.id} onClick={onClickBlock} />
     ))}
   </div>
 )
 
 BlockList.propTypes = {
   blocks: React.PropTypes.array.isRequired,
+  selected: React.PropTypes.string,
   onClickBlock: React.PropTypes.func,
 }
 

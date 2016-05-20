@@ -35,7 +35,7 @@ class Block extends React.Component {
           </div>
           <ChannelList channels={channels} isSoloMode={isSoloMode} />
         </div>
-        <NavPane ids={song.blocks} />
+        <NavPane ids={song.blocks} selected={id} />
       </div>
     )
   }

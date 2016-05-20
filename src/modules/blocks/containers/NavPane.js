@@ -45,10 +45,10 @@ class NavPane extends React.Component {
   }
 
   render() {
-    const {blocks, onClickBlock} = this.props
+    const {selected, blocks, onClickBlock} = this.props
     return (
       <div ref="el" className="block-nav-pane" onMouseDown={this.handleMouseDown} onMouseMove={this.handleMouseMove}>
-        <traxExt.components.BlockList blocks={blocks}
+        <traxExt.components.BlockList selected={selected} blocks={blocks}
           onClickBlock={this.state.isDragging ? undefined : onClickBlock} />
       </div>
     )
@@ -58,6 +58,7 @@ class NavPane extends React.Component {
 
 NavPane.propTypes = {
   ids: React.PropTypes.array.isRequired,
+  selected: React.PropTypes.string,
   blocks: React.PropTypes.array.isRequired,
 }
 
