@@ -5,7 +5,7 @@ import {fireOnce} from 'dom-util'
 import {blocks} from 'trax'
 import traxExt from '../../trax-ext'
 import url from '../../url'
-import NavPaneBlock from '../components/NavPaneBlock'
+import Block from '../components/Block'
 
 class NavPane extends React.Component {
 
@@ -67,7 +67,7 @@ class NavPane extends React.Component {
         <div ref="el" className="block-nav-scroll-pane"
           onMouseDown={this.handleMouseDown} onMouseMove={this.handleMouseMove}>
           {hidden ? null :
-            <traxExt.components.BlockList Child={NavPaneBlock} selected={selected} blocks={blocks}
+            <traxExt.components.BlockList Child={Block} selected={selected} blocks={blocks}
               onClickBlock={this.state.isDragging ? undefined : onClickBlock} />}
         </div>
       </div>

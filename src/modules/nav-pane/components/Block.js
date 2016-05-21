@@ -1,12 +1,17 @@
 import React from 'react'
 import traxExt from '../../trax-ext'
-import NavPaneBlockControls from '../containers/NavPaneBlockControls'
+import ui from '../../ui'
+import BlockControls from '../containers/BlockControls'
+
+// <TODO>
 
 const NavPaneBlock = (props) => (
   <div className="nav-pane-block">
     <div className="block-position-label">{props.i + 1}</div>
     <traxExt.components.Block {...props} />
-    <NavPaneBlockControls id={props.block.id} />
+    {/*<ui.components.ToggleMenu>*/}
+      <BlockControls id={props.block.id} />
+    {/*</ui.components.ToggleMenu>*/}
   </div>
 )
 
