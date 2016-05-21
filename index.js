@@ -1,6 +1,6 @@
 // Styles
 import 'normalize-css/normalize.css'
-import './src/styles/app.less'
+import './src/styles/index.less'
 
 // Modules
 // import 'regenerator/runtime'
