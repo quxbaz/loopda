@@ -50,7 +50,7 @@
 
   .block-position-label {
     .flex-center;
-    z-index: 2;
+    z-index: 1;
     pointer-events: none;
     position: absolute;
     left: 0;
@@ -61,29 +61,7 @@
     font-weight: bold;
     background: #ff0;
     color: #000;
-    opacity: 0.9;
-  }
-
-  .toggle-menu {
-    .clicky;
-    .flex-center;
-    .animated;
-    z-index: 2;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 32px;
-    height: 32px;
-    background: #111;
-    color: #fff;
-    opacity: 0.6;
-    &.open {
-      width: auto;
-      height: auto;
-      .content {
-        padding: 8px 24px;
-      }
-    }
+    opacity: 0.75;
   }
 
   .block {
