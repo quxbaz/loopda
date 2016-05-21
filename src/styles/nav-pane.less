@@ -1,0 +1,115 @@
+.block-nav-pane {
+
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: 4100;
+
+  .toggle-bar {
+    .clicky;
+    .flex-center;
+    height: 24px;
+    background: #444;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    transition: height 160ms ease-out;
+  }
+
+  .block-nav-scroll-pane {
+    height: 160px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background: #fff;
+    transition: height 160ms ease-out;
+  }
+
+  &.minimized {
+    .block-nav-scroll-pane {
+      height: 0;
+    }
+    .toggle-bar {
+      height: 32px;
+    }
+  }
+
+  .block-list {
+    display: flex;
+    height: 100%;
+  }
+
+  .nav-pane-block {
+    position: relative;
+    flex: 1;
+    width: 20%;
+    max-width: 20%;
+    min-width: 100% / 8;
+    height: 100%;
+  }
+
+  .block-position-label {
+    .flex-center;
+    z-index: 2;
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+    font-weight: bold;
+    background: #ff0;
+    color: #000;
+    opacity: 0.9;
+  }
+
+  .toggle-menu {
+    .clicky;
+    .flex-center;
+    .animated;
+    z-index: 2;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 32px;
+    height: 32px;
+    background: #111;
+    color: #fff;
+    opacity: 0.6;
+    &.open {
+      width: auto;
+      height: auto;
+      .content {
+        padding: 8px 24px;
+      }
+    }
+  }
+
+  .block {
+    cursor: pointer;
+    height: 100%;
+    background: #eee;
+    &.selected {
+      border: 1px solid red;
+    }
+  }
+
+  .channel-list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .channel {
+    flex: 1;
+    width: 100%;
+    height: auto;
+  }
+
+  .blip {
+    width: 100% / @beats;
+    height: 100%;
+  }
+
+}
