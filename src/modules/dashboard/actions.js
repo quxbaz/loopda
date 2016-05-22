@@ -5,7 +5,7 @@ const createDefaultSong = (title) => (dispatch) => {
   /*
     Creates a song with a new block and sets the url to that song.
   */
-  const action = dispatch(songs.actions.createSong({
+  const action = dispatch(songs.actions.create({
     title: title.trim(),
   }))
   dispatch(songs.actions.createBlock(action.payload.id))

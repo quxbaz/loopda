@@ -56,13 +56,13 @@ const mapDispatchToProps = (dispatch, {id}) => ({
     })
   },
   onClickArchive: () => {
-    dispatch(channels.actions.archiveChannel(id))
+    dispatch(channels.actions.archive(id))
   },
   onClickMute: () => {
-    dispatch(channels.actions.toggleMuteChannel(id))
+    dispatch(channels.actions.toggleMute(id))
   },
   onClickSolo: () => {
-    dispatch(channels.actions.toggleSoloChannel(id))
+    dispatch(channels.actions.toggleSolo(id))
   }
 })
 

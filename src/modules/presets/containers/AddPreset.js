@@ -63,7 +63,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (title, sample) => {
     dispatch(
-      presets.actions.createPreset({title, sample})
+      presets.actions.create({title, sample})
     )
   }
 })

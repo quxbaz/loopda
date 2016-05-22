@@ -70,7 +70,7 @@ const mapDispatchToProps = (dispatch) => ({
       url.actions.setBrowserUrl('/presets', {replaceState: true})
     )
     dispatch(
-      presets.actions.removePreset(id)
+      presets.actions.remove(id)
     )
   },
 })

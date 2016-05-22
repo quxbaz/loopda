@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(url.actions.setBrowserUrl('/songs/' + id))
   },
   onClickRemoveSong: (id) => {
-    dispatch(songs.actions.removeSong(id))
+    dispatch(songs.actions.remove(id))
   },
 })
 

@@ -118,20 +118,20 @@ export default class App {
     if (this.isNew) {
 
       dispatch(
-        player.actions.createPlayer({playing: false /* <LATER> true */})
+        player.actions.create({playing: false /* <LATER> true */})
       )
 
       // Create presets
-      dispatch(presets.actions.createPreset({sample: 'hihat'}))
-      dispatch(presets.actions.createPreset({sample: 'snare'}))
-      dispatch(presets.actions.createPreset({sample: 'kick'}))
-      dispatch(presets.actions.createPreset({sample: 'clap'}))
+      dispatch(presets.actions.create({sample: 'hihat'}))
+      dispatch(presets.actions.create({sample: 'snare'}))
+      dispatch(presets.actions.create({sample: 'kick'}))
+      dispatch(presets.actions.create({sample: 'clap'}))
 
       each(store.getState().presets, (preset) => {
         dispatch(traxExt.actions.createChannel({preset: preset.id}))
       })
 
-      const songId = dispatch(songs.actions.createSong({
+      const songId = dispatch(songs.actions.create({
         title: 'my first song',
       })).payload.id
 

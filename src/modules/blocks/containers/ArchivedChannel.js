@@ -26,10 +26,10 @@ const mapStateToProps = (state, {id}) => ({
 
 const mapDispatchToProps = (dispatch, {id}) => ({
   onClickRestore: () => {
-    dispatch(channels.actions.restoreChannel(id))
+    dispatch(channels.actions.restore(id))
   },
   onClickDismiss: () => {
-    dispatch(channels.actions.removeChannel(id))
+    dispatch(channels.actions.remove(id))
   }
 })
 
