@@ -15,7 +15,7 @@ const BlockControls = (props) => (
     </div>
     <button onClick={props.onClickAdd}>Add block</button>
     <button onClick={props.onClickDupe}>Duplicate block</button>
-    <button onClick={props.onClickRemove}>Remove block</button>
+    <button onClick={props.onClickDestroy}>Remove block</button>
   </div>
 )
 
@@ -26,7 +26,7 @@ BlockControls.propTypes = {
   onClickPlay: React.PropTypes.func.isRequired,
   onClickAdd: React.PropTypes.func.isRequired,
   onClickDupe: React.PropTypes.func.isRequired,
-  onClickRemove: React.PropTypes.func.isRequired,
+  onClickDestroy: React.PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, {id, song}) => ({
@@ -48,7 +48,7 @@ const mapDispatchToProps = (dispatch, {id, song}) => ({
     console.log('dupe')
   },
 
-  onClickRemove() {
+  onClickDestroy() {
     if (!song.blocks.includes(id))
       return
     const prevBlock = before(song.blocks, id)
@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch, {id, song}) => ({
         '/songs/' + song.id, {replaceState: true}
       ))
     }
-    dispatch(blocks.actions.remove(id))
+    dispatch(blocks.actions.destroy(id))
   },
 
 })

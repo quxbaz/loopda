@@ -5,15 +5,15 @@ class SongItem extends React.Component {
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
-    this.handleClickRemove = this.handleClickRemove.bind(this)
+    this.handleClickDestroy = this.handleClickDestroy.bind(this)
   }
 
   handleClick() {
     this.props.onClick(this.props.song.id)
   }
 
-  handleClickRemove() {
-    this.props.onClickRemove(this.props.song.id)
+  handleClickDestroy() {
+    this.props.onClickDestroy(this.props.song.id)
   }
 
   render() {
@@ -21,7 +21,7 @@ class SongItem extends React.Component {
     return (
       <div className="song-item">
         <a onClick={this.handleClick}>{song.title}</a>{' '}
-        (<a onClick={this.handleClickRemove}>remove</a>)
+        (<a onClick={this.handleClickDestroy}>remove</a>)
       </div>
     )
   }
@@ -31,7 +31,7 @@ class SongItem extends React.Component {
 SongItem.propTypes = {
   song: React.PropTypes.object.isRequired,
   onClick: React.PropTypes.func.isRequired,
-  onClickRemove: React.PropTypes.func.isRequired,
+  onClickDestroy: React.PropTypes.func.isRequired,
 }
 
 export default SongItem

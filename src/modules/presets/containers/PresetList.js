@@ -8,15 +8,15 @@ class PresetItem extends React.Component {
   constructor(props) {
     super(props)
     this.handleClickItem = this.handleClickItem.bind(this)
-    this.handleClickRemove = this.handleClickRemove.bind(this)
+    this.handleClickDestroy = this.handleClickDestroy.bind(this)
   }
 
   handleClickItem() {
     this.props.onClickItem(this.props.preset.id)
   }
 
-  handleClickRemove() {
-    this.props.onClickRemove(this.props.preset.id)
+  handleClickDestroy() {
+    this.props.onClickDestroy(this.props.preset.id)
   }
 
   render() {
@@ -26,7 +26,7 @@ class PresetItem extends React.Component {
         <a onClick={this.handleClickItem}>
           {title || 'untitled'} ({sample})
         </a>{' '}
-        <a onClick={this.handleClickRemove}>remove</a>
+        <a onClick={this.handleClickDestroy}>remove</a>
       </li>
     )
   }
@@ -36,15 +36,15 @@ class PresetItem extends React.Component {
 PresetItem.propTypes = {
   preset: React.PropTypes.object.isRequired,
   onClickItem: React.PropTypes.func.isRequired,
-  onClickRemove: React.PropTypes.func.isRequired,
+  onClickDestroy: React.PropTypes.func.isRequired,
 }
 
-const PresetList = ({presets, onClickPreset, onClickRemovePreset}) => (
+const PresetList = ({presets, onClickPreset, onClickDestroyPreset}) => (
   <ul>
     {presets.map(preset => (
       <PresetItem key={preset.id} preset={preset}
        onClickItem={onClickPreset}
-       onClickRemove={onClickRemovePreset} />
+       onClickDestroy={onClickDestroyPreset} />
     ))}
   </ul>
 )
@@ -52,7 +52,7 @@ const PresetList = ({presets, onClickPreset, onClickRemovePreset}) => (
 PresetList.propTypes = {
   presets: React.PropTypes.array.isRequired,
   onClickPreset: React.PropTypes.func.isRequired,
-  onClickRemovePreset: React.PropTypes.func.isRequired,
+  onClickDestroyPreset: React.PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
@@ -65,12 +65,12 @@ const mapDispatchToProps = (dispatch) => ({
       url.actions.setBrowserUrl('/presets/' + id, {replaceState: true})
     )
   },
-  onClickRemovePreset: (id) => {
+  onClickDestroyPreset: (id) => {
     dispatch(
       url.actions.setBrowserUrl('/presets', {replaceState: true})
     )
     dispatch(
-      presets.actions.remove(id)
+      presets.actions.destroy(id)
     )
   },
 })

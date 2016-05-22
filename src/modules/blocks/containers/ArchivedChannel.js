@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch, {id}) => ({
     dispatch(channels.actions.restore(id))
   },
   onClickDismiss: () => {
-    dispatch(channels.actions.remove(id))
+    dispatch(channels.actions.destroy(id))
   }
 })
 

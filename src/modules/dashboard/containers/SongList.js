@@ -4,12 +4,12 @@ import {songs} from 'trax'
 import url from '../../url'
 import SongItem from '../components/SongItem'
 
-const SongList = ({songs, onClickSongItem, onClickRemoveSong}) => (
+const SongList = ({songs, onClickSongItem, onClickDestroySong}) => (
   <div className="song-list">
     {songs.map((song) => (
       <SongItem key={song.id} song={song}
         onClick={onClickSongItem}
-        onClickRemove={onClickRemoveSong} />
+        onClickDestroy={onClickDestroySong} />
     ))}
   </div>
 )
@@ -17,7 +17,7 @@ const SongList = ({songs, onClickSongItem, onClickRemoveSong}) => (
 SongList.propTypes = {
   songs: React.PropTypes.array.isRequired,
   onClickSongItem: React.PropTypes.func.isRequired,
-  onClickRemoveSong: React.PropTypes.func.isRequired,
+  onClickDestroySong: React.PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
@@ -28,8 +28,8 @@ const mapDispatchToProps = (dispatch) => ({
   onClickSongItem: (id) => {
     dispatch(url.actions.setBrowserUrl('/songs/' + id))
   },
-  onClickRemoveSong: (id) => {
-    dispatch(songs.actions.remove(id))
+  onClickDestroySong: (id) => {
+    dispatch(songs.actions.destroy(id))
   },
 })
 
