@@ -45,7 +45,9 @@ const mapDispatchToProps = (dispatch, {id, song}) => ({
   },
 
   onClickDupe() {
-    console.log('dupe')
+    const index = song.blocks.indexOf(id)
+    const blockId = dispatch(blocks.actions.deepCopy(id)).payload.copy.id
+    dispatch(songs.actions.addBlockAt(song.id, blockId, index + 1))
   },
 
   onClickDestroy() {
