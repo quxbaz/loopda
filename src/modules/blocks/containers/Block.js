@@ -26,6 +26,7 @@ class Block extends React.Component {
     const {id, song, i, channels, currentBeat, isSoloMode} = this.props
     return (
       <div className="block overview sequencer">
+        <h2><a href={'/#/songs/' + song.id}>{song.title}</a></h2>
         <AddChannel id={id} />
         <div>Block #{i + 1}</div>
         <BlockControls id={id} song={song} />
