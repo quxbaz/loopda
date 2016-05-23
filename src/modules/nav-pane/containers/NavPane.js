@@ -32,13 +32,16 @@ class NavPane extends React.Component {
   }
 
   handleMouseDown(event) {
+    event.preventDefault()  // Prevents scroll from resetting on moving the mouse outside the window
     this.setState({
       isMouseDown: true,
       isDragging: false,
       originX: event.clientX,
       scrollX: this.refs.el.scrollLeft,
     })
+    window.addEventListener('mousemove', this.handleMouseMove)
     this.onMouseUp = fireOnce(window, 'mouseup', (event) => {
+      window.removeEventListener('mousemove', this.handleMouseMove)
       this.setState({isMouseDown: false})
     })
   }
@@ -64,8 +67,7 @@ class NavPane extends React.Component {
         <div className="toggle-bar" onClick={this.toggle}>
           {hidden ? 'Show previewer' : 'Hide previewer'}
         </div>
-        <div ref="el" className="block-nav-scroll-pane"
-          onMouseDown={this.handleMouseDown} onMouseMove={this.handleMouseMove}>
+        <div ref="el" className="block-nav-scroll-pane" onMouseDown={this.handleMouseDown}>
           {hidden ? null :
             <traxExt.components.BlockList Child={Block} selected={selected} blocks={blocks}
               onClickBlock={this.state.isDragging ? undefined : onClickBlock} />}
