@@ -42,13 +42,13 @@ class Channel extends PureComponent {
 
   render() {
 
-    const {channel, enabled, archived, onMouseDown, onClickBlip} = this.props
+    const {channel, enabled, onMouseDown, onClickBlip} = this.props
 
     const cssClass = classNames({
       channel: true,
       mute: !enabled,
       enabled,
-      archived,
+      archived: channel.archived,
     })
 
     return (
