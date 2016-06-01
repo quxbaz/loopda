@@ -2,6 +2,7 @@ const BEATS = 16
 
 export default {
 
+  // <TODO> Remove
   randomChannelHSL() {
     /*
       Generates a random color (within a limited palette) for a channel
