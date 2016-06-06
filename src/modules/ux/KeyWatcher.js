@@ -26,6 +26,12 @@ class KeyWatcher extends React.Component {
             props.onKeySpace(event)
           }
           break
+        case 39:
+          if (props.onKeyRightArrow) {
+            event.preventDefault()
+            props.onKeyRightArrow(event)
+          }
+          break
       }
     }
   }
@@ -51,7 +57,8 @@ KeyWatcher.propTypes = {
   keyCode: React.PropTypes.number,
   handler: React.PropTypes.func,
   onKeyEscape: React.PropTypes.func,
-  onKeySpace: React.PropTypes.func
+  onKeySpace: React.PropTypes.func,
+  onKeyRightArrow: React.PropTypes.func,
 }
 
 export default KeyWatcher
