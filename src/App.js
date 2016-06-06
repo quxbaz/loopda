@@ -153,6 +153,7 @@ export default class App {
       audioService,
       store: store,
       tickInterval: store.getState().player.beatDuration,
+      songTickInterval: store.getState().songPlayer.beatDuration,
     })
 
     this.audioPlayer.start()

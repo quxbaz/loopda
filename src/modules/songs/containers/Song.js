@@ -20,13 +20,13 @@ class Song extends React.Component {
   }
 
   render() {
-    const {id, song, playing, loop, currentBeat} = this.props
+    const {id, song, playing, loop, beatDuration, currentBeat} = this.props
     return (
       <div className="song">
         <h2>{song.title}</h2>
         <SongOverview id={id} currentBeat={currentBeat} />
         <div className="sticky-panel-bottom">
-          <PlaybackControls playing={playing} loop={loop} />
+          <PlaybackControls playing={playing} loop={loop} beatDuration={beatDuration} />
         </div>
       </div>
     )
@@ -39,6 +39,7 @@ Song.propTypes = {
   song: React.PropTypes.object.isRequired,
   playing: React.PropTypes.bool.isRequired,
   loop: React.PropTypes.bool.isRequired,
+  beatDuration: React.PropTypes.number.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   onMount: React.PropTypes.func.isRequired,
   onUnmount: React.PropTypes.func.isRequired,
@@ -49,6 +50,7 @@ const mapStateToProps = (state, {id}) => ({
   song: songs.selectors.getById(id)(state),
   playing: state.songPlayer.playing,
   loop: state.songPlayer.loop,
+  beatDuration: state.songPlayer.beatDuration,
   currentBeat: state.songPlayer.currentBeat,
 })
 
