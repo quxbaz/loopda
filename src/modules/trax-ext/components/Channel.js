@@ -1,9 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
-import isNil from 'qux/lib/isNil'
 import {fireOnce} from 'dom-util'
 import {PureComponent} from 'loopda/lib/react-ext'
-import Blip from '../containers/Blip'
+import BlipList from '../containers/BlipList'
 
 class Channel extends PureComponent {
 
@@ -42,7 +41,7 @@ class Channel extends PureComponent {
 
   render() {
 
-    const {channel, enabled, onMouseDown, onClickBlip} = this.props
+    const {channel, enabled, onMouseDown} = this.props
 
     const cssClass = classNames({
       channel: true,
@@ -55,11 +54,7 @@ class Channel extends PureComponent {
       <div ref="div" className={cssClass} onClick={this.handleClick}
         onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove} >
-        {channel.blips.map((id, i) => (
-          isNil(id) ?
-            null :
-            <Blip key={id} id={id} onClickBlip={onClickBlip} />
-        ))}
+        <BlipList ids={channel.blips} />
       </div>
     )
 
@@ -73,7 +68,6 @@ Channel.propTypes = {
   onClick: React.PropTypes.func,
   onMouseDown: React.PropTypes.func,
   onMouseMove: React.PropTypes.func,
-  onClickBlip: React.PropTypes.func,
 }
 
 Channel.defaultProps = {
