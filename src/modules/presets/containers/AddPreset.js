@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import audio from '../../audio'
+import url from '../../url'
 import {presets} from 'trax'
 import SampleSelect from '../components/SampleSelect'
 
@@ -62,8 +63,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (title, sample) => {
-    dispatch(
+    const action = dispatch(
       presets.actions.create({title, sample})
+    )
+    dispatch(
+      url.actions.setBrowserUrl('/presets/' + action.payload.id)
     )
   }
 })
