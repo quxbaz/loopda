@@ -4,7 +4,7 @@ import {player} from 'trax'
 import traxExt from '../../trax-ext'
 
 const mapDispatchToProps = (dispatch) => ({
-  onClickToggle: () => {
+  onClickToggle() {
     dispatch(player.actions.togglePlay())
   },
 })
