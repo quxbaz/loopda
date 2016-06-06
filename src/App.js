@@ -140,11 +140,11 @@ export default class App {
       })).payload.id
 
       // dispatch(url.actions.setBrowserUrl('/songs/' + songId))
-      dispatch(url.actions.setBrowserUrl('/blocks/' + blockId))
+      // dispatch(url.actions.setBrowserUrl('/blocks/' + blockId))
 
     }
 
-    // dispatch(url.actions.setUrl('no known url'))
+    dispatch(url.actions.setUrl('no known url'))
     window.addEventListener('hashchange', processUrl)
     processUrl()
 
