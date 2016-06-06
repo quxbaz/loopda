@@ -17,7 +17,7 @@ class PresetItem extends React.Component {
   }
 
   handleClickDestroy() {
-    this.props.onClickDestroy(this.props.preset.id)
+    // this.props.onClickDestroy(this.props.preset.id)
   }
 
   render() {
@@ -30,7 +30,7 @@ class PresetItem extends React.Component {
         <a onClick={this.handleClickItem}>
           {title || 'untitled'} ({sample})
         </a>{' '}
-        <a onClick={this.handleClickDestroy}>remove</a>
+        {/*<a onClick={this.handleClickDestroy}>remove</a>*/}
       </li>
     )
   }
