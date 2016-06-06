@@ -14,6 +14,7 @@ class BlockGrid extends React.Component {
   }
 
   getBeatOffset(i) {
+    const {currentBeat} = this.props
     if (currentBeat >= (i * 16) && currentBeat < ((i + 1) * 16)) {
       return currentBeat % 16
     } else {
@@ -27,7 +28,7 @@ class BlockGrid extends React.Component {
       <div className="block-grid">
         {blocks.map((block, i) => (
           <BlockItem key={block.id} i={i} block={block}
-            beatOffset={getBeatOffset(i)}
+            beatOffset={this.getBeatOffset(i)}
             dragSource={this.state.dragSource} onDragStart={this.handleBlockDragStart} />
         ))}
       </div>
