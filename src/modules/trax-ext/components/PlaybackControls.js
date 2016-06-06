@@ -7,14 +7,24 @@ const PlaybackControls = (props) => (
     <button className="restart" onClick={props.onClickRestart}>Restart</button>
     <button className="toggle" onClick={props.onClickToggle}>{props.playing ? 'Pause' : 'Play'}</button>
     <button className="stop" onClick={props.onClickStop}>Stop</button>
+    <label className="loop">
+      <input type="checkbox" checked={props.loop} onChange={props.onClickLoop} />
+      Loop
+    </label>
   </div>
 )
 
 PlaybackControls.propTypes = {
   playing: React.PropTypes.bool.isRequired,
+  loop: React.PropTypes.bool,
   onClickRestart: React.PropTypes.func,
   onClickToggle: React.PropTypes.func,
   onClickStop: React.PropTypes.func,
+  onClickLoop: React.PropTypes.func,
+}
+
+PlaybackControls.defaultProps = {
+  loop: false,
 }
 
 export default PlaybackControls

@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {songs, songPlayer} from 'trax'
-import SongControls from './SongControls'
 import SongOverview from './SongOverview'
+import PlaybackControls from './PlaybackControls'
 
 class Song extends React.Component {
 
@@ -24,8 +24,10 @@ class Song extends React.Component {
     return (
       <div className="song">
         <h2>{song.title}</h2>
-        <SongControls id={id} playing={playing} loop={loop} />
         <SongOverview id={id} currentBeat={currentBeat} />
+        <div className="sticky-panel-bottom">
+          <PlaybackControls playing={playing} loop={loop} />
+        </div>
       </div>
     )
   }
