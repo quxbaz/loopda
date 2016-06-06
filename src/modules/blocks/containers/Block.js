@@ -24,7 +24,7 @@ class Block extends React.Component {
   }
 
   render() {
-    const {id, song, i, channels, playing, currentBeat, isSoloMode} = this.props
+    const {id, song, i, channels, playing, beatDuration, currentBeat, isSoloMode} = this.props
     return (
       <div className="block overview sequencer">
         <h2><a href={'/#/songs/' + song.id}>{song.title}</a></h2>
@@ -39,7 +39,7 @@ class Block extends React.Component {
         </div>
         <div className="sticky-panel-bottom">
           <navPane.containers.NavPane ids={song.blocks} selected={id} />
-          <PlaybackControls playing={playing} />
+          <PlaybackControls playing={playing} beatDuration={beatDuration} />
         </div>
       </div>
     )
@@ -54,6 +54,7 @@ Block.propTypes = {
   i: React.PropTypes.number.isRequired,
   channels: React.PropTypes.array.isRequired,
   playing: React.PropTypes.bool.isRequired,
+  beatDuration: React.PropTypes.number.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   isSoloMode: React.PropTypes.bool.isRequired,
   onMount: React.PropTypes.func.isRequired,
@@ -71,6 +72,7 @@ const mapStateToProps = (state, {id}) => {
     i: song.blocks.indexOf(id),
     channels: blocks.selectors.getChannels(id)(state),
     playing: state.player.playing,
+    beatDuration: state.player.beatDuration,
     currentBeat: state.player.currentBeat,
     isSoloMode: blocks.selectors.isSoloMode(id)(state),
   }
