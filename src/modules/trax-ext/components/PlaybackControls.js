@@ -4,9 +4,9 @@ import ux from '../../ux'
 const PlaybackControls = (props) => (
   <div className="playback-controls">
     <ux.KeyWatcher onKeySpace={props.onClickToggle} />
-    <button onClick={props.onClickRestart}>Restart</button>
-    <button onClick={props.onClickToggle}>{props.playing ? 'Pause' : 'Play'}</button>
-    <button onClick={props.onClickStop}>Stop</button>
+    <button className="restart" onClick={props.onClickRestart}>Restart</button>
+    <button className="toggle" onClick={props.onClickToggle}>{props.playing ? 'Pause' : 'Play'}</button>
+    <button className="stop" onClick={props.onClickStop}>Stop</button>
   </div>
 )
 
