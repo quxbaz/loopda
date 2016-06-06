@@ -30,16 +30,16 @@ BlipList.propTypes = {
   object eventually consuming all memory.
 */
 const mapStateToProps = () => {
-  const map = new WeakMap()
+  const cache = new WeakMap()
   return (state, {ids}) => {
     let result
-    if (!map.has(ids)) {
+    if (!cache.has(ids)) {
       result = ids
         .filter(id => !isNil(id))
         .map(id => blips.selectors.getById(id)(state)),
-      map.set(ids, result)
+      cache.set(ids, result)
     } else {
-      result = map.get(ids)
+      result = cache.get(ids)
     }
     return {blips: result}
   }

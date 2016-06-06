@@ -13,12 +13,21 @@ class BlockGrid extends React.Component {
     this.setState({dragSource: i})
   }
 
+  getBeatOffset(i) {
+    if (currentBeat >= (i * 16) && currentBeat < ((i + 1) * 16)) {
+      return currentBeat % 16
+    } else {
+      return -1
+    }
+  }
+
   render() {
     const {blocks, currentBeat, onBlockDragStart} = this.props
     return (
       <div className="block-grid">
         {blocks.map((block, i) => (
-          <BlockItem key={block.id} i={i} currentBeat={currentBeat} block={block}
+          <BlockItem key={block.id} i={i} block={block}
+            beatOffset={getBeatOffset(i)}
             dragSource={this.state.dragSource} onDragStart={this.handleBlockDragStart} />
         ))}
       </div>
