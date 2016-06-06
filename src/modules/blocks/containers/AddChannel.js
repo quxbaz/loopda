@@ -10,7 +10,7 @@ const AddChannel = ({presets, onSelect, onTestSelect}) => (
       {presets.map(preset => (
         <li key={preset.id}>
           <a onClick={() => onSelect(preset.id)}>
-            {preset.sample}
+            {preset.title} ({preset.sample})
           </a>
         </li>
       ))}
