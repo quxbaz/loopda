@@ -12,14 +12,13 @@ class ChannelControls extends PureComponent {
   render() {
 
     const {channel, onClickTitle, onClickArchive, onClickMute, onClickSolo} = this.props
-    const {color, number, title, mute, solo} = channel
+    const {color, /*number,*/ title, mute, solo} = channel
 
     return (
       <div className="channel-controls">
         <div className="color-box" style={{background: color}} />
         <div className="channel-text">
-          <div className="channel-number hide">{number}</div>
-          <div className="channel-title clicky" onClick={onClickTitle}>{title} ({number})</div>
+          <div className="channel-title clicky" onClick={onClickTitle}>{title}</div>
           <a className="archive-channel" onClick={onClickArchive}><Icon name="x" /></a>
         </div>
         <div className="channel-play-controls">
