@@ -17,7 +17,10 @@ class PlaybackControls extends React.Component {
     const {props} = this
     return (
       <div className="playback-controls">
-        <ux.KeyWatcher onKeySpace={props.onClickToggle} onKeyRightArrow={props.onClickStep} />
+        <ux.KeyWatcher
+          onKeySpace={props.onClickToggle}
+          onKeyLeftArrow={props.onClickRewind}
+          onKeyRightArrow={props.onClickStep} />
         <button className="restart" onClick={props.onClickRestart}>Restart</button>
         <button className="toggle" onClick={props.onClickToggle}>{props.playing ? 'Pause' : 'Play'}</button>
         <button className="stop" onClick={props.onClickStop}>Stop</button>
