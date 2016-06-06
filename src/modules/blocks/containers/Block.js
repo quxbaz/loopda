@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {blocks, songs, player, songPlayer} from 'trax'
-import traxExt from '../../trax-ext'
 import AddChannel from './AddChannel'
 import BlockControls from './BlockControls'
 import TempoBar from '../components/TempoBar'
 import ChannelList from '../components/ChannelList'
 import navPane from '../../nav-pane'
+import PlaybackControls from './PlaybackControls'
 
 class Block extends React.Component {
 
@@ -24,7 +24,7 @@ class Block extends React.Component {
   }
 
   render() {
-    const {id, song, i, channels, currentBeat, isSoloMode} = this.props
+    const {id, song, i, channels, playing, currentBeat, isSoloMode} = this.props
     return (
       <div className="block overview sequencer">
         <h2><a href={'/#/songs/' + song.id}>{song.title}</a></h2>
@@ -39,7 +39,7 @@ class Block extends React.Component {
         </div>
         <div className="sticky-panel-bottom">
           <navPane.containers.NavPane ids={song.blocks} selected={id} />
-          <traxExt.components.PlaybackControls />
+          <PlaybackControls playing={playing} />
         </div>
       </div>
     )
@@ -53,6 +53,7 @@ Block.propTypes = {
   block: React.PropTypes.object.isRequired,
   i: React.PropTypes.number.isRequired,
   channels: React.PropTypes.array.isRequired,
+  playing: React.PropTypes.bool.isRequired,
   currentBeat: React.PropTypes.number.isRequired,
   isSoloMode: React.PropTypes.bool.isRequired,
   onMount: React.PropTypes.func.isRequired,
@@ -69,6 +70,7 @@ const mapStateToProps = (state, {id}) => {
     song,
     i: song.blocks.indexOf(id),
     channels: blocks.selectors.getChannels(id)(state),
+    playing: state.player.playing,
     currentBeat: state.player.currentBeat,
     isSoloMode: blocks.selectors.isSoloMode(id)(state),
   }
