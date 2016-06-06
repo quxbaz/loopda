@@ -10,6 +10,9 @@ const mapDispatchToProps = (dispatch) => ({
   onClickStep() {
     window.loopda.audioPlayer.tick()
   },
+  onClickRewind() {
+    dispatch(player.actions.reverseTick())
+  },
   onChangeBeatDuration(value) {
     dispatch(player.actions.setBeatDuration(value))
     window.loopda.audioPlayer.timer.setTickInterval(value)

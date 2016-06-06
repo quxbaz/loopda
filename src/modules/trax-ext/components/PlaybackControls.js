@@ -21,6 +21,7 @@ class PlaybackControls extends React.Component {
         <button className="restart" onClick={props.onClickRestart}>Restart</button>
         <button className="toggle" onClick={props.onClickToggle}>{props.playing ? 'Pause' : 'Play'}</button>
         <button className="stop" onClick={props.onClickStop}>Stop</button>
+        <button className="rewind" onClick={props.onClickRewind}>Rewind</button>
         <button className="step" onClick={props.onClickStep}>Step</button>
         <label className="loop">
           <input type="checkbox" checked={props.loop} onChange={props.onClickLoop} />
@@ -44,6 +45,7 @@ PlaybackControls.propTypes = {
   onClickToggle: React.PropTypes.func,
   onClickStop: React.PropTypes.func,
   onClickStep: React.PropTypes.func,
+  onClickRewind: React.PropTypes.func,
   onClickLoop: React.PropTypes.func,
   onChangeBeatDuration: React.PropTypes.func,
 }
