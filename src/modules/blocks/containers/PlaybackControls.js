@@ -7,6 +7,9 @@ const mapDispatchToProps = (dispatch) => ({
   onClickToggle() {
     dispatch(player.actions.togglePlay())
   },
+  onClickStep() {
+    window.loopda.audioPlayer.tick()
+  },
 })
 
 export default connect(

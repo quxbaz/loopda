@@ -17,6 +17,9 @@ const mapDispatchToProps = (dispatch, {playing}) => ({
   onClickStop() {
     window.loopda.audioPlayer.stopSong()
   },
+  onClickStep() {
+    window.loopda.audioPlayer.tickSong()
+  },
   onClickLoop: (event) => {
     dispatch(songPlayer.actions.toggleLoop())
   },
