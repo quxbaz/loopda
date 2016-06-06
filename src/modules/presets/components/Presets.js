@@ -9,8 +9,11 @@ const Presets = () => (
   <div className="presets">
     <Uploader />
     <AddPreset />
-    <PresetList />
+    <Route route="/">
+      <PresetList />
+    </Route>
     <Route route=":id">
+      <PresetList />
       <MixerWrapper />
     </Route>
   </div>

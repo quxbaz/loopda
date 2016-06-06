@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import classNames from 'classnames'
 import {presets} from 'trax'
 import url from '../../url'
 
@@ -22,7 +23,10 @@ class PresetItem extends React.Component {
   render() {
     const {id, title, sample} = this.props.preset
     return (
-      <li className="preset-item">
+      <li className={classNames({
+          "preset-item": true,
+          selected: this.props.selected,
+        })}>
         <a onClick={this.handleClickItem}>
           {title || 'untitled'} ({sample})
         </a>{' '}
@@ -35,14 +39,15 @@ class PresetItem extends React.Component {
 
 PresetItem.propTypes = {
   preset: React.PropTypes.object.isRequired,
+  selected: React.PropTypes.bool.isRequired,
   onClickItem: React.PropTypes.func.isRequired,
   onClickDestroy: React.PropTypes.func.isRequired,
 }
 
-const PresetList = ({presets, onClickPreset, onClickDestroyPreset}) => (
-  <ul>
-    {presets.map(preset => (
-      <PresetItem key={preset.id} preset={preset}
+const PresetList = ({id, presets, onClickPreset, onClickDestroyPreset}) => (
+  <ul className="preset-list">
+    {presets.map((preset) => (
+      <PresetItem key={preset.id} preset={preset} selected={preset.id === id}
        onClickItem={onClickPreset}
        onClickDestroy={onClickDestroyPreset} />
     ))}
@@ -50,6 +55,7 @@ const PresetList = ({presets, onClickPreset, onClickDestroyPreset}) => (
 )
 
 PresetList.propTypes = {
+  id: React.PropTypes.string,
   presets: React.PropTypes.array.isRequired,
   onClickPreset: React.PropTypes.func.isRequired,
   onClickDestroyPreset: React.PropTypes.func.isRequired,
