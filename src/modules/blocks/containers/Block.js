@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {blocks, songs, player, songPlayer} from 'trax'
+import traxExt from '../../trax-ext'
 import AddChannel from './AddChannel'
 import BlockControls from './BlockControls'
 import TempoBar from '../components/TempoBar'
@@ -36,7 +37,10 @@ class Block extends React.Component {
           </div>
           <ChannelList channels={channels} isSoloMode={isSoloMode} />
         </div>
-        <navPane.containers.NavPane ids={song.blocks} selected={id} />
+        <div className="sticky-panel-bottom">
+          <navPane.containers.NavPane ids={song.blocks} selected={id} />
+          <traxExt.components.PlaybackControls />
+        </div>
       </div>
     )
   }
