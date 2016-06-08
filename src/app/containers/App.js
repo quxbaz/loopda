@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Route} from 'stateful-router'
+import {Router, Route} from 'stateful-router'
 import dashboard from '../../modules/dashboard'
 import presets from '../../modules/presets'
 import blocks from '../../modules/blocks'
@@ -17,32 +17,34 @@ const TestControls = () => (
   </ul>
 )
 
-const App = ({player}) => (
+const App = ({url}) => (
   <div className="app">
-    <ul>
-      <li><a href='/#/dashboard'>Dashboard</a></li>
-      <li><a href='/#/presets'>Presets</a></li>
-    </ul>
-    <test.components.Profiler />
-    <TestControls />
-    <Saver />
-    <Route route="dashboard">
-      <dashboard.components.Dashboard />
-    </Route>
-    <Route route="presets">
-      <presets.components.Presets />
-    </Route>
-    <Route route="songs/:id">
-      <songs.containers.Song />
-    </Route>
-    <Route route="blocks/:id">
-      <blocks.containers.Block />
-    </Route>
+    <Router path={url}>
+      <ul>
+        <li><a href='/#/dashboard'>Dashboard</a></li>
+        <li><a href='/#/presets'>Presets</a></li>
+      </ul>
+      <test.components.Profiler />
+      <TestControls />
+      <Saver />
+      <Route route="dashboard">
+        <dashboard.components.Dashboard />
+      </Route>
+      <Route route="presets">
+        <presets.components.Presets />
+      </Route>
+      <Route route="songs/:id">
+        <songs.containers.Song />
+      </Route>
+      <Route route="blocks/:id">
+        <blocks.containers.Block />
+      </Route>
+    </Router>
   </div>
 )
 
 const mapStateToProps = (state) => ({
-  player: state.player
+  url: state.url,
 })
 
 export default connect(
