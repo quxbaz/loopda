@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import classNames from 'classnames'
-import {channels, blocks, songs, songPlayer} from 'trax'
+import {blocks, songs, songPlayer} from 'trax'
 import {PureComponent} from 'loopda/lib/react-ext'
 import blocksModule from '../../blocks'
 import traxExt from '../../trax-ext'
@@ -25,7 +25,7 @@ class BlockItem extends PureComponent {
   }
 
   handleClickBeat(event) {
-    const beat = traxExt.util.getBeatClicked(event, this.refs.channels)
+    const beat = blocksModule.util.getBeatClicked(event, this.refs.channels)
     this.props.onClickBeat(this.props.i * 16 + beat)
   }
 
@@ -48,7 +48,7 @@ class BlockItem extends PureComponent {
   }
 
   render() {
-    const {block, channels, beatOffset, isSoloMode} = this.props
+    const {block, beatOffset} = this.props
     const dragProps = {
       draggable: true,
       onDragStart: this.handleDragStart,
@@ -66,7 +66,7 @@ class BlockItem extends PureComponent {
         <div ref="channels" className={innerCssClass} onClick={this.handleClickBeat} {...dragProps}>
           {beatOffset === -1 ? null :
             <blocksModule.components.TempoBar beat={beatOffset} />}
-          <traxExt.components.ChannelList channels={channels} isSoloMode={isSoloMode} />
+          <traxExt.containers.ChannelList ids={block.channels} />
         </div>
       </div>
     )
@@ -76,9 +76,7 @@ class BlockItem extends PureComponent {
 BlockItem.propTypes = {
   i: React.PropTypes.number.isRequired,
   block: React.PropTypes.object.isRequired,
-  channels: React.PropTypes.array.isRequired,
   beatOffset: React.PropTypes.number.isRequired,
-  isSoloMode: React.PropTypes.bool.isRequired,
   onClickTitle: React.PropTypes.func.isRequired,
   onClickBeat: React.PropTypes.func.isRequired,
 
@@ -86,28 +84,6 @@ BlockItem.propTypes = {
   dragSource: React.PropTypes.number,
   onDragStart: React.PropTypes.func.isRequired,
   onDrop: React.PropTypes.func.isRequired,
-}
-
-const mapStateToProps = () => {
-
-  const cache = new WeakMap()
-
-  return (state, {block}) => {
-    let result
-    if (!cache.has(block)) {
-      result = {
-        channels: channels.selectors.getMany(block.channels)(state).filter(
-          c => !c.archived
-        ),
-        isSoloMode: blocks.selectors.isSoloMode(block.id)(state),
-      }
-      cache.set(block, result)
-    } else {
-      result = cache.get(block)
-    }
-    return result
-  }
-
 }
 
 const mapDispatchToProps = (dispatch, {block, dragSource}) => ({
@@ -123,6 +99,6 @@ const mapDispatchToProps = (dispatch, {block, dragSource}) => ({
 })
 
 export default connect(
-  mapStateToProps(),
+  null,
   mapDispatchToProps
 )(BlockItem)

@@ -42,13 +42,15 @@ class Channel extends PureComponent {
 
   render() {
 
-    const {channel, enabled, onMouseDown} = this.props
+    const {channel, isSoloMode} = this.props
+    const {archived, solo, mute} = channel
+    const enabled = (isSoloMode && solo) || (!isSoloMode && !mute)
 
     const cssClass = classNames({
       channel: true,
       mute: !enabled,
       enabled,
-      archived: channel.archived,
+      archived,
     })
 
     return (
@@ -67,14 +69,14 @@ class Channel extends PureComponent {
 
 Channel.propTypes = {
   channel: React.PropTypes.object.isRequired,
-  enabled: React.PropTypes.bool,
+  isSoloMode: React.PropTypes.bool,
   onClick: React.PropTypes.func,
   onMouseDown: React.PropTypes.func,
   onMouseMove: React.PropTypes.func,
 }
 
 Channel.defaultProps = {
-  enabled: true,
+  isSoloMode: false,
   onClick: () => {},
   onMouseDown: () => {},
   onMouseMove: () => {},

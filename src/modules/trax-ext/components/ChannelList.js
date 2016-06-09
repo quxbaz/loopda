@@ -1,17 +1,16 @@
 import React from 'react'
-import Channel from './Channel'
+import Channel from '../containers/Channel'
 
-const ChannelList = ({channels, isSoloMode}) => (
+const ChannelList = ({ids, isSoloMode}) => (
   <div className="channel-list">
-    {channels.map((channel) => (
-      <Channel key={channel.id} channel={channel}
-        enabled={(isSoloMode && channel.solo) || (!isSoloMode && !channel.mute)} />
-    ))}
+    {ids.map(id =>
+      <Channel key={id} id={id} isSoloMode={isSoloMode} />
+    )}
   </div>
 )
 
 ChannelList.propTypes = {
-  channels: React.PropTypes.array.isRequired,
+  ids: React.PropTypes.array.isRequired,
   isSoloMode: React.PropTypes.bool,
 }
 
