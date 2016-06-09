@@ -8,28 +8,23 @@ import url from '../../url'
 const {Button, Icon} = ui.components
 
 class ChannelControls extends PureComponent {
-
   render() {
-
-    const {channel, onClickTitle, onClickArchive, onClickMute, onClickSolo} = this.props
-    const {color, /*number,*/ title, mute, solo} = channel
-
+    const {props} = this
+    const {color, title, solo, mute} = props.channel
     return (
       <div className="channel-controls">
         <div className="color-box" style={{background: color}} />
         <div className="channel-text">
-          <div className="channel-title clicky" onClick={onClickTitle}>{title}</div>
-          <a className="archive-channel" onClick={onClickArchive}><Icon name="x" /></a>
+          <div className="channel-title clicky" onClick={props.onClickTitle}>{title}</div>
+          <a className="archive-channel" onClick={props.onClickArchive}><Icon name="x" /></a>
         </div>
         <div className="channel-play-controls">
-          <Button className="solo-button" state={solo} onClick={onClickSolo}>Solo</Button>
-          <Button className="mute-button" state={mute} onClick={onClickMute}>Mute</Button>
+          <Button className="solo-button" state={solo} onClick={props.onClickSolo}>Solo</Button>
+          <Button className="mute-button" state={mute} onClick={props.onClickMute}>Mute</Button>
         </div>
       </div>
     )
-
   }
-
 }
 
 ChannelControls.propTypes = {
@@ -40,32 +35,23 @@ ChannelControls.propTypes = {
   onClickSolo: React.PropTypes.func
 }
 
-const mapStateToProps = (state, {id}) => ({
-  channel: channels.selectors.getById(id)(state)
-})
-
-const mapDispatchToProps = (dispatch, {id}) => ({
+const mapDispatchToProps = (dispatch, {channel}) => ({
   onClickTitle: () => {
-    dispatch((dispatch, getState) => {
-      const state = getState()
-      const channel = channels.selectors.getById(id)(state)
-      dispatch(
-        url.actions.setBrowserUrl('/presets/' + channel.preset)
-      )
-    })
+    const action = url.actions.setBrowserUrl('/presets/' + channel.preset)
+    dispatch(action)
   },
   onClickArchive: () => {
-    dispatch(channels.actions.archive(id))
+    dispatch(channels.actions.archive(channel.id))
   },
   onClickMute: () => {
-    dispatch(channels.actions.toggleMute(id))
+    dispatch(channels.actions.toggleMute(channel.id))
   },
   onClickSolo: () => {
-    dispatch(channels.actions.toggleSolo(id))
-  }
+    dispatch(channels.actions.toggleSolo(channel.id))
+  },
 })
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(ChannelControls)

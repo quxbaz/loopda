@@ -38,7 +38,7 @@ class Block extends React.Component {
           <ChannelList ids={block.channels} />
         </div>
         <div className="sticky-panel-bottom">
-          <navPane.containers.NavPane ids={song.blocks} selected={id} />
+          {/*<navPane.containers.NavPane ids={song.blocks} selected={id} />*/}
           <PlaybackControls playing={playing} beatDuration={beatDuration} />
         </div>
       </div>

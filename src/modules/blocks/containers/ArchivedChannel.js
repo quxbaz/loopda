@@ -17,23 +17,19 @@ const ArchivedChannel = ({channel, onClickRestore, onClickDismiss}) => (
 )
 
 ArchivedChannel.propTypes = {
-  channel: React.PropTypes.object.isRequired
+  channel: React.PropTypes.object.isRequired,
 }
 
-const mapStateToProps = (state, {id}) => ({
-  channel: channels.selectors.getById(id)(state)
-})
-
-const mapDispatchToProps = (dispatch, {id}) => ({
+const mapDispatchToProps = (dispatch, {channel}) => ({
   onClickRestore: () => {
-    dispatch(channels.actions.restore(id))
+    dispatch(channels.actions.restore(channel.id))
   },
   onClickDismiss: () => {
-    dispatch(channels.actions.destroy(id))
-  }
+    dispatch(channels.actions.destroy(channel.id))
+  },
 })
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(ArchivedChannel)
