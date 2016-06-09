@@ -90,17 +90,12 @@ export default class App {
     const {store} = this
     const {dispatch} = store
 
-    store.subscribe(() => {
-      const state = store.getState()
-      render(
-        <Provider store={store}>
-          <Router path={state.url}>
-            <app.containers.App />
-          </Router>
-        </Provider>,
-        document.getElementById('root')
-      )
-    })
+    render(
+      <Provider store={store}>
+        <app.containers.App />
+      </Provider>,
+      document.getElementById('root')
+    )
 
     const processUrl = () => {
       let hash = location.hash.slice(1)
