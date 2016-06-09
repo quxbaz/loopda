@@ -1,3 +1,8 @@
+/*
+  <WARNING> Deprecated in favor of using smaller containers. Map over
+  Blip containers instead while passing the id.
+*/
+
 import React from 'react'
 import {connect} from 'react-redux'
 import isNil from 'qux/lib/isNil'

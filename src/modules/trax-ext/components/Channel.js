@@ -1,8 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
+import isNil from 'qux/lib/isNil'
 import {fireOnce} from 'dom-util'
 import {PureComponent} from 'loopda/lib/react-ext'
-import BlipList from '../containers/BlipList'
+import Blip from '../containers/Blip'
 
 class Channel extends PureComponent {
 
@@ -53,8 +54,10 @@ class Channel extends PureComponent {
     return (
       <div ref="div" className={cssClass} onClick={this.handleClick}
         onMouseDown={this.handleMouseDown}
-        onMouseMove={this.handleMouseMove} >
-        <BlipList ids={channel.blips} />
+        onMouseMove={this.handleMouseMove}>
+          {channel.blips.filter(id => !isNil(id)).map((id) => (
+            <Blip key={id} id={id} />
+          ))}
       </div>
     )
 
