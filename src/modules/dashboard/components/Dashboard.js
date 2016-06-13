@@ -1,6 +1,6 @@
 import React from 'react'
 import SongControls from '../containers/SongControls'
-import SongList from '../containers/SongList'
+import SongList from '../providers/SongList'
 
 const Dashboard = () => (
   <div className="dashboard">
@@ -9,7 +9,5 @@ const Dashboard = () => (
     <SongList />
   </div>
 )
-
-Dashboard.propTypes = {}
 
 export default Dashboard

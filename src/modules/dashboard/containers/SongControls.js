@@ -1,9 +1,8 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import actions from '../actions'
-import SongList from './SongList'
 
-class SongControls extends React.Component {
+class SongControls extends Component {
 
   constructor(props) {
     super(props)
@@ -44,7 +43,7 @@ class SongControls extends React.Component {
 }
 
 SongControls.propTypes = {
-  onSubmit: React.PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => ({
