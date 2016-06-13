@@ -74,8 +74,12 @@ const mapStateToProps = (state, {id}) => {
 
 const mapDispatchToProps = (dispatch, {id}) => ({
   onMount: () => {
-    // dispatch(songPlayer.actions.stop())
-    // dispatch(player.actions.setCurrentBlock(id))
+    try {
+      dispatch(songPlayer.actions.stop())
+      dispatch(player.actions.setCurrentBlock(id))
+    } catch (e) {
+      console.error(e)
+    }
   },
   onUnmount: () => {
     dispatch(player.actions.pause())
