@@ -1,19 +1,10 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import classNames from 'classnames'
 import {PureComponent} from 'loopda/lib/react-ext'
 
 const BEATS = 16
 
 class Blip extends PureComponent {
-
-  constructor(props) {
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  handleClick() {
-    this.props.onClick(this.props.blip)
-  }
 
   render() {
 
@@ -30,19 +21,14 @@ class Blip extends PureComponent {
       left: (100 / BEATS) * beat + '%',
     }
 
-    return <div className={cssClass} style={style} onClick={this.handleClick} />
+    return <div className={cssClass} style={style} />
 
   }
 
 }
 
 Blip.propTypes = {
-  blip: React.PropTypes.object.isRequired,
-  onClick: React.PropTypes.func,
-}
-
-Blip.defaultProps = {
-  onClick: () => {},
+  blip: PropTypes.object.isRequired,
 }
 
 export default Blip
