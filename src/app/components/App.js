@@ -1,21 +1,13 @@
-import React from 'react'
-import {connect} from 'react-redux'
+import React, {PropTypes} from 'react'
 import {Router, Route} from 'stateful-router'
 import dashboard from '../../modules/dashboard'
 import presets from '../../modules/presets'
 import blocks from '../../modules/blocks'
 import songs from '../../modules/songs'
-import Saver from './Saver'
+import Saver from '../containers/Saver'
 
 // <TESTING>
 import test from '../../modules/test'
-
-const TestControls = () => (
-  <ul>
-    <li><a onClick={() => console.clear()}>console.clear()</a></li>
-    <li><a onClick={() => localStorage.clear()}>localStorage.clear()</a></li>
-  </ul>
-)
 
 const App = ({url}) => (
   <div className="app">
@@ -25,7 +17,6 @@ const App = ({url}) => (
         <li><a href='/#/presets'>Presets</a></li>
       </ul>
       <test.components.Profiler />
-      <TestControls />
       <Saver />
       <Route route="dashboard">
         <dashboard.components.Dashboard />
@@ -43,10 +34,8 @@ const App = ({url}) => (
   </div>
 )
 
-const mapStateToProps = (state) => ({
-  url: state.url,
-})
+App.propTypes = {
+  url: PropTypes.string.isRequired,
+}
 
-export default connect(
-  mapStateToProps
-)(App)
+export default App

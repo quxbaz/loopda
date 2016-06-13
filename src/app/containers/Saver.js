@@ -2,9 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 const Saver = ({onClickSave}) => (
-  <div>
-    <a onClick={onClickSave}>Save</a>
-  </div>
+  <a onClick={onClickSave}>Save</a>
 )
 
 Saver.propTypes = {
@@ -13,7 +11,7 @@ Saver.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onClickSave: () => {
-    dispatch((_, getState) => {
+    dispatch((dispatch, getState) => {
       const state = getState()
       localStorage.setItem(
         'loopda',

@@ -92,7 +92,7 @@ export default class App {
 
     render(
       <Provider store={store}>
-        <app.containers.App />
+        <app.providers.App />
       </Provider>,
       document.getElementById('root')
     )
