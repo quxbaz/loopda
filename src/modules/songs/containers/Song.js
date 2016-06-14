@@ -26,7 +26,9 @@ class Song extends React.Component {
       <div className="song">
         <h2>{title}</h2>
         <BlockGrid ids={blocks} />
-        <PlaybackControls />
+        <div className="sticky-panel-bottom">
+          <PlaybackControls />
+        </div>
       </div>
     )
   }

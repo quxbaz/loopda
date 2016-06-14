@@ -28,7 +28,7 @@ const App = ({url}) => (
         <songs.providers.Song />
       </Route>
       <Route route="blocks/:id">
-        <blocks.containers.Block />
+        <blocks.providers.Block />
       </Route>
     </Router>
   </div>

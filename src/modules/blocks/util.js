@@ -2,6 +2,8 @@ const BEATS = 16
 
 export default {
 
+  // <TODO> Move this to trax-ext
+
   getBeatClicked(event, el) {
     /*
       Detects which beat position was clicked by looking at the position

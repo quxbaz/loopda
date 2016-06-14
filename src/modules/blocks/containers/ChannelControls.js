@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {PureComponent} from 'loopda/lib/react-ext'
 import {channels} from 'trax'
@@ -28,11 +28,11 @@ class ChannelControls extends PureComponent {
 }
 
 ChannelControls.propTypes = {
-  channel: React.PropTypes.object.isRequired,
-  onClickTitle: React.PropTypes.func,
-  onClickArchive: React.PropTypes.func,
-  onClickMute: React.PropTypes.func,
-  onClickSolo: React.PropTypes.func
+  channel: PropTypes.object.isRequired,
+  onClickTitle: PropTypes.func,
+  onClickArchive: PropTypes.func,
+  onClickMute: PropTypes.func,
+  onClickSolo: PropTypes.func
 }
 
 const mapDispatchToProps = (dispatch, {channel}) => ({

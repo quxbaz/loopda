@@ -1,8 +1,6 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {channels} from 'trax'
 import {PureComponent} from 'loopda/lib/react-ext'
-import ChannelItem from './ChannelItem'
+import ChannelItem from '../providers/ChannelItem'
 
 class ChannelList extends PureComponent {
   render() {
@@ -22,14 +20,4 @@ ChannelList.propTypes = {
   isSoloMode: React.PropTypes.bool.isRequired,
 }
 
-const mapStateToProps = (state, {ids}) => {
-  const query = channels.selectors.getMany(ids)(state)
-  return {
-    ids,
-    isSoloMode: query.some(c => c.solo),
-  }
-}
-
-export default connect(
-  mapStateToProps
-)(ChannelList)
+export default ChannelList

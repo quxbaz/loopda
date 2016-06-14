@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {PureComponent} from 'loopda/lib/react-ext'
 import ChannelControls from '../containers/ChannelControls'
 import Channel from '../containers/Channel'
@@ -6,8 +6,7 @@ import Channel from '../containers/Channel'
 class NormalChannel extends PureComponent {
   render() {
     const {channel, isSoloMode} = this.props
-    const {solo, mute} = channel
-    const enabled = (!isSoloMode && !mute) || (isSoloMode && solo)
+    const enabled = (!isSoloMode && !channel.mute) || (isSoloMode && channel.solo)
     return (
       <div className="normal-channel">
         <ChannelControls channel={channel} />
@@ -18,8 +17,8 @@ class NormalChannel extends PureComponent {
 }
 
 NormalChannel.propTypes = {
-  channel: React.PropTypes.object.isRequired,
-  isSoloMode: React.PropTypes.bool.isRequired,
+  channel: PropTypes.object.isRequired,
+  isSoloMode: PropTypes.bool.isRequired,
 }
 
 export default NormalChannel

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import isNil from 'qux/lib/isNil'
 import before from 'qux/lib/before'
 import after from 'qux/lib/after'
-import {blocks, songs, player} from 'trax'
+import {blocks, songs} from 'trax'
 import url from '../../url'
 
 const BlockControls = (props) => (
@@ -15,31 +15,31 @@ const BlockControls = (props) => (
 )
 
 BlockControls.propTypes = {
-  id: React.PropTypes.string.isRequired,
+  block: React.PropTypes.object.isRequired,
   song: React.PropTypes.object.isRequired,
   onClickAdd: React.PropTypes.func.isRequired,
   onClickDupe: React.PropTypes.func.isRequired,
   onClickDestroy: React.PropTypes.func.isRequired,
 }
 
-const mapDispatchToProps = (dispatch, {id, song}) => ({
+const mapDispatchToProps = (dispatch, {block, song}) => ({
 
   onClickAdd() {
-    const index = song.blocks.indexOf(id)
+    const index = song.blocks.indexOf(block.id)
     dispatch(songs.actions.createBlockAt(song.id, index + 1))
   },
 
   onClickDupe() {
-    const index = song.blocks.indexOf(id)
-    const blockId = dispatch(blocks.actions.deepCopy(id)).payload.copy.id
+    const index = song.blocks.indexOf(block.id)
+    const blockId = dispatch(blocks.actions.deepCopy(block.id)).payload.copy.id
     dispatch(songs.actions.addBlockAt(song.id, blockId, index + 1))
   },
 
   onClickDestroy() {
-    if (!song.blocks.includes(id))
+    if (!song.blocks.includes(block.id))
       return
-    const prevBlock = before(song.blocks, id)
-    const nextBlock = after(song.blocks, id)
+    const prevBlock = before(song.blocks, block.id)
+    const nextBlock = after(song.blocks, block.id)
     if (!isNil(prevBlock)) {
       dispatch(url.actions.setBrowserUrl(
         '/blocks/' + prevBlock , {replaceState: true}
@@ -53,7 +53,7 @@ const mapDispatchToProps = (dispatch, {id, song}) => ({
         '/songs/' + song.id, {replaceState: true}
       ))
     }
-    dispatch(blocks.actions.destroy(id))
+    dispatch(blocks.actions.destroy(block.id))
   },
 
 })

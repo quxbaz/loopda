@@ -1,4 +1,6 @@
-import containers from './containers'
+// <TODO> Remove util
+
+import providers from './providers'
 import util from './util'
 
-export default {containers, util}
+export default {providers, util}
