@@ -69,7 +69,7 @@ class Channel extends PureComponent {
 
 Channel.propTypes = {
   channel: React.PropTypes.object.isRequired,
-  isSoloMode: React.PropTypes.bool,
+  isSoloMode: React.PropTypes.bool.isRequired,
   onClick: React.PropTypes.func,
   onMouseDown: React.PropTypes.func,
   onMouseMove: React.PropTypes.func,

@@ -47,7 +47,7 @@ class BlockItem extends PureComponent {
   }
 
   render() {
-    const {block, beatOffset} = this.props
+    const {block, isSoloMode, beatOffset} = this.props
     const dragProps = {
       draggable: true,
       onDragStart: this.handleDragStart,
@@ -65,7 +65,7 @@ class BlockItem extends PureComponent {
         <div ref="channels" className={innerCssClass} onClick={this.handleClickBeat} {...dragProps}>
           {beatOffset === -1 ? null :
             <traxExt.components.TempoBar beat={beatOffset} />}
-          <traxExt.providers.ChannelList ids={block.channels} />
+          <traxExt.components.ChannelList ids={block.channels} isSoloMode={isSoloMode} />
         </div>
       </div>
     )
@@ -75,6 +75,7 @@ class BlockItem extends PureComponent {
 BlockItem.propTypes = {
   block: React.PropTypes.object.isRequired,
   i: React.PropTypes.number.isRequired,
+  isSoloMode: React.PropTypes.bool.isRequired,
   beatOffset: React.PropTypes.number.isRequired,
   onClickTitle: React.PropTypes.func.isRequired,
   onClickBeat: React.PropTypes.func.isRequired,

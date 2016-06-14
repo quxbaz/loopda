@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import classNames from 'classnames'
 import {PureComponent} from 'loopda/lib/react-ext'
-import ChannelList from '../providers/ChannelList'
+import ChannelList from '../components/ChannelList'
 
 class Block extends PureComponent {
 
@@ -15,14 +15,14 @@ class Block extends PureComponent {
   }
 
   render() {
-    const {block, selected} = this.props
+    const {block, isSoloMode, selected} = this.props
     const cssClass = classNames({
       'block': true,
       selected,
     })
     return (
       <div className={cssClass} onClick={this.handleClick}>
-        <ChannelList ids={block.channels} />
+        <ChannelList ids={block.channels} isSoloMode={isSoloMode} />
       </div>
     )
   }
@@ -32,6 +32,7 @@ class Block extends PureComponent {
 Block.propTypes = {
   block: PropTypes.object.isRequired,
   i: PropTypes.number.isRequired,
+  isSoloMode: PropTypes.bool.isRequired,
   selected: PropTypes.bool,
   onClick: PropTypes.func,
 }

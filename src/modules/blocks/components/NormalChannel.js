@@ -6,11 +6,10 @@ import Channel from '../containers/Channel'
 class NormalChannel extends PureComponent {
   render() {
     const {channel, isSoloMode} = this.props
-    const enabled = (!isSoloMode && !channel.mute) || (isSoloMode && channel.solo)
     return (
       <div className="normal-channel">
         <ChannelControls channel={channel} />
-        <Channel channel={channel} enabled={enabled} />
+        <Channel channel={channel} isSoloMode={isSoloMode} />
       </div>
     )
   }

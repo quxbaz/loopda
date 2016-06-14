@@ -17,11 +17,7 @@ class ChannelList extends PureComponent {
 
 ChannelList.propTypes = {
   ids: React.PropTypes.array.isRequired,
-  isSoloMode: React.PropTypes.bool,
-}
-
-ChannelList.defaultProps = {
-  isSoloMode: false,
+  isSoloMode: React.PropTypes.bool.isRequired,
 }
 
 export default ChannelList
