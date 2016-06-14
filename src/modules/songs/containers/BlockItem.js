@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import classNames from 'classnames'
 import {songs, songPlayer} from 'trax'
 import {PureComponent} from 'loopda/lib/react-ext'
-import blocksModule from '../../blocks'
 import traxExt from '../../trax-ext'
 import url from '../../url'
 
@@ -25,7 +24,7 @@ class BlockItem extends PureComponent {
   }
 
   handleClickBeat(event) {
-    const beat = blocksModule.util.getBeatClicked(event, this.refs.channels)
+    const beat = traxExt.util.getBeatClicked(event, this.refs.channels)
     this.props.onClickBeat(this.props.i * 16 + beat)
   }
 
