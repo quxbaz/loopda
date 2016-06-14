@@ -24,11 +24,10 @@ class Uploader extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  onChange: (event, input) => {
+  onChange(event, input) {
     for (let i=0; i < input.files.length; i++) {
-      dispatch(
-        audio.actions.uploadSampleFile(input.files[i])
-      )
+      const action = audio.actions.uploadSampleFile(input.files[i])
+      dispatch(action)
     }
   },
 })

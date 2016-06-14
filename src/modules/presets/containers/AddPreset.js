@@ -12,7 +12,7 @@ class AddPreset extends React.Component {
     this.defaultTitle = 'untitled'
     this.state = {
       title: this.defaultTitle,
-      sample: 'hihat'
+      sample: 'hihat',
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSelectChange = this.handleSelectChange.bind(this)
@@ -54,25 +54,17 @@ class AddPreset extends React.Component {
 
 AddPreset.propTypes = {
   samples: React.PropTypes.array.isRequired,
-  onSubmit: React.PropTypes.func.isRequired
+  onSubmit: React.PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state) => ({
-  samples: audio.selectors.getSamples(state)
-})
-
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (title, sample) => {
-    const action = dispatch(
-      presets.actions.create({title, sample})
-    )
-    dispatch(
-      url.actions.setBrowserUrl('/presets/' + action.payload.id)
-    )
-  }
+  onSubmit(title, sample) {
+    const action = dispatch(presets.actions.create({title, sample}))
+    dispatch(url.actions.setBrowserUrl('/presets/' + action.payload.id))
+  },
 })
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(AddPreset)

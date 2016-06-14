@@ -1,9 +1,9 @@
 import React from 'react'
 import {Route} from 'stateful-router'
 import Uploader from '../containers/Uploader'
-import AddPreset from '../containers/AddPreset'
-import PresetList from '../containers/PresetList'
-import MixerWrapper from '../containers/MixerWrapper'
+import AddPreset from '../providers/AddPreset'
+import PresetList from '../providers/PresetList'
+import Mixer from '../providers/Mixer'
 
 const Presets = () => (
   <div className="presets">
@@ -14,7 +14,7 @@ const Presets = () => (
     </Route>
     <Route route=":id">
       <PresetList />
-      <MixerWrapper />
+      <Mixer />
     </Route>
   </div>
 )

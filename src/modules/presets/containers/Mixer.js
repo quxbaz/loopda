@@ -1,13 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {mixables, } from 'trax'
+import {mixables} from 'trax'
 import omit from 'qux/lib/omit'
 import capitalize from 'qux/lib/capitalize'
 import throttle from 'qux/lib/throttle'
 import audioService from 'loopda/src/globals/audioService'
 import ui from '../../ui'
 
-const Mixer = ({mixable, onMixChange}) => {
+const testSound = throttle(audioService.play.bind(audioService), 60)
+
+const Mixer = ({mixable, onMix}) => {
 
   const validMixables = omit(mixable, (value, key) =>
     key === 'id' || key === 'sample' ||
@@ -20,12 +22,12 @@ const Mixer = ({mixable, onMixChange}) => {
     <div className="mixer">
       {props.map(prop =>
         <ui.components.Slider
-         key={prop}
-         name={prop}
-         value={mixable[prop]}
-         min={mixable['min' + capitalize(prop)]}
-         max={mixable['max' + capitalize(prop)]}
-         onChange={onMixChange} />
+          key={prop}
+          name={prop}
+          value={mixable[prop]}
+          min={mixable['min' + capitalize(prop)]}
+          max={mixable['max' + capitalize(prop)]}
+          onChange={onMix} />
       )}
     </div>
   )
@@ -34,36 +36,18 @@ const Mixer = ({mixable, onMixChange}) => {
 
 Mixer.propTypes = {
   mixable: React.PropTypes.object.isRequired,
-  onMixChange: React.PropTypes.func.isRequired
+  onMix: React.PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state, {id}) => ({
-  mixable: mixables.selectors.getById(id)(state)
-})
-
-const mapDispatchToProps = (dispatch, {id}) => ({
-  onMixChange: (name, value) => {
-    dispatch(
-      mixables.actions.mix(id, {[name]: value})
-    )
-  }
-})
-
-const previewSound = throttle(
-  audioService.play.bind(audioService),
-  60
-)
-
-const mergeProps = (stateProps, dispatchProps) => ({
-  ...stateProps,
-  onMixChange: (name, value) => {
-    dispatchProps.onMixChange(name, value)
-    previewSound({...stateProps.mixable, mute: false})
-  }
+const mapDispatchToProps = (dispatch, {mixable}) => ({
+  onMix(name, value) {
+    const action = mixables.actions.mix(mixable.id, {[name]: value})
+    dispatch(action)
+    testSound({...mixable, mute: false})
+  },
 })
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  mergeProps
+  null,
+  mapDispatchToProps
 )(Mixer)
