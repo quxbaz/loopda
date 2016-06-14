@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {PureComponent} from 'loopda/lib/react-ext'
 
 class TempoBar extends PureComponent {
@@ -13,7 +13,7 @@ class TempoBar extends PureComponent {
 }
 
 TempoBar.propTypes = {
-  beat: React.PropTypes.number.isRequired,
+  beat: PropTypes.number.isRequired,
 }
 
 export default TempoBar
