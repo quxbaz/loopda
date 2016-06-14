@@ -4,15 +4,21 @@ import isNil from 'qux/lib/isNil'
 import before from 'qux/lib/before'
 import after from 'qux/lib/after'
 import {blocks, songs} from 'trax'
+import {PureComponent} from 'loopda/lib/react-ext'
 import url from '../../url'
 
-const BlockControls = (props) => (
-  <div className="block-controls">
-    <button onClick={props.onClickAdd}>Add block</button>
-    <button onClick={props.onClickDupe}>Duplicate block</button>
-    <button onClick={props.onClickDestroy}>Remove block</button>
-  </div>
-)
+class BlockControls extends PureComponent {
+  render() {
+    const {props} = this
+    return (
+      <div className="block-controls">
+        <button onClick={props.onClickAdd}>Add block</button>
+        <button onClick={props.onClickDupe}>Duplicate block</button>
+        <button onClick={props.onClickDestroy}>Remove block</button>
+      </div>
+    )
+  }
+}
 
 BlockControls.propTypes = {
   block: React.PropTypes.object.isRequired,
