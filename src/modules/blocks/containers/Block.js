@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {player, songPlayer} from 'trax'
 import SongHeader from '../providers/SongHeader'
@@ -48,12 +48,12 @@ class Block extends Component {
 }
 
 Block.propTypes = {
-  block: React.PropTypes.object.isRequired,
-  order: React.PropTypes.number.isRequired,
-  isSoloMode: React.PropTypes.bool.isRequired,
-  onMount: React.PropTypes.func.isRequired,
-  onUnmount: React.PropTypes.func.isRequired,
-  onSwitchBlock: React.PropTypes.func.isRequired,
+  block: PropTypes.object.isRequired,
+  order: PropTypes.number.isRequired,
+  isSoloMode: PropTypes.bool.isRequired,
+  onMount: PropTypes.func.isRequired,
+  onUnmount: PropTypes.func.isRequired,
+  onSwitchBlock: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch, {block}) => ({

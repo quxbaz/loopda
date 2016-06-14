@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import constrain from 'qux/lib/constrain'
 import {fireOnce} from 'dom-util'
 
@@ -25,19 +25,19 @@ const Slider = React.createClass({
   propTypes: {
 
     // Styles
-    barWidth: React.PropTypes.number,
-    grabberWidth: React.PropTypes.number,
+    barWidth: PropTypes.number,
+    grabberWidth: PropTypes.number,
 
-    name: React.PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
 
     // Values
-    value: React.PropTypes.number.isRequired,
-    min: React.PropTypes.number.isRequired,
-    max: React.PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+    min: PropTypes.number.isRequired,
+    max: PropTypes.number.isRequired,
 
     // Callbacks
-    onChange: React.PropTypes.func.isRequired,
-    onSet: React.PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    onSet: PropTypes.func.isRequired
 
   },
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 
 const SampleSelect = ({value, samples, onChange}) => (
   <select value={value} onChange={onChange}>
@@ -9,9 +9,9 @@ const SampleSelect = ({value, samples, onChange}) => (
 )
 
 SampleSelect.propTypes = {
-  value: React.PropTypes.string.isRequired,
-  samples: React.PropTypes.array.isRequired,
-  onChange: React.PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  samples: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired,
 }
 
 export default SampleSelect

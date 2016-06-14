@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import classNames from 'classnames'
 import {PureComponent} from 'loopda/lib/react-ext'
 
@@ -28,10 +28,10 @@ class Button extends PureComponent {
 }
 
 Button.propTypes = {
-  state: React.PropTypes.bool,
-  text: React.PropTypes.array,
-  className: React.PropTypes.string,
-  onClick: React.PropTypes.func
+  state: PropTypes.bool,
+  text: PropTypes.array,
+  className: PropTypes.string,
+  onClick: PropTypes.func
 }
 
 Button.defaultProps = {

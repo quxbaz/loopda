@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {channels} from 'trax'
 import traxExt from '../../trax-ext'
@@ -17,7 +17,7 @@ const ArchivedChannel = ({channel, onClickRestore, onClickDismiss}) => (
 )
 
 ArchivedChannel.propTypes = {
-  channel: React.PropTypes.object.isRequired,
+  channel: PropTypes.object.isRequired,
 }
 
 const mapDispatchToProps = (dispatch, {channel}) => ({

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 
 class KeyWatcher extends Component {
 
@@ -60,12 +60,12 @@ class KeyWatcher extends Component {
 }
 
 KeyWatcher.propTypes = {
-  keyCode: React.PropTypes.number,
-  handler: React.PropTypes.func,
-  onKeyEscape: React.PropTypes.func,
-  onKeySpace: React.PropTypes.func,
-  onKeyRightArrow: React.PropTypes.func,
-  onKeyLeftArrow: React.PropTypes.func,
+  keyCode: PropTypes.number,
+  handler: PropTypes.func,
+  onKeyEscape: PropTypes.func,
+  onKeySpace: PropTypes.func,
+  onKeyRightArrow: PropTypes.func,
+  onKeyLeftArrow: PropTypes.func,
 }
 
 export default KeyWatcher

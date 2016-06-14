@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {songs, songPlayer} from 'trax'
 import BlockGrid from '../providers/BlockGrid'
@@ -36,10 +36,10 @@ class Song extends Component {
 }
 
 Song.propTypes = {
-  song: React.PropTypes.object.isRequired,
-  onMount: React.PropTypes.func.isRequired,
-  onUnmount: React.PropTypes.func.isRequired,
-  onSwitchSong: React.PropTypes.func.isRequired,
+  song: PropTypes.object.isRequired,
+  onMount: PropTypes.func.isRequired,
+  onUnmount: PropTypes.func.isRequired,
+  onSwitchSong: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch, {song}) => ({

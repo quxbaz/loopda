@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {connect} from 'react-redux'
 import isNil from 'qux/lib/isNil'
 import before from 'qux/lib/before'
@@ -21,11 +21,11 @@ class BlockControls extends PureComponent {
 }
 
 BlockControls.propTypes = {
-  block: React.PropTypes.object.isRequired,
-  song: React.PropTypes.object.isRequired,
-  onClickAdd: React.PropTypes.func.isRequired,
-  onClickDupe: React.PropTypes.func.isRequired,
-  onClickDestroy: React.PropTypes.func.isRequired,
+  block: PropTypes.object.isRequired,
+  song: PropTypes.object.isRequired,
+  onClickAdd: PropTypes.func.isRequired,
+  onClickDupe: PropTypes.func.isRequired,
+  onClickDestroy: PropTypes.func.isRequired,
 }
 
 const makeMapDispatchToProps = (_, {block, song}) => (dispatch) => ({

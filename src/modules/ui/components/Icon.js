@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import classNames from 'classnames'
 
 const Icon = ({name, className, onClick}) => {
@@ -20,9 +20,9 @@ const Icon = ({name, className, onClick}) => {
 }
 
 Icon.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  className: React.PropTypes.string,
-  onClick: React.PropTypes.func
+  name: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  onClick: PropTypes.func
 }
 
 export default Icon

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {connect} from 'react-redux'
 import classNames from 'classnames'
 import {songs, songPlayer} from 'trax'
@@ -73,17 +73,17 @@ class BlockItem extends PureComponent {
 }
 
 BlockItem.propTypes = {
-  block: React.PropTypes.object.isRequired,
-  i: React.PropTypes.number.isRequired,
-  isSoloMode: React.PropTypes.bool.isRequired,
-  beatOffset: React.PropTypes.number.isRequired,
-  onClickTitle: React.PropTypes.func.isRequired,
-  onClickBeat: React.PropTypes.func.isRequired,
+  block: PropTypes.object.isRequired,
+  i: PropTypes.number.isRequired,
+  isSoloMode: PropTypes.bool.isRequired,
+  beatOffset: PropTypes.number.isRequired,
+  onClickTitle: PropTypes.func.isRequired,
+  onClickBeat: PropTypes.func.isRequired,
 
   // Drag n drop props
-  dragSource: React.PropTypes.number,
-  onDragStart: React.PropTypes.func.isRequired,
-  onDrop: React.PropTypes.func.isRequired,
+  dragSource: PropTypes.number,
+  onDragStart: PropTypes.func.isRequired,
+  onDrop: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch, {block, dragSource}) => ({

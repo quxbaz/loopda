@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {PureComponent} from 'loopda/lib/react-ext'
 import ChannelItem from '../providers/ChannelItem'
 
@@ -16,8 +16,8 @@ class ChannelList extends PureComponent {
 }
 
 ChannelList.propTypes = {
-  ids: React.PropTypes.array.isRequired,
-  isSoloMode: React.PropTypes.bool.isRequired,
+  ids: PropTypes.array.isRequired,
+  isSoloMode: PropTypes.bool.isRequired,
 }
 
 export default ChannelList

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {PureComponent} from 'loopda/lib/react-ext'
 import Block from '../providers/Block'
 
@@ -18,10 +18,10 @@ class BlockList extends PureComponent {
 }
 
 BlockList.propTypes = {
-  Child: React.PropTypes.func,
-  ids: React.PropTypes.array.isRequired,
-  selected: React.PropTypes.string,
-  onClickBlock: React.PropTypes.func,
+  Child: PropTypes.func,
+  ids: PropTypes.array.isRequired,
+  selected: PropTypes.string,
+  onClickBlock: PropTypes.func,
 }
 
 export default BlockList

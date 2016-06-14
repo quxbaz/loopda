@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {mixables} from 'trax'
 import omit from 'qux/lib/omit'
@@ -35,8 +35,8 @@ const Mixer = ({mixable, onMix}) => {
 }
 
 Mixer.propTypes = {
-  mixable: React.PropTypes.object.isRequired,
-  onMix: React.PropTypes.func.isRequired,
+  mixable: PropTypes.object.isRequired,
+  onMix: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch, {mixable}) => ({

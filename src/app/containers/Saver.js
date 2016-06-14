@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {connect} from 'react-redux'
 
 const Saver = ({onClickSave}) => (
@@ -6,7 +6,7 @@ const Saver = ({onClickSave}) => (
 )
 
 Saver.propTypes = {
-  onClickSave: React.PropTypes.func.isRequired,
+  onClickSave: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => ({

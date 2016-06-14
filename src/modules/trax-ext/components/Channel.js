@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import classNames from 'classnames'
 import isNil from 'qux/lib/isNil'
 import {fireOnce} from 'dom-util'
@@ -68,11 +68,11 @@ class Channel extends PureComponent {
 }
 
 Channel.propTypes = {
-  channel: React.PropTypes.object.isRequired,
-  isSoloMode: React.PropTypes.bool.isRequired,
-  onClick: React.PropTypes.func,
-  onMouseDown: React.PropTypes.func,
-  onMouseMove: React.PropTypes.func,
+  channel: PropTypes.object.isRequired,
+  isSoloMode: PropTypes.bool.isRequired,
+  onClick: PropTypes.func,
+  onMouseDown: PropTypes.func,
+  onMouseMove: PropTypes.func,
 }
 
 Channel.defaultProps = {

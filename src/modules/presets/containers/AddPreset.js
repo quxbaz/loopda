@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import audio from '../../audio'
 import url from '../../url'
@@ -53,8 +53,8 @@ class AddPreset extends Component {
 }
 
 AddPreset.propTypes = {
-  samples: React.PropTypes.array.isRequired,
-  onSubmit: React.PropTypes.func.isRequired,
+  samples: PropTypes.array.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => ({
