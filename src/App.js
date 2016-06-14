@@ -33,23 +33,42 @@ import url from './modules/url'
 import traxExt from './modules/trax-ext'
 import audio from './modules/audio'
 
+
+// testing
+import {batchedSubscribe} from 'redux-batched-subscribe'
+import debounce from 'lodash.debounce'
+
 export default class App {
 
   constructor() {
     window.loopda = this  // Set to global object
     const data = localStorage.getItem('loopda')
     this.isNew = isNil(data)
-    this.store = createStore(
+
+    // testing
+    const batchDebounce = debounce(notify => notify())
+    const finalCreateStore = batchedSubscribe(batchDebounce)(createStore);
+    this.store = finalCreateStore(
       app.reducer,
       this.isNew ? {} : JSON.parse(data),
-      compose(
-        applyMiddleware(
-          thunkMiddleware
-          , createLogger({collapsed: true})
-        )
-        // , window.devToolsExtension ? window.devToolsExtension() : undefined
-      )
+      compose(applyMiddleware(
+        thunkMiddleware
+        , createLogger({collapsed: true})
+      ))
     )
+
+    // this.store = createStore(
+    //   app.reducer,
+    //   this.isNew ? {} : JSON.parse(data),
+    //   compose(
+    //     applyMiddleware(
+    //       thunkMiddleware
+    //       , createLogger({collapsed: true})
+    //     )
+    //     // , window.devToolsExtension ? window.devToolsExtension() : undefined
+    //   )
+    // )
+
     this.dispatch = this.store.dispatch.bind(this.store)
   }
 
