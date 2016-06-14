@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import classNames from 'classnames'
-import {blocks, songs, songPlayer} from 'trax'
+import {songs, songPlayer} from 'trax'
 import {PureComponent} from 'loopda/lib/react-ext'
 import blocksModule from '../../blocks'
 import traxExt from '../../trax-ext'
@@ -74,8 +74,8 @@ class BlockItem extends PureComponent {
 }
 
 BlockItem.propTypes = {
-  i: React.PropTypes.number.isRequired,
   block: React.PropTypes.object.isRequired,
+  i: React.PropTypes.number.isRequired,
   beatOffset: React.PropTypes.number.isRequired,
   onClickTitle: React.PropTypes.func.isRequired,
   onClickBeat: React.PropTypes.func.isRequired,
@@ -87,13 +87,13 @@ BlockItem.propTypes = {
 }
 
 const mapDispatchToProps = (dispatch, {block, dragSource}) => ({
-  onClickTitle: () => {
+  onClickTitle() {
     dispatch(url.actions.setBrowserUrl('/blocks/' + block.id))
   },
-  onClickBeat: (i) => {
+  onClickBeat(i) {
     dispatch(songPlayer.actions.setCurrentBeat(i))
   },
-  onDrop: (to) => {
+  onDrop(to) {
     dispatch(songs.actions.moveBlock(block.song, dragSource, to))
   },
 })

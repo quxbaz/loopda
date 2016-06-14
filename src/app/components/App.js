@@ -25,7 +25,7 @@ const App = ({url}) => (
         <presets.components.Presets />
       </Route>
       <Route route="songs/:id">
-        <songs.containers.Song />
+        <songs.providers.Song />
       </Route>
       <Route route="blocks/:id">
         <blocks.containers.Block />

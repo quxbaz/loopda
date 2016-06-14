@@ -1,7 +1,7 @@
-import React from 'react'
-import BlockItem from '../containers/BlockItem'
+import React, {Component, PropTypes} from 'react'
+import BlockItem from '../providers/BlockItem'
 
-class BlockGrid extends React.Component {
+class BlockGrid extends Component {
 
   constructor(props) {
     super(props)
@@ -23,11 +23,11 @@ class BlockGrid extends React.Component {
   }
 
   render() {
-    const {blocks, currentBeat, onBlockDragStart} = this.props
+    const {ids, currentBeat} = this.props
     return (
       <div className="block-grid">
-        {blocks.map((block, i) => (
-          <BlockItem key={block.id} i={i} block={block}
+        {ids.map((id, i) => (
+          <BlockItem key={id} id={id} i={i}
             beatOffset={this.getBeatOffset(i)}
             dragSource={this.state.dragSource} onDragStart={this.handleBlockDragStart} />
         ))}
@@ -38,8 +38,8 @@ class BlockGrid extends React.Component {
 }
 
 BlockGrid.propTypes = {
-  blocks: React.PropTypes.array.isRequired,
-  currentBeat: React.PropTypes.number.isRequired,
+  ids: PropTypes.array.isRequired,
+  currentBeat: PropTypes.number.isRequired,
 }
 
 export default BlockGrid

@@ -1,3 +1,3 @@
-import containers from './containers'
+import providers from './providers'
 
-export default {containers}
+export default {providers}

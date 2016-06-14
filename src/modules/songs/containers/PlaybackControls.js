@@ -1,4 +1,3 @@
-import React from 'react'
 import {connect} from 'react-redux'
 import {songPlayer} from 'trax'
 import traxExt from '../../trax-ext'
