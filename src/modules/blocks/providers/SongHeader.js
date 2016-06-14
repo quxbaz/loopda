@@ -15,7 +15,7 @@ SongHeader.propTypes = {
   title: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = (state, {id}) => {
+const makeMapStateToProps = (initialState, {id}) => (state) => {
   const song = songs.selectors.getById(id)(state)
   return {
     id,
@@ -23,4 +23,4 @@ const mapStateToProps = (state, {id}) => {
   }
 }
 
-export default connect(mapStateToProps)(SongHeader)
+export default connect(makeMapStateToProps)(SongHeader)
