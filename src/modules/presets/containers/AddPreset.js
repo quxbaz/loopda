@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import audio from '../../audio'
 import url from '../../url'
 import {presets} from 'trax'
 import SampleSelect from '../components/SampleSelect'
 
-class AddPreset extends React.Component {
+class AddPreset extends Component {
 
   constructor(props) {
     super(props)

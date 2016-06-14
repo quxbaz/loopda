@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {Component} from 'react'
 import ReactPerf from 'react/lib/ReactDefaultPerf'
 import ux from '../../ux'
 
-class Profiler extends React.Component {
+class Profiler extends Component {
 
   constructor(props) {
     super(props)

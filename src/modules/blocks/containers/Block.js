@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {player, songPlayer} from 'trax'
 import SongHeader from '../providers/SongHeader'
@@ -9,7 +9,7 @@ import ChannelList from '../components/ChannelList'
 import NavPane from '../providers/NavPane'
 import PlaybackControls from '../providers/PlaybackControls'
 
-class Block extends React.Component {
+class Block extends Component {
 
   componentWillMount() {
     this.props.onMount()

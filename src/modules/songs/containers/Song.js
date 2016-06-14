@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {songs, songPlayer} from 'trax'
 import BlockGrid from '../providers/BlockGrid'
 import PlaybackControls from '../providers/PlaybackControls'
 
-class Song extends React.Component {
+class Song extends Component {
 
   componentWillMount() {
     this.props.onMount()

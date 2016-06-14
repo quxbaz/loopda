@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import audio from '../../audio'
 
-class Uploader extends React.Component {
+class Uploader extends Component {
 
   constructor(props) {
     super(props)

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component} from 'react'
 import classNames from 'classnames'
 
-class ToggleMenu extends React.Component {
+class ToggleMenu extends Component {
 
   constructor(props) {
     super(props)

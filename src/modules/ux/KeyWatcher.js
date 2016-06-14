@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {Component} from 'react'
 
-class KeyWatcher extends React.Component {
+class KeyWatcher extends Component {
 
   constructor(props) {
     super(props)
