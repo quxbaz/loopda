@@ -1,15 +1,17 @@
-import React, {Component, PropTypes} from 'react'
-import AddChannelOption from '../providers/AddChannelOption'
+import React, {PropTypes} from 'react'
+import values from 'qux/lib/values'
+import {PureComponent} from 'loopda/lib/react-ext'
+import AddChannelOption from '../containers/AddChannelOption'
 
-class AddChannel extends Component {
+class AddChannel extends PureComponent {
   render() {
-    const {ids, block} = this.props
+    const {presets, block} = this.props
     return (
       <div>
         <strong>Add a channel</strong>
         <ul>
-          {ids.map((id) => (
-            <AddChannelOption key={id} id={id} block={block} />
+          {values(presets).map((preset) => (
+            <AddChannelOption key={preset.id} preset={preset} block={block} />
           ))}
         </ul>
       </div>
@@ -18,7 +20,7 @@ class AddChannel extends Component {
 }
 
 AddChannel.propTypes = {
-  ids: PropTypes.array.isRequired,
+  presets: PropTypes.object.isRequired,
   block: PropTypes.string.isRequired,
 }
 

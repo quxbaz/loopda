@@ -22,6 +22,7 @@ class AddChannelOption extends Component {
       </li>
     )
   }
+
 }
 
 AddChannelOption.propTypes = {
