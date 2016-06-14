@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import classNames from 'classnames'
+import {PureComponent} from 'loopda/lib/react-ext'
 import ChannelList from '../providers/ChannelList'
 
-class Block extends React.Component {
+class Block extends PureComponent {
 
   constructor(props) {
     super(props)
@@ -29,10 +30,10 @@ class Block extends React.Component {
 }
 
 Block.propTypes = {
-  block: React.PropTypes.object.isRequired,
-  i: React.PropTypes.number.isRequired,
-  selected: React.PropTypes.bool,
-  onClick: React.PropTypes.func,
+  block: PropTypes.object.isRequired,
+  i: PropTypes.number.isRequired,
+  selected: PropTypes.bool,
+  onClick: PropTypes.func,
 }
 
 Block.defaultProps = {

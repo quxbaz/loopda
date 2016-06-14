@@ -1,8 +1,9 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PropTypes} from 'react'
+import {PureComponent} from 'loopda/lib/react-ext'
 import ux from '../../ux'
 import ui from '../../ui'
 
-class PlaybackControls extends Component {
+class PlaybackControls extends PureComponent {
 
   constructor(props) {
     super(props)
