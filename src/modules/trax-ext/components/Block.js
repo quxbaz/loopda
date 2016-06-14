@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import ChannelList from '../containers/ChannelList'
+import ChannelList from '../providers/ChannelList'
 
 class Block extends React.Component {
 

@@ -1,21 +1,25 @@
 import React from 'react'
-import Block from './Block'
+import {PureComponent} from 'loopda/lib/react-ext'
+import Block from '../providers/Block'
 
-const BlockList = ({Child, blocks, selected, onClickBlock}) => (
-  <div className="block-list">
-    {blocks.map((block, i) => React.createElement(Child ? Child : Block, {
-      key: block.id,
-      block: block,
-      i,
-      selected: selected === block.id,
-      onClick: onClickBlock,
-    }))}
-  </div>
-)
+class BlockList extends PureComponent {
+  render() {
+    const {Child, ids, selected, onClickBlock} = this.props
+    const Item = Child ? Child : Block
+    return (
+      <div className="block-list">
+        {ids.map((id, i) => (
+          <Item key={id} id={id} i={i} selected={id === selected}
+            onClick={onClickBlock} />
+        ))}
+      </div>
+    )
+  }
+}
 
 BlockList.propTypes = {
   Child: React.PropTypes.func,
-  blocks: React.PropTypes.array.isRequired,
+  ids: React.PropTypes.array.isRequired,
   selected: React.PropTypes.string,
   onClickBlock: React.PropTypes.func,
 }

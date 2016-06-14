@@ -66,7 +66,7 @@ class BlockItem extends PureComponent {
         <div ref="channels" className={innerCssClass} onClick={this.handleClickBeat} {...dragProps}>
           {beatOffset === -1 ? null :
             <traxExt.components.TempoBar beat={beatOffset} />}
-          <traxExt.containers.ChannelList ids={block.channels} />
+          <traxExt.providers.ChannelList ids={block.channels} />
         </div>
       </div>
     )

@@ -1,13 +1,12 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import classNames from 'classnames'
 import {fireOnce} from 'dom-util'
-import {blocks} from 'trax'
 import traxExt from '../../trax-ext'
 import url from '../../url'
 import Block from '../components/Block'
 
-class NavPane extends React.Component {
+class NavPane extends Component {
 
   constructor(props) {
     super(props)
@@ -57,7 +56,7 @@ class NavPane extends React.Component {
 
   render() {
     const {hidden} = this.state
-    const {selected, blocks, onClickBlock} = this.props
+    const {ids, selected, onClickBlock} = this.props
     const cssClass = classNames({
       'block-nav-pane': true,
       'minimized': hidden,
@@ -69,7 +68,7 @@ class NavPane extends React.Component {
         </div>
         <div ref="el" className="block-nav-scroll-pane" onMouseDown={this.handleMouseDown}>
           {hidden ? null :
-            <traxExt.components.BlockList Child={Block} selected={selected} blocks={blocks}
+            <traxExt.components.BlockList Child={Block} ids={ids} selected={selected}
               onClickBlock={this.state.isDragging ? undefined : onClickBlock} />}
         </div>
       </div>
@@ -79,24 +78,17 @@ class NavPane extends React.Component {
 }
 
 NavPane.propTypes = {
-  ids: React.PropTypes.array.isRequired,
-  selected: React.PropTypes.string,
-  blocks: React.PropTypes.array.isRequired,
+  ids: PropTypes.array.isRequired,
+  selected: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = (state, {ids}) => ({
-  blocks: ids.map(
-    (id) => blocks.selectors.getById(id)(state)
-  ),
-})
-
 const mapDispatchToProps = (dispatch) => ({
-  onClickBlock: (id) => {
+  onClickBlock(id) {
     dispatch(url.actions.setBrowserUrl('/blocks/' + id))
   },
 })
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(NavPane)

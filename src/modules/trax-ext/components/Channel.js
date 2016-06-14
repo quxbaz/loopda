@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import isNil from 'qux/lib/isNil'
 import {fireOnce} from 'dom-util'
 import {PureComponent} from 'loopda/lib/react-ext'
-import Blip from '../containers/Blip'
+import Blip from '../providers/Blip'
 
 class Channel extends PureComponent {
 

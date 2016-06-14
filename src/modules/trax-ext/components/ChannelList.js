@@ -1,13 +1,19 @@
 import React from 'react'
-import Channel from '../containers/Channel'
+import {PureComponent} from 'loopda/lib/react-ext'
+import Channel from '../providers/Channel'
 
-const ChannelList = ({ids, isSoloMode}) => (
-  <div className="channel-list">
-    {ids.map(id =>
-      <Channel key={id} id={id} isSoloMode={isSoloMode} />
-    )}
-  </div>
-)
+class ChannelList extends PureComponent {
+  render() {
+    const {ids, isSoloMode} = this.props
+    return (
+      <div className="channel-list">
+        {ids.map((id) =>
+          <Channel key={id} id={id} isSoloMode={isSoloMode} />
+        )}
+      </div>
+    )
+  }
+}
 
 ChannelList.propTypes = {
   ids: React.PropTypes.array.isRequired,

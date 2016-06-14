@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import ux from '../../ux'
 import ui from '../../ui'
 
-class PlaybackControls extends React.Component {
+class PlaybackControls extends Component {
 
   constructor(props) {
     super(props)
@@ -41,16 +41,16 @@ class PlaybackControls extends React.Component {
 }
 
 PlaybackControls.propTypes = {
-  playing: React.PropTypes.bool.isRequired,
-  beatDuration: React.PropTypes.number.isRequired,
-  loop: React.PropTypes.bool,
-  onClickRestart: React.PropTypes.func,
-  onClickToggle: React.PropTypes.func,
-  onClickStop: React.PropTypes.func,
-  onClickStep: React.PropTypes.func,
-  onClickRewind: React.PropTypes.func,
-  onClickLoop: React.PropTypes.func,
-  onChangeBeatDuration: React.PropTypes.func,
+  playing: PropTypes.bool.isRequired,
+  beatDuration: PropTypes.number.isRequired,
+  loop: PropTypes.bool,
+  onClickRestart: PropTypes.func,
+  onClickToggle: PropTypes.func,
+  onClickStop: PropTypes.func,
+  onClickStep: PropTypes.func,
+  onClickRewind: PropTypes.func,
+  onClickLoop: PropTypes.func,
+  onChangeBeatDuration: PropTypes.func,
 }
 
 PlaybackControls.defaultProps = {

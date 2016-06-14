@@ -1,11 +1,16 @@
 import React from 'react'
 import traxExt from '../../trax-ext'
+import {PureComponent} from 'loopda/lib/react-ext'
 
-const NavPaneBlock = (props) => (
-  <div className="nav-pane-block">
-    <traxExt.components.Block {...props} />
-    <div className="block-position-label">{props.i + 1}</div>
-  </div>
-)
+class NavPaneBlock extends PureComponent {
+  render() {
+    return (
+      <div className="nav-pane-block">
+        <traxExt.providers.Block {...this.props} />
+        <div className="block-position-label">{this.props.i + 1}</div>
+      </div>
+    )
+  }
+}
 
 export default NavPaneBlock
