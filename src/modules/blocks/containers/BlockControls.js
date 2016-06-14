@@ -22,7 +22,7 @@ BlockControls.propTypes = {
   onClickDestroy: React.PropTypes.func.isRequired,
 }
 
-const mapDispatchToProps = (dispatch, {block, song}) => ({
+const makeMapDispatchToProps = (_, {block, song}) => (dispatch) => ({
 
   onClickAdd() {
     const index = song.blocks.indexOf(block.id)
@@ -60,5 +60,5 @@ const mapDispatchToProps = (dispatch, {block, song}) => ({
 
 export default connect(
   null,
-  mapDispatchToProps
+  makeMapDispatchToProps
 )(BlockControls)
