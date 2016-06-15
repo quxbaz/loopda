@@ -145,13 +145,13 @@ export default class App {
         dispatch(traxExt.actions.createChannel({preset: preset.id}))
       })
 
-      const songId = dispatch(songs.actions.create({
-        title: 'my first song',
-      })).payload.id
+      // const songId = dispatch(songs.actions.create({
+      //   title: 'my first song',
+      // })).payload.id
 
-      const blockId = dispatch(songs.actions.createBlock(songId, {
-        channels: Object.keys(store.getState().channels),
-      })).payload.id
+      // const blockId = dispatch(songs.actions.createBlock(songId, {
+      //   channels: Object.keys(store.getState().channels),
+      // })).payload.id
 
       // dispatch(url.actions.setBrowserUrl('/songs/' + songId))
       // dispatch(url.actions.setBrowserUrl('/blocks/' + blockId))
