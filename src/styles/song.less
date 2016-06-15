@@ -1,7 +1,13 @@
 .song {
 
-  width: 95%;
-  margin-bottom: 160px;
+  width: 100%;
+  margin: 0 auto 200px auto;
+  padding: 0 40px;
+
+  h2 {
+    margin: 56px 0;
+    font-size: 40px;
+  }
 
   .playback-controls {
     .loop {
@@ -10,7 +16,6 @@
   }
 
   .block-grid {
-    .outline;
     display: flex;
     flex-wrap: wrap;
     .squeeze-channels;
@@ -20,8 +25,10 @@
   }
 
   .block-item {
-    .outline;
+
+    // <TODO> Make this responsive
     width: 25%;
+
     .relative {
       transition: transform 120ms ease-out;
     }
