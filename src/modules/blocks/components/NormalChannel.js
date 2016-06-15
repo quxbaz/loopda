@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import {PureComponent} from 'loopda/lib/react-ext'
-import ChannelControls from '../containers/ChannelControls'
+import ChannelControls from '../providers/ChannelControls'
 import Channel from '../containers/Channel'
 
 class NormalChannel extends PureComponent {

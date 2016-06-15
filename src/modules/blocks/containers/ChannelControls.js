@@ -10,12 +10,12 @@ const {Button, Icon} = ui.components
 class ChannelControls extends PureComponent {
   render() {
     const {props} = this
-    const {color, title, solo, mute} = props.channel
+    const {color, solo, mute} = props.channel
     return (
       <div className="channel-controls">
         <div className="color-box" style={{background: color}} />
         <div className="channel-text">
-          <div className="channel-title clicky" onClick={props.onClickTitle}>{title}</div>
+          <div className="channel-title clicky" onClick={props.onClickTitle}>{props.presetTitle}</div>
           <a className="archive-channel" onClick={props.onClickArchive}><Icon name="x" /></a>
         </div>
         <div className="channel-play-controls">
@@ -29,6 +29,7 @@ class ChannelControls extends PureComponent {
 
 ChannelControls.propTypes = {
   channel: PropTypes.object.isRequired,
+  presetTitle: PropTypes.string.isRequired,
   onClickTitle: PropTypes.func,
   onClickArchive: PropTypes.func,
   onClickMute: PropTypes.func,
