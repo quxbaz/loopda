@@ -136,10 +136,10 @@ export default class App {
       )
 
       // Create presets
-      dispatch(presets.actions.create({title: 'default', sample: 'hihat'}))
-      dispatch(presets.actions.create({title: 'default', sample: 'snare'}))
-      dispatch(presets.actions.create({title: 'default', sample: 'kick'}))
-      dispatch(presets.actions.create({title: 'default', sample: 'clap'}))
+      dispatch(presets.actions.create({title: 'default hihat', sample: 'hihat'}))
+      dispatch(presets.actions.create({title: 'default snare', sample: 'snare'}))
+      dispatch(presets.actions.create({title: 'default kick', sample: 'kick'}))
+      dispatch(presets.actions.create({title: 'default clap', sample: 'clap'}))
 
       each(store.getState().presets, (preset) => {
         dispatch(traxExt.actions.createChannel({preset: preset.id}))
