@@ -33,9 +33,11 @@ class SongControls extends Component {
     const {onSubmit} = this.props
     return (
       <form className="song-controls" onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.title} placeholder="Song title"
-          onChange={this.handleInputChange} />
-        <button type="submit">Add song</button>
+        <div className="text-submit">
+          <input type="text" value={this.state.title} placeholder="What's the name of your song?"
+            onChange={this.handleInputChange} />
+          <button type="submit">Create new song</button>
+        </div>
       </form>
     )
   }

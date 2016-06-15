@@ -29,7 +29,7 @@ class SongItem extends Component {
     const {title} = this.props.song
     return (
       <li className="song-item">
-        <a onClick={this.handleClick}>{title}</a>{' '}
+        <a title={title} onClick={this.handleClick}>{title}</a>{' '}
         <traxExt.components.BlockList ids={this.props.song.blocks} onClickBlock={this.handleClickBlock} />
         {/*(<a onClick={this.handleDestroy}>remove</a>)*/}
       </li>

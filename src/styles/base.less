@@ -37,3 +37,32 @@ li {
   bottom: 0;
   z-index: 4100;
 }
+
+input[type="text"] {
+  width: 22rem;
+  height: 48px;
+  padding: 0 6px;
+  border: 1px solid #aaa;
+}
+
+button {
+  height: 48px;
+  padding: 0 32px;
+  border: 1px solid #aaa;
+}
+
+.text-submit {
+  input {
+    border-right: none;
+  }
+  button {
+    border: none;
+    background: #39b794;
+    color: #fff;
+  }
+  &.large {
+    input, button {
+      height: 64px;
+    }
+  }
+}
