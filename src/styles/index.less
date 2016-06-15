@@ -1,50 +1,12 @@
 // // Font
 // @import url("https://fonts.googleapis.com/css?family=PT+Mono");
 
-// Imports
 @import "vars";
+@import "colors";
 @import "util";
 @import "base";
 @import "ui/index";
-
-*, *:before, *:after {box-sizing: border-box}
-
-html {}
-
-body {
-  font-family: helvetica, arial, sans-serif;
-}
-
-// .main-header {
-//   display: flex;
-//   .flex-center;
-//   height: 200px;
-//   margin-bottom: 64px;
-//   font-family: 'PT Mono';
-//   font-size: 32px;
-//   background: linear-gradient(45deg, #64afc0 30%, #d8357e);
-// }
-
-// .main-header {
-//   margin: 24px;
-//   font-family: 'PT Mono';
-//   font-size: 64px;
-//   font-weight: bold;
-//   letter-spacing: 2px;
-//   color: #bd6eb2;
-// }
-
-a {
-  cursor: pointer;
-  text-decoration: none;
-}
-
-#root {
-  // This makes the app more useable by preventing text selection when
-  // dragging, clicking, or sliding was intended.
-  .disable-selection;
-}
-
+@import "app";
 @import "sequencer";
 @import "overview";
 @import "preset";
@@ -54,3 +16,4 @@ a {
 @import "song-overview";
 @import "nav-pane";
 @import "playback-controls";
+@import "dashboard";

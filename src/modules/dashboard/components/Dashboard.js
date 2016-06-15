@@ -4,8 +4,8 @@ import SongList from '../providers/SongList'
 
 const Dashboard = () => (
   <div className="dashboard">
-    <h2>Songs</h2>
-    <SongControls />
+    <h2>My Songs</h2>
+    {/*<SongControls />*/}
     <SongList />
   </div>
 )

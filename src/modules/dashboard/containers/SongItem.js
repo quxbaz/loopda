@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {songs} from 'trax'
+import traxExt from '../../trax-ext'
 import url from '../../url'
 
 class SongItem extends Component {
@@ -9,6 +10,7 @@ class SongItem extends Component {
     super(props)
     this.handleClick = this.handleClick.bind(this)
     this.handleDestroy = this.handleDestroy.bind(this)
+    this.handleClickBlock = this.handleClickBlock.bind(this)
   }
 
   handleClick() {
@@ -19,13 +21,18 @@ class SongItem extends Component {
     this.props.onDestroy(this.props.song.id)
   }
 
+  handleClickBlock(id) {
+    this.props.onClickBlock(id)
+  }
+
   render() {
     const {title} = this.props.song
     return (
-      <div className="song-item">
+      <li className="song-item">
         <a onClick={this.handleClick}>{title}</a>{' '}
-        (<a onClick={this.handleDestroy}>remove</a>)
-      </div>
+        <traxExt.components.BlockList ids={this.props.song.blocks} onClickBlock={this.handleClickBlock} />
+        {/*(<a onClick={this.handleDestroy}>remove</a>)*/}
+      </li>
     )
   }
 
@@ -35,6 +42,7 @@ SongItem.propTypes = {
   song: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   onDestroy: PropTypes.func.isRequired,
+  onClickBlock: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -43,6 +51,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onDestroy(id) {
     dispatch(songs.actions.destroy(id))
+  },
+  onClickBlock(id) {
+    dispatch(url.actions.setBrowserUrl('/blocks/' + id))
   },
 })
 

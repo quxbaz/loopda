@@ -4,37 +4,10 @@
   display: flex;
   flex-wrap: wrap;
 
-  .channel {
-    display: flex;
-    flex: 1;
-    width: 100%;
-    height: auto;
-    &:not(.mute) {&:before, &:after {display: none}}
-    &.mute:after {z-index: 1}
-  }
-
-  .blip {
-    width: 100% / @beats;
-    height: 100%;
-  }
+  .squeeze-channels;
 
   .channel-list {
-    position: relative;
-    display: flex;
-    flex-direction: column;
     height: 240px;
-    background: lighten(@blipBorderColor, 54%);
-    &:before, &:after {
-      .overlay(lighten(@blipBorderColor, 60%), 1);
-      left: 25%;
-      width: 25%;
-    }
-    &:before {
-      z-index: 1;
-    }
-    &:after {
-      left: 75%;
-    }
   }
 
 }
