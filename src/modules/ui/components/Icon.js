@@ -22,7 +22,7 @@ const Icon = ({name, className, onClick}) => {
 Icon.propTypes = {
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 }
 
 export default Icon
