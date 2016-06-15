@@ -18,6 +18,7 @@ class Nav extends PureComponent {
           ... github
           ... donating
           ... contact
+          ... bugs
         */}
 
       </ul>
