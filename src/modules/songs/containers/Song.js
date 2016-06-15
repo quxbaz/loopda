@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {songs, songPlayer} from 'trax'
+import SongControls from '../containers/SongControls'
 import BlockGrid from '../providers/BlockGrid'
 import PlaybackControls from '../providers/PlaybackControls'
 
@@ -24,7 +25,10 @@ class Song extends Component {
     const {title, blocks} = this.props.song
     return (
       <div className="song">
-        <h2>{title}</h2>
+        <div className="song-heading">
+          <h2>{title}</h2>
+          <SongControls id={this.props.song.id} />
+        </div>
         <BlockGrid ids={blocks} />
         <div className="sticky-panel-bottom">
           <PlaybackControls />

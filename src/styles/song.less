@@ -4,6 +4,12 @@
   margin: 0 auto 200px auto;
   padding: 0 40px;
 
+  .song-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
   h2 {
     margin: 56px 0;
     font-size: 40px;
@@ -26,8 +32,12 @@
 
   .block-item {
 
-    // <TODO> Make this responsive
-    width: 25%;
+    /*
+      <TODO>
+      - Make this responsive
+      - Add compact view
+    */
+    width: 100% / 8;
 
     .relative {
       transition: transform 120ms ease-out;

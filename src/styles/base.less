@@ -72,3 +72,31 @@ h2 {
   font-weight: normal;
   color: #424242;
 }
+
+
+.action {
+  display: inline-block;
+  margin: 0 1rem;
+  padding: 8px 12px;
+  box-sizing: content-box;
+  & + & {
+    margin-left: 0;
+  }
+}
+
+.cancel-action {
+  background: #ddd;
+}
+
+.warning-action {
+  background: #ff0;
+  color: #000;
+}
+
+.danger-action {
+  padding-left: 24px;
+  padding-right: 24px;
+  background: #f00;
+  color: #fff;
+  font-weight: bold;
+}
