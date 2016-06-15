@@ -5,6 +5,7 @@ import presets from '../../modules/presets'
 import blocks from '../../modules/blocks'
 import songs from '../../modules/songs'
 import Saver from '../containers/Saver'
+import Nav from './Nav'
 
 // <TESTING>
 import test from '../../modules/test'
@@ -12,12 +13,9 @@ import test from '../../modules/test'
 const App = ({url}) => (
   <div className="app">
     <Router path={url}>
-      <ul>
-        <li><a href='/#/dashboard'>Dashboard</a></li>
-        <li><a href='/#/presets'>Presets</a></li>
-      </ul>
-      <test.components.Profiler />
-      <Saver />
+      <Nav />
+      {/*<test.components.Profiler />*/}
+      {/*<Saver />*/}
       <Route route="dashboard">
         <dashboard.components.Dashboard />
       </Route>
