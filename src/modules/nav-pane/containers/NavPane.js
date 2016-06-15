@@ -67,9 +67,8 @@ class NavPane extends Component {
           {hidden ? 'Show previewer' : 'Hide previewer'}
         </div>
         <div ref="el" className="block-nav-scroll-pane" onMouseDown={this.handleMouseDown}>
-          {hidden ? null :
-            <traxExt.components.BlockList Child={Block} ids={ids} selected={selected}
-              onClickBlock={this.state.isDragging ? undefined : onClickBlock} />}
+          <traxExt.components.BlockList Child={Block} ids={ids} selected={selected}
+            onClickBlock={this.state.isDragging ? undefined : onClickBlock} />
         </div>
       </div>
     )
