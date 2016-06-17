@@ -7,7 +7,7 @@ class NavPaneBlock extends PureComponent {
     return (
       <div className="nav-pane-block">
         <traxExt.providers.Block {...this.props} />
-        <div className="block-position-label">{this.props.i + 1}</div>
+        <div className="block-label">{this.props.i + 1}</div>
       </div>
     )
   }

@@ -37,7 +37,10 @@
       - Make this responsive
       - Add compact view
     */
+
+    position: relative;
     width: 100% / 8;
+    margin-bottom: 12px;
 
     .relative {
       transition: transform 120ms ease-out;
@@ -45,6 +48,28 @@
     .dragging {
       opacity: 0.8;
       transform: scale(0.8)
+    }
+    &:first-child .timeline-tick:first-child {
+      background: none;
+    }
+  }
+
+  .timeline {
+    display: flex;
+    width: 100%;
+    height: 40px;  // <TODO> make this slightly larger in mobile contexts
+    background: #6b6290;
+  }
+
+  .timeline-tick {
+    width: 100% / 16;
+    height: 33.3333%;
+    border-left: 1px solid #e0e0e0;
+    &:nth-child(8) {
+      height: 66.6666%;
+    }
+    &:first-child {
+      height: 100%;
     }
   }
 
