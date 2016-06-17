@@ -38,7 +38,7 @@ class SongControls extends PureComponent {
             <a className="action cancel-action" onClick={this.handleCancel}>Close</a>
             <a className="action danger-action" onClick={this.handleDestroy}>Delete song!</a>
           </div> :
-          <a className="action warning-action" onClick={this.handleClick}>Delete song</a>}
+          <a className="action shy-btn" onClick={this.handleClick}>Delete song</a>}
       </div>
     )
   }
