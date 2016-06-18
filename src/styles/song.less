@@ -54,11 +54,22 @@
     }
   }
 
+  .channel-list {
+    cursor: pointer;
+  }
+
   .timeline {
-    display: flex;
+    position: relative;
     width: 100%;
     height: 40px;  // <TODO> make this slightly larger in mobile contexts
     background: #6b6290;
+  }
+
+  .timeline-ticks {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
 
   .timeline-tick {
@@ -71,6 +82,15 @@
     &:first-child {
       height: 100%;
     }
+  }
+
+  .timeline-n-label {
+    pointer-events: none;
+    position: absolute;
+    left: 6px;
+    bottom: 2px;
+    color: #fff;
+    font-size: 12px;
   }
 
 }

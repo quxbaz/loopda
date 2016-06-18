@@ -24,4 +24,11 @@ export default {
     return Math.floor((event.clientX - left) / blipWidth)
   },
 
+  getTickClicked(event, el) {
+    const {left, right} = el.getBoundingClientRect()
+    const channelWidth = right - left
+    const blipWidth = channelWidth / BEATS
+    return Math.floor((event.clientX - left - blipWidth / 2) / blipWidth)
+  },
+
 }
