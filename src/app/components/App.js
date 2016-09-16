@@ -8,7 +8,7 @@ import Saver from '../containers/Saver'
 import Nav from './Nav'
 
 // <TESTING>
-import test from '../../modules/test'
+// import test from '../../modules/test'
 
 const App = ({url}) => (
   <div className="app">
