@@ -1,4 +1,5 @@
 require('es6-promise').polyfill()
+const DashboardPlugin = require('webpack-dashboard/plugin')
 
 var webpack = require('webpack')
 var path = require('path')
@@ -57,7 +58,8 @@ var config = {
   },
 
   plugins: [
-    new webpack.DefinePlugin({'process.env.NODE_ENV': '"development"'})
+    new webpack.DefinePlugin({'process.env.NODE_ENV': '"development"'}),
+    new DashboardPlugin(),
   ]
 
 }
