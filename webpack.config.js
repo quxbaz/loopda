@@ -54,6 +54,8 @@ var config = {
     extensions: ['', '.js'],
     alias: {
       'loopda': resolve(__dirname),
+      'react': 'preact-compat',
+      'react-dom': 'preact-compat',
     }
   },
 
