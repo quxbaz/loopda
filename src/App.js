@@ -136,7 +136,7 @@ export default class App {
       )
 
       // Create presets
-      dispatch(presets.actions.create({title: 'default fhihat', sample: 'hihat'}))
+      dispatch(presets.actions.create({title: 'default hihat', sample: 'hihat'}))
       dispatch(presets.actions.create({title: 'default snare', sample: 'snare'}))
       dispatch(presets.actions.create({title: 'default kick', sample: 'kick'}))
       dispatch(presets.actions.create({title: 'default clap', sample: 'clap'}))
