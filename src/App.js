@@ -82,7 +82,7 @@ export default class App {
       if (samples.length === 0) {
         // Fetch initial samples if none were found in cache.
         const pending = defaultSamples.map(
-          (name) => createAudioBuffer.from.url(`media/samples/${name}.mp3`, name)
+          (name) => createAudioBuffer.from.url(`/media/samples/${name}.mp3`, name)
         )
         return Promise.all(pending).then(() => {
           defaultSamples.forEach((name) => {
