@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import isNil from 'qux/lib/isNil'
 import {fireOnce} from 'dom-util'
@@ -9,6 +10,7 @@ class Channel extends PureComponent {
 
   constructor(props) {
     super(props)
+    this.divRef = React.createRef()
     this.handleClick = this.handleClick.bind(this)
     this.handleMouseDown = this.handleMouseDown.bind(this)
     this.handleMouseMove = this.handleMouseMove.bind(this)
@@ -27,7 +29,7 @@ class Channel extends PureComponent {
   }
 
   handleMouseDown(event) {
-    const blipWasMuted = this.props.onMouseDown(event, this.refs.div)
+    const blipWasMuted = this.props.onMouseDown(event, this.divRef.current)
     this.setState({mouseDown: true, blipWasMuted})
     this.onMouseUp = fireOnce(window, 'mouseup', () => {
       this.setState({mouseDown: false, blipWasMuted})
@@ -36,7 +38,7 @@ class Channel extends PureComponent {
 
   handleMouseMove(event) {
     if (this.state.mouseDown) {
-      this.props.onMouseMove(event, this.refs.div, this.state.blipWasMuted)
+      this.props.onMouseMove(event, this.divRef.current, this.state.blipWasMuted)
     }
   }
 
@@ -54,7 +56,7 @@ class Channel extends PureComponent {
     })
 
     return (
-      <div ref="div" className={cssClass} onClick={this.handleClick}
+      <div ref={this.divRef} className={cssClass} onClick={this.handleClick}
         onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove}>
           {channel.blips.filter(id => !isNil(id)).map((id) => (

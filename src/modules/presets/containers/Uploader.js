@@ -6,17 +6,18 @@ class Uploader extends Component {
 
   constructor(props) {
     super(props)
+    this.inputRef = React.createRef()
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(event) {
-    this.props.onChange(event, this.refs.input)
+    this.props.onChange(event, this.inputRef.current)
   }
 
   render() {
     return (
       <div>
-        <input ref="input" type="file" multiple onChange={this.handleChange} />
+        <input ref={this.inputRef} type="file" multiple onChange={this.handleChange} />
       </div>
     )
   }

@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import {PureComponent} from 'loopda/lib/react-ext'
 import ArchivedChannel from '../containers/ArchivedChannel'
 import NormalChannel from './NormalChannel'

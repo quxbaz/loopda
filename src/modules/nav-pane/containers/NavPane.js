@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import classNames from 'classnames'
 import {fireOnce} from 'dom-util'
@@ -10,6 +11,7 @@ class NavPane extends Component {
 
   constructor(props) {
     super(props)
+    this.elRef = React.createRef()
     this.toggle = this.toggle.bind(this)
     this.handleMouseDown = this.handleMouseDown.bind(this)
     this.handleMouseMove = this.handleMouseMove.bind(this)
@@ -23,7 +25,8 @@ class NavPane extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener(window, 'mouseup', this.onMouseUp)
+    if (this.onMouseUp)
+      window.removeEventListener('mouseup', this.onMouseUp)
   }
 
   toggle() {
@@ -36,7 +39,7 @@ class NavPane extends Component {
       isMouseDown: true,
       isDragging: false,
       originX: event.clientX,
-      scrollX: this.refs.el.scrollLeft,
+      scrollX: this.elRef.current.scrollLeft,
     })
     window.addEventListener('mousemove', this.handleMouseMove)
     this.onMouseUp = fireOnce(window, 'mouseup', (event) => {
@@ -50,7 +53,7 @@ class NavPane extends Component {
       const diff = this.state.originX - event.clientX
       if (Math.abs(diff) > 20)
         this.setState({isDragging: true})
-      this.refs.el.scrollLeft = this.state.scrollX + diff
+      this.elRef.current.scrollLeft = this.state.scrollX + diff
     }
   }
 
@@ -66,7 +69,7 @@ class NavPane extends Component {
         <div className="toggle-bar" onClick={this.toggle}>
           {hidden ? 'Show previewer' : 'Hide previewer'}
         </div>
-        <div ref="el" className="block-nav-scroll-pane" onMouseDown={this.handleMouseDown}>
+        <div ref={this.elRef} className="block-nav-scroll-pane" onMouseDown={this.handleMouseDown}>
           <traxExt.components.BlockList Child={Block} ids={ids} selected={selected}
             onClickBlock={this.state.isDragging ? undefined : onClickBlock} />
         </div>

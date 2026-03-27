@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {player, songPlayer} from 'trax'
 import SongHeader from '../providers/SongHeader'
@@ -11,7 +12,7 @@ import PlaybackControls from '../providers/PlaybackControls'
 
 class Block extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.onMount()
   }
 
@@ -19,9 +20,9 @@ class Block extends Component {
     this.props.onUnmount()
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.block.id !== this.props.block.id) {
-      this.props.onSwitchBlock(nextProps.block.id)
+  componentDidUpdate(prevProps) {
+    if (prevProps.block.id !== this.props.block.id) {
+      this.props.onSwitchBlock(this.props.block.id)
     }
   }
 

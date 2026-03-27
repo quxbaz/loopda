@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import values from 'qux/lib/values'
 import {PureComponent} from 'loopda/lib/react-ext'
 import AddChannelOption from '../containers/AddChannelOption'

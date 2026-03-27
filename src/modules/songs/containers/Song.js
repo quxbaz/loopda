@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {songs, songPlayer} from 'trax'
 import SongControls from '../containers/SongControls'
@@ -7,7 +8,7 @@ import PlaybackControls from '../providers/PlaybackControls'
 
 class Song extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.onMount()
   }
 
@@ -15,9 +16,9 @@ class Song extends Component {
     this.props.onUnmount()
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.id !== this.props.id) {
-      this.props.onSwitchSong(nextProps.id)
+  componentDidUpdate(prevProps) {
+    if (prevProps.id !== this.props.id) {
+      this.props.onSwitchSong(this.props.id)
     }
   }
 
