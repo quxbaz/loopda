@@ -1,13 +1,13 @@
 // React stuff
 import React from 'react'
-import {render} from 'react-dom'
+import {createRoot} from 'react-dom/client'
 import {Provider} from 'react-redux'
 import {Router} from 'stateful-router'
 
 // Redux stuff
 import {compose, createStore, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
+import {createLogger} from 'redux-logger';
 
 // App-related libs
 import isNil from 'qux/lib/isNil'
@@ -57,19 +57,12 @@ export default class App {
       ))
     )
 
-    // this.store = createStore(
-    //   app.reducer,
-    //   this.isNew ? {} : JSON.parse(data),
-    //   compose(
-    //     applyMiddleware(
-    //       thunkMiddleware
-    //       , createLogger({collapsed: true})
-    //     )
-    //     // , window.devToolsExtension ? window.devToolsExtension() : undefined
-    //   )
-    // )
-
     this.dispatch = this.store.dispatch.bind(this.store)
+
+    // Auto-save state to localStorage
+    this.store.subscribe(debounce(() => {
+      localStorage.setItem('loopda', JSON.stringify(this.store.getState()))
+    }, 1000))
   }
 
   init() {
@@ -82,7 +75,7 @@ export default class App {
       if (samples.length === 0) {
         // Fetch initial samples if none were found in cache.
         const pending = defaultSamples.map(
-          (name) => createAudioBuffer.from.url(`media/samples/${name}.mp3`, name)
+          (name) => createAudioBuffer.from.url(`media/samples/${name}.wav`, name)
         )
         return Promise.all(pending).then(() => {
           defaultSamples.forEach((name) => {
@@ -90,9 +83,11 @@ export default class App {
           })
         })
       } else {
-        // Load samples from cache.
+        // Load samples from cache, falling back to fetch on decode failure.
         const pending = samples.map(
-          (sample) => createAudioBuffer.from.db(sample)
+          (sample) => createAudioBuffer.from.db(sample).catch(() => {
+            return createAudioBuffer.from.url(`media/samples/${sample.name}.wav`, sample.name)
+          })
         )
         return Promise.all(pending).then(() => {
           samples.forEach(({name}) => {
@@ -109,11 +104,11 @@ export default class App {
     const {store} = this
     const {dispatch} = store
 
-    render(
+    const root = createRoot(document.getElementById('root'))
+    root.render(
       <Provider store={store}>
         <app.providers.App />
-      </Provider>,
-      document.getElementById('root')
+      </Provider>
     )
 
     const processUrl = () => {
@@ -140,21 +135,6 @@ export default class App {
       dispatch(presets.actions.create({title: 'default snare', sample: 'snare'}))
       dispatch(presets.actions.create({title: 'default kick', sample: 'kick'}))
       dispatch(presets.actions.create({title: 'default clap', sample: 'clap'}))
-
-      // each(store.getState().presets, (preset) => {
-      //   dispatch(traxExt.actions.createChannel({preset: preset.id}))
-      // })
-
-      // const songId = dispatch(songs.actions.create({
-      //   title: 'my first song',
-      // })).payload.id
-
-      // const blockId = dispatch(songs.actions.createBlock(songId, {
-      //   channels: Object.keys(store.getState().channels),
-      // })).payload.id
-
-      // dispatch(url.actions.setBrowserUrl('/songs/' + songId))
-      // dispatch(url.actions.setBrowserUrl('/blocks/' + blockId))
 
     }
 
