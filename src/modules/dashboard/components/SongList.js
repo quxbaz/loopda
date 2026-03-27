@@ -1,8 +1,9 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import SongItem from '../providers/SongItem'
 
 const EmptyList = () => (
-  React.DOM.em({}, "You don't have any songs yet")
+  <em>You don't have any songs yet</em>
 )
 
 const SongList = ({ids}) => (

@@ -1,4 +1,4 @@
-import {db} from 'loopda/src/db'
+import db from 'loopda/src/db'
 import {createAudioBuffer} from 'loopda/src/audio/helper'
 
 const actionTypes = {

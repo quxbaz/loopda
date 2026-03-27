@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import classNames from 'classnames'
 import {songs, songPlayer} from 'trax'
@@ -77,7 +78,7 @@ class BlockItem extends PureComponent {
     return (
       <div className="block-item">
         <Timeline i={i} onMouseMove={this.handleTimelineMouseMove} onMouseOut={this.handleTimelineMouseOut} />
-        <div ref="channels" className={innerCssClass} {...dragProps} onClick={this.handleClickBody}>
+        <div className={innerCssClass} {...dragProps} onClick={this.handleClickBody}>
           {beatOffset === -1 ? null :
             <traxExt.components.TempoBar beat={beatOffset} />}
           {!showTimelinePreview ? null :
