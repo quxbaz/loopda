@@ -1,0 +1,4 @@
+Loopda - Todo
+
+* Todo
+  - Allow any preset on any track. Tracks represent a single "flow."
