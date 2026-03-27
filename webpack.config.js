@@ -16,6 +16,10 @@ var config = {
     publicPath: '/assets/'
   },
 
+  devServer: {
+    contentBase: path.join(__dirname, 'public'),
+  },
+
   module: {
     loaders: [
       {
