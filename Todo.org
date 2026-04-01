@@ -2,3 +2,6 @@ Loopda - Todo
 
 * Todo
   - Allow any preset on any track. Tracks represent a single "flow."
+  - Support drag-and-drop for notes.
+  - Support shifting notes.
+  - Group select notes.
