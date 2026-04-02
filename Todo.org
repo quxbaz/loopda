@@ -5,3 +5,6 @@ Loopda - Todo
   - Support drag-and-drop for notes.
   - Support shifting notes.
   - Group select notes.
+
+* Bookmarks
+  https://www.goldbaby.co.nz/freestuff.html
