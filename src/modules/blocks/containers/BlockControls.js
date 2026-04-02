@@ -40,6 +40,7 @@ const mapDispatchToProps = (dispatch, {block, song}) => ({
     const index = song.blocks.indexOf(block.id)
     const blockId = dispatch(blocks.actions.deepCopy(block.id)).payload.copy.id
     dispatch(songs.actions.addBlockAt(song.id, blockId, index + 1))
+    dispatch(url.actions.setBrowserUrl('/blocks/' + blockId))
   },
 
   onClickDestroy() {
