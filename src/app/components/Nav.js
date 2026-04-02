@@ -12,7 +12,7 @@ class Nav extends PureComponent {
         </li>
         <li><a href='/#/dashboard'>Dashboard</a></li>
         <li><a href='/#/presets'>Presets</a></li>
-        <li style={{marginLeft: 'auto'}}><a onClick={() => { localStorage.removeItem('loopda'); location.reload() }}>Reset</a></li>
+        <li style={{marginLeft: 'auto'}}><a onClick={() => { localStorage.removeItem('loopda'); location.href = location.pathname }}>Reset</a></li>
 
         {/*
           ... about
