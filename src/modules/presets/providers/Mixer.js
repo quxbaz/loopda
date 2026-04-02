@@ -3,9 +3,10 @@ import {presets, mixables} from 'trax'
 import Mixer from '../containers/Mixer'
 
 const mapStateToProps = (state, {id}) => {
-  const {mixable} = presets.selectors.getById(id)(state)
+  const preset = presets.selectors.getById(id)(state)
   return {
-    mixable: mixables.selectors.getById(mixable)(state),
+    mixable: mixables.selectors.getById(preset.mixable)(state),
+    isDefault: preset.title && preset.title.startsWith('default '),
   }
 }
 

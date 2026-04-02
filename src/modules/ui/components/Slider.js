@@ -97,7 +97,7 @@ class Slider extends Component {
 }
 
 Slider.defaultProps = {
-  barWidth: 200,
+  barWidth: 400,
   grabberWidth: 40,
   value: 50,
   min: 0,
