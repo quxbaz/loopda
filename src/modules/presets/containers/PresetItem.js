@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import classNames from 'classnames'
+import {presets} from 'trax'
 import url from '../../url'
 
 class PresetItem extends Component {
@@ -9,20 +10,21 @@ class PresetItem extends Component {
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
-    // this.handleDestroy = this.handleDestroy.bind(this)
+    this.handleDestroy = this.handleDestroy.bind(this)
   }
 
   handleClick() {
     this.props.onClick(this.props.preset.id)
   }
 
-  // handleDestroy() {
-  //   this.props.onDestroy(this.props.preset.id)
-  // }
+  handleDestroy() {
+    this.props.onDestroy(this.props.preset.id)
+  }
 
   render() {
     const {selected} = this.props
     const {title, sample} = this.props.preset
+    const isDefault = title && title.startsWith('default ')
     return (
       <li className={classNames({
           "preset-item": true,
@@ -31,7 +33,7 @@ class PresetItem extends Component {
         <a onClick={this.handleClick}>
           {title || 'untitled'} ({sample})
         </a>{' '}
-        {/*<a onClick={this.handleDestroy}>remove</a>*/}
+        {!isDefault && <a className="shy-btn clicky" onClick={this.handleDestroy}>delete</a>}
       </li>
     )
   }
