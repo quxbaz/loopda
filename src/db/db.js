@@ -1,4 +1,4 @@
-const VERSION = 4
+const VERSION = 5
 
 const {indexedDB} = window
 let db
@@ -13,6 +13,9 @@ const create = () => {
 
   request.onupgradeneeded = (event) => {
     var db = event.target.result
+    if (db.objectStoreNames.contains('samples')) {
+      db.deleteObjectStore('samples')
+    }
     db.createObjectStore('samples', {keyPath: 'name'})
   }
 

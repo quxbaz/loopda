@@ -67,7 +67,7 @@ export default class App {
 
   init() {
 
-    const defaultSamples = ['hihat', 'snare', 'kick', 'clap']
+    const defaultSamples = ['hihat', 'snare', 'kick', 'clap', 'open-hat']
 
     return db.create().then(
       db.getSamples
@@ -135,6 +135,7 @@ export default class App {
       dispatch(presets.actions.create({title: 'default snare', sample: 'snare'}))
       dispatch(presets.actions.create({title: 'default kick', sample: 'kick'}))
       dispatch(presets.actions.create({title: 'default clap', sample: 'clap'}))
+      dispatch(presets.actions.create({title: 'default open-hat', sample: 'open-hat'}))
 
     }
 
